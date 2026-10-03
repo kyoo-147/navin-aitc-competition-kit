@@ -20,6 +20,8 @@ The user is the Founder/Team Leader. The primary agent is the Chief of Staff and
 - Never read, print, commit, or place secrets in prompts. `.env` is local-only.
 - One member profile per workspace. Verify Git identity, SSH identity, remote, branch, and status before mutation.
 - Members push profile-prefixed branches; they do not push `main`. Leader merges reviewed PRs.
+- If the leader has an ordinary authentication/outage issue, authorized members may continue within their existing permissions under `docs/operations/ACCOUNT-AND-CI-CONTINUITY.md`. Never use another account to evade a GitHub/BTC enforcement, suspension, billing, or policy restriction.
+- If hosted CI is unavailable, report `CI UNAVAILABLE`; run and record local gates. Never relabel local checks as GitHub Actions success.
 - Do not treat an agent or account switch as independent human review. Actual review must be performed by the named member.
 - Use visible, inspectable workers only when delegation materially helps. One writer per isolated workspace/worktree. The Chief verifies actual diffs/tests/artifacts.
 - Do not modify the official BTC repository until a reviewed delivery is intentionally prepared.
