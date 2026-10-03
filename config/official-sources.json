@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "title": "Vòng Chung Khảo",
+      "url": "https://docs.thucchien.ai/docs/round-2",
+      "category": "official-rules-and-tools",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Cấu hình AI Log",
+      "url": "https://docs.thucchien.ai/docs/round-2/ai-log-guide",
+      "category": "official-rules-and-tools",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Đọc lại AI Log",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/ai-log-entries",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh hình ảnh (Image Generation)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/image-generation",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh hình ảnh (với Chat Completions)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/image-generation-chat",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Chuyển giọng nói thành văn bản (Speech-to-Text)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/speech-to-text",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Kiểm tra chi tiêu (Spend Checking)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/spend-checking",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tạo phản hồi trò chuyện (Chat Completions)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/text-generation",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Chuyển văn bản thành giọng nói (Text-to-Speech)",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/text-to-speech",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh video (Bước 3/3): Tải video",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/video-generation-download",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh video (Bước 1/3): Bắt đầu tác vụ",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/video-generation-start",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh video (Bước 2/3): Kiểm tra trạng thái",
+      "url": "https://docs.thucchien.ai/docs/round-2/api-reference/video-generation-status",
+      "category": "api-reference",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Công cụ Tạo mã OTP",
+      "url": "https://docs.thucchien.ai/docs/round-2/otp-generator",
+      "category": "official-rules-and-tools",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Quy định & Hướng dẫn kỹ thuật — Vòng Chung khảo (Thi trực tuyến)",
+      "url": "https://docs.thucchien.ai/docs/round-2/regulations-and-technical-guidelines",
+      "category": "official-rules-and-tools",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Hướng dẫn đăng nhập Suno",
+      "url": "https://docs.thucchien.ai/docs/round-2/suno-login-guidelines",
+      "category": "official-rules-and-tools",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Các khái niệm cốt lõi",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/core-concepts",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Embedding",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/embeddings",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tìm kiếm web (Google Search grounding)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/google-search-grounding",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh hình ảnh (Image Generation)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/image-generation",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Giới thiệu",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/introduction",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Model OpenAI và DeepSeek",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/openai-deepseek",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Bảng giá model",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/pricing",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tham khảo",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/references",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Chuyển giọng nói thành văn bản (Speech-to-Text)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/speech-to-text",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh văn bản (Text Generation)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/text-generation",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Chuyển văn bản thành giọng nói (Text-to-Speech)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/text-to-speech",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Sinh video với Veo 3.1 (Quy trình bất đồng bộ)",
+      "url": "https://docs.thucchien.ai/docs/round-2/user-guide/video-generation-veo3",
+      "category": "user-guide",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với Antigravity CLI",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/antigravity-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Các phương pháp tốt nhất (Best Practices)",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/best-practices",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với CLine",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/cline-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với Codex",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/codex-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với Cursor",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/cursor-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với DeepSeek Harness",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/deepseek-harness-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với Gemini CLI",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/gemini-cli-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với Hermes Agent",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/hermes-agent-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Giới thiệu về VibeCoding",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/introduction",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    },
+    {
+      "title": "Tích hợp với OpenCode",
+      "url": "https://docs.thucchien.ai/docs/round-2/vibe-coding/opencode-integration",
+      "category": "vibe-coding",
+      "retrieved_at": "2026-10-03",
+      "official": true
+    }
+  ]
+}

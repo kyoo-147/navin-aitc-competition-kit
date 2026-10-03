@@ -1,0 +1,41 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Required AI logs remain local
+.ai-log/*.jsonl
+.ai-log/archive/
+
+# Private operations
+.pi/
+.private/
+.cache/
+artifacts/local/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node/build
+node_modules/
+dist/
+build/
+coverage/
+
+# Media and large generated artifacts
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
