@@ -23,3 +23,7 @@ uv run scripts/refresh_official_sources.py
 ```
 
 Raw fetched pages go to ignored `.cache/official-docs/`; the repository stores the source registry and first-party summaries, not a vendored copy of BTC documentation.
+
+## Active test execution
+
+- [Mandatory technical test: Gateway and AI Log](MANDATORY-TECHNICAL-TEST.md)
