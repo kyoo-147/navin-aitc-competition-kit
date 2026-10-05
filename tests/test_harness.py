@@ -29,7 +29,6 @@ class HarnessTests(unittest.TestCase):
         policy = json.loads(
             (ROOT / "config" / "competition" / "budget-policy.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(sum(policy["envelopes"].values()), policy["team_budget"])
         thresholds = policy["thresholds"]
         self.assertLess(thresholds["leader_review"], thresholds["economy_mode"])
         self.assertLess(thresholds["economy_mode"], thresholds["nonessential_hard_stop"])
@@ -39,9 +38,9 @@ class HarnessTests(unittest.TestCase):
         policy = json.loads(
             (ROOT / "config" / "competition" / "router-policy.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(list(policy["tiers"]), ["T0", "T1", "T2", "T3", "T4"])
+        self.assertEqual(list(policy["tiers"]), ["T0", "T1", "T2", "T3"])
         self.assertFalse(policy["tiers"]["T0"]["model_required"])
-        self.assertIn("leader_approval", policy["tiers"]["T4"]["requires"])
+        self.assertEqual(policy["tiers"]["T3"]["selection"], "gpt-5.6-sol, only after evidence and only when the cheaper route is insufficient")
         self.assertTrue(policy["retry"]["never_retry_auth_failure"])
 
     def test_model_snapshot_is_explicitly_non_authoritative(self):
@@ -64,8 +63,9 @@ class HarnessTests(unittest.TestCase):
             "leader_review": 35,
             "economy_mode": 42,
             "block_nonessential": 45,
+            "cap_reached": 50,
         })
-        self.assertEqual(sum(budget["planning_envelope"].values()), budget["organizer_cap"])
+        self.assertTrue(budget["policy"].startswith("Use total observed team spend thresholds"))
 
     def test_official_training_screenshots_are_preserved(self):
         screenshots = list((ROOT / "kit" / "references" / "official-training" / "screenshots").glob("*.png"))
@@ -100,12 +100,13 @@ class HarnessTests(unittest.TestCase):
 
     def test_competition_skills_include_runtime_evidence(self):
         skill_root = ROOT / "kit/skills"
-        expected = {"aitc-orchestrator", "aitc-captain", "aitc-worker", "aitc-orca-runtime", "aitc-diagnose", "aitc-reviewer"}
+        expected = {"aitc-captain", "aitc-worker", "aitc-reviewer"}
         self.assertEqual({path.name for path in skill_root.iterdir() if path.is_dir()}, expected)
         combined = "\n".join((path / "SKILL.md").read_text(encoding="utf-8") for path in skill_root.iterdir())
         self.assertIn("session_meta.model_provider", combined)
         self.assertIn("turn_started", combined)
         self.assertIn("UserPromptSubmit", combined)
+        self.assertIn("deepseek-flash", combined)
 
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):

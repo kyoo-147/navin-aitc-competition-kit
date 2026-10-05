@@ -6,6 +6,7 @@ description: Review integrated contest work across scoring compliance, engineeri
 # AITC Reviewer
 
 This is a short-contest gate, not a style critique. Remain read-only unless explicitly assigned a repair lane.
+This is a short-contest gate, not a style critique. Remain read-only unless explicitly assigned a repair lane. Use the cheapest compatible reviewer; reserve `gpt-5.6-sol` for the final evidence-backed review and never exceed that model in the kit policy.
 
 ## Inputs
 

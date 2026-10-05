@@ -45,13 +45,10 @@ Pi settings are not Codex configuration. Do not copy `~/.pi/agent/settings.json`
 
 ### Install for competition
 
-Install only the six reviewed AITC skills:
+Install only the three reviewed AITC skills:
 
-- `aitc-orchestrator`
 - `aitc-captain`
 - `aitc-worker`
-- `aitc-orca-runtime`
-- `aitc-diagnose`
 - `aitc-reviewer`
 
 These are provider-safe operational skills and are maintained in this kit.

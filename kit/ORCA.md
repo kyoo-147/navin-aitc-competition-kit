@@ -54,3 +54,6 @@ commandcode = SIMULATED_ROUTING_NON_BTC_TRANSPORT
 ## Acceptance and cleanup
 
 The Captain independently verifies provider metadata, Git diff/status, tests/build, real API/UI behavior, local/server AI Log evidence, and commit state. Close only exact task-owned handles after integration or safe preservation. Preserve dirty/ambiguous state and report `UNKNOWN` or `BLOCKED`.
+The Captain independently verifies provider metadata, Git diff/status, tests/build, real API/UI behavior, local/server AI Log evidence, and commit state. Close only exact task-owned handles after integration or safe preservation. Preserve dirty/ambiguous state and report `UNKNOWN` or `BLOCKED`.
+
+The user gives one high-level task to the Captain. The Captain may create up to two writer worktrees and one read-only reviewer terminal. Writers never share a checkout; the reviewer never writes to writer worktrees. Use the scale rule: spawn only when independent ownership and observable acceptance outweigh coordination cost.

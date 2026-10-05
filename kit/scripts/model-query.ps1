@@ -4,7 +4,8 @@ param(
     [string]$Model,
     [switch]$CodexOnly,
     [switch]$SearchRequired,
-    [switch]$All
+    [switch]$All,
+    [switch]$Recommend
 )
 
 $ErrorActionPreference = 'Stop'
@@ -51,4 +52,10 @@ $result = foreach ($entry in $models) {
     }
 }
 
-$result | Sort-Object @{Expression='tier';Ascending=$true}, @{Expression='output_per_1m';Ascending=$true}, @{Expression='input_per_1m';Ascending=$true} | Format-Table -AutoSize
+$sorted = @($result | Sort-Object @{Expression='tier';Ascending=$true}, @{Expression='output_per_1m';Ascending=$true}, @{Expression='input_per_1m';Ascending=$true})
+if ($Recommend) {
+    if ($sorted.Count -eq 0) { throw 'No compatible model remains in the dated snapshot.' }
+    $sorted[0] | ConvertTo-Json -Depth 4
+} else {
+    $sorted | Format-Table -AutoSize
+}

@@ -15,7 +15,7 @@
 | AI Log readback lacks required events | Launch Codex at repo root, check hooks, create a real event, submit, and read back again. Never synthesize logs. |
 | Pre-push shows `bash\r` or BOM error | Normalize the local hook to UTF-8 without BOM and line endings compatible with Git Bash. |
 | Merge conflict | Stop overlapping writers. Captain integrates or serializes ownership. |
-| Hard bug survives two attempts | Use `$aitc-diagnose`, create a minimal repro, then escalate with reduced evidence. |
+| Hard bug survives two attempts | Captain creates a minimal repro, asks the reviewer for a read-only reproduction report, then escalates only with reduced evidence. |
 | Spend >= `$35` | Leader review before expensive work. |
 | Spend >= `$42` | Economy mode. Stop redundant calls. |
 | Spend >= `$45` | Block nonessential calls. Reserve only for approved P0/deploy/submission work. |

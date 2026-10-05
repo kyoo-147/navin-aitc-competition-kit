@@ -25,9 +25,9 @@ Use the cheapest live model that reliably completes the task. Escalate from evid
 | Tier | Work | Action |
 |---|---|---|
 | T0 | grep, formatting, validation, tests, deterministic scripts | no model call |
-| T1 | routine implementation and clear fixes | cheapest canary-passing candidate |
-| T2 | multi-file integration and substantive review | strongest benchmarked general candidate |
-| T3 | security, concurrency, architecture blocker | reasoning/pro tier with captain approval |
+| T1 | routine implementation and clear fixes | cheapest live canary-passing candidate: gpt-6-luna, deepseek-flash, or Gemini Flash Lite |
+| T2 | multi-file integration and substantive review | gpt-5.6-luna or DeepSeek V4 Pro after mini-benchmark |
+| T3 | final read-only review or verified scoring blocker | gpt-5.6-sol with Captain approval |
 | Emergency | deployment, submission, or scoring-critical blocker | leader-approved model and reserve |
 
 Candidate names in `config/routing.json` came from supplied preparation material. A name appearing there does not prove availability, price, quality, or tool compatibility.

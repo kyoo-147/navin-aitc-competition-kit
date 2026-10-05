@@ -44,7 +44,7 @@ preflight
 → freeze and submit
 ```
 
-Use terminal handoff, not supervised `worker-start`, while Orca 1.4.215 + Codex 0.160 remains blocked at `agent_readiness`.
+Use terminal handoff, not supervised `worker-start`, while Orca 1.4.215 + Codex 0.160 remains blocked at `agent_readiness`. The Captain is the only liaison: the user supplies one task, and the Captain decides whether to work directly or spawn lanes.
 
 ## Worker brief
 
@@ -61,11 +61,11 @@ MAX_SPEND / MODEL TIER: <bounded>
 RUNTIME: official repo/worktree, BTC-only, no secret reads, no provider changes
 ```
 
-Default to two writer lanes. Add a lane only when scope is independent, ownership does not overlap, acceptance is observable, and integration cost is lower than time saved.
+Hard limit: at most two concurrent writer lanes. A third lane may be a read-only reviewer or scout and must not write to a writer worktree. Spawn only when ownership is independent, acceptance is observable, and coordination cost is lower than time saved. Otherwise the Captain works directly.
 
 ## Routing and failure
 
-Start with the cheapest canary-proven model. Escalate only from repeated capability failure, reviewer rejection, missing capability, worse retry economics, or a scoring-critical blocker. Never model-hop for code, test, Git, workspace, hook, or policy failures. Never silently change provider.
+Start with a three-minute live mini-benchmark when the key is available: `gpt-6-luna`, `deepseek-flash`, and `gemini-3.1-flash-lite` for compatible harnesses. Select the cheapest canary-passing model for the task. Prefer `gpt-6-luna` for Codex Responses, `deepseek-flash` for a validated chat worker, and `gpt-5.6-luna` or `deepseek-v4-pro` only for harder integration. Reserve `gpt-5.6-sol` for a final read-only review or verified scoring-critical blocker. Never model-hop for code, test, Git, workspace, hook, or policy failures. Never silently change provider.
 
 ## Acceptance
 

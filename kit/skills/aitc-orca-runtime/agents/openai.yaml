@@ -1,4 +1,0 @@
-interface:
-  display_name: "AITC Orca Runtime"
-  short_description: "Run visible isolated workers in Orca"
-  default_prompt: "Preflight Orca, create only the required isolated worker workspace, observe it safely, and accept output only after repository evidence is verified."

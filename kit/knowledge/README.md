@@ -22,11 +22,11 @@ Google Search is allowed through BTC only:
 
 ## Default policy
 
-- `$50` simulated or live team cap.
-- Default Codex ceiling: `gpt-6-luna`, usually `none` or `low` reasoning.
-- Start with T0 deterministic work or T1.
-- Larger models require evidence and Captain approval.
-- `gpt-6-astra` is emergency-only.
+- `$50` simulated or live team cap, governed by total-spend thresholds rather than phase envelopes.
+- Start with T0 deterministic work or the cheapest live T1 candidate.
+- Benchmark `gpt-6-luna`, `deepseek-flash`, and Gemini Flash Lite when the key is available.
+- Prefer `gpt-6-luna` for Codex Responses; use DeepSeek only through a validated chat harness.
+- Use `gpt-5.6-luna`/DeepSeek V4 Pro for harder integration and cap final review at `gpt-5.6-sol`.
 
 ## Query
 

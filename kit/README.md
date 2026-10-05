@@ -65,7 +65,7 @@ cd D:\path\to\navin-aitc-competition-kit\kit
   -RequireServerLog
 ```
 
-`bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs the six reviewed AITC skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
+`bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs the three reviewed AITC skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
 
 ## Reusable variant clone
 
@@ -87,7 +87,7 @@ Do not run this against the official repository until the team has reviewed the 
 3. Run the logged Codex canary and verify its session on the BTC AI Log server.
 4. Lock `templates/IMPLEMENTATION_CONTRACT.md` before parallel writers start.
 5. Build the smallest complete vertical slice.
-6. Use at most three independent lanes and one writer per checkout.
+6. Give one task to the Captain. It may use two isolated writer lanes and one read-only reviewer; see `CODEX-PROMPT-FLOW.md`.
 7. Integrate early, run task-relevant tests, deploy, and capture evidence.
 8. Stop nonessential model calls at policy gates.
 9. Freeze, submit, and capture a visible receipt.
@@ -95,10 +95,11 @@ Do not run this against the official repository until the team has reviewed the 
 ## Directory map
 
 - `config/` - dated routing guidance and spend policy.
+- `CODEX-PROMPT-FLOW.md` - one-prompt Captain routing, model selection, spawn limits, and evidence contract.
 - `docs/` - team operating guides, official-repository boundary, and Codex/Pi scope policy.
 - `runbook/` - timed and failure runbooks.
 - `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, budget, Orca, sync, and verification.
-- `skills/` - orchestrator, captain, worker, reviewer, diagnosis, and Orca runtime skills.
+- `skills/` - captain, worker, and reviewer skills. Runtime and orchestration are Captain procedures, not separate skill sprawl.
 - `templates/` - worker brief, implementation contract, acceptance matrix, and review report.
 - `references/` - preparation-only screenshots and source material. Not included in the official variant.
 - `licenses/` and `THIRD_PARTY_NOTES.md` - attribution.

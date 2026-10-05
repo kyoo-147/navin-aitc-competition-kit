@@ -49,6 +49,9 @@ One complete result, written as an observable behavior.
 - local AI Log status when required.
 
 ## MAX_SPEND / MODEL TIER
-## MAX_SPEND / MODEL TIER
 
-T1 by default. Escalate only through Captain.
+T1 by default: choose the cheapest live canary-passing candidate. Prefer `gpt-6-luna` for Codex Responses or `deepseek-flash` for a validated chat harness. T2 may use `gpt-5.6-luna` or `deepseek-v4-pro`. T3 is read-only final review with `gpt-5.6-sol` and Captain approval. Never change provider, catalog, or `CODEX_HOME`.
+
+## SECURITY
+
+Never read `.env`, credential stores, SSH keys, browser profiles, or private vaults. If the application needs a secret, the human sets the environment variable and the application reads it; the worker must not see the value.

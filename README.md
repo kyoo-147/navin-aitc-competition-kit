@@ -41,7 +41,7 @@ Then follow the bootstrap and live preflight commands in `kit/README.md`.
 - `kit/` - canonical reusable operational variant.
 - `docs/competition/` - sourced Round 2 knowledge inherited from the validated harness.
 - `config/competition/` - earlier policy snapshots retained for provenance.
-- `skills/aitc-orchestrator/` - earlier orchestrator proposal retained for review history.
+- Captain orchestration - the earlier orchestrator proposal is folded into `kit/skills/aitc-captain/`; no separate orchestrator skill is installed.
 - `tests/` and `scripts/verify_harness.py` - repository-wide static verification.
 
 Live BTC instructions always override snapshots and internal runbooks.

@@ -9,7 +9,7 @@ function Fail([string]$Message) { $script:failures.Add($Message); Write-Host "[F
 function Pass([string]$Message) { Write-Host "[PASS] $Message" }
 
 $required = @(
-    'README.md', 'AGENTS.md', 'RULES.md', 'MODEL_ROUTING.md', 'ORCA.md',
+    'README.md', 'AGENTS.md', 'RULES.md', 'MODEL_ROUTING.md', 'ORCA.md', 'CODEX-PROMPT-FLOW.md',
     'config\routing.json', 'config\budget.json', 'config\codex-config.template.toml', 'config\models-btc.snapshot.json',
     'knowledge\README.md', 'knowledge\model-registry.json', 'knowledge\routing-policy.json', 'knowledge\tracking-schema.json',
     'docs\OFFICIAL-REPO-BOUNDARY.md', 'docs\ENGINEERING.md', 'docs\ORCA-CODEX-FINDINGS.md', 'docs\CODEX-SCOPES-AND-PI-MIGRATION.md',

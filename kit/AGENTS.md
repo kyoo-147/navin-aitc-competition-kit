@@ -18,11 +18,13 @@ Read `RULES.md`, `docs/OFFICIAL-REPO-BOUNDARY.md`, and the applicable runbook be
 
 ## Parallel work
 
-The captain may use at most three lanes by default:
+The captain may use at most three lanes:
 
-1. integration and orchestration;
-2. backend or AI implementation;
-3. frontend/product surface, evaluation/data, or deployment.
+1. writer A;
+2. writer B;
+3. read-only reviewer or scout.
+
+Never run more than two concurrent writers. Every writer has an isolated Orca-managed worktree. The third lane cannot write to a writer worktree.
 
 Before parallel writers start, freeze `templates/IMPLEMENTATION_CONTRACT.md` into the project with request/response schemas, paths, states, ownership, and acceptance commands.
 

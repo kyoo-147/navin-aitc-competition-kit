@@ -16,7 +16,7 @@
 
 ## Minute 10-15
 
-- Use one writer unless independent work clearly saves time.
-- If parallel work is justified, create isolated worktrees with non-overlapping paths.
-- Dispatch at most three lanes through visible Orca terminals using `codex-orca.cmd`; require `turn_started`, then poll with `terminal read --cursor`.
+- Use the Captain directly for small or overlapping tasks.
+- If parallel work is justified, create at most two isolated writer worktrees with non-overlapping paths.
+- A third visible Orca lane may be a read-only scout/reviewer only; require `turn_started`, then poll with `terminal read --cursor`.
 - Start integration planning immediately. Do not wait for isolated lanes to become perfect.

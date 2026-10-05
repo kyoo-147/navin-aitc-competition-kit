@@ -6,6 +6,7 @@ description: Implement one bounded BTC competition outcome end-to-end in an assi
 # AITC Worker
 
 Own one coherent outcome. Do not redesign the project or change provider/runtime policy.
+Own one coherent outcome. Do not redesign the project or change provider/runtime policy. The Captain selects the model: prefer the cheapest live canary-passing candidate; `gpt-6-luna` for Codex Responses, `deepseek-flash` for a validated chat harness, and never a premium model without explicit tier assignment.
 
 ## Before editing
 
