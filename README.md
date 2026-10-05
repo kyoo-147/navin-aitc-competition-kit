@@ -1,45 +1,57 @@
 # NAVIN AITC Competition Kit
 
-Private competition-day setup, skill, routing, and verification kit for team **AITC-918 — NAVIN Research**. It was initialized from the proven `kyoo-147/nr-00` harness so its sourced rules and operating history remain available.
+Private preparation and reusable operating kit for team **AITC-918 - NAVIN Research**.
 
-This repository is separate from the official BTC repository `ai-thuc-chien/aitc2026-team-918-navin-research`. It must never receive secrets or raw private AI logs.
+This repository is separate from the organizer-owned team repository. It must never receive secrets or raw private AI logs.
 
-## Start here
+## Canonical reusable kit
 
-1. Read `AGENTS.md`.
-2. Read `docs/competition/README.md` and `docs/competition/ROUND-2-RULES.md`.
-3. Read `docs/competition-kit/README.md` and `skills/aitc-orchestrator/SKILL.md`.
-4. Read `docs/operations/WORKFLOW.md`.
-5. Before the official timed session, complete `docs/competition/COMPETITION-DAY-CHECKLIST.md`.
+The reviewed operational variant lives at [`kit/`](kit/README.md).
 
-## Workspace layout
+It includes:
 
-```text
-.ai/                     Agent identity and operating protocols
-config/                  Official sources plus budget/model/router policies
-skills/                  Competition-specific orchestration instructions
-scripts/                 AI log and harness verification/refresh scripts
-docs/competition/        Sourced Round 2 knowledge pack
-docs/competition-kit/    Competition-day kit design and implementation status
-docs/operations/         Git, member workspace, and SS-WD operating rules
-workspace/product/       Product source after the official challenge is known
-workspace/evidence/      Test/demo evidence safe to commit
-workspace/submission/    Final reviewed submission staging area
+- official-repository boundary rules;
+- secret-safe bootstrap and private Codex Gateway configuration;
+- fail-closed live preflight;
+- correct team spend lookup through `/key/info` then `/team/info?team_id=...`;
+- BTC AI Log server readback checks;
+- budget gates and dated routing guidance;
+- Orca runtime checks and bounded worker skills;
+- implementation contract, review, evidence, and submission runbooks;
+- a safe sync command for `chung-khao/navin-competition-kit/`.
+
+Preparation screenshots and upstream source material are retained under `kit/references/` but are excluded from the official-repository variant.
+
+## Official repository rule
+
+All final-round source, documentation, demo assets, and deliverables must live under the official repository's `chung-khao/` directory. Organizer-provided root hook infrastructure remains at root. AI tools must be opened at official repository root so logging hooks load.
+
+## Start
+
+```powershell
+cd kit
+.\scripts\verify.ps1
+Get-Content .\README.md
 ```
 
-## Hard boundaries
+Then follow the bootstrap and live preflight commands in `kit/README.md`.
 
-- Official BTC instructions override this repository.
-- During the official session, only tools/models/resources explicitly permitted by BTC may be used.
-- AI usage logging must remain complete and truthful.
-- Never commit secrets, AI/API keys, credentials, private keys, raw AI logs, monitoring recordings, or private worker transcripts.
-- Research and preparation claims must cite official URLs and distinguish facts, inferences, and unknowns.
-- `main` is integration-only: member branches → PR → review → leader merge.
+## Repository layers
+
+- `kit/` - canonical reusable operational variant.
+- `docs/competition/` - sourced Round 2 knowledge inherited from the validated harness.
+- `config/competition/` - earlier policy snapshots retained for provenance.
+- `skills/aitc-orchestrator/` - earlier orchestrator proposal retained for review history.
+- `tests/` and `scripts/verify_harness.py` - repository-wide static verification.
+
+Live BTC instructions always override snapshots and internal runbooks.
 
 ## Verification
 
 ```powershell
-python scripts/verify_harness.py
+powershell -NoProfile -ExecutionPolicy Bypass -File kit\scripts\update-manifest.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File kit\scripts\verify.ps1
+python scripts\verify_harness.py
 python -m unittest discover -s tests -v
 git diff --check
 ```

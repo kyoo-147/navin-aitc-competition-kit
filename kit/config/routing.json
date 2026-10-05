@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "snapshot_date": "2026-10-05",
+  "authority": "Live BTC documentation, /key/info, /team/info and canary results override this file.",
+  "provider": {
+    "name": "thucchien",
+    "base_url": "https://api.thucchien.ai/v1",
+    "wire_api": "responses",
+    "environment_key": "THUCCHIEN_API_KEY"
+  },
+  "policy": {
+    "gateway_only": true,
+    "personal_provider_fallback": false,
+    "require_live_canary": true,
+    "require_server_ai_log": true,
+    "premium_requires_leader_approval": true
+  },
+  "candidate_roles": {
+    "routine_implementation": ["deepseek-flash"],
+    "general_orchestration": ["gpt-6-luna"],
+    "hard_reasoning": ["deepseek-v4-pro", "gpt-6.1-sol", "gpt-6-sol"],
+    "long_context_or_multimodal": ["gemini-3.5-flash"]
+  },
+  "selection_rule": "Use only models confirmed live for the current key and benchmarked on the actual task shape. Candidate names are hints, not an allowlist."
+}

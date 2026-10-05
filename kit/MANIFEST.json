@@ -1,0 +1,422 @@
+{
+    "schema_version":  2,
+    "generated_at_utc":  "2026-10-05T09:09:56.2019890Z",
+    "file_count":  83,
+    "files":  [
+                  {
+                      "path":  ".gitignore",
+                      "bytes":  151,
+                      "sha256":  "a83a14188e23d9025c848738938d8a029b1ac58146ee4db4ffde6559887adef7"
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "bytes":  1478,
+                      "sha256":  "649139d5661d78717561f8ebfc4e8ff196f484636ad836133d1343dd349e8a35"
+                  },
+                  {
+                      "path":  "config/.env.example",
+                      "bytes":  201,
+                      "sha256":  "17563d6b90c4616972d3061a468ea6acdcaf487822755324a2388a1ae9e244d8"
+                  },
+                  {
+                      "path":  "config/budget.json",
+                      "bytes":  500,
+                      "sha256":  "f489e342a1611e0290720e5f692de432a0dc892618a59461f8662d11b790a9f5"
+                  },
+                  {
+                      "path":  "config/codex-config.template.toml",
+                      "bytes":  239,
+                      "sha256":  "a8bb03cde4913fce4c1a875aca52f5edfba08c7561cbee7f9c41d761b774b7dd"
+                  },
+                  {
+                      "path":  "config/routing.json",
+                      "bytes":  936,
+                      "sha256":  "2a9d7844ed8cb847576480a9d456dd03af838d6e86b3eebd2bafe361e88fe1cf"
+                  },
+                  {
+                      "path":  "docs/ENGINEERING.md",
+                      "bytes":  1012,
+                      "sha256":  "c9a0933bcf76e1bb5464bd52853816e3bcd74f3e2dc0ed4d4bb1ae0334d90269"
+                  },
+                  {
+                      "path":  "docs/OFFICIAL-REPO-BOUNDARY.md",
+                      "bytes":  1772,
+                      "sha256":  "48925b5a1047b145a90ddf4b269d24f8ebf35d9e1029a50c2fdfa375bf735635"
+                  },
+                  {
+                      "path":  "docs/ORCA-CODEX-FINDINGS.md",
+                      "bytes":  6015,
+                      "sha256":  "2de8d4fad6c6a4f66ab3238d42e64abeb38194673538a3c452b88c6b22b5cde9"
+                  },
+                  {
+                      "path":  "docs/REVIEW-2026-10-05.md",
+                      "bytes":  3815,
+                      "sha256":  "d92e337483fbf7f3e53ac3b8ac43865993584ed5f6b1ac33a4d80509f4cda1a0"
+                  },
+                  {
+                      "path":  "docs/UI-BASELINE.md",
+                      "bytes":  793,
+                      "sha256":  "bd4ab2f4c589a261965e247bb1f09a03ab8f3142f3f13bbe879376a63befef7d"
+                  },
+                  {
+                      "path":  "knowledge/model-registry.json",
+                      "bytes":  8652,
+                      "sha256":  "56109fda414c952b8eed203bbbd54cc1d4b33dd5b80861fd27d8087ced4e3d98"
+                  },
+                  {
+                      "path":  "knowledge/README.md",
+                      "bytes":  1978,
+                      "sha256":  "ef7f65de3e2a26b0ad2488ad583f1ba85b0c533473b4de7b0a3268529ea09627"
+                  },
+                  {
+                      "path":  "knowledge/routing-policy.json",
+                      "bytes":  2987,
+                      "sha256":  "f5c163f90026bf95d1f50c0c366f42caa70e77998cbbeb9884f3f96327e8d692"
+                  },
+                  {
+                      "path":  "knowledge/tracking-schema.json",
+                      "bytes":  1499,
+                      "sha256":  "e294c96a5e430637e57d3f60938cbd1b22c00f3978e5da1bddedd79c1e76cd27"
+                  },
+                  {
+                      "path":  "licenses/Matt-Pocock-MIT.txt",
+                      "bytes":  1068,
+                      "sha256":  "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+                  },
+                  {
+                      "path":  "licenses/SS-WD-MIT.txt",
+                      "bytes":  1065,
+                      "sha256":  "628dec150714ed1746c1d52600d61a0f2faf7ff61eea6eb64abdaed40ba2a4d7"
+                  },
+                  {
+                      "path":  "MODEL_ROUTING.md",
+                      "bytes":  3385,
+                      "sha256":  "40ef52e549b68b917274ed761020cebc290ef1efe69d39c5346fb4cb160462e4"
+                  },
+                  {
+                      "path":  "ORCA.md",
+                      "bytes":  2560,
+                      "sha256":  "28dfd3bdcec91e5e9466c26858194235206bca70457f9aeda53890b6d8303b91"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  4393,
+                      "sha256":  "85401f4a21df0c31fe02470fa927969d7d0eda1fb758942e15a4d5c6ff2ed082"
+                  },
+                  {
+                      "path":  "references/official-training/README.md",
+                      "bytes":  481,
+                      "sha256":  "678e2bc5ef87632f165622c3f7b7f2d73450bf7bbca7193d138d1ed4b9664eb1"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085229.png",
+                      "bytes":  743240,
+                      "sha256":  "99948455bf9a7675d15595441de29d0e0e58b1477b093b2cab82f1d006c14807"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085233.png",
+                      "bytes":  579323,
+                      "sha256":  "4e05ec44f5d31514e64991855252cd3adbfdd322f539ad24abbdaa3312128f5d"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085237.png",
+                      "bytes":  758860,
+                      "sha256":  "bc6fc01271b133cd442133341bf622a116287a0c119083e85fd39d9f7e3bebdd"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085243.png",
+                      "bytes":  551084,
+                      "sha256":  "e1684d9807efc03660dc60a2924ae188eb0b05555c7f3c4b93bc16243e90f019"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085247.png",
+                      "bytes":  486126,
+                      "sha256":  "0cab6bfc393a3ab99cde9ce471f69e7f40f27e9e5f37c679bf3b080ad9f64eea"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085250.png",
+                      "bytes":  533987,
+                      "sha256":  "58ede35893b51df3d8452efc6ef46e6def7df19274edc7a956eae8892cdd8280"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085254.png",
+                      "bytes":  554028,
+                      "sha256":  "7d488ab13fad32a98c8f446220b68e3582a06bbe1689f2625e83a7226bcd7554"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085259.png",
+                      "bytes":  575280,
+                      "sha256":  "835edbc2000edd0e6c0d5cf4de85b7a26297d9b4cd78884135ce24d8169cd8ee"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085305.png",
+                      "bytes":  503720,
+                      "sha256":  "3229799c6b5aa55ae4d883572e34e430d75e4477da77761bd02b25d87c0ed8ec"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085313.png",
+                      "bytes":  512973,
+                      "sha256":  "7a498bc0eb51cde5eeadce7cbfdda37f73b8931e1546a611561cc5504f40c658"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085318.png",
+                      "bytes":  763810,
+                      "sha256":  "aed0c8fc30b97359d896a4c21f1b20e627c46d46011801d6d67628c2961de9d1"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085322.png",
+                      "bytes":  745026,
+                      "sha256":  "4d8c47c609304e7455e5ea25f6a019e5a634586c67dd200fdd839955df0f56f4"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085327.png",
+                      "bytes":  544257,
+                      "sha256":  "b94eb81afd6ad6e1dc392f47843118ccb870cab00187e5ddef9f2933334736b0"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085331.png",
+                      "bytes":  754953,
+                      "sha256":  "17872d069e4a9213fcfeee76d894852be623844a6a4e8a769b054d88d24feba4"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085336.png",
+                      "bytes":  498775,
+                      "sha256":  "6889d4626d83fa5a65af4f06baa778e9574e43a4ac1d4d982fec7153c372e2bb"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085340.png",
+                      "bytes":  522003,
+                      "sha256":  "79d0aa5795946aa3c7b6b20ae4a05211378a01ff154c0da95165dbab9a27aa5a"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085343.png",
+                      "bytes":  529918,
+                      "sha256":  "e6b66168df79a2c3495d91aa60c2f4259b035be372be8d6c5807f5bdd6d66f36"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085347.png",
+                      "bytes":  510382,
+                      "sha256":  "f669519a3737a00eaaf0718c8ffc0fac19e1856067c35d60303d982473d5bb0d"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085351.png",
+                      "bytes":  567239,
+                      "sha256":  "a9d26348a1295d88027c96158f724238aed434badd4207f37d1f1bf8cbd0da57"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085354.png",
+                      "bytes":  480075,
+                      "sha256":  "a62f134e586aa3f1c48364f19a2f8ae80873a1dafbc3acc230ec7075c5e777a5"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085358.png",
+                      "bytes":  735988,
+                      "sha256":  "3f0ce510196179744f1e3d7f9ad755acea495d43f41b7e490cc4016d61d977e5"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085414.png",
+                      "bytes":  153784,
+                      "sha256":  "8e59f68c82645fe64545aef13aac733dd966216b2bd88203859183dca2b8f66c"
+                  },
+                  {
+                      "path":  "references/official-training/screenshots/Screenshot 2026-10-05 085422.png",
+                      "bytes":  140763,
+                      "sha256":  "7f7bf110dc0cd1d83c34494b5945d259c0beee583ca4734a14d230d3fe231d99"
+                  },
+                  {
+                      "path":  "references/source-material/michael/AGENTS.md",
+                      "bytes":  3877,
+                      "sha256":  "8463540bfbb36fb1767cd6b6dbf4950f1fccf63283d0677cd187296514a3b817"
+                  },
+                  {
+                      "path":  "references/source-material/michael/BUILD_PLAYBOOK.md",
+                      "bytes":  6935,
+                      "sha256":  "e09195f2d1a35a902d8e727289fab2ddb7bdaed59efd0d96e7e6faf821d7d28b"
+                  },
+                  {
+                      "path":  "references/source-material/michael/RESEARCH_TASTE.md",
+                      "bytes":  6645,
+                      "sha256":  "80f90b3b6a62266705381e7b8de17ed5e8f264856846a091f94d568ec0c1d6eb"
+                  },
+                  {
+                      "path":  "references/source-material/michael/TASTE_UI.md",
+                      "bytes":  3075,
+                      "sha256":  "0385909b3ad22bbec07cb99b75385abb1bed251653aa5d8af50ed097ef37055a"
+                  },
+                  {
+                      "path":  "references/source-material/README.md",
+                      "bytes":  376,
+                      "sha256":  "b21c9be812ab0c206b1121546211b94f90c44d179c66ceacf587c7fa485a148f"
+                  },
+                  {
+                      "path":  "RULES.md",
+                      "bytes":  3021,
+                      "sha256":  "b54dbe3b507b54ca4328ac8aabc18a92d0846d82fbd29a2df48e4277270511f2"
+                  },
+                  {
+                      "path":  "runbook/FAILURE_MATRIX.md",
+                      "bytes":  1591,
+                      "sha256":  "70f1b204dd9058a45a741b7287afdf49ccb8bc18e48abaf6af602c9f91841e03"
+                  },
+                  {
+                      "path":  "runbook/FINAL_30_MIN.md",
+                      "bytes":  1070,
+                      "sha256":  "bfa973edc8678eabab02094f78872c31884172cb85a2be10798c15b223097825"
+                  },
+                  {
+                      "path":  "runbook/FIRST_15_MIN.md",
+                      "bytes":  888,
+                      "sha256":  "28e5fef70b1f49b45393cb2cf80ee8b2f6805bc3c4dd2015f44724028c357d80"
+                  },
+                  {
+                      "path":  "runbook/SUBMIT.md",
+                      "bytes":  889,
+                      "sha256":  "72ddda1b3eeb83c6f811482f51bbd61eba2333799701a1f2a696c981e078ce07"
+                  },
+                  {
+                      "path":  "runbook/T_MINUS_15.md",
+                      "bytes":  993,
+                      "sha256":  "7514145073cd89b14227a7fad7059bf285f7151bb217c53bc305f4f9f963b86c"
+                  },
+                  {
+                      "path":  "scripts/bootstrap.ps1",
+                      "bytes":  3912,
+                      "sha256":  "6767708f0dc16e8dd16382ecacedbf489a0f0516706c4703358fe924d1e27bba"
+                  },
+                  {
+                      "path":  "scripts/budget.ps1",
+                      "bytes":  1870,
+                      "sha256":  "7f5167dd1151127895d4c7adc08caf69ed4e84879e1a59a304815a6d68bec73b"
+                  },
+                  {
+                      "path":  "scripts/codex-canary.ps1",
+                      "bytes":  3406,
+                      "sha256":  "9abe84b2679a5a0eff645bb656f573c3a9630955520ee57b6524680f1c135691"
+                  },
+                  {
+                      "path":  "scripts/install-skills.ps1",
+                      "bytes":  957,
+                      "sha256":  "3a08a9b3334583613118e4253b801afd095ac9755d778ef2a6764dea5cffed39"
+                  },
+                  {
+                      "path":  "scripts/lib/Aitc.Common.ps1",
+                      "bytes":  4778,
+                      "sha256":  "fcd37606ec492e1da64544165d6fee505088c28d9181815ef32c50c32e7e6870"
+                  },
+                  {
+                      "path":  "scripts/model-query.ps1",
+                      "bytes":  2023,
+                      "sha256":  "032f21262abaf386b6660512a6ffcb89daf24581013e047f0bafe0de427a0c55"
+                  },
+                  {
+                      "path":  "scripts/orca-preflight.ps1",
+                      "bytes":  573,
+                      "sha256":  "9b360dad96bc4d7dcb6c5dc6bb41bf8f4176bd871eb664934f16e2db4bbc1ec3"
+                  },
+                  {
+                      "path":  "scripts/preflight.ps1",
+                      "bytes":  6870,
+                      "sha256":  "c6d51306ec008cd62ef4b056c19ca8c75c5eb31e9b02334184216588d49b6de8"
+                  },
+                  {
+                      "path":  "scripts/spend-ledger.ps1",
+                      "bytes":  5049,
+                      "sha256":  "5f36de2b37cd7561cfb851700583014bc61d37068f39af0438151c9f15ed72c3"
+                  },
+                  {
+                      "path":  "scripts/start-codex.ps1",
+                      "bytes":  1259,
+                      "sha256":  "56782e744b191387e2befd8945cd85c116e93c950b2b785c6118345f7010fad5"
+                  },
+                  {
+                      "path":  "scripts/sync-variant.ps1",
+                      "bytes":  1947,
+                      "sha256":  "2ba76d9c69d9b985e6a2b5fc2bc34a7ce41dc2175079de443af49a1a06abf1f0"
+                  },
+                  {
+                      "path":  "scripts/update-manifest.ps1",
+                      "bytes":  1092,
+                      "sha256":  "0e1ef0bb3f1f258dd1b4c3d7f1966cd872f17daf3b8f7c54cdf2e51897909fb1"
+                  },
+                  {
+                      "path":  "scripts/verify.ps1",
+                      "bytes":  4068,
+                      "sha256":  "5aa6cd5e892383598d42e073239229bb34bdd2567b96d18ec11b8c3d0e83ec51"
+                  },
+                  {
+                      "path":  "skills/aitc-captain/agents/openai.yaml",
+                      "bytes":  260,
+                      "sha256":  "551435d5f2e029488b72cdab355137a3b2e2bd8e41b817a9840214ad99db0d7b"
+                  },
+                  {
+                      "path":  "skills/aitc-captain/SKILL.md",
+                      "bytes":  3051,
+                      "sha256":  "6d024b2b7fa886ee28cf0b6d71f577f5f7c86036ff4f41c1b85a5d3d13694b19"
+                  },
+                  {
+                      "path":  "skills/aitc-diagnose/agents/openai.yaml",
+                      "bytes":  259,
+                      "sha256":  "8dcc460205c4d404e125f8189757de62618314613a3b6e3a3b86f90e84bc48c9"
+                  },
+                  {
+                      "path":  "skills/aitc-diagnose/SKILL.md",
+                      "bytes":  1819,
+                      "sha256":  "cb4eb2e65296bc4390d01d29c87d54dd00c198a15204a34590348b282dc4493b"
+                  },
+                  {
+                      "path":  "skills/aitc-orca-runtime/agents/openai.yaml",
+                      "bytes":  276,
+                      "sha256":  "c98d78fa474db2d62dda873330387985ff00677965ffc28ad8d6c157ac776d02"
+                  },
+                  {
+                      "path":  "skills/aitc-orca-runtime/SKILL.md",
+                      "bytes":  1458,
+                      "sha256":  "8084f1ada0ead52192935cd54327cc6938563b2ae2023ed40d9a3d24998ff0c5"
+                  },
+                  {
+                      "path":  "skills/aitc-reviewer/agents/openai.yaml",
+                      "bytes":  250,
+                      "sha256":  "fec86eb56feebf0166e3d1bc73e94fbe87d49ad6482602e107da943ec21d4339"
+                  },
+                  {
+                      "path":  "skills/aitc-reviewer/SKILL.md",
+                      "bytes":  1709,
+                      "sha256":  "571ec023226d328552b738d040766712f798af3e12eb798336c4e96651a52229"
+                  },
+                  {
+                      "path":  "skills/aitc-worker/agents/openai.yaml",
+                      "bytes":  223,
+                      "sha256":  "d0c60c247121a398d848a334558ca3a7c490114b56468eee4d813dc12cfacffa"
+                  },
+                  {
+                      "path":  "skills/aitc-worker/SKILL.md",
+                      "bytes":  2056,
+                      "sha256":  "198231e940eda15d02c8b96afabc91af4da41da98339344b6f7a80cd873f245b"
+                  },
+                  {
+                      "path":  "templates/ACCEPTANCE_MATRIX.md",
+                      "bytes":  508,
+                      "sha256":  "16ce9b1ff4f20fcbefd3dbccea2d5cd4d3a4dc5eb16f69a35d7c4639829b8ff0"
+                  },
+                  {
+                      "path":  "templates/IMPLEMENTATION_CONTRACT.md",
+                      "bytes":  1022,
+                      "sha256":  "c714e9bbb68f727bfd2e76a4ee4b53052cf12e85f4e667910d8b7e37df79c6f5"
+                  },
+                  {
+                      "path":  "templates/REVIEW_REPORT.md",
+                      "bytes":  214,
+                      "sha256":  "fcfe0730f481dab266ba34db7e6e55cf018fbaf5df8f1de0fe5bb4eea81e8802"
+                  },
+                  {
+                      "path":  "templates/WORKER_BRIEF.md",
+                      "bytes":  466,
+                      "sha256":  "34d2c8ac20c184e519ce84be7881680684adc7012cc01724161bf570b68ac7d2"
+                  },
+                  {
+                      "path":  "THIRD_PARTY_NOTES.md",
+                      "bytes":  1337,
+                      "sha256":  "c2681770f53c0738191d4458e396c40ea4528830806ad57604157d7c490c3168"
+                  }
+              ]
+}

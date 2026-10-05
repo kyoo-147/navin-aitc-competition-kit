@@ -1,0 +1,4 @@
+interface:
+  display_name: "AITC Diagnose"
+  short_description: "Debug blockers with a tight loop"
+  default_prompt: "Build a fast red/green reproduction for the exact bug, test a few falsifiable hypotheses, fix the root cause, and verify the original flow."

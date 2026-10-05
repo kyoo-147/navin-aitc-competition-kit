@@ -1,0 +1,12 @@
+model = "__MODEL__"
+model_provider = "thucchien"
+__REASONING_LINE__
+
+[model_providers.thucchien]
+name = "AI Thuc Chien"
+base_url = "https://api.thucchien.ai/v1"
+env_key = "THUCCHIEN_API_KEY"
+wire_api = "responses"
+
+[features]
+hooks = true

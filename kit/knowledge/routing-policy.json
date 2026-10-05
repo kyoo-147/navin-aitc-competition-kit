@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "budget_usd": 50,
+  "default_codex_ceiling": "gpt-6-luna",
+  "principles": [
+    "Gateway only during competition",
+    "Live key and team data override snapshots",
+    "Use no model for deterministic work",
+    "Use the cheapest canary-passing compatible model",
+    "Do not silently change provider after failures",
+    "Do not use a chat-completions-only model from the Codex Responses transport",
+    "Premium tiers require captain approval and evidence"
+  ],
+  "budget_gates": [
+    {"spend_gte":0,"state":"NORMAL","action":"Use T0/T1; preserve concise context."},
+    {"spend_gte":35,"state":"LEADER_REVIEW","action":"Captain approves every new lane and every T2+ call."},
+    {"spend_gte":42,"state":"ECONOMY_MODE","action":"T0/T1 only; stop benchmarking and optional review."},
+    {"spend_gte":45,"state":"BLOCK_NONESSENTIAL","action":"Only deployment, submission, or scoring-critical repair."},
+    {"spend_gte":50,"state":"CAP_REACHED","action":"Stop all model calls."}
+  ],
+  "task_routes": [
+    {"task":"deterministic","tier":"T0","models":[],"examples":["grep","format","run tests","hash manifest","calculate cost"]},
+    {"task":"codex_routine","tier":"T1","models":["gpt-6-luna","gpt-5.6-luna"],"effort":"none_or_low","approval":false,"examples":["small backend endpoint","clear frontend component","bounded bug fix"]},
+    {"task":"chat_routine","tier":"T1-chat","models":["deepseek-flash"],"effort":"thinking_off_unless_needed","approval":false,"examples":["routine coding using a chat-completions harness"]},
+    {"task":"web_research_codex","tier":"T1","models":["gpt-6-luna","gpt-5.6-luna"],"effort":"low","approval":false,"constraints":["BTC Responses web_search only","record sources","budget $0.01 per search call plus tokens"]},
+    {"task":"google_grounding_chat","tier":"T1-chat","models":["gemini-3.1-flash-lite","gemini-3.5-flash-lite","gemini-2.5-flash"],"approval":false,"constraints":["chat/completions only","googleSearch tool","not the Codex Responses transport"]},
+    {"task":"integration_review","tier":"T2","models":["gpt-6-luna","o4-mini"],"effort":"low_or_medium","approval":"o4-mini requires captain approval"},
+    {"task":"hard_reasoning","tier":"T3","models":["gpt-6-sol","gpt-6.1-sol","o3"],"effort":"low_then_high_if_evidence_requires","approval":true},
+    {"task":"emergency","tier":"EMERGENCY","models":["gpt-6-astra"],"approval":true,"constraints":["submission-critical blocker","reserve available","record decision"]}
+  ],
+  "escalation": {
+    "allowed_when": [
+      "two bounded attempts fail for the same model-capability reason",
+      "independent review rejects substantive correctness",
+      "required capability is absent",
+      "retry cost exceeds one stronger call",
+      "deployment or submission is threatened"
+    ],
+    "forbidden_when": [
+      "code bug",
+      "test failure",
+      "Git or workspace failure",
+      "policy failure",
+      "provider authentication failure"
+    ]
+  }
+}

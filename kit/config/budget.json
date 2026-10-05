@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "organizer_cap": 50,
+  "gates": {
+    "leader_review": 35,
+    "economy_mode": 42,
+    "block_nonessential": 45
+  },
+  "planning_envelope": {
+    "discovery_and_benchmark": 4,
+    "main_build": 20,
+    "review_and_hard_reasoning": 10,
+    "multimodal_if_required": 6,
+    "final_qa_and_repair": 5,
+    "emergency_reserve": 5
+  },
+  "note": "Live team_info.max_budget is authoritative. The emergency reserve and premium tier require leader approval."
+}

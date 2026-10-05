@@ -1,0 +1,48 @@
+# Local Competition Knowledge Base
+
+This directory is a dated, queryable snapshot for model routing and spend decisions. Live BTC documentation, `/key/info`, `/team/info`, response headers, and canaries override every local value.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `model-registry.json` | Models, endpoints, prices, reasoning/search capability, Codex Responses compatibility. |
+| `routing-policy.json` | Task tiers, default ceiling, budget gates, escalation rules. |
+| `tracking-schema.json` | Required run ledger fields and operational tables. |
+
+## Critical transport rule
+
+Codex uses the Responses API. BTC OpenAI text models support `/responses`; BTC DeepSeek and Gemini workflows documented here use `/chat/completions`, so they are not Codex worker candidates unless a separately validated chat-completions harness is used.
+
+Google Search is allowed through BTC only:
+
+- OpenAI text models: `web_search` on BTC `/responses`.
+- Gemini: `googleSearch` on BTC `/chat/completions`; not the Codex Responses transport.
+- DeepSeek: unsupported.
+
+## Default policy
+
+- `$50` simulated or live team cap.
+- Default Codex ceiling: `gpt-6-luna`, usually `none` or `low` reasoning.
+- Start with T0 deterministic work or T1.
+- Larger models require evidence and Captain approval.
+- `gpt-6-astra` is emergency-only.
+
+## Query
+
+```powershell
+pwsh -File .\scripts\model-query.ps1 -Task codex_routine
+pwsh -File .\scripts\model-query.ps1 -Model gpt-6-luna
+pwsh -File .\scripts\model-query.ps1 -Task web_research_codex -CodexOnly
+```
+
+## Tracking
+
+Initialize a simulation ledger and append measured records:
+
+```powershell
+pwsh -File .\scripts\spend-ledger.ps1 -Action Init -LedgerPath .\evidence\drill-ledger.jsonl -BudgetUsd 50
+pwsh -File .\scripts\spend-ledger.ps1 -Action Status -LedgerPath .\evidence\drill-ledger.jsonl -BudgetUsd 50
+```
+
+Never label estimated spend as live BTC spend. Use `SIMULATED_ROUTING_NON_BTC_TRANSPORT` when the BTC gateway was not the actual transport.

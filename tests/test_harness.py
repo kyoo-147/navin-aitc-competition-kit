@@ -53,6 +53,34 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(len(model_ids), len(set(model_ids)))
         self.assertGreater(len(model_ids), 10)
 
+    def test_reusable_kit_policies_match_team_rules(self):
+        routing = json.loads((ROOT / "kit" / "config" / "routing.json").read_text(encoding="utf-8"))
+        budget = json.loads((ROOT / "kit" / "config" / "budget.json").read_text(encoding="utf-8"))
+        self.assertEqual(routing["provider"]["environment_key"], "THUCCHIEN_API_KEY")
+        self.assertEqual(routing["provider"]["wire_api"], "responses")
+        self.assertTrue(routing["policy"]["gateway_only"])
+        self.assertFalse(routing["policy"]["personal_provider_fallback"])
+        self.assertEqual(budget["gates"], {
+            "leader_review": 35,
+            "economy_mode": 42,
+            "block_nonessential": 45,
+        })
+        self.assertEqual(sum(budget["planning_envelope"].values()), budget["organizer_cap"])
+
+    def test_official_training_screenshots_are_preserved(self):
+        screenshots = list((ROOT / "kit" / "references" / "official-training" / "screenshots").glob("*.png"))
+        self.assertEqual(len(screenshots), 23)
+        self.assertFalse(any(path.name.startswith("_contact_") for path in screenshots))
+
+    def test_kit_uses_organizer_credential_names(self):
+        deprecated = ("AITC_" + "AGENT_KEY", "AITC_" + "PRODUCT_KEY", "AITC_" + "LOG_KEY")
+        for path in (ROOT / "kit").rglob("*"):
+            if not path.is_file() or "source-material" in path.parts or path.suffix.lower() not in {".md", ".json", ".ps1", ".toml"}:
+                continue
+            text = path.read_text(encoding="utf-8", errors="replace")
+            for name in deprecated:
+                self.assertNotIn(name, text, str(path.relative_to(ROOT)))
+
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
             self.assertTrue((ROOT / relative).is_dir(), relative)

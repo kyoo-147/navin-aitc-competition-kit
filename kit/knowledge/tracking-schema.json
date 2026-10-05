@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_record": {
+    "required": ["run_id","task_id","lane","transport","model","routing_status","started_at_utc","ended_at_utc","duration_ms","input_tokens","cached_input_tokens","output_tokens","reasoning_tokens","search_calls","reported_cost_usd","estimated_cost_usd","verification","outcome"],
+    "routing_status_values": ["BTC_LIVE","SIMULATED_ROUTING_NON_BTC_TRANSPORT","NO_MODEL_T0"],
+    "outcome_values": ["SUCCEEDED","FAILED","BLOCKED","UNKNOWN"]
+  },
+  "cost_formula": "estimated_cost_usd = input_tokens/1e6*input_rate + cached_input_tokens/1e6*cached_rate + (output_tokens+reasoning_tokens)/1e6*output_rate + search_calls*search_rate. If x-litellm-response-cost exists, reported_cost_usd is authoritative.",
+  "tables": [
+    {"name":"model_registry","purpose":"Capability, endpoint, price, and Codex compatibility snapshot."},
+    {"name":"routing_policy","purpose":"Task-to-tier decisions, budget gates, and escalation rules."},
+    {"name":"canary_matrix","purpose":"Day-of live compatibility, latency, tool behavior, and observed cost."},
+    {"name":"run_ledger","purpose":"Per-task timing, token, search, cost, verification, and outcome."},
+    {"name":"budget_summary","purpose":"Team spend, remaining budget, state, and reserve."},
+    {"name":"evidence_matrix","purpose":"Acceptance requirement to command, artifact, owner, and status."},
+    {"name":"decision_log","purpose":"Captain approvals, escalations, model changes, and scope changes."}
+  ]
+}

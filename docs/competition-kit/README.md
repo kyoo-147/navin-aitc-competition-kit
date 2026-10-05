@@ -1,32 +1,28 @@
-# NAVIN AITC Competition Kit
+# Competition Kit Status
 
-This directory is the design and implementation home for the reusable competition-day setup derived from the proven `kyoo-147/nr-00` harness.
+The canonical reusable implementation is [`../../kit/`](../../kit/README.md).
 
-## Intended deliverables
+## Implemented
 
-| Area | Tracked artifact | Local-only artifact |
-|---|---|---|
-| Rules and runbooks | `docs/competition/`, `docs/competition-kit/` | live notes containing private context |
-| Model routing | `config/competition/*.json` | runtime model response if it contains team data |
-| Orchestration | `skills/aitc-orchestrator/SKILL.md` | private worker transcripts |
-| Secure setup | planned bootstrap and preflight scripts | `.env`, keys, account configuration |
-| Verification | tests and redacted reports | raw AI logs and unredacted diagnostics |
-| Submission | reviewed evidence manifest | credentials, monitoring recordings, PII |
+- organizer-aligned credential names;
+- private Codex config using BTC Gateway Responses API;
+- official hook setup with Windows UTF-8 BOM normalization;
+- fail-closed structure, Gateway, team budget, model canary, and AI Log server readback preflight;
+- spend guard using `team_id` from `/key/info` and nested `team_info` fields;
+- explicit `chung-khao/` delivery boundary;
+- safe reusable-variant sync into `chung-khao/navin-competition-kit/`;
+- bounded captain, worker, reviewer, diagnosis, and Orca skills;
+- implementation contract and timed runbooks;
+- content manifest and offline verifier.
 
-## Build order
+## Deliberately not implemented
 
-1. Lock rules, budget thresholds, and model-routing policy.
-2. Implement a secret-safe bootstrap that accepts new BTC keys without printing them.
-3. Implement a fail-closed preflight for Gateway, AI Log, Git identity, hooks, and spend.
-4. Add fixture-based tests for redaction, auth failure, throttling, malformed payloads, and threshold behavior.
-5. Add the orchestrator adapter for the approved coding agents.
-6. Rehearse in disposable clones before using the official BTC repository.
+- a starter application or hidden product template;
+- any personal-provider fallback;
+- automatic secret storage outside the ignored official `.env` or current process;
+- automatic commit, push, merge, deployment, or submission;
+- claims that dated model names or prices are current.
 
-## Current status
+## Required live proof
 
-- Existing Round 2 knowledge pack and technical-test evidence workflow: inherited and previously verified in the source harness.
-- Budget and router policies: initial proposal, subject to leader review.
-- Model catalog: dated snapshot only; it is not a competition-day allowlist.
-- Secure bootstrap, full preflight, spend guard, and orchestrator runtime: not implemented yet.
-
-No secret belongs in this repository.
+Static verification cannot prove Gateway availability, a selected model, current spend, AI Log ingestion, deployment, or platform submission. Those remain day-of checks against official systems.
