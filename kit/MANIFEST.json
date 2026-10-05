@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-05T14:24:49.2893666Z",
-    "file_count":  85,
+    "generated_at_utc":  "2026-10-05T14:36:34.8659771Z",
+    "file_count":  87,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -52,6 +52,11 @@
                       "path":  "docs/ENGINEERING.md",
                       "bytes":  1012,
                       "sha256":  "c9a0933bcf76e1bb5464bd52853816e3bcd74f3e2dc0ed4d4bb1ae0334d90269"
+                  },
+                  {
+                      "path":  "docs/MATT-POCOCK-REFERENCE.md",
+                      "bytes":  1038,
+                      "sha256":  "64c13bcf8902bf9bb27cebf264062a2c99513f3ad971c14d5dbf8944e34f1644"
                   },
                   {
                       "path":  "docs/OFFICIAL-REPO-BOUNDARY.md",
@@ -115,8 +120,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  5124,
-                      "sha256":  "f430294b9814aed765378d927de55d15d811927ede6a79e550548b703782c872"
+                      "bytes":  5136,
+                      "sha256":  "3d334bfacda5019557cab9e9fab138091d606e910582e0b4401dc74ed83ab1fd"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -365,8 +370,8 @@
                   },
                   {
                       "path":  "scripts/verify.ps1",
-                      "bytes":  4301,
-                      "sha256":  "88934396726e4f93aea9506f73e5bf97c790eaac6f0114bbeafaa4ef7848c63d"
+                      "bytes":  4361,
+                      "sha256":  "37f0c79bdefe8f234ba1fc775815c5ad0926bced305f23155a3a0aa24d53ab45"
                   },
                   {
                       "path":  "skills/aitc-captain/agents/openai.yaml",
@@ -375,8 +380,8 @@
                   },
                   {
                       "path":  "skills/aitc-captain/SKILL.md",
-                      "bytes":  3872,
-                      "sha256":  "699120c51c19585a3ab356d440660435e5f67e941d8395e53e3aa686bd7a231c"
+                      "bytes":  6366,
+                      "sha256":  "824ee1e5aff4a0790da5729d313990b34576a822f0ab8ac5b159442295ffda0f"
                   },
                   {
                       "path":  "skills/aitc-reviewer/agents/openai.yaml",
@@ -407,6 +412,11 @@
                       "path":  "templates/codex-orca.cmd",
                       "bytes":  625,
                       "sha256":  "fb54e78f0876f9018b40b8c83c310ffd3dae05f41676d72b11c075fcba8932ad"
+                  },
+                  {
+                      "path":  "templates/IDEA-BRIEF.md",
+                      "bytes":  625,
+                      "sha256":  "387c6300fb5ba6d41578c366c89811cfd692f38dc013e45a4791580665125d45"
                   },
                   {
                       "path":  "templates/IMPLEMENTATION_CONTRACT.md",

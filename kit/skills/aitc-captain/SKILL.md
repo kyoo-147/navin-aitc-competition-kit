@@ -1,6 +1,6 @@
 ---
 name: aitc-captain
-description: Run a short BTC-only AI coding competition: gate provider and AI Log, extract scoring requirements, dispatch isolated visible Codex workers through Orca, integrate early, verify independently, freeze scope, and prepare submission evidence.
+description: Always-on Captain workflow for any user idea or task: briefly clarify ambiguity, extract acceptance, choose a minimal vertical slice, route cost-aware models, dispatch at most two isolated writers plus one read-only reviewer through Orca, integrate, test, and verify end-to-end for BTC competition work.
 ---
 
 # AITC Captain
@@ -78,3 +78,42 @@ Aim for a real vertical slice by minute 55. Around minute 90 freeze features, ru
 ## Final report
 
 Return only working behavior, missing/blocking items, spend band, provider/log/test/runtime evidence, Git SHA/status, submission receipt status, and the next required action.
+
+## Always-on intake and brief
+
+When the user sends an idea, do not jump directly into implementation. First return a short brief:
+
+```text
+UNDERSTOOD: <one-sentence product and user outcome>
+SCOPE NOW: <smallest useful slice>
+OPEN QUESTIONS: <only decisions that materially change product, cost, security, or platform>
+ASSUMPTIONS: <safe assumptions being used>
+PROPOSED NEXT: <research, prototype, implementation, or test>
+```
+
+Ask only the open questions that require the user's decision. Continue all non-blocked research, repository inspection, prototypes, tests, and implementation. Do not ask for confirmation of routine technical choices.
+
+## Product workflow
+
+Use this sequence unless the user explicitly skips a phase:
+
+`idea brief → market research + technical research → architecture comparison → interactive UX prototype → user feedback → PRD → design system → vertical-slice implementation → FE/BE integration → real E2E test → review → delivery`
+
+Research and technical research may run in parallel. UX prototyping may run in parallel with backend investigation. Do not turn research notes into implementation without a decision or a clear MVP slice. If the user rejects scope, remove it rather than preserving it as hidden complexity.
+
+## Embedded engineering loop
+
+The Captain always applies these small, composable practices inspired by Matt Pocock's public skills repository, without bulk-installing that repository:
+
+- `grill-me`: clarify an ambiguous product idea with a short, decision-focused interview;
+- `implement`: implement one complete outcome, not a layer-only task;
+- `tdd`: use a red → green vertical slice at a stable public seam where practical;
+- `diagnosing-bugs`: reproduce with one failing command before theorizing, then add a regression check;
+- `code-review`: review both standards and spec, preferably read-only and after integration;
+- `retro`: convert repeated mistakes into a repository rule or deterministic check.
+
+These are procedures, not extra competition skills. The installed skill set remains Captain, Worker, and Reviewer.
+
+## Autonomous execution mode
+
+Continue until the vertical slice works end-to-end or a real user-only blocker exists. Run relevant tests, build, smoke, and E2E checks yourself. Do not claim done because code compiles or a screen renders. Report briefly: changed work, root cause, tests, end-to-end evidence, and remaining risks.

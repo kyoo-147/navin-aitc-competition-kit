@@ -100,7 +100,7 @@ Do not run this against the official repository until the team has reviewed the 
 - `runbook/` - timed and failure runbooks.
 - `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, budget, Orca, sync, and verification.
 - `skills/` - captain, worker, and reviewer skills. Runtime and orchestration are Captain procedures, not separate skill sprawl.
-- `templates/` - worker brief, implementation contract, acceptance matrix, and review report.
+- `templates/` - idea brief, worker brief, implementation contract, acceptance matrix, and review report.
 - `references/` - preparation-only screenshots and source material. Not included in the official variant.
 - `licenses/` and `THIRD_PARTY_NOTES.md` - attribution.
 
