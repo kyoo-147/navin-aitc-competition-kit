@@ -31,3 +31,15 @@ python scripts\submit_log.py
 ```
 
 `python-dotenv` must be available for `.env` loading. A valid team token is still required and must be entered locally by a team member, never through chat.
+
+## Codex session proof
+
+For Codex, validate logging against the exact rollout session rather than checking only that `.ai-log/session.jsonl` exists:
+
+1. open Codex at the official repository root through the canonical wrapper;
+2. read rollout `session_meta.id` and require `session_meta.model_provider=thucchien`;
+3. require local `UserPromptSubmit` and `Stop` entries with that same session ID;
+4. run the organizer submit script and require HTTP `202`;
+5. read BTC entries back and require the same session ID/events.
+
+Global user hooks may coexist with project hooks. Bootstrap must preserve user hooks; competition log hooks remain project-local under the official repository `.codex/hooks.json`.

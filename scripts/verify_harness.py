@@ -20,6 +20,9 @@ REQUIRED = [
     "kit/RULES.md",
     "kit/docs/OFFICIAL-REPO-BOUNDARY.md",
     "kit/scripts/preflight.ps1",
+    "kit/scripts/session-preflight.ps1",
+    "kit/scripts/codex-runtime-refresh.ps1",
+    "kit/docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
     "kit/scripts/sync-variant.ps1",
     "kit/MANIFEST.json",
 ]

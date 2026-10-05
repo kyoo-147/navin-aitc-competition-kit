@@ -34,6 +34,21 @@ One complete result, written as an observable behavior.
 - commit SHA;
 - blockers/integration notes.
 
+## RUNTIME
+
+- official repository/worktree:
+- BTC-only; worker must not change provider/catalog/home:
+- no secret or `.env` reads:
+- expected provider proof: `session_meta.model_provider = thucchien`:
+
+## EVIDENCE RETURN
+
+- session ID and rollout path;
+- provider metadata;
+- exact Git branch/HEAD/status;
+- local AI Log status when required.
+
+## MAX_SPEND / MODEL TIER
 ## MAX_SPEND / MODEL TIER
 
 T1 by default. Escalate only through Captain.

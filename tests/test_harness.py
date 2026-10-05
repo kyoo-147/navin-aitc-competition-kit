@@ -81,6 +81,32 @@ class HarnessTests(unittest.TestCase):
             for name in deprecated:
                 self.assertNotIn(name, text, str(path.relative_to(ROOT)))
 
+    def test_codex_runtime_flow_is_source_controlled(self):
+        required = (
+            "kit/scripts/codex-runtime-refresh.ps1",
+            "kit/scripts/session-preflight.ps1",
+            "kit/templates/codex-orca.cmd",
+            "kit/docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
+        )
+        for relative in required:
+            self.assertTrue((ROOT / relative).is_file(), relative)
+
+        wrapper = (ROOT / "kit/templates/codex-orca.cmd").read_text(encoding="utf-8")
+        self.assertIn("app-server daemon restart", wrapper)
+        self.assertIn("AITC_REFRESH_RC", wrapper)
+        runtime = (ROOT / "kit/scripts/codex-runtime-refresh.ps1").read_text(encoding="utf-8")
+        self.assertIn("fingerprint", runtime)
+        self.assertIn("exit 10", runtime)
+
+    def test_competition_skills_include_runtime_evidence(self):
+        skill_root = ROOT / "kit/skills"
+        expected = {"aitc-orchestrator", "aitc-captain", "aitc-worker", "aitc-orca-runtime", "aitc-diagnose", "aitc-reviewer"}
+        self.assertEqual({path.name for path in skill_root.iterdir() if path.is_dir()}, expected)
+        combined = "\n".join((path / "SKILL.md").read_text(encoding="utf-8") for path in skill_root.iterdir())
+        self.assertIn("session_meta.model_provider", combined)
+        self.assertIn("turn_started", combined)
+        self.assertIn("UserPromptSubmit", combined)
+
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
             self.assertTrue((ROOT / relative).is_dir(), relative)

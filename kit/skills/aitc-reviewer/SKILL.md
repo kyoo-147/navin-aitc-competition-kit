@@ -1,62 +1,54 @@
 ---
 name: aitc-reviewer
-description: Review contest work quickly along two independent axes - spec/scoring compliance and engineering/runtime correctness - prioritizing only issues that can affect score, reliability, deployment, security, or submission.
+description: Review integrated contest work across scoring compliance, engineering/runtime correctness, BTC provider and AI Log provenance, Git/worktree state, and submission readiness.
 ---
 
 # AITC Reviewer
 
-This is a short-contest review, not a style critique.
+This is a short-contest gate, not a style critique. Remain read-only unless explicitly assigned a repair lane.
 
 ## Inputs
 
-Read:
+Read the live challenge/acceptance matrix, integrated diff, repository rules, test/build/runtime evidence, rollout metadata, AI Log evidence, Git/worktree state, and deployment/submission evidence.
 
-- the current challenge/acceptance matrix;
-- the integrated diff or target branch;
-- repository rules;
-- relevant test/build/runtime evidence.
+## Axis 1 - Spec and scoring
 
-## Axis 1 - Spec / scoring
+Find required behavior or deliverables that are missing/partial, page/format/path mismatches, wrong user flows, wasted scope while scoring work is absent, and unproven deployment/submission requirements.
 
-Find:
+## Axis 2 - Engineering and runtime
 
-- required behavior missing or partial;
-- output/deliverable mismatch;
-- scope spent on unrequested work while scoring work is missing;
-- requirement implemented in a way that does not actually satisfy the user flow;
-- submission/deployment requirement not yet proven.
+Find broken critical paths, contract/data errors, unhandled states, security/secret/policy violations, tests/build/runtime failures, integration regressions, deployment blockers, and material overengineering risk.
 
-## Axis 2 - Engineering / runtime
+## Axis 3 - Competition provenance
 
-Find only material issues:
+Fail the gate when any required item is absent:
 
-- broken user path;
-- wrong API/data contract;
-- unhandled critical state;
-- security/secret/policy violation;
-- build/test/runtime failure;
-- integration regression;
-- deployment blocker;
-- severe overengineering that creates a real failure risk.
+- exact session rollout exists;
+- `session_meta.model_provider = thucchien`;
+- local AI Log has `UserPromptSubmit` and `Stop` for that same session;
+- submit script returned `202`;
+- BTC readback contains the same session events;
+- no visible `Hook failed` remains unexplained;
+- Git branch/HEAD/status and worktree ownership are known;
+- final submission has a visible receipt when submission is claimed.
 
-Ignore cosmetic nits unless UI quality is explicitly scored and the issue is visibly harmful.
+A picker label, HTTP 200, worker message, or local log alone is insufficient.
 
 ## Severity
 
-- `P0`: app cannot satisfy a mandatory flow, cannot deploy/submit, or violates a hard rule.
+- `P0`: mandatory flow cannot work/deploy/submit or hard policy/provenance failure.
 - `P1`: likely scoring/reliability failure on an important path.
-- `P2`: material but non-critical issue worth fixing only if time remains.
+- `P2`: material issue worth fixing only if time remains.
 
 ## Output
-
-Report findings with file/path or concrete runtime evidence. Do not write vague advice.
 
 ```text
 SPEC: PASS | FAIL
 ENGINEERING: PASS | FAIL
+PROVENANCE: PASS | FAIL
 
 P0
-- ...
+- <finding with file/runtime evidence>
 
 P1
 - ...
@@ -66,5 +58,9 @@ P2
 
 FINAL GATE
 - safe to freeze: YES | NO
+- provider proof: VERIFIED | BLOCKED
+- AI Log proof: VERIFIED | BLOCKED
+- Git/worktree: VERIFIED | UNKNOWN
+- submission receipt: VERIFIED | NOT YET REQUIRED | BLOCKED
 - one highest-value next fix: ...
 ```

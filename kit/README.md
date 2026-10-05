@@ -33,10 +33,12 @@ From PowerShell:
 ```powershell
 cd D:\path\to\navin-aitc-competition-kit\kit
 
-# Prepare the official clone without storing secrets in this kit.
+# Prepare the official clone and install the canonical wrapper/skills without storing secrets in this kit.
 .\scripts\bootstrap.ps1 `
   -RepoPath D:\path\to\aitc2026-team-918-navin-research `
-  -Model <live-verified-model>
+  -Model <live-verified-model> `
+  -CodexHome "$HOME\.codex" `
+  -InstallSkills
 
 # Offline structure and manifest check.
 .\scripts\verify.ps1
@@ -56,9 +58,14 @@ cd D:\path\to\navin-aitc-competition-kit\kit
 .\scripts\start-codex.ps1 `
   -RepoPath D:\path\to\aitc2026-team-918-navin-research `
   -Model <live-verified-model>
+
+# Verify rollout provider plus local events for the resulting session.
+.\scripts\session-preflight.ps1 `
+  -RepoPath D:\path\to\aitc2026-team-918-navin-research `
+  -RequireServerLog
 ```
 
-`bootstrap.ps1` never asks for or prints a key. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
+`bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs the six reviewed AITC skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
 
 ## Reusable variant clone
 
@@ -88,10 +95,10 @@ Do not run this against the official repository until the team has reviewed the 
 ## Directory map
 
 - `config/` - dated routing guidance and spend policy.
-- `docs/` - team operating guides and official-repository boundary.
+- `docs/` - team operating guides, official-repository boundary, and Codex/Pi scope policy.
 - `runbook/` - timed and failure runbooks.
-- `scripts/` - bootstrap, live preflight, budget, Codex, Orca, sync, and verification.
-- `skills/` - captain, engineering worker, reviewer, diagnosis, and Orca runtime skills.
+- `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, budget, Orca, sync, and verification.
+- `skills/` - orchestrator, captain, worker, reviewer, diagnosis, and Orca runtime skills.
 - `templates/` - worker brief, implementation contract, acceptance matrix, and review report.
 - `references/` - preparation-only screenshots and source material. Not included in the official variant.
 - `licenses/` and `THIRD_PARTY_NOTES.md` - attribution.

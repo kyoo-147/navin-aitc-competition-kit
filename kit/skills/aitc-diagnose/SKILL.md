@@ -1,54 +1,60 @@
 ---
 name: aitc-diagnose
-description: Diagnose a hard contest bug under time pressure by first building a tight reproducible feedback loop, then testing ranked hypotheses, fixing the root cause, and re-running the original flow.
+description: Diagnose a hard contest bug with a tight reproducible loop, ranked hypotheses, root-cause repair, and dedicated playbooks for Codex provider/catalog, Orca delivery, and AI Log failures.
 ---
 
 # AITC Diagnose
 
-Use for a real blocker that survived an ordinary fix attempt. This is adapted for a short contest: fast feedback first, theories second.
+Use after an ordinary bounded fix fails. Build evidence before theories.
 
-## 1. Build a red/green loop
+## Core loop
 
-Before theorizing, create the fastest reliable signal that catches the exact symptom:
+1. Create the fastest reliable red/green signal: targeted test, curl, CLI fixture, browser smoke, or minimal replay.
+2. Reproduce the exact user symptom and minimize irrelevant inputs.
+3. Rank 2-3 falsifiable hypotheses and test the highest-value discriminator.
+4. Make the smallest root-cause fix and retain a regression check.
+5. Rerun both the narrow check and original full flow.
+6. Remove temporary instrumentation.
 
-1. targeted test;
-2. curl/HTTP request;
-3. CLI fixture;
-4. browser smoke;
-5. minimal replay/harness.
+If two bounded attempts or roughly eight minutes do not narrow the cause, return the repro, eliminated hypotheses, and next discriminator to the Captain. Do not spend premium reasoning on an unstructured dump.
 
-The loop must be able to fail on the reported bug and pass after the fix. "It did not crash" is not enough.
+## Wrong model picker/provider playbook
 
-## 2. Reproduce and minimize
+```text
+check effective CODEX_HOME
+→ inspect top-level model/model_provider/model_catalog_json/forced_login_method
+→ verify catalog file exists and contains selected model
+→ run conditional codex-runtime-refresh.ps1
+→ restart app-server daemon only when fingerprint changed
+→ open a new session through codex-orca.cmd
+→ verify rollout session_meta.model_provider
+```
 
-Confirm the loop shows the same symptom the user/acceptance flow shows. Remove irrelevant inputs/steps until the smallest useful repro remains.
+Do not infer transport from picker/footer labels. Do not change only `/model`.
 
-## 3. Rank hypotheses
+## Orca delivery playbook
 
-Create 2-3 falsifiable hypotheses. For each, state what observation would disprove it. Test the highest-value discriminator first.
+```text
+confirm exact terminal handle and incarnation
+→ read and retain nextCursor
+→ send once with --wait-submit
+→ require turn_started or inspect ambiguous receipt
+→ poll with --cursor
+→ verify Git/runtime independently
+```
 
-Do not scatter logs everywhere. Add only targeted instrumentation and label temporary debug output so it can be removed.
+Do not rely on `tui-idle` and do not resend merely because output is slow.
 
-## 4. Fix the cause
+## AI Log playbook
 
-Where a correct test seam exists:
+```text
+confirm Codex cwd is official repo root
+→ inspect project .codex/hooks.json for UserPromptSubmit/PostToolUse/Stop
+→ verify referenced scripts and bash/python resolve
+→ reproduce with one real canary, never synthetic log editing
+→ match local events to rollout session id
+→ submit and require 202
+→ read back the same session from BTC
+```
 
-- keep the repro red;
-- add/retain a regression check;
-- make the smallest root-cause fix;
-- make the check green;
-- rerun the original full flow.
-
-## 5. Timebox / escalate
-
-If two bounded attempts or roughly 8 minutes do not materially narrow the cause:
-
-- summarize the repro and eliminated hypotheses;
-- escalate to the Captain;
-- recommend a stronger model only with the evidence/context already reduced.
-
-Do not spend premium reasoning on an unstructured dump.
-
-## 6. Cleanup
-
-Remove temporary instrumentation, rerun the original flow, and return the root cause plus verification evidence.
+Never delete/edit/add `.ai-log` lines to make a gate pass. Preserve failed pending logs and hook stderr evidence.

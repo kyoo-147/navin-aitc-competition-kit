@@ -6,6 +6,8 @@ The queryable local snapshot lives in `knowledge/`. Use `scripts/model-query.ps1
 
 Switch `model`, `model_provider`, `model_catalog_json`, and `forced_login_method` as one unit. The `/model` picker lists whatever the active catalog contains while the transport comes from the active provider; mixing them offers model IDs the endpoint may not serve and fails only at request time. A picker label is not proof of which provider served a request - read the worker session's `session_meta.model_provider`.
 
+Launch through `codex-orca.cmd`. Its runtime fingerprint prevents stale picker caches while avoiding an app-server restart for every same-preset worker. A provider/catalog change restarts the managed daemon once; subsequent workers reuse the current preset without interrupting active sessions.
+
 Codex uses the Responses API. For BTC Codex workers, the default ceiling is `gpt-6-luna` with `none` or `low` reasoning. BTC DeepSeek and Gemini coding/research routes documented in this kit use `/chat/completions`; do not select them for a Codex Responses worker without a separate canary-proven chat harness.
 
 Google Search remains inside BTC:

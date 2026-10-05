@@ -2,7 +2,7 @@
 param(
     [string]$RepoPath = (Get-Location).Path,
     [string]$Model,
-    [string]$CodexHome = (Join-Path $env:LOCALAPPDATA 'NAVIN-AITC\codex-home'),
+    [string]$CodexHome = (Join-Path $HOME '.codex'),
     [switch]$Offline,
     [switch]$RequireServerLog,
     [switch]$RequireOrca
@@ -11,16 +11,10 @@ param(
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'lib\Aitc.Common.ps1')
 $failures = New-Object System.Collections.Generic.List[string]
-
 function Check-Step {
     param([string]$Name, [scriptblock]$Action)
-    try {
-        & $Action
-        Write-Host "[PASS] $Name"
-    } catch {
-        $script:failures.Add("$Name - $($_.Exception.Message)")
-        Write-Host "[FAIL] $Name - $($_.Exception.Message)" -ForegroundColor Red
-    }
+    try { & $Action; Write-Host "[PASS] $Name" }
+    catch { $script:failures.Add("$Name - $($_.Exception.Message)"); Write-Host "[FAIL] $Name - $($_.Exception.Message)" -ForegroundColor Red }
 }
 
 $repo = $null
@@ -29,7 +23,7 @@ Check-Step 'Official repository structure' { $script:repo = Assert-AitcOfficialR
 if ($null -eq $repo) { throw 'Cannot continue without a valid official repository.' }
 
 Check-Step 'Required local commands' {
-    foreach ($command in @('git', 'python', 'codex')) {
+    foreach ($command in @('git', 'python', 'codex', 'bash')) {
         if (-not (Get-Command $command -ErrorAction SilentlyContinue)) { throw "$command is not available on PATH." }
     }
 }
@@ -38,24 +32,30 @@ Check-Step 'Python 3.10 or newer' {
     $parts = $versionText.Split('.')
     if ([int]$parts[0] -lt 3 -or ([int]$parts[0] -eq 3 -and [int]$parts[1] -lt 10)) { throw "Found Python $versionText." }
 }
-Check-Step 'Organizer scripts and Codex hooks' {
-    foreach ($relative in @('scripts\setup_hooks.ps1', 'scripts\submit_log.py', '.codex\hooks.json')) {
+Check-Step 'Organizer scripts and project-local Codex hooks' {
+    foreach ($relative in @('scripts\setup_hooks.ps1', 'scripts\submit_log.py', 'scripts\log_hook.py', '.codex\hooks.json')) {
         if (-not (Test-Path -LiteralPath (Join-Path $repo $relative) -PathType Leaf)) { throw "Missing $relative" }
     }
-}
-Check-Step 'Private Codex Gateway config and compatible hooks' {
-    $configPath = Join-Path $CodexHome 'config.toml'
-    $hooksPath = Join-Path $CodexHome 'hooks.json'
-    if (-not (Test-Path -LiteralPath $configPath)) { throw 'Missing private config.toml. Run bootstrap.ps1.' }
-    if (-not (Test-Path -LiteralPath $hooksPath)) { throw 'Missing private hooks.json. Run bootstrap.ps1.' }
-    $configText = Get-Content -LiteralPath $configPath -Raw
-    if ($configText -notmatch 'model_provider\s*=\s*"thucchien"') { throw 'Codex provider is not fixed to thucchien.' }
-    if ($configText -notmatch 'wire_api\s*=\s*"responses"') { throw 'Codex wire_api is not responses.' }
-    if ($Model -and $configText -notmatch [regex]::Escape("model = `"$Model`"")) { throw "Configured model does not match $Model. Rerun bootstrap.ps1." }
-    $hooks = Get-Content -LiteralPath $hooksPath -Raw | ConvertFrom-Json
-    if ($hooks.PSObject.Properties['version']) { throw 'Private hooks.json contains unsupported version field.' }
+    $hooks = Get-Content -LiteralPath (Join-Path $repo '.codex\hooks.json') -Raw | ConvertFrom-Json
     foreach ($event in @('UserPromptSubmit', 'PostToolUse', 'Stop')) {
-        if (-not $hooks.hooks.PSObject.Properties[$event]) { throw "Private hooks missing $event." }
+        if (-not $hooks.hooks.PSObject.Properties[$event]) { throw "Project hooks missing $event." }
+    }
+}
+Check-Step 'BTC Codex config and active catalog' {
+    $configPath = Join-Path $CodexHome 'config.toml'
+    if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) { throw 'Missing config.toml. Run bootstrap.ps1.' }
+    $configText = Get-Content -LiteralPath $configPath -Raw
+    if ($configText -notmatch '(?m)^\s*model_provider\s*=\s*"thucchien"') { throw 'Codex provider is not fixed to thucchien.' }
+    if ($configText -notmatch '(?m)^\s*model_catalog_json\s*=\s*"([^"]+)"') { throw 'model_catalog_json is missing.' }
+    $catalogPath = $matches[1] -replace '/', '\'
+    if (-not [System.IO.Path]::IsPathRooted($catalogPath)) { $catalogPath = Join-Path $CodexHome $catalogPath }
+    if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) { throw "Model catalog is missing: $catalogPath" }
+    if ($configText -notmatch '(?s)\[model_providers\.thucchien\].*?wire_api\s*=\s*"responses"') { throw 'Codex thucchien wire_api is not responses.' }
+    if ($Model -and $configText -notmatch [regex]::Escape("model = `"$Model`"")) { throw "Configured model does not match $Model." }
+}
+Check-Step 'Codex wrapper and conditional runtime refresh' {
+    foreach ($name in @('codex-orca.cmd', 'codex-runtime-refresh.ps1')) {
+        if (-not (Test-Path -LiteralPath (Join-Path $CodexHome $name) -PathType Leaf)) { throw "Missing $name. Run bootstrap.ps1." }
     }
 }
 Check-Step 'Git pre-push hook is installed without BOM' {
@@ -64,7 +64,7 @@ Check-Step 'Git pre-push hook is installed without BOM' {
     $bytes = [System.IO.File]::ReadAllBytes($hook)
     if ($bytes.Length -lt 2 -or $bytes[0] -ne 35 -or $bytes[1] -ne 33) { throw 'Hook must start with #! and contain no UTF-8 BOM.' }
 }
-Check-Step 'Repository has origin and expected final-round directory' {
+Check-Step 'Repository identity and final-round directory' {
     Push-Location $repo
     try {
         $origin = (& git remote get-url origin 2>$null).Trim()
@@ -83,21 +83,19 @@ if ($RequireOrca) {
 if (-not $Offline) {
     $key = $null
     $keyInfo = $null
-    $teamInfo = $null
     Check-Step 'Gateway credentials loaded without display' { $script:key = Get-AitcGatewayKey -RepoPath $repo }
     if ($null -ne $key) {
         Check-Step 'Gateway /key/info' {
             $script:keyInfo = Get-AitcKeyInfo -Key $key
-            $blocked = Get-AitcProperty -Object $keyInfo -Name 'blocked'
-            if ($blocked -eq $true) { throw 'Gateway key is blocked.' }
+            if ((Get-AitcProperty -Object $keyInfo -Name 'blocked') -eq $true) { throw 'Gateway key is blocked.' }
             $teamId = [string](Get-AitcProperty -Object $keyInfo -Name 'team_id')
             if ([string]::IsNullOrWhiteSpace($teamId)) { throw 'info.team_id is missing.' }
-            Write-Host "  key=$(Mask-AitcValue ([string](Get-AitcProperty $keyInfo 'key_name'))) team=$(Mask-AitcValue $teamId)"
+            Write-Host "  team=$(Mask-AitcValue $teamId)"
         }
         if ($null -ne $keyInfo) {
             Check-Step 'Gateway /team/info with team_id' {
                 $teamId = [string](Get-AitcProperty -Object $keyInfo -Name 'team_id')
-                $script:teamInfo = Get-AitcTeamInfo -Key $key -TeamId $teamId
+                $teamInfo = Get-AitcTeamInfo -Key $key -TeamId $teamId
                 $spend = Get-AitcProperty -Object $teamInfo -Name 'spend'
                 $budget = Get-AitcProperty -Object $teamInfo -Name 'max_budget'
                 if ($null -eq $spend -or $null -eq $budget) { throw 'team_info spend/max_budget is missing.' }
@@ -113,11 +111,9 @@ if (-not $Offline) {
             $response = Invoke-RestMethod -Method Get -Uri $uri -Headers @{ Authorization = "Bearer $($logSettings.Key)"; Accept = 'application/json' } -TimeoutSec 30
             $entries = Get-AitcProperty -Object $response -Name 'entries'
             if ($null -eq $entries -and $response -is [System.Array]) { $entries = $response }
-            if ($null -eq $entries -or @($entries).Count -eq 0) { throw 'No Codex entries were returned. Create a real logged prompt, submit it, and retry.' }
+            if ($null -eq $entries -or @($entries).Count -eq 0) { throw 'No Codex entries returned.' }
             $events = @($entries | ForEach-Object { [string](Get-AitcProperty -Object $_ -Name 'event') })
-            if (-not ($events -contains 'UserPromptSubmit')) { throw 'No UserPromptSubmit event found in server readback.' }
-            if (-not ($events -contains 'Stop')) { throw 'No Stop event found in server readback.' }
-            Write-Host "  entries=$(@($entries).Count) events=$((($events | Sort-Object -Unique) -join ','))"
+            if (-not ($events -contains 'UserPromptSubmit') -or -not ($events -contains 'Stop')) { throw 'Server readback lacks UserPromptSubmit or Stop.' }
         }
     }
 }

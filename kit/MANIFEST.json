@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-05T09:09:56.2019890Z",
-    "file_count":  83,
+    "generated_at_utc":  "2026-10-05T13:52:17.9130431Z",
+    "file_count":  89,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -10,8 +10,8 @@
                   },
                   {
                       "path":  "AGENTS.md",
-                      "bytes":  1478,
-                      "sha256":  "649139d5661d78717561f8ebfc4e8ff196f484636ad836133d1343dd349e8a35"
+                      "bytes":  1704,
+                      "sha256":  "a5b78f2b741f748543dcbbe5190f65ddc935003c0823a0d94cbfbe5cee460187"
                   },
                   {
                       "path":  "config/.env.example",
@@ -25,13 +25,23 @@
                   },
                   {
                       "path":  "config/codex-config.template.toml",
-                      "bytes":  239,
-                      "sha256":  "a8bb03cde4913fce4c1a875aca52f5edfba08c7561cbee7f9c41d761b774b7dd"
+                      "bytes":  365,
+                      "sha256":  "bc0113567fef6796069c802a4af5a7d24f7d56732dfb76d85f8003a479cedbce"
+                  },
+                  {
+                      "path":  "config/models-btc.snapshot.json",
+                      "bytes":  569164,
+                      "sha256":  "77d26208ec4736848db32de426d2469b0a2d2955caf7110a2e1667bffc5fef08"
                   },
                   {
                       "path":  "config/routing.json",
                       "bytes":  936,
                       "sha256":  "2a9d7844ed8cb847576480a9d456dd03af838d6e86b3eebd2bafe361e88fe1cf"
+                  },
+                  {
+                      "path":  "docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
+                      "bytes":  4601,
+                      "sha256":  "dd217e93432546a6734598f4c02ca1460ed10339a77cb2f58f6916577cb1a4cc"
                   },
                   {
                       "path":  "docs/ENGINEERING.md",
@@ -45,8 +55,8 @@
                   },
                   {
                       "path":  "docs/ORCA-CODEX-FINDINGS.md",
-                      "bytes":  6015,
-                      "sha256":  "2de8d4fad6c6a4f66ab3238d42e64abeb38194673538a3c452b88c6b22b5cde9"
+                      "bytes":  6926,
+                      "sha256":  "5e4f348f6bc9f76618d37a15f419eef1227ccf195692b2cacc31139767743507"
                   },
                   {
                       "path":  "docs/REVIEW-2026-10-05.md",
@@ -90,18 +100,18 @@
                   },
                   {
                       "path":  "MODEL_ROUTING.md",
-                      "bytes":  3385,
-                      "sha256":  "40ef52e549b68b917274ed761020cebc290ef1efe69d39c5346fb4cb160462e4"
+                      "bytes":  3681,
+                      "sha256":  "81ed38e4e4f8b926051803035188f082cada91c2c103eacbd6b7ddb662a6f1cb"
                   },
                   {
                       "path":  "ORCA.md",
-                      "bytes":  2560,
-                      "sha256":  "28dfd3bdcec91e5e9466c26858194235206bca70457f9aeda53890b6d8303b91"
+                      "bytes":  2554,
+                      "sha256":  "a1ec4b988f474ade74247dd85c3cc7cefa2c54836d051a33d2553ccf58240218"
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  4393,
-                      "sha256":  "85401f4a21df0c31fe02470fa927969d7d0eda1fb758942e15a4d5c6ff2ed082"
+                      "bytes":  4917,
+                      "sha256":  "cba2887ca73e0e45208886543b85a6d7ce011d4697acadb9d2163a923e7e0b46"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -255,8 +265,8 @@
                   },
                   {
                       "path":  "runbook/FAILURE_MATRIX.md",
-                      "bytes":  1591,
-                      "sha256":  "70f1b204dd9058a45a741b7287afdf49ccb8bc18e48abaf6af602c9f91841e03"
+                      "bytes":  2153,
+                      "sha256":  "1da87dea6e60620751f1508cfeb7b0466d3d462ff10cc9adf4c23ae0e25873ee"
                   },
                   {
                       "path":  "runbook/FINAL_30_MIN.md",
@@ -265,8 +275,8 @@
                   },
                   {
                       "path":  "runbook/FIRST_15_MIN.md",
-                      "bytes":  888,
-                      "sha256":  "28e5fef70b1f49b45393cb2cf80ee8b2f6805bc3c4dd2015f44724028c357d80"
+                      "bytes":  1082,
+                      "sha256":  "3d2597f159266f70c041eba46230e4d8bb79feb0898e3f45140587445baa8174"
                   },
                   {
                       "path":  "runbook/SUBMIT.md",
@@ -280,8 +290,8 @@
                   },
                   {
                       "path":  "scripts/bootstrap.ps1",
-                      "bytes":  3912,
-                      "sha256":  "6767708f0dc16e8dd16382ecacedbf489a0f0516706c4703358fe924d1e27bba"
+                      "bytes":  4601,
+                      "sha256":  "c7981d2d45f6e43296a06fcbfe150e1a0bd46f5fecdd92c62c7977d9a4318106"
                   },
                   {
                       "path":  "scripts/budget.ps1",
@@ -290,18 +300,23 @@
                   },
                   {
                       "path":  "scripts/codex-canary.ps1",
-                      "bytes":  3406,
-                      "sha256":  "9abe84b2679a5a0eff645bb656f573c3a9630955520ee57b6524680f1c135691"
+                      "bytes":  4099,
+                      "sha256":  "8172b2b1e41b7a0d39947d498328dc673016feb6181de1f6bf2a07861c187217"
+                  },
+                  {
+                      "path":  "scripts/codex-runtime-refresh.ps1",
+                      "bytes":  4144,
+                      "sha256":  "5a0a03137d57b8978681e167160a50337e622d6dbc9308d8098d63b4797ba9a3"
                   },
                   {
                       "path":  "scripts/install-skills.ps1",
-                      "bytes":  957,
-                      "sha256":  "3a08a9b3334583613118e4253b801afd095ac9755d778ef2a6764dea5cffed39"
+                      "bytes":  1620,
+                      "sha256":  "0969199d87c417e540fcfda3c12d823fda327abc19bac124fa65772395cd0b33"
                   },
                   {
                       "path":  "scripts/lib/Aitc.Common.ps1",
-                      "bytes":  4778,
-                      "sha256":  "fcd37606ec492e1da64544165d6fee505088c28d9181815ef32c50c32e7e6870"
+                      "bytes":  8332,
+                      "sha256":  "f1f25cc16f51d300713019faaf67800509ddfb9cefb69aacbfe4a5d8d093d876"
                   },
                   {
                       "path":  "scripts/model-query.ps1",
@@ -315,8 +330,13 @@
                   },
                   {
                       "path":  "scripts/preflight.ps1",
-                      "bytes":  6870,
-                      "sha256":  "c6d51306ec008cd62ef4b056c19ca8c75c5eb31e9b02334184216588d49b6de8"
+                      "bytes":  6931,
+                      "sha256":  "d9632d6e0a586f39cb3817d16501fc3646229238daf903d88c61420504e097c3"
+                  },
+                  {
+                      "path":  "scripts/session-preflight.ps1",
+                      "bytes":  2583,
+                      "sha256":  "ea33cd1482ecd0984e2492f3a682454a90eb2a96114530de204fa869bd14b33b"
                   },
                   {
                       "path":  "scripts/spend-ledger.ps1",
@@ -325,8 +345,8 @@
                   },
                   {
                       "path":  "scripts/start-codex.ps1",
-                      "bytes":  1259,
-                      "sha256":  "56782e744b191387e2befd8945cd85c116e93c950b2b785c6118345f7010fad5"
+                      "bytes":  1393,
+                      "sha256":  "37a8ec451f7e42b31021d9048105dc20dcaacb8a0cf75eb123fe36c1a72ff488"
                   },
                   {
                       "path":  "scripts/sync-variant.ps1",
@@ -340,8 +360,8 @@
                   },
                   {
                       "path":  "scripts/verify.ps1",
-                      "bytes":  4068,
-                      "sha256":  "5aa6cd5e892383598d42e073239229bb34bdd2567b96d18ec11b8c3d0e83ec51"
+                      "bytes":  4277,
+                      "sha256":  "20050a20fe046eb615e41e23cc87697e9624c38b68edb7edd8471945c05518a2"
                   },
                   {
                       "path":  "skills/aitc-captain/agents/openai.yaml",
@@ -350,8 +370,8 @@
                   },
                   {
                       "path":  "skills/aitc-captain/SKILL.md",
-                      "bytes":  3051,
-                      "sha256":  "6d024b2b7fa886ee28cf0b6d71f577f5f7c86036ff4f41c1b85a5d3d13694b19"
+                      "bytes":  3353,
+                      "sha256":  "14e118a9fd25e9237ec4d6fed305bd431c380ad1f3daaf62d51f3354993c403e"
                   },
                   {
                       "path":  "skills/aitc-diagnose/agents/openai.yaml",
@@ -360,8 +380,8 @@
                   },
                   {
                       "path":  "skills/aitc-diagnose/SKILL.md",
-                      "bytes":  1819,
-                      "sha256":  "cb4eb2e65296bc4390d01d29c87d54dd00c198a15204a34590348b282dc4493b"
+                      "bytes":  2300,
+                      "sha256":  "75048ae0b1e84eeebbbb704373a31dce8ed5019307eea54ca6b6ddaf84c82abd"
                   },
                   {
                       "path":  "skills/aitc-orca-runtime/agents/openai.yaml",
@@ -370,8 +390,13 @@
                   },
                   {
                       "path":  "skills/aitc-orca-runtime/SKILL.md",
-                      "bytes":  1458,
-                      "sha256":  "8084f1ada0ead52192935cd54327cc6938563b2ae2023ed40d9a3d24998ff0c5"
+                      "bytes":  3214,
+                      "sha256":  "0cc2aa06f25273164720f2ce8df4e45af6072e6887fdb6b329d300a6ce012e0a"
+                  },
+                  {
+                      "path":  "skills/aitc-orchestrator/SKILL.md",
+                      "bytes":  3844,
+                      "sha256":  "137e3df387e892d8daff1bd3487b842141d892bf69966a398c7e1e3da4aaf0e2"
                   },
                   {
                       "path":  "skills/aitc-reviewer/agents/openai.yaml",
@@ -380,8 +405,8 @@
                   },
                   {
                       "path":  "skills/aitc-reviewer/SKILL.md",
-                      "bytes":  1709,
-                      "sha256":  "571ec023226d328552b738d040766712f798af3e12eb798336c4e96651a52229"
+                      "bytes":  2226,
+                      "sha256":  "7e312facdaa5c14b90e54ebbe434c3038f2251d7bfe4782344eaed1e0f6b9608"
                   },
                   {
                       "path":  "skills/aitc-worker/agents/openai.yaml",
@@ -390,13 +415,18 @@
                   },
                   {
                       "path":  "skills/aitc-worker/SKILL.md",
-                      "bytes":  2056,
-                      "sha256":  "198231e940eda15d02c8b96afabc91af4da41da98339344b6f7a80cd873f245b"
+                      "bytes":  2107,
+                      "sha256":  "b7cf4adeb2bb111610a319a689a95dcde1c9caa3153de8de2d85ea65f58b9687"
                   },
                   {
                       "path":  "templates/ACCEPTANCE_MATRIX.md",
                       "bytes":  508,
                       "sha256":  "16ce9b1ff4f20fcbefd3dbccea2d5cd4d3a4dc5eb16f69a35d7c4639829b8ff0"
+                  },
+                  {
+                      "path":  "templates/codex-orca.cmd",
+                      "bytes":  625,
+                      "sha256":  "fb54e78f0876f9018b40b8c83c310ffd3dae05f41676d72b11c075fcba8932ad"
                   },
                   {
                       "path":  "templates/IMPLEMENTATION_CONTRACT.md",
@@ -410,8 +440,8 @@
                   },
                   {
                       "path":  "templates/WORKER_BRIEF.md",
-                      "bytes":  466,
-                      "sha256":  "34d2c8ac20c184e519ce84be7881680684adc7012cc01724161bf570b68ac7d2"
+                      "bytes":  836,
+                      "sha256":  "25b0b85773dc62b0154ef48d40d451a48886c1f31780a16ebffd8df2ceeba363"
                   },
                   {
                       "path":  "THIRD_PARTY_NOTES.md",

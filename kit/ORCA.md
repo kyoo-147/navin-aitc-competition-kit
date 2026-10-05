@@ -1,23 +1,22 @@
 # Orca Runtime Policy
 
-For the verified Orca 1.4.215 + Codex 0.160 behaviour, the working worker path, the always-on
-no-approval keys, the catalog/provider rule, and where token counts live, read
-`docs/ORCA-CODEX-FINDINGS.md`. Supervised `worker-start` for Codex fails at `agent_readiness` in that
-combination; use the terminal-handoff path documented there.
+Verified baseline: Orca 1.4.215 + Codex 0.160 on Windows. Orca is the visible runtime/workspace host, Codex is the worker, and BTC Gateway is the provider.
 
-Orca is the visible runtime/workspace host for this kit. It is not the AI provider and not the competition control plane.
+## Required Codex launcher
 
-Keep three concepts separate:
+Orca Settings:
 
-1. Captain/control plane - task lifecycle, ownership, routing, evidence.
-2. Orca/runtime host - visible terminals and worktrees.
-3. Codex/worker harness - the coding agent and selected BTC model.
+```text
+Command:   C:\Users\hoang\.codex\codex-orca.cmd
+Arguments: <empty>
+Import:    ~/.codex
+```
 
-Changing runtime host must not change task ownership or acceptance criteria.
+The wrapper pins the intended `CODEX_HOME`. It fingerprints `model`, `model_provider`, `model_catalog_json`, `forced_login_method`, and catalog contents. Cache sync and `codex app-server daemon restart` happen only when that fingerprint changes, preventing a same-preset worker launch from interrupting existing workers.
+
+Direct `codex` is not accepted from an Orca-inherited shell unless `CODEX_HOME` is explicitly verified.
 
 ## Preflight
-
-Use the version-matched Orca CLI. At minimum:
 
 ```text
 orca status --json
@@ -25,44 +24,33 @@ orca worktree current --json
 orca terminal list --json
 ```
 
-If the installed Orca version differs, inspect `orca --help`, `orca worktree --help`, and `orca terminal --help` before using creation/send commands. Do not guess an unsupported command.
+Inspect installed CLI help before using version-sensitive commands. Failed preflight is `BLOCKED`, not permission to silently move to another runtime/provider.
 
-A failed Orca preflight is `BLOCKED`; do not silently move the task elsewhere.
+## Worktrees and terminals
 
-## Writers
+Every concurrent writer gets an isolated Orca-managed worktree. Capture exact worktree ID, terminal handle, and process incarnation. Read-only workers may use separate terminals against an existing checkout.
 
-Every concurrent writer gets an isolated Git worktree. Capture the exact worktree identity and terminal handle returned by Orca. Display labels are not authoritative IDs.
+While `orchestration worker-start` fails at `agent_readiness`, use terminal handoff:
 
-Default to two writers. More writers require non-overlapping ownership and an obvious time benefit.
+```text
+orca worktree create --repo id:<repoId> --name <lane> --base-branch <ref> --setup run --json
+orca terminal create --worktree id:<repoId>::<path> --title "<lane> codex" --shell cmd.exe --command "C:\Users\hoang\.codex\codex-orca.cmd" --json
+orca terminal read --terminal <handle> --limit 200 --json
+orca terminal send --terminal <handle> --text "<brief>" --enter --wait-submit 30 --json
+orca terminal read --terminal <handle> --cursor <nextCursor> --limit 500 --json
+```
 
-## Read-only workers
+`turn_started` is delivery proof. `accepted: true` alone is not. Poll with returned cursors. `tui-idle` is advisory and must not be used as completion proof.
 
-Scouts and reviewers may use separate visible terminals against the source checkout when they do not mutate files. If they need to edit, promote them to an isolated writer worktree.
+## Provider proof
 
-## Send / observe
+Picker/footer labels are not evidence. Read `session_meta.model_provider` from the worker rollout under the active `CODEX_HOME`.
 
-A send receipt proves only that input was accepted. It does not prove the agent started or completed the requested work.
+```text
+thucchien  = valid BTC competition transport
+commandcode = SIMULATED_ROUTING_NON_BTC_TRANSPORT
+```
 
-Observe with bounded waits/reads. Do not resend a prompt simply because output is slow. Inspect the terminal first.
+## Acceptance and cleanup
 
-## Accepting worker output
-
-Terminal text is supporting evidence only. The Captain independently checks:
-
-- Git diff/status;
-- changed files;
-- relevant tests/build;
-- runtime/API/UI behavior;
-- commit/worktree state.
-
-## Cleanup
-
-Before releasing an Orca worktree:
-
-1. confirm the exact repository/worktree identity;
-2. confirm intended work is integrated or safely preserved;
-3. inspect Git status;
-4. retain any useful report/evidence;
-5. close only the exact task-owned terminal/worktree.
-
-If identity or dirty state is uncertain, preserve the workspace and report `UNKNOWN` instead of forcing cleanup.
+The Captain independently verifies provider metadata, Git diff/status, tests/build, real API/UI behavior, local/server AI Log evidence, and commit state. Close only exact task-owned handles after integration or safe preservation. Preserve dirty/ambiguous state and report `UNKNOWN` or `BLOCKED`.

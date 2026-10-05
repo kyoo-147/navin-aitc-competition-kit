@@ -102,3 +102,80 @@ function Get-AitcBudgetState {
     if ($Spend -ge $review) { return 'LEADER_REVIEW' }
     return 'NORMAL'
 }
+
+function Get-AitcCodexCommand {
+    $command = Get-Command codex.cmd -ErrorAction SilentlyContinue
+    if ($null -eq $command) { $command = Get-Command codex -ErrorAction SilentlyContinue }
+    if ($null -eq $command) { throw 'codex is not available on PATH.' }
+    return $command.Source
+}
+
+function Invoke-AitcCodexRuntimeRefresh {
+    param(
+        [Parameter(Mandatory = $true)][string]$CodexHome,
+        [Parameter(Mandatory = $true)][string]$RuntimeScript,
+        [switch]$Force
+    )
+    $arguments = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $RuntimeScript, '-CodexHome', $CodexHome)
+    if ($Force) { $arguments += '-Force' }
+    & powershell.exe @arguments
+    $refreshExit = $LASTEXITCODE
+    if ($refreshExit -notin @(0, 10)) { throw "Codex runtime refresh failed with exit code $refreshExit." }
+    if ($refreshExit -eq 10) {
+        $codex = Get-AitcCodexCommand
+        & $codex app-server daemon restart | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw 'Codex app-server daemon restart failed.' }
+    }
+    return $refreshExit
+}
+
+function Get-AitcLatestCodexSessionMeta {
+    param(
+        [Parameter(Mandatory = $true)][string]$CodexHome,
+        [Parameter(Mandatory = $true)][string]$RepoPath,
+        [datetime]$NotBeforeUtc = [datetime]::MinValue
+    )
+    $sessions = Join-Path $CodexHome 'sessions'
+    if (-not (Test-Path -LiteralPath $sessions -PathType Container)) { throw "Codex sessions directory is missing: $sessions" }
+    $repo = (Resolve-Path -LiteralPath $RepoPath -ErrorAction Stop).Path
+    $candidates = Get-ChildItem -LiteralPath $sessions -Filter 'rollout-*.jsonl' -File -Recurse |
+        Where-Object { $_.LastWriteTimeUtc -ge $NotBeforeUtc } |
+        Sort-Object LastWriteTimeUtc -Descending
+    foreach ($file in $candidates) {
+        foreach ($line in [System.IO.File]::ReadLines($file.FullName)) {
+            if ([string]::IsNullOrWhiteSpace($line)) { continue }
+            try { $item = $line | ConvertFrom-Json } catch { continue }
+            if ([string]$item.type -ne 'session_meta') { continue }
+            $cwd = [string](Get-AitcProperty -Object $item.payload -Name 'cwd')
+            if ($cwd -and [System.IO.Path]::GetFullPath($cwd).TrimEnd('\') -eq $repo.TrimEnd('\')) {
+                return [pscustomobject]@{
+                    SessionId = [string](Get-AitcProperty -Object $item.payload -Name 'id')
+                    Provider = [string](Get-AitcProperty -Object $item.payload -Name 'model_provider')
+                    Cwd = $cwd
+                    RolloutPath = $file.FullName
+                    LastWriteTimeUtc = $file.LastWriteTimeUtc
+                }
+            }
+            break
+        }
+    }
+    throw "No Codex session metadata found for $repo after $($NotBeforeUtc.ToString('o'))."
+}
+
+function Get-AitcLocalLogEvents {
+    param(
+        [Parameter(Mandatory = $true)][string]$RepoPath,
+        [Parameter(Mandatory = $true)][string]$SessionId
+    )
+    $path = Join-Path $RepoPath '.ai-log\session.jsonl'
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { return @() }
+    $events = New-Object System.Collections.Generic.List[string]
+    foreach ($line in [System.IO.File]::ReadLines($path)) {
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try { $item = $line | ConvertFrom-Json } catch { continue }
+        if ([string](Get-AitcProperty -Object $item -Name 'session_id') -eq $SessionId) {
+            $events.Add([string](Get-AitcProperty -Object $item -Name 'event'))
+        }
+    }
+    return @($events)
+}

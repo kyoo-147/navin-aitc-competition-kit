@@ -10,20 +10,20 @@ function Pass([string]$Message) { Write-Host "[PASS] $Message" }
 
 $required = @(
     'README.md', 'AGENTS.md', 'RULES.md', 'MODEL_ROUTING.md', 'ORCA.md',
-    'config\routing.json', 'config\budget.json', 'config\codex-config.template.toml',
+    'config\routing.json', 'config\budget.json', 'config\codex-config.template.toml', 'config\models-btc.snapshot.json',
     'knowledge\README.md', 'knowledge\model-registry.json', 'knowledge\routing-policy.json', 'knowledge\tracking-schema.json',
-    'docs\OFFICIAL-REPO-BOUNDARY.md', 'docs\ENGINEERING.md', 'docs\ORCA-CODEX-FINDINGS.md',
-    'scripts\bootstrap.ps1', 'scripts\preflight.ps1', 'scripts\codex-canary.ps1', 'scripts\budget.ps1',
+    'docs\OFFICIAL-REPO-BOUNDARY.md', 'docs\ENGINEERING.md', 'docs\ORCA-CODEX-FINDINGS.md', 'docs\CODEX-SCOPES-AND-PI-MIGRATION.md',
+    'scripts\bootstrap.ps1', 'scripts\preflight.ps1', 'scripts\session-preflight.ps1', 'scripts\codex-runtime-refresh.ps1', 'scripts\codex-canary.ps1', 'scripts\budget.ps1',
     'scripts\model-query.ps1', 'scripts\spend-ledger.ps1',
     'scripts\start-codex.ps1', 'scripts\sync-variant.ps1',
-    'templates\IMPLEMENTATION_CONTRACT.md', 'MANIFEST.json'
+    'templates\IMPLEMENTATION_CONTRACT.md', 'templates\codex-orca.cmd', 'MANIFEST.json'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { Fail "Missing $relative" }
 }
 if ($failures.Count -eq 0) { Pass 'Required kit files exist' }
 
-foreach ($relative in @('config\routing.json', 'config\budget.json', 'knowledge\model-registry.json', 'knowledge\routing-policy.json', 'knowledge\tracking-schema.json', 'MANIFEST.json')) {
+foreach ($relative in @('config\routing.json', 'config\budget.json', 'config\models-btc.snapshot.json', 'knowledge\model-registry.json', 'knowledge\routing-policy.json', 'knowledge\tracking-schema.json', 'MANIFEST.json')) {
     try { Get-Content -LiteralPath (Join-Path $root $relative) -Raw | ConvertFrom-Json | Out-Null; Pass "Valid JSON: $relative" }
     catch { Fail "Invalid JSON: $relative - $($_.Exception.Message)" }
 }

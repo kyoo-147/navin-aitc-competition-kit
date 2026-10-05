@@ -10,6 +10,8 @@ Read `RULES.md`, `docs/OFFICIAL-REPO-BOUNDARY.md`, and the applicable runbook be
 - Use BTC Gateway only during competition.
 - Never read or print secret files. Never include secrets in prompts.
 - Fail closed when Gateway identity, budget, hooks, or server-side AI logging is unverified.
+- Launch Codex through the canonical `codex-orca.cmd`; direct `codex` is invalid when effective `CODEX_HOME` is unknown.
+- Treat `session_meta.model_provider = thucchien` as provider proof; picker/footer labels are not proof.
 - Prefer reuse, small interfaces, and the smallest complete vertical slice.
 - Reproduce failures, fix root causes, add targeted tests, and rerun the user path.
 - Do not claim completion from worker prose alone.

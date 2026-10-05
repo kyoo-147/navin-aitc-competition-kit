@@ -5,7 +5,7 @@
 - Read the complete live challenge before coding.
 - Extract mandatory deliverables, scoring items, forbidden approaches, deployment, and submission obligations.
 - Confirm final project path under `chung-khao/`.
-- Run budget and preflight. Stop if Gateway or server AI Log proof fails.
+- Run budget, preflight, the smallest logged canary, and session preflight. Stop unless rollout provider is `thucchien`, local events exist, submission is `202`, and BTC readback matches the same session.
 
 ## Minute 5-10
 
@@ -18,5 +18,5 @@
 
 - Use one writer unless independent work clearly saves time.
 - If parallel work is justified, create isolated worktrees with non-overlapping paths.
-- Dispatch at most three lanes: integration, backend/AI, and product/evaluation/deploy.
+- Dispatch at most three lanes through visible Orca terminals using `codex-orca.cmd`; require `turn_started`, then poll with `terminal read --cursor`.
 - Start integration planning immediately. Do not wait for isolated lanes to become perfect.

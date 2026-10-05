@@ -24,10 +24,9 @@ Working path used instead (reliable, visible, still Orca-managed):
 
 ```text
 orca worktree create --repo id:<repoId> --name <lane> --no-parent --setup skip --json
-orca terminal create --worktree id:<repoId>::<path> --title "<lane> codex" --shell cmd.exe --command "codex" --json
+orca terminal create --worktree id:<repoId>::<path> --title "<lane> codex" --shell cmd.exe --command "C:\Users\hoang\.codex\codex-orca.cmd" --json
 orca terminal send  --terminal <handle> --text "<task brief>" --enter --wait-submit 30 --json
-orca terminal wait  --terminal <handle> --for tui-idle --timeout-ms 420000 --json
-orca terminal read  --terminal <handle> --json
+orca terminal read  --terminal <handle> --cursor <nextCursor> --limit 500 --json
 ```
 
 `terminal send --wait-submit` returns `turn_started` when the agent actually began the turn. That is the
@@ -103,14 +102,18 @@ effective home for agent terminals was:
 C:\Users\hoang\AppData\Roaming\orca\codex-runtime-home\home
 ```
 
-Editing only `C:\Users\hoang\.codex\config.toml` left Orca workers on the previous model. Keep the
-intended preset aligned across:
+Editing only `C:\Users\hoang\.codex\config.toml` originally left Orca workers on the previous model because
+Orca and the managed app-server retained the earlier home/catalog in memory. The verified launcher is now:
 
-- `C:\Users\hoang\.codex\config.toml`
-- `C:\Users\hoang\AppData\Roaming\orca\codex-runtime-home\home\config.toml`
-- `C:\Users\hoang\AppData\Roaming\orca\codex-accounts\<accountId>\home\config.toml`
+```text
+C:\Users\hoang\.codex\codex-orca.cmd
+```
 
-Validate each with `codex debug prompt-input "<text>"` under the matching `CODEX_HOME` before relying on it.
+It pins `CODEX_HOME`, synchronizes the active catalog cache across discovered Orca homes, and runs the
+official `codex app-server daemon restart` only when the provider/model/catalog fingerprint changes.
+Orca Arguments must be empty because the wrapper already supplies no-approval and hook-trust flags.
+
+Do not restart on every same-preset worker launch: that interrupts active parallel Codex sessions.
 
 ## 7. Token and cost accounting
 
@@ -123,3 +126,15 @@ Real per-worker token counts are available from the Codex session rollout files:
 Read the `token_count` payload's `total_token_usage` (`input_tokens`, `cached_input_tokens`,
 `output_tokens`, `reasoning_output_tokens`). Record them through `scripts/spend-ledger.ps1`, and always
 label non-BTC transports as `SIMULATED_ROUTING_NON_BTC_TRANSPORT`.
+
+## 8. Hook scope and skill scope
+
+Competition AI Log hooks are project-local under the official repository `.codex/hooks.json`. User-level
+`CODEX_HOME/hooks.json` may contain unrelated personal hooks and must not be overwritten by bootstrap.
+Preflight validates project hooks; a real canary proves execution by matching local and server events to
+the rollout session ID.
+
+Codex user skills live under `<CODEX_HOME>/skills`; project skills live under `.agents/skills` (or
+`.codex/skills`). The kit installs only the five AITC operational skills globally by default. Do not bulk
+copy Pi skills into competition Codex because Pi-specific tools and external services may be unavailable
+or prohibited.

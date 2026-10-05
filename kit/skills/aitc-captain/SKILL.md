@@ -1,111 +1,80 @@
 ---
 name: aitc-captain
-description: Run a short AI coding competition: extract scoring requirements, choose the smallest complete product, dispatch independent workers through Orca, route BTC Gateway models by cost/evidence, integrate early, verify, freeze scope, and prepare submission.
+description: Run a short BTC-only AI coding competition: gate provider and AI Log, extract scoring requirements, dispatch isolated visible Codex workers through Orca, integrate early, verify independently, freeze scope, and prepare submission evidence.
 ---
 
 # AITC Captain
 
-Use this skill as the contest control plane. The goal is the highest-scoring working product within the fixed time, not the most elaborate architecture.
+The goal is the highest-scoring working product within the fixed time, not the most elaborate architecture.
 
-## Start
+## Authority and startup
 
-Read, in order:
+Read live organizer instructions first, then repository rules, `RULES.md`, `MODEL_ROUTING.md`, and only the relevant runbook/skill. Live instructions override the kit.
 
-1. the current official challenge/rules;
-2. repository `AGENTS.md`/README/conventions;
-3. this kit's `RULES.md` and `MODEL_ROUTING.md`;
-4. only the additional skill/reference needed for the current task.
+Run in order:
 
-The official challenge overrides all prewritten assumptions.
+```text
+preflight.ps1
+budget.ps1
+codex-canary.ps1
+session-preflight.ps1
+orca-preflight.ps1
+```
+
+Do not begin model work until Gateway identity, `thucchien` provider proof, project hooks, local `UserPromptSubmit`/`Stop`, submit status `202`, and BTC readback are verified. If BTC is unavailable, report `BLOCKED`; CommandCode work is preparation simulation only.
 
 ## First 10 minutes
 
-Extract an acceptance matrix with:
+Create an acceptance matrix containing deliverables, visible flows, technical constraints, scoring-critical items, deployment/submission requirements, and invalidating unknowns. Choose the smallest complete product. Freeze `IMPLEMENTATION_CONTRACT.md` before parallel writers.
 
-- required output/deliverables;
-- required user-visible flows;
-- mandatory technical constraints;
-- scoring-critical features;
-- deployment/submission requirements;
-- unknowns that could invalidate the build.
-
-Then choose the **smallest complete product** that can satisfy those requirements.
-
-Do not design optional infrastructure before the first vertical slice exists.
-
-## Decompose by coherent ownership
-
-Default to two writer lanes, not many microtasks.
-
-Good split examples:
-
-- core/backend vs frontend/user-flow;
-- ingestion/processing vs presentation/control;
-- main implementation vs independent integration module.
-
-Add read-only scout/reviewer lanes only when they are genuinely independent.
-
-For each worker, provide exactly:
+## Orchestration flow
 
 ```text
-OUTCOME
-OWN
-DO_NOT_TOUCH
-ACCEPTANCE
-VERIFY
-RETURN
-MAX_SPEND / MODEL TIER
+preflight
+→ select one atomic BTC preset
+→ launch Codex at official repo root through codex-orca.cmd
+→ create isolated worktree for each writer
+→ send bounded brief
+→ require turn_started receipt
+→ poll terminal with nextCursor
+→ verify rollout provider
+→ inspect diff/tests/runtime independently
+→ integrate early
+→ rerun session/log gates
+→ freeze and submit
 ```
 
-If two workers would need to edit the same module repeatedly, serialize or redraw ownership instead of accepting merge conflict as normal.
+Use terminal handoff, not supervised `worker-start`, while Orca 1.4.215 + Codex 0.160 remains blocked at `agent_readiness`.
 
-## Scale rule
+## Worker brief
 
-Spawn another worker only when:
+Provide exactly:
 
-- the task is independent;
-- ownership does not overlap;
-- acceptance is observable;
-- integration cost is lower than expected time saved.
+```text
+OUTCOME: <one observable result>
+OWN: <exclusive writable paths>
+DO_NOT_TOUCH: <protected paths>
+ACCEPTANCE: <numbered observable checks>
+VERIFY: <exact commands and real smoke path>
+RETURN: status, files, commands/results, session id, provider proof, commit, blockers
+MAX_SPEND / MODEL TIER: <bounded>
+RUNTIME: official repo/worktree, BTC-only, no secret reads, no provider changes
+```
 
-Otherwise do the work directly.
+Default to two writer lanes. Add a lane only when scope is independent, ownership does not overlap, acceptance is observable, and integration cost is lower than time saved.
 
-## Model routing
+## Routing and failure
 
-Use live Gateway information as truth. Start cheap. Escalate only from evidence. Premium/reasoning-heavy calls require Captain approval.
+Start with the cheapest canary-proven model. Escalate only from repeated capability failure, reviewer rejection, missing capability, worse retry economics, or a scoring-critical blocker. Never model-hop for code, test, Git, workspace, hook, or policy failures. Never silently change provider.
 
-Never change provider/runtime silently after a task failure. Distinguish:
+## Acceptance
 
-- provider/model unavailable;
-- task/code failure;
-- test failure;
-- workspace/Git failure;
-- contest-policy failure.
+Never accept worker prose alone. Check exact rollout `session_meta.model_provider`, Git diff/status, changed files, tests/build, real runtime behavior, AI Log evidence, and commit/worktree state.
 
-## Integration clock
+## Time gates
 
-Aim for the first real vertical slice by minute 55 or earlier.
-
-Integrate before both lanes are "perfect". A working end-to-end path reveals contract mismatches while there is still time.
-
-At approximately minute 90:
-
-- freeze new features;
-- run reviewer;
-- fix only P0/P1 or scoring-critical P2 issues;
-- deploy and smoke the real flow;
-- preserve a known-good state.
-
-## Accept worker output
-
-Never accept a verbal completion message alone. Verify the diff, tests/build, runtime behavior, and repository state.
+Aim for a real vertical slice by minute 55. Around minute 90 freeze features, run independent review, fix only P0/P1 or scoring-critical P2, deploy/smoke, and preserve a known-good state.
 
 ## Final report
 
-Return only:
-
-- what is working;
-- what remains missing/blocking;
-- spend band;
-- verification evidence;
-- next action required before submission.
+Return only working behavior, missing/blocking items, spend band, provider/log/test/runtime evidence, Git SHA/status, submission receipt status, and the next required action.
