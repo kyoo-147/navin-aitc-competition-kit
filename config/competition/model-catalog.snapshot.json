@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "SNAPSHOT_NOT_RUNTIME_ALLOWLIST",
+  "retrieved_on": "2026-10-03",
+  "pricing_unit": "USD per 1M tokens",
+  "runtime_rule": "Refresh official docs and use /key/info before selecting a model.",
+  "text_models": [
+    {"id":"gpt-6-luna","input":0.10,"cached_input":0.01,"output":0.50},
+    {"id":"gpt-5.6-luna","input":0.20,"cached_input":0.02,"output":1.20},
+    {"id":"gemini-3.1-flash-lite","input":0.25,"cached_input":0.025,"output":1.50},
+    {"id":"deepseek-flash","input":0.30,"cached_input":0.006,"output":1.20},
+    {"id":"gemini-2.5-flash","input":0.30,"cached_input":0.03,"output":2.50},
+    {"id":"deepseek-v4-pro","input":1.32,"cached_input":0.044,"output":3.96},
+    {"id":"o4-mini","input":1.10,"cached_input":0.275,"output":4.40},
+    {"id":"o3","input":2.00,"cached_input":0.50,"output":8.00},
+    {"id":"gpt-6-sol","input":2.00,"cached_input":0.20,"output":10.00},
+    {"id":"gpt-6.1-sol","input":2.00,"cached_input":0.10,"output":10.00},
+    {"id":"gpt-5.6-terra","input":2.00,"cached_input":0.20,"output":12.00},
+    {"id":"gpt-5.6-sol","input":4.00,"cached_input":0.40,"output":20.00},
+    {"id":"gpt-6-astra","input":10.00,"cached_input":1.00,"output":50.00},
+    {"id":"gemini-2.5-pro","input":1.25,"cached_input":0.125,"output":10.00,"note":"Pricing changes above 200k tokens."},
+    {"id":"gemini-3.1-pro-preview","input":2.00,"cached_input":0.20,"output":12.00,"note":"Pricing changes above 200k tokens; preview stability must be tested."}
+  ],
+  "other_endpoints": {
+    "image": ["gpt-image-2.5-flare", "gpt-image-2.5-sunburst"],
+    "tts": ["gpt-4o-mini-tts"],
+    "stt": ["gpt-4o-transcribe", "gpt-4o-mini-transcribe", "gpt-transcribe", "whisper-1"],
+    "embedding": ["text-embedding-3-small", "text-embedding-3-large"],
+    "moderation": ["omni-moderation-latest"]
+  }
+}

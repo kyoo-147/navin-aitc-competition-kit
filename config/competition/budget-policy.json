@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "team_budget": 50.0,
+  "envelopes": {
+    "discovery_and_benchmark": 4.0,
+    "main_build": 20.0,
+    "review_and_hard_reasoning": 10.0,
+    "multimodal_or_media_if_required": 6.0,
+    "final_qa_and_repair": 5.0,
+    "emergency_reserve": 5.0
+  },
+  "thresholds": {
+    "leader_review": 35.0,
+    "economy_mode": 42.0,
+    "nonessential_hard_stop": 45.0
+  },
+  "controls": {
+    "premium_tier_requires_leader": true,
+    "reserve_requires_leader": true,
+    "unknown_cost_is_blocked": true,
+    "shared_team_budget": true
+  }
+}

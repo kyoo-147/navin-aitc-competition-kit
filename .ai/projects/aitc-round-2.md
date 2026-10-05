@@ -8,7 +8,8 @@ Prepare and operate a private, auditable harness that lets the three registered 
 
 - Team: AITC-918 — NAVIN Research.
 - Official team repository: `ai-thuc-chien/aitc2026-team-918-navin-research`.
-- Harness repository: `kyoo-147/nr-00` (private).
+- Source harness repository: `kyoo-147/nr-00` (private).
+- Competition kit repository: `kyoo-147/navin-aitc-competition-kit` (private).
 - Round 2 is online and uses BTC-provided API/tools to build an AI product.
 - Exact challenge, scoring rubric, submission format/path, start time, and allowed-resource list remain `UNKNOWN` until BTC publishes the challenge package.
 

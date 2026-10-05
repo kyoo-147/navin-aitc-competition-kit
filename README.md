@@ -1,23 +1,26 @@
-# NR-00 — NAVIN Research AITC Round 2 Harness
+# NAVIN AITC Competition Kit
 
-Private competition harness for team **AITC-918 — NAVIN Research**.
+Private competition-day setup, skill, routing, and verification kit for team **AITC-918 — NAVIN Research**. It was initialized from the proven `kyoo-147/nr-00` harness so its sourced rules and operating history remain available.
 
-This repository is the team's preparation, implementation, evidence, and controlled delivery workspace. It is separate from the official BTC repository `ai-thuc-chien/aitc2026-team-918-navin-research`.
+This repository is separate from the official BTC repository `ai-thuc-chien/aitc2026-team-918-navin-research`. It must never receive secrets or raw private AI logs.
 
 ## Start here
 
 1. Read `AGENTS.md`.
 2. Read `docs/competition/README.md` and `docs/competition/ROUND-2-RULES.md`.
-3. Read `docs/operations/WORKFLOW.md`.
-4. Before the official timed session, complete `docs/competition/COMPETITION-DAY-CHECKLIST.md`.
+3. Read `docs/competition-kit/README.md` and `skills/aitc-orchestrator/SKILL.md`.
+4. Read `docs/operations/WORKFLOW.md`.
+5. Before the official timed session, complete `docs/competition/COMPETITION-DAY-CHECKLIST.md`.
 
 ## Workspace layout
 
 ```text
 .ai/                     Agent identity and operating protocols
-config/                  Machine-readable official-source registry
+config/                  Official sources plus budget/model/router policies
+skills/                  Competition-specific orchestration instructions
 scripts/                 AI log and harness verification/refresh scripts
 docs/competition/        Sourced Round 2 knowledge pack
+docs/competition-kit/    Competition-day kit design and implementation status
 docs/operations/         Git, member workspace, and SS-WD operating rules
 workspace/product/       Product source after the official challenge is known
 workspace/evidence/      Test/demo evidence safe to commit
