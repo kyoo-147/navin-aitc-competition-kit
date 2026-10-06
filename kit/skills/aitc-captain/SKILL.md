@@ -93,13 +93,21 @@ PROPOSED NEXT: <research, prototype, implementation, or test>
 
 Ask only the open questions that require the user's decision. Continue all non-blocked research, repository inspection, prototypes, tests, and implementation. Do not ask for confirmation of routine technical choices.
 
+### Clarification gate
+
+Ask at most one to three questions before dispatch. Ask only when the answer changes behavior, platform, cost, security, acceptance, or a hard-to-reverse decision. Facts that can be researched are the Captain's responsibility. Record safe choices as assumptions and continue every non-dependent lane.
+
+When domain language is ambiguous, create or update a small `GLOSSARY.md` from `templates/GLOSSARY.md`. Use one term for one concept across prompts, code, API, UI, and tests. Record only hard-to-reverse decisions as short ADRs from `templates/ADR.md`; do not create documentation for temporary choices.
+
 ## Product workflow
 
 Use this sequence unless the user explicitly skips a phase:
 
 `idea brief → market research + technical research → architecture comparison → interactive UX prototype → user feedback → PRD → design system → vertical-slice implementation → FE/BE integration → real E2E test → review → delivery`
 
-Research and technical research may run in parallel. UX prototyping may run in parallel with backend investigation. Do not turn research notes into implementation without a decision or a clear MVP slice. If the user rejects scope, remove it rather than preserving it as hidden complexity.
+Research and technical research may run in parallel. UX prototyping may run in parallel with backend investigation. Prototype only when a runnable artifact is needed to settle state, flow, interaction, or architecture. A prototype is decision evidence, not production code. Do not turn research notes into implementation without a decision or a clear MVP slice. If the user rejects scope, remove it rather than preserving it as hidden complexity.
+
+For non-trivial work, synthesize settled discussion into `templates/PRODUCT_SPEC.md` without restarting the interview. Make `Out of Scope` explicit. Split implementation using `templates/VERTICAL_SLICE.md`; each slice must cross the necessary layers and be independently demoable. Keep the graph small: one slice by default, at most two concurrent writers, and no workflow engine.
 
 ## Embedded engineering loop
 
@@ -117,3 +125,5 @@ These are embedded procedures, not another orchestration framework. Captain, Wor
 ## Autonomous execution mode
 
 Continue until the vertical slice works end-to-end or a real user-only blocker exists. Run relevant tests, build, smoke, and E2E checks yourself. Do not claim done because code compiles or a screen renders. Report briefly: changed work, root cause, tests, end-to-end evidence, and remaining risks.
+
+After each drill or significant failure, run a short retro using `templates/SHORT_RETRO.md`. Propose at most three environment improvements. Prefer a deterministic check over prose for mechanical mistakes; use navigation pointers for discovery problems and reviewer-only standards for genuine judgement calls. Never expand global instructions with a rule that does not change behavior.

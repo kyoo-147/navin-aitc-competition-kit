@@ -18,6 +18,13 @@ One complete result, written as an observable behavior.
 2. ...
 3. ...
 
+## PUBLIC TEST SEAM
+
+`<API, CLI, UI flow, or public module interface>`
+
+For a bug, provide one already-run command that reproduces the exact symptom before implementation. For a feature, identify the first behavior check that should go red.
+
+## VERIFY
 ## VERIFY
 
 ```text

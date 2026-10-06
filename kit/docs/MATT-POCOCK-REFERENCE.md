@@ -21,3 +21,9 @@ Competition adaptation:
 - Captain decides when to dispatch and when to work directly.
 
 This is a reference and is not an allowlist for external providers, tools, or competition resources.
+
+## Competition adaptation implemented
+
+The active adaptation is defined by `docs/ENGINEERING-LOOP.md` and the Captain, Worker, and Reviewer skills. Supporting templates are `PRODUCT_SPEC.md`, `VERTICAL_SLICE.md`, `GLOSSARY.md`, `ADR.md`, `REVIEW_REPORT.md`, and `SHORT_RETRO.md`.
+
+The adaptation keeps clarification, shared language, prototype gates, explicit non-goals, behavior-first feedback loops, fixed-point review, and retro. It deliberately omits the mandatory issue tracker, large ticket frontier, unbounded implementer fanout, and PR ceremony that do not fit a two-hour round.

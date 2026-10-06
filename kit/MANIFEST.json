@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-06T02:00:11.9850052Z",
-    "file_count":  122,
+    "generated_at_utc":  "2026-10-06T02:48:37.6765065Z",
+    "file_count":  128,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -10,8 +10,8 @@
                   },
                   {
                       "path":  "AGENTS.md",
-                      "bytes":  2059,
-                      "sha256":  "4952d132270f0698e343463c7c7ebed00f421bb5d226bc64a73a3d8bb9334922"
+                      "bytes":  2087,
+                      "sha256":  "e4991f4db45e1ad3329d283a9e7002987aa6ccbac96c130db8e66f6e2d2ae64b"
                   },
                   {
                       "path":  "CODEX-PROMPT-FLOW.md",
@@ -74,9 +74,14 @@
                       "sha256":  "c9a0933bcf76e1bb5464bd52853816e3bcd74f3e2dc0ed4d4bb1ae0334d90269"
                   },
                   {
+                      "path":  "docs/ENGINEERING-LOOP.md",
+                      "bytes":  4293,
+                      "sha256":  "1fdc93d6acc468dfbb9a5882ceaa051e1156702bd66a4f6b9b8e8632009df791"
+                  },
+                  {
                       "path":  "docs/MATT-POCOCK-REFERENCE.md",
-                      "bytes":  1038,
-                      "sha256":  "64c13bcf8902bf9bb27cebf264062a2c99513f3ad971c14d5dbf8944e34f1644"
+                      "bytes":  1626,
+                      "sha256":  "d9729bd1e6b641e8b3aec61f013a7887ba9aef6b65df960ed3461fc9a466507e"
                   },
                   {
                       "path":  "docs/OFFICIAL-REPO-BOUNDARY.md",
@@ -125,8 +130,8 @@
                   },
                   {
                       "path":  "licenses/Matt-Pocock-MIT.txt",
-                      "bytes":  1068,
-                      "sha256":  "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+                      "bytes":  1089,
+                      "sha256":  "4981c5f6a90eb3a969dacabb9350f5a75695ff3910b39b6534952908dfdc5ff7"
                   },
                   {
                       "path":  "licenses/SS-WD-MIT.txt",
@@ -145,8 +150,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  5276,
-                      "sha256":  "bd63104080ddba38dbc1bd52833f3995f8d6a92d8479d49bfe7ddf201b1fec68"
+                      "bytes":  5369,
+                      "sha256":  "55a1c471ad30931dd34af8159215efdf89762795cfc2f86bcd3bdb0546cb596a"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -395,8 +400,8 @@
                   },
                   {
                       "path":  "scripts/verify.ps1",
-                      "bytes":  4519,
-                      "sha256":  "fb674112c89abb9da85501a9be6e9bea7eb9c237a8a0249760f6f48b2ed80b60"
+                      "bytes":  4710,
+                      "sha256":  "7e8175e4be0bbb9550fe4a63fa177834263961887bcb1110aa4439c48b484dbf"
                   },
                   {
                       "path":  "skills/accessibility/references/A11Y-PATTERNS.md",
@@ -420,8 +425,8 @@
                   },
                   {
                       "path":  "skills/aitc-captain/SKILL.md",
-                      "bytes":  6443,
-                      "sha256":  "4923730a8122c99193076c955a1d06566cba8a185c9114660233e80aa11b66c8"
+                      "bytes":  8000,
+                      "sha256":  "4cf4744191ebce204a4e64f8a7cbffee6b2bbdab0479050f3e5b6a63740a20a0"
                   },
                   {
                       "path":  "skills/aitc-reviewer/agents/openai.yaml",
@@ -430,8 +435,8 @@
                   },
                   {
                       "path":  "skills/aitc-reviewer/SKILL.md",
-                      "bytes":  2481,
-                      "sha256":  "ba4ab9b3be3bfa35e6458503324c8d8b0b5d6e1ec3b4aa2a95bccd51a333a348"
+                      "bytes":  3134,
+                      "sha256":  "82d583404905da48e5a0a53bca2a54695e965d919d0ebc5038a81c69a3065005"
                   },
                   {
                       "path":  "skills/aitc-worker/agents/openai.yaml",
@@ -440,8 +445,8 @@
                   },
                   {
                       "path":  "skills/aitc-worker/SKILL.md",
-                      "bytes":  2419,
-                      "sha256":  "c7b3cb4cca9025fd57d8e1836f25a20181b0ce62594d970258a538c887990d64"
+                      "bytes":  3516,
+                      "sha256":  "b20f39e0155bde747b9f2720d4401ef6e25ef4b0c6186aa5eb733bcc1547d4c8"
                   },
                   {
                       "path":  "skills/best-practices/references/SECURITY.md",
@@ -584,9 +589,19 @@
                       "sha256":  "16ce9b1ff4f20fcbefd3dbccea2d5cd4d3a4dc5eb16f69a35d7c4639829b8ff0"
                   },
                   {
+                      "path":  "templates/ADR.md",
+                      "bytes":  351,
+                      "sha256":  "32f38fa88f107688e15fb3286036262fd3e62856207306999b0720e2e8d07c78"
+                  },
+                  {
                       "path":  "templates/codex-orca.cmd",
                       "bytes":  625,
                       "sha256":  "fb54e78f0876f9018b40b8c83c310ffd3dae05f41676d72b11c075fcba8932ad"
+                  },
+                  {
+                      "path":  "templates/GLOSSARY.md",
+                      "bytes":  207,
+                      "sha256":  "e68e39df86c28bfe509059716431e8a204d950170749c0e69aba5bf89a193bd2"
                   },
                   {
                       "path":  "templates/IDEA-BRIEF.md",
@@ -599,19 +614,34 @@
                       "sha256":  "c714e9bbb68f727bfd2e76a4ee4b53052cf12e85f4e667910d8b7e37df79c6f5"
                   },
                   {
+                      "path":  "templates/PRODUCT_SPEC.md",
+                      "bytes":  656,
+                      "sha256":  "2162c329b854c08fd6db74f9ff7191b145b2f2b41e30b1e2ddf550f860adec05"
+                  },
+                  {
                       "path":  "templates/REVIEW_REPORT.md",
-                      "bytes":  214,
-                      "sha256":  "fcfe0730f481dab266ba34db7e6e55cf018fbaf5df8f1de0fe5bb4eea81e8802"
+                      "bytes":  756,
+                      "sha256":  "6d56b1c616d681c69a91b0002b172cb91147fc067169f25dd9c454f9c6796861"
+                  },
+                  {
+                      "path":  "templates/SHORT_RETRO.md",
+                      "bytes":  527,
+                      "sha256":  "b0c42f42de60845ff3c7cc7efdf77f8ebf1c23482ad1b86e39cfeca18a89d2bc"
+                  },
+                  {
+                      "path":  "templates/VERTICAL_SLICE.md",
+                      "bytes":  617,
+                      "sha256":  "c9acad2ed5d4eaa464d13c653c105d05109ec9d20a8bb4b9e3980f8d0c4fcb8d"
                   },
                   {
                       "path":  "templates/WORKER_BRIEF.md",
-                      "bytes":  1326,
-                      "sha256":  "6fbb3dd26a131d7556b71c024ef02230bfcbac5e71342c3234fe8999ad92a071"
+                      "bytes":  1578,
+                      "sha256":  "53d9a5d22f1f410d5c357fef137adcc1bc9b3fdb6ff5b598e827d77cf8a437ec"
                   },
                   {
                       "path":  "THIRD_PARTY_NOTES.md",
-                      "bytes":  1337,
-                      "sha256":  "c2681770f53c0738191d4458e396c40ea4528830806ad57604157d7c490c3168"
+                      "bytes":  2059,
+                      "sha256":  "b10b06e53c74cb457b79cc8078ab4ef166a2fe4cd8384c8cc6982b267855835c"
                   }
               ]
 }

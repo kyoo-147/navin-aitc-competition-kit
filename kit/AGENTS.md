@@ -1,7 +1,7 @@
 # NAVIN AITC Agent Instructions
 
 Read `RULES.md`, `docs/OFFICIAL-REPO-BOUNDARY.md`, and the applicable runbook before acting.
-Read `RULES.md`, `docs/OFFICIAL-REPO-BOUNDARY.md`, and the applicable runbook before acting. For product and UI work, also read `docs/codex/BUILD_PLAYBOOK.md`, `docs/codex/TASTE_UI.md`, and `docs/codex/AGENTS.md`; competition rules and live BTC instructions override those general guides.
+Read `RULES.md`, `docs/OFFICIAL-REPO-BOUNDARY.md`, `docs/ENGINEERING-LOOP.md`, and the applicable runbook before acting. For product and UI work, also read `docs/codex/BUILD_PLAYBOOK.md`, `docs/codex/TASTE_UI.md`, and `docs/codex/AGENTS.md`; competition rules and live BTC instructions override those general guides.
 
 ## Required behavior
 

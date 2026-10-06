@@ -5,7 +5,6 @@ description: Implement one bounded BTC competition outcome end-to-end in an assi
 
 # AITC Worker
 
-Own one coherent outcome. Do not redesign the project or change provider/runtime policy.
 Own one coherent outcome. Do not redesign the project or change provider/runtime policy. The Captain selects the model: prefer the cheapest live canary-passing candidate; `gpt-6-luna` for Codex Responses, `deepseek-flash` for a validated chat harness, and never a premium model without explicit tier assignment.
 
 ## Before editing
@@ -25,14 +24,23 @@ During the timed round, `session_meta.model_provider` must be `thucchien`. Do no
 
 If assignment ambiguity materially changes implementation, return one concise blocker instead of guessing.
 
+## Feedback-loop gate
+
+Before implementation, name one public seam where the required behavior is observable: API, CLI, UI flow, or public module interface. Tests verify behavior through that seam, not private implementation. Expected values come from the spec, a known-good example, or another independent source rather than recomputing the implementation.
+
+For a feature, work one vertical red/green slice at a time: write one failing behavior check, implement only enough to pass, then repeat. Do not write all tests first or anticipate unrequested slices.
+
+For a bug, do not theorize before one command can reproduce the user's exact symptom. Make that loop fast, deterministic, and agent-runnable. For a hard bug: minimise the repro, rank three to five falsifiable hypotheses, instrument one variable at a time, write the regression test before the fix at the correct seam, rerun the original flow, and remove every debug artifact. If no correct seam exists, report the architectural limitation instead of adding a misleading test.
+
 ## Implementation loop
 
-1. reproduce or establish current observable behavior;
-2. make the narrow check fail when appropriate;
+1. confirm the public seam and exact acceptance behavior;
+2. reproduce or make the narrow check fail;
 3. implement the smallest complete vertical change;
-4. run the narrow check;
-5. repeat;
-6. run the original user path and relevant broader gates.
+4. rerun the narrow check and typecheck regularly;
+5. repeat only for the next accepted slice;
+6. run the original user path, relevant broader gates, and the full suite once at the end;
+7. inspect the final diff for scope creep before commit.
 
 Reuse existing modules. Fix root causes. Stay inside `OWN`. Do not touch `DO_NOT_TOUCH` without Captain approval. No placeholders, fake production paths, fake health/metrics, silent fallback, weakened tests, unrequested dependencies, or external source copying.
 

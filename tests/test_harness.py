@@ -114,6 +114,25 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("UserPromptSubmit", combined)
         self.assertIn("deepseek-flash", combined)
 
+    def test_competition_engineering_loop_is_bounded_and_evidence_driven(self):
+        loop = (ROOT / "kit/docs/ENGINEERING-LOOP.md").read_text(encoding="utf-8")
+        captain = (ROOT / "kit/skills/aitc-captain/SKILL.md").read_text(encoding="utf-8")
+        worker = (ROOT / "kit/skills/aitc-worker/SKILL.md").read_text(encoding="utf-8")
+        reviewer = (ROOT / "kit/skills/aitc-reviewer/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("at most one to three questions", loop)
+        self.assertIn("Never exceed two concurrent writers", loop)
+        self.assertIn("GLOSSARY.md", captain)
+        self.assertIn("public seam", worker)
+        self.assertIn("three to five falsifiable hypotheses", worker)
+        self.assertIn("git diff <fixed-point>...HEAD", reviewer)
+        self.assertIn("Do not merge or rerank", reviewer)
+        for relative in (
+            "kit/templates/PRODUCT_SPEC.md", "kit/templates/GLOSSARY.md",
+            "kit/templates/ADR.md", "kit/templates/VERTICAL_SLICE.md",
+            "kit/templates/SHORT_RETRO.md",
+        ):
+            self.assertTrue((ROOT / relative).is_file(), relative)
+
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
             self.assertTrue((ROOT / relative).is_dir(), relative)

@@ -4,13 +4,25 @@ This kit contains original competition-specific adaptations informed by public M
 
 ## Matt Pocock - `mattpocock/skills`
 
+Upstream: https://github.com/mattpocock/skills
+
+Reviewed revision: `4588b32`
+
 MIT License. Concepts adapted into the competition skills include:
 
 - small/composable skills rather than a giant framework;
 - implementation with frequent feedback;
 - behavior-focused testing at public seams;
 - debugging by establishing a tight red/green feedback loop before theorizing;
-- separating spec compliance from engineering/standards review.
+- separating spec compliance from engineering/standards review;
+- decision-focused grilling, shared domain vocabulary, and short ADRs;
+- prototypes as decision evidence rather than automatic production code;
+- explicit out-of-scope boundaries;
+- tracer-bullet vertical slices and small dependency frontiers;
+- fixed-point diff review;
+- retrospectives that improve checks, navigation, standards, and tool economy.
+
+The competition-specific prose and templates are modified adaptations, not verbatim upstream workflow files. The kit preserves user control, limits concurrent writers to two, adds BTC provider/log provenance, and removes the upstream requirement for a large issue-tracker/task-graph workflow.
 
 The original MIT license text is included at `licenses/Matt-Pocock-MIT.txt`.
 
