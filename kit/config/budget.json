@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "currency": "USD",
+  "organizer_cap": 50,
+  "gates": {
+    "leader_review": 35,
+    "economy_mode": 42,
+    "block_nonessential": 45,
+    "cap_reached": 50
+  },
+  "policy": "Use total observed team spend thresholds; do not preallocate fixed phase envelopes.",
+  "note": "Live team_info.max_budget is authoritative. Premium calls require Captain approval and evidence."
+}

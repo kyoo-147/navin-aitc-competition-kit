@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "budget_usd": 50,
+  "default_t1_candidates": ["gpt-6-luna", "deepseek-flash", "gemini-3.1-flash-lite"],
+  "default_codex_ceiling": "gpt-5.6-luna",
+  "maximum_review_model": "gpt-5.6-sol",
+  "principles": [
+    "Gateway only during competition",
+    "Live key and team data override snapshots",
+    "Use no model for deterministic work",
+    "Use the cheapest live canary-passing compatible model",
+    "Benchmark gpt-6-luna, deepseek-flash, and gemini-3.1-flash-lite for three minutes when the official key becomes available",
+    "Do not silently change provider after failures",
+    "Do not use a chat-completions-only model from the Codex Responses transport",
+    "DeepSeek thinking is off for mechanical tasks unless evidence requires otherwise",
+    "Never exceed gpt-5.6-sol without explicit competition-authority approval"
+  ],
+  "concurrency": {
+    "max_concurrent_writers": 2,
+    "max_read_only_reviewers": 1,
+    "writer_worktree_required": true,
+    "reviewer_worktree_write_forbidden": true
+  },
+  "budget_gates": [
+    {"spend_gte":0,"state":"NORMAL","action":"Use T0/T1; preserve concise cached context."},
+    {"spend_gte":35,"state":"LEADER_REVIEW","action":"Captain approves every new lane and every T2+ call."},
+    {"spend_gte":42,"state":"ECONOMY_MODE","action":"T0/T1 only; stop benchmarking and optional review."},
+    {"spend_gte":45,"state":"BLOCK_NONESSENTIAL","action":"Only deployment, submission, or scoring-critical repair."},
+    {"spend_gte":50,"state":"CAP_REACHED","action":"Stop all model calls."}
+  ],
+  "task_routes": [
+    {"task":"deterministic","tier":"T0","models":[],"reasoning":"none","examples":["grep","format","run tests","hash manifest","calculate cost"]},
+    {"task":"routine_coding","tier":"T1","models":["gpt-6-luna","deepseek-flash","gemini-3.1-flash-lite"],"reasoning":"none_or_low","approval":false,"examples":["small backend endpoint","clear frontend component","bounded bug fix"]},
+    {"task":"codex_routine","tier":"T1","models":["gpt-6-luna"],"reasoning":"none_or_low","approval":false,"constraints":["Codex uses Responses; DeepSeek/Gemini require a separately validated chat harness"]},
+    {"task":"integration","tier":"T2","models":["gpt-5.6-luna","deepseek-v4-pro","gemini-2.5-pro"],"reasoning":"low_or_medium","approval":false,"constraints":["choose by live mini-benchmark and supported endpoint"]},
+    {"task":"final_review","tier":"T3","models":["gpt-5.6-sol"],"reasoning":"medium_or_high","approval":true,"constraints":["read-only reviewer; verified defect or scoring-critical acceptance risk"]}
+  ],
+  "escalation": {
+    "allowed_when": [
+      "two bounded attempts fail for the same model-capability reason",
+      "independent reviewer rejects substantive correctness",
+      "required capability is absent",
+      "retry cost exceeds one stronger call",
+      "deployment or submission is threatened"
+    ],
+    "forbidden_when": [
+      "code bug without reproduction",
+      "test failure caused by implementation error",
+      "Git or workspace failure",
+      "policy failure",
+      "provider authentication failure"
+    ]
+  }
+}

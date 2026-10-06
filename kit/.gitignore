@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.private/
+runtime/
+evidence/
+logs/
+*.secret
+*.secrets
+secrets.clixml
+session.jsonl
+.ai-log/
+__pycache__/
+.DS_Store
+Thumbs.db

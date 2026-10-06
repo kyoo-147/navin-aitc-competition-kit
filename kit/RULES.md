@@ -1,0 +1,99 @@
+# Competition Rules
+
+## Authority order
+
+1. Live organizer challenge instructions.
+2. Current BTC documentation and organizer repository files.
+3. Team leader decisions.
+4. This kit.
+5. Dated snapshots and preparation notes.
+
+Stop and ask the leader when sources conflict.
+
+## Session mode gate
+
+- Before analyzing, editing, dispatching, or implementing a new challenge, ask: `Anh đang thi chính thức hay drill/chuẩn bị?`
+- Do not infer official mode from the directory, date, key, or user urgency.
+- In `OFFICIAL` mode, work only in `https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research` and its verified local clone. All source, planning files, Lavish artifacts, evidence, and deliverables belong under `chung-khao/`; organizer hooks/config remain at repository root.
+- In `DRILL` mode, label provider and evidence truthfully and never present the result as official competition work.
+
+## Pre-implementation lock
+
+Implementation is forbidden until all gates are true:
+
+```text
+BRIEF = CONFIRMED
+ARCHITECTURE_LAVISH = LOCKED_BY_USER
+UX_FLOW_LAVISH = LOCKED_BY_USER
+PROJECT_CONTRACT = LOCKED
+```
+
+- The Spec Broker compiles the challenge into structured requirements but must not choose architecture or UX for the user.
+- Exactly two user-reviewable Lavish artifacts are mandatory before implementation: Architecture and UX/Product Flow.
+- Architecture Lavish covers stack, components, backend, database, schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, alternatives, recommendation, and open decisions.
+- UX Lavish is an interactive HTML wireframe covering screen map, journeys, actions, navigation, empty/loading/error/success states, responsive behavior, necessary features, and removable scope.
+- The Captain must poll and incorporate user feedback. A generated HTML file without user review is not locked.
+- After approval, compile decisions into `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md`, plus `docs/PROJECT_LOCK.json`.
+- Run `scripts/implementation-gate.ps1`. Only `IMPLEMENTATION ALLOWED` opens execution.
+- Locked decisions are immutable to workers. Changes require explicit user approval, updated artifacts/docs, a new lock timestamp, and notification to every affected lane.
+
+## Official repository
+
+- Run AI tools from the official team repository root.
+- Put all final-round source, documentation, demo assets, and deliverables under `chung-khao/`.
+- Keep organizer-provided root hook/config files where BTC placed them.
+- Do not edit preparation or upstream repositories as a substitute for official delivery.
+- Normal team work uses branch, PR, human review, and merge unless the organizer explicitly requires another flow.
+
+## Providers and credentials
+
+- During the timed round, all model calls use BTC Gateway only.
+- No personal OpenAI, Gemini, Navin Gateway, or free-provider fallback.
+- `THUCCHIEN_API_KEY` is the Gateway variable used by Codex.
+- `AI_LOG_API_KEY` and `AI_LOG_SERVER` are the BTC logging variables.
+- Never print, commit, prompt, screenshot, or copy secret values into artifacts.
+- Treat a pasted or logged secret as exposed and ask the leader whether BTC requires rotation.
+
+## AI logging
+
+- AI Log is fail-closed for model work.
+- Preserve required Codex events: `UserPromptSubmit`, `PostToolUse`, and `Stop`.
+- Do not hand-edit `.ai-log/`, synthesize events, remove required events, alter timestamps, or submit another team's logs.
+- A local file is not server proof. Require successful submission status `202` and confirm entries through the BTC readback API.
+- Open the AI tool at official repository root because hooks can be skipped from a subdirectory.
+
+## Routing and spend
+
+- Live `/key/info`, `/team/info?team_id=...`, current pricing, and a task-relevant canary override snapshots.
+- Do not infer quality or tool reliability from model name or price.
+- Default budget gates: leader review at `$35`, economy mode at `$42`, block nonessential calls at `$45`, absolute organizer cap `$50`.
+- Premium models and emergency reserve require leader approval.
+- Escalate only after verified failure, reviewer rejection, missing capability, or worse retry economics.
+
+## Execution
+
+- Start with the smallest working vertical slice.
+- Use deterministic software for deterministic work.
+- Lock the implementation contract before parallel frontend/backend work.
+- After lock, Writer A owns backend and Writer B owns frontend in separate Orca worktrees. They implement independently against the frozen API/state contract; neither edits the other lane or integrates incrementally.
+- The Captain integrates only after both lanes return commits and pass their lane-specific verification. Final mocks are removed and real FE/BE E2E is then proven on the integration branch.
+- Use one writer per checkout or isolated worktree.
+- Use one to three workers by default and only for independent scopes.
+- Keep humans responsible for consequential actions, review, merge, deployment, and submission.
+- Do not add fake data, fake health, fake metrics, placeholder production paths, or silent fallback.
+
+## Browser automation safety
+
+- Browser work defaults to an isolated automation profile. The user's personal Chrome, signed-in profile, tabs, cookies, extensions, history, and saved data are out of scope.
+- `chrome-devtools-axi` may be installed as an on-demand skill, but auto-connect, browser URL attachment, and SessionStart hooks remain disabled.
+- Never attach to, restart, close, or relaunch the user's Chrome unless the leader explicitly authorizes that exact session after the Captain explains why isolated browsing is insufficient.
+- A failed attach is a hard stop. Do not retry, recreate the bridge, or restart Chrome automatically.
+- Official browser evidence must be produced from the official repository workflow, saved under `chung-khao/`, scrubbed of secrets/personal data, and labeled with the tested commit and command.
+- Stop isolated browser processes after verification. Do not leave background bridges or automation listeners running.
+
+## Evidence
+
+- Inspect diffs, tests, runtime behavior, logs, deployment, and artifacts.
+- If hosted Actions cannot start, report `CI UNAVAILABLE`; local checks are not hosted CI.
+- A URL or HTTP 200 alone is not deployment proof.
+- Do not claim submission complete without a visible `Đã nộp` state or receipt.

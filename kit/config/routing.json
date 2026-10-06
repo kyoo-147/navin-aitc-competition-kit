@@ -1,0 +1,28 @@
+{
+  "schema_version": 3,
+  "snapshot_date": "2026-10-05",
+  "authority": "Live BTC documentation, /key/info, /team/info and canary results override this file.",
+  "provider": {
+    "name": "thucchien",
+    "base_url": "https://api.thucchien.ai/v1",
+    "wire_api": "responses",
+    "environment_key": "THUCCHIEN_API_KEY"
+  },
+  "policy": {
+    "gateway_only": true,
+    "personal_provider_fallback": false,
+    "require_live_canary": true,
+    "require_server_ai_log": true,
+    "premium_requires_leader_approval": true,
+    "max_concurrent_writers": 2,
+    "max_read_only_reviewers": 1,
+    "maximum_review_model": "gpt-5.6-sol"
+  },
+  "candidate_roles": {
+    "routine_implementation": ["gpt-6-luna", "deepseek-flash", "gemini-3.1-flash-lite"],
+    "integration": ["gpt-5.6-luna", "deepseek-v4-pro", "gemini-2.5-pro"],
+    "final_review": ["gpt-5.6-sol"],
+    "codex_responses": ["gpt-6-luna", "gpt-5.6-luna", "gpt-5.6-sol"]
+  },
+  "selection_rule": "Benchmark live candidates briefly, then use the cheapest canary-passing model compatible with the selected harness. Candidate names are hints, not an allowlist."
+}

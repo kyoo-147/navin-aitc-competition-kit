@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-05",
+  "authority": "Live BTC /key/info, /team/info, current documentation, response headers, and canaries override this snapshot.",
+  "sources": [
+    "https://docs.thucchien.ai/docs/round-2/user-guide/pricing",
+    "https://docs.thucchien.ai/docs/round-2/user-guide/openai-deepseek",
+    "https://docs.thucchien.ai/docs/round-2/user-guide/google-search-grounding",
+    "https://docs.thucchien.ai/docs/round-2/api-reference/spend-checking"
+  ],
+  "currency": "USD",
+  "text_models": [
+    {"id":"gpt-6-luna","provider":"OpenAI","input_per_1m":0.1,"cached_input_per_1m":0.01,"output_per_1m":0.5,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["none","low","medium","high","xhigh","max"],"tier":"T1","use":"default Codex coding, orchestration, bounded review"},
+    {"id":"gpt-5.6-luna","provider":"OpenAI","input_per_1m":0.2,"cached_input_per_1m":0.02,"output_per_1m":1.2,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["none","low","medium","high","xhigh","max"],"tier":"T1","use":"fallback general coding"},
+    {"id":"deepseek-flash","provider":"DeepSeek","input_per_1m":0.3,"cached_input_per_1m":0.006,"output_per_1m":1.2,"endpoints":["chat/completions"],"codex_responses":false,"web_search_responses":false,"reasoning":["thinking_on","thinking_off"],"tier":"T1-chat","use":"routine coding through chat-completions harness only"},
+    {"id":"gemini-3.1-flash-lite","provider":"Agent Platform","input_per_1m":0.25,"cached_input_per_1m":0.025,"output_per_1m":1.5,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T1-chat","use":"cheap extraction and Google grounding outside Codex"},
+    {"id":"gemini-2.5-flash","provider":"Agent Platform","input_per_1m":0.3,"cached_input_per_1m":0.03,"output_per_1m":2.5,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.035,"search_unit":"request","tier":"T1-chat","use":"grounded research outside Codex"},
+    {"id":"deepseek-v4-pro","provider":"DeepSeek","input_per_1m":1.32,"cached_input_per_1m":0.044,"output_per_1m":3.96,"endpoints":["chat/completions"],"codex_responses":false,"web_search_responses":false,"reasoning":["thinking_on","thinking_off"],"tier":"T2-chat","use":"harder coding through chat-completions harness with approval"},
+    {"id":"o4-mini","provider":"OpenAI","input_per_1m":1.1,"cached_input_per_1m":0.275,"output_per_1m":4.4,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["low","medium","high"],"tier":"T2","use":"bounded reasoning escalation"},
+    {"id":"gpt-6-sol","provider":"OpenAI","input_per_1m":2,"cached_input_per_1m":0.2,"output_per_1m":10,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["none","low","medium","high","xhigh","max"],"tier":"T3","use":"security, concurrency, architecture blocker with approval"},
+    {"id":"gpt-6.1-sol","provider":"OpenAI","input_per_1m":2,"cached_input_per_1m":0.1,"output_per_1m":10,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["low","medium","high","xhigh","max"],"tier":"T3","use":"strong reasoning escalation with approval"},
+    {"id":"o3","provider":"OpenAI","input_per_1m":2,"cached_input_per_1m":0.5,"output_per_1m":8,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["low","medium","high"],"tier":"T3","use":"reasoning escalation with approval"},
+    {"id":"gpt-5.6-terra","provider":"OpenAI","input_per_1m":2,"cached_input_per_1m":0.2,"output_per_1m":12,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["none","low","medium","high","xhigh","max"],"tier":"T3","use":"premium fallback only"},
+    {"id":"gpt-5.6-sol","provider":"OpenAI","input_per_1m":4,"cached_input_per_1m":0.4,"output_per_1m":20,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["none","low","medium","high","xhigh","max"],"tier":"T3","use":"premium blocker only"},
+    {"id":"gpt-6-astra","provider":"OpenAI","input_per_1m":10,"cached_input_per_1m":1,"output_per_1m":50,"endpoints":["chat/completions","responses"],"codex_responses":true,"web_search_responses":true,"reasoning":["low","medium","high","xhigh","max"],"tier":"EMERGENCY","use":"submission-critical emergency only"},
+    {"id":"gemini-2.5-pro","provider":"Agent Platform","input_per_1m":1.25,"cached_input_per_1m":0.125,"output_per_1m":10,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.035,"search_unit":"request","tier":"T2-chat","use":"long context and grounded research outside Codex"},
+    {"id":"gemini-3.1-pro-preview","provider":"Agent Platform","input_per_1m":2,"cached_input_per_1m":0.2,"output_per_1m":12,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T3-chat","use":"premium long-context research outside Codex"},
+    {"id":"gemini-3.5-flash","provider":"Agent Platform","input_per_1m":1.5,"cached_input_per_1m":0.15,"output_per_1m":9,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T2-chat","use":"multimodal or grounded research outside Codex"},
+    {"id":"gemini-3.5-flash-lite","provider":"Agent Platform","input_per_1m":0.3,"cached_input_per_1m":0.03,"output_per_1m":2.5,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T1-chat","use":"economical grounded research outside Codex"},
+    {"id":"gemini-3.6-flash","provider":"Agent Platform","input_per_1m":0.75,"cached_input_per_1m":0.075,"output_per_1m":3.75,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T2-chat","use":"grounded research outside Codex"},
+    {"id":"gemini-3.7-flash","provider":"Agent Platform","input_per_1m":0.75,"cached_input_per_1m":0.075,"output_per_1m":3.75,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T2-chat","use":"grounded research outside Codex"},
+    {"id":"gemini-3.8-flash","provider":"Agent Platform","input_per_1m":0.75,"cached_input_per_1m":0.075,"output_per_1m":3.75,"endpoints":["chat/completions"],"codex_responses":false,"google_search_chat":true,"search_cost":0.014,"search_unit":"query","tier":"T2-chat","use":"grounded research outside Codex"}
+  ],
+  "other_modalities": [
+    {"category":"image","id":"gpt-image-2.5-flare","provider":"OpenAI","text_input_per_1m":5,"image_input_per_1m":8,"output_image_token_per_1m":30},
+    {"category":"image","id":"gpt-image-2.5-sunburst","provider":"OpenAI","text_input_per_1m":5,"image_input_per_1m":8,"output_image_token_per_1m":30},
+    {"category":"image","id":"gemini-2.5-flash-image","provider":"Agent Platform","price_per_image":0.039},
+    {"category":"image","id":"gemini-3-pro-image","provider":"Agent Platform","price_per_image":0.134},
+    {"category":"image","id":"gemini-3.1-flash-image","provider":"Agent Platform","price_per_image":0.0672},
+    {"category":"image","id":"gemini-3.1-flash-lite-image","provider":"Agent Platform","price_per_image":0.0336},
+    {"category":"video","id":"veo-3.1-fast-generate-001","provider":"Agent Platform","price_720p_per_second":0.1,"price_1080p_per_second":0.12,"price_4k_per_second":0.3},
+    {"category":"video","id":"veo-3.1-generate-001","provider":"Agent Platform","price_720p_per_second":0.4,"price_1080p_per_second":0.4,"price_4k_per_second":0.6},
+    {"category":"video","id":"veo-3.1-lite-generate-001","provider":"Agent Platform","price_720p_per_second":0.05,"price_1080p_per_second":0.08},
+    {"category":"tts","id":"gpt-4o-mini-tts","provider":"OpenAI","text_input_per_1m":0.6,"audio_output_per_1m":12},
+    {"category":"stt","id":"gpt-4o-mini-transcribe","provider":"OpenAI","audio_input_per_second":0.00005,"text_output_per_1m":5},
+    {"category":"embedding","id":"text-embedding-3-small","provider":"OpenAI","input_per_1m":0.02},
+    {"category":"embedding","id":"text-embedding-3-large","provider":"OpenAI","input_per_1m":0.13},
+    {"category":"moderation","id":"omni-moderation-latest","provider":"OpenAI","input_per_1m":0}
+  ]
+}

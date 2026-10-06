@@ -10,6 +10,9 @@
 - [ ] Confirm authorized tools/models/resources and prohibited resources in writing.
 - [ ] Verify Gateway key locally, team budget/RPM/TPM, and AI log token locally.
 - [ ] Install/test hooks in every clone; verify logs reach BTC without exposing token.
+- [ ] Install the six AITC Codex skills in `~/.codex/skills`; do not bulk-copy Pi/external-service skills.
+- [ ] Confirm Orca Codex Command is `~/.codex/codex-orca.cmd` with empty Arguments.
+- [ ] Run logged canary and match rollout `session_meta.model_provider=thucchien`, local events, submit `202`, and BTC readback for one session.
 - [ ] Fetch all Git repositories and ensure clean status.
 
 ## T-30m

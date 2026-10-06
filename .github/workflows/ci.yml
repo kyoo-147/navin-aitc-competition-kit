@@ -17,3 +17,14 @@ jobs:
           python-version: "3.12"
       - run: python scripts/verify_harness.py
       - run: python -m unittest discover -s tests -v
+
+  verify-portable-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install -g @openai/codex
+      - shell: powershell
+        run: .\setup\verify-portable.ps1

@@ -1,0 +1,58 @@
+{
+    "schema_version":  1,
+    "session_mode":  "DRILL",
+    "status":  "LOCKED",
+    "official_repository":  "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research",
+    "brief":  {
+                  "confirmed":  true,
+                  "approved_by":  "user",
+                  "approved_at_utc":  "2026-10-06T10:19:51.6008982Z"
+              },
+    "architecture_lavish":  {
+                                "status":  "LOCKED_BY_USER",
+                                "path":  "artifacts/architecture.html",
+                                "approved_by":  "user",
+                                "approved_at_utc":  "2026-10-06T10:19:51.6008982Z"
+                            },
+    "ux_flow_lavish":  {
+                           "status":  "LOCKED_BY_USER",
+                           "path":  "artifacts/ux-flow.html",
+                           "approved_by":  "user",
+                           "approved_at_utc":  "2026-10-06T10:19:51.6008982Z"
+                       },
+    "contract":  {
+                     "status":  "LOCKED",
+                     "approved_by":  "user",
+                     "approved_at_utc":  "2026-10-06T10:19:51.6008982Z"
+                 },
+    "locked_files":  [
+                         {
+                             "path":  "docs/PROJECT.md",
+                             "sha256":  "557acf30d6d1612dd5a22c468e741d794605024e5f11b69582ff7b4c94bbe88c"
+                         },
+                         {
+                             "path":  "docs/ARCHITECTURE.md",
+                             "sha256":  "6d4a42fefbc0139b0644ca7589502eae5c19d7269515c3771327ad239934b348"
+                         },
+                         {
+                             "path":  "docs/UX_FLOW.md",
+                             "sha256":  "2023f78e0eb2eeaa3e5d087344329a589f0632e36ebd07f00a949288bbf27cac"
+                         },
+                         {
+                             "path":  "docs/DECISIONS.md",
+                             "sha256":  "8a57f19057b87fe75c4df316c05469ff1b80d713c7451abceb8edf82a297b6c5"
+                         },
+                         {
+                             "path":  "docs/TASKS.md",
+                             "sha256":  "6b5ea44ac9b9ccc25a0ee2d1016367a326909d5f47227cde54bb4625461b1742"
+                         },
+                         {
+                             "path":  "artifacts/architecture.html",
+                             "sha256":  "6a9432efab57766f5c5cf78a969ea92b72e3acb2f15611e5978086d3d0f2a0b0"
+                         },
+                         {
+                             "path":  "artifacts/ux-flow.html",
+                             "sha256":  "5f79237f459391775596aa4a6e0f6aa8812861fbb1e9fb595c4e9bee6adbc9e0"
+                         }
+                     ]
+}

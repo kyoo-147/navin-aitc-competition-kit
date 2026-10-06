@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "policy": "evidence-gated-value-routing",
+  "runtime_source_of_truth": "/key/info",
+  "concurrency": {
+    "max_concurrent_writers": 2,
+    "max_read_only_reviewers": 1,
+    "writer_worktree_required": true,
+    "reviewer_must_be_read_only": true,
+    "spawn_rule": "Spawn only when ownership is independent, acceptance is observable, and coordination cost is lower than time saved."
+  },
+  "tiers": {
+    "T0": {
+      "purpose": "deterministic tools",
+      "model_required": false
+    },
+    "T1": {
+      "purpose": "routine coding and clear fixes",
+      "selection": "cheapest live canary-proven compatible candidate from gpt-6-luna, deepseek-flash, or gemini-3.1-flash-lite",
+      "reasoning": "none_or_low",
+      "max_attempts_before_review": 2
+    },
+    "T2": {
+      "purpose": "cross-file integration, ambiguous bugs, and standard review",
+      "selection": "best value from current task-relevant mini-benchmark; prefer gpt-5.6-luna or deepseek-v4-pro when the harness supports the endpoint",
+      "reasoning": "low_or_medium",
+      "captain_approval": false
+    },
+    "T3": {
+      "purpose": "final review or verified hard blocker",
+      "selection": "gpt-5.6-sol, only after evidence and only when the cheaper route is insufficient",
+      "reasoning": "medium_or_high",
+      "requires": ["verified_failure_evidence", "captain_approval"]
+    }
+  },
+  "escalation_evidence": [
+    "two_bounded_attempts_same_verified_defect",
+    "reviewer_rejection_with_reproduction",
+    "required_capability_absent",
+    "cheaper_retries_expected_to_cost_more",
+    "scoring_critical_blocker"
+  ],
+  "retry": {
+    "retryable_statuses": [429, 500, 502, 503, 504],
+    "maximum_transient_retries": 2,
+    "use_jitter": true,
+    "never_retry_auth_failure": true
+  }
+}

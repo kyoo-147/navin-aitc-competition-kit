@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "currency": "USD",
+  "team_budget": 50.0,
+  "thresholds": {
+    "leader_review": 35.0,
+    "economy_mode": 42.0,
+    "nonessential_hard_stop": 45.0,
+    "cap_reached": 50.0
+  },
+  "controls": {
+    "thresholds_over_phase_envelopes": true,
+    "premium_requires_leader": true,
+    "unknown_cost_is_blocked": true,
+    "shared_team_budget": true,
+    "reserve_is_not_preallocated": true
+  }
+}

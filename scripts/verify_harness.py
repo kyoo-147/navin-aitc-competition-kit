@@ -16,6 +16,15 @@ REQUIRED = [
     "docs/competition/SOURCE-REGISTER.md",
     "docs/operations/WORKFLOW.md",
     "config/official-sources.json",
+    "kit/README.md",
+    "kit/RULES.md",
+    "kit/docs/OFFICIAL-REPO-BOUNDARY.md",
+    "kit/scripts/preflight.ps1",
+    "kit/scripts/session-preflight.ps1",
+    "kit/scripts/codex-runtime-refresh.ps1",
+    "kit/docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
+    "kit/scripts/sync-variant.ps1",
+    "kit/MANIFEST.json",
 ]
 TEXT_SUFFIXES = {".md", ".json", ".py", ".yml", ".yaml", ".toml", ".sh", ".ps1"}
 SECRET_PATTERNS = {
