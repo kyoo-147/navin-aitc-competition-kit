@@ -77,7 +77,21 @@
                                                "artifacts/architecture.html",
                                                "artifacts/ux-flow.html"
                                            ],
-                    "ux_design_scope":  ["screen_map", "user_journey", "visual_directions", "design_choice", "core_components", "interactive_wireframe", "loading", "error", "empty", "success", "responsive_behavior", "accessibility", "design_tokens"],
+                    "ux_design_scope":  [
+                                            "screen_map",
+                                            "user_journey",
+                                            "visual_directions",
+                                            "design_choice",
+                                            "core_components",
+                                            "interactive_wireframe",
+                                            "loading",
+                                            "error",
+                                            "empty",
+                                            "success",
+                                            "responsive_behavior",
+                                            "accessibility",
+                                            "design_tokens"
+                                        ],
                     "required_states":  [
                                             "empty",
                                             "loading",

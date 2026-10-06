@@ -6,42 +6,42 @@
     "brief":  {
                   "confirmed":  true,
                   "approved_by":  "user",
-                  "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                  "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
               },
     "architecture_lavish":  {
                                 "status":  "LOCKED_BY_USER",
                                 "path":  "artifacts/architecture.html",
                                 "approved_by":  "user",
-                                "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                                "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
                             },
     "ux_flow_lavish":  {
                            "status":  "LOCKED_BY_USER",
                            "path":  "artifacts/ux-flow.html",
                            "approved_by":  "user",
-                           "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                           "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
                        },
     "contract":  {
                      "status":  "LOCKED",
                      "approved_by":  "user",
-                     "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                     "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
                  },
     "canonical_contract":  {
                                "status":  "LOCKED",
                                "path":  "docs/PROJECT_CONTRACT.json",
                                "approved_by":  "user",
-                               "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                               "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
                            },
     "boundary_contract":  {
                               "status":  "LOCKED",
                               "path":  "contracts/app-contract.json",
                               "approved_by":  "user",
-                              "approved_at_utc":  "2026-10-06T12:46:21.2262213Z"
+                              "approved_at_utc":  "2026-10-06T13:10:33.3190132Z"
                           },
-    "base_commit":  "8598983214a9fb12c3ac20fe0ec82521ee3ed335",
+    "base_commit":  "23c8c4ed626e48eca16a0db560ac5d83fa11a3b8",
     "locked_files":  [
                          {
                              "path":  "docs/PROJECT_CONTRACT.json",
-                             "sha256":  "85a9979f30a3a868f8844baa5d39701d3b6d1491d2cb8d786cacc5e7e9a5e1d7"
+                             "sha256":  "f332ff1ae81adc210980220a6c02b2e8189229ef63ee8a9d98e6b0764c92ab6f"
                          },
                          {
                              "path":  "contracts/app-contract.json",
@@ -57,7 +57,7 @@
                          },
                          {
                              "path":  "docs/UX_FLOW.md",
-                             "sha256":  "7c12bb64aa0db923c61933f76688f8226e11c7192548573bfc15f304156b08bc"
+                             "sha256":  "63a0e72ce122124660c90385436c0794a3a46998c3505fd17380710da7c72b9f"
                          },
                          {
                              "path":  "docs/DECISIONS.md",
@@ -69,11 +69,11 @@
                          },
                          {
                              "path":  "artifacts/architecture.html",
-                             "sha256":  "aaa8fdcf427b3efa27b82e9228d79c4f9d44c20a9f02282a90f0046fe93bf271"
+                             "sha256":  "f908f4a3d299f7ab9e2ed8f1ccf3f1ef57ab04fa1a79d6fe6f6da5d5bcea9b95"
                          },
                          {
                              "path":  "artifacts/ux-flow.html",
-                             "sha256":  "1fdf4ea647e67059471069a634e484ed71c8ae7ceddd50409003f1c024681372"
+                             "sha256":  "06469f65e84a5bd21e7d3e5626901309fa664de2e8c1e24ce23cb3ac72cf39f9"
                          }
                      ]
 }
