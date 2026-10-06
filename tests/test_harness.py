@@ -161,6 +161,13 @@ class HarnessTests(unittest.TestCase):
         })
         self.assertIn("profile_allowlists", (ROOT / "setup/bootstrap.ps1").read_text(encoding="utf-8"))
 
+    def test_aitc_profile_installs_only_allowlisted_skills(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = self.run_powershell(ROOT / "setup/bootstrap.ps1", "-Profile", "Aitc", "-CodexHome", tmp, "-Apply")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            installed = {path.name for path in (Path(tmp) / "skills").iterdir() if path.is_dir()}
+            self.assertEqual(installed, {"aitc-captain", "aitc-worker", "aitc-reviewer", "aitc-design-studio", "lavish", "chrome-devtools-axi", "playwright-cli"})
+
     def test_competition_engineering_loop_is_bounded_and_evidence_driven(self):
         loop = (ROOT / "kit/docs/ENGINEERING-LOOP.md").read_text(encoding="utf-8")
         captain = (ROOT / "kit/skills/aitc-captain/SKILL.md").read_text(encoding="utf-8")
