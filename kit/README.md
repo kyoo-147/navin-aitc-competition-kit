@@ -82,15 +82,15 @@ Do not run this against the official repository until the team has reviewed the 
 
 ## Competition flow
 
-1. Read the live challenge and current BTC documentation.
-2. Run `budget.ps1` and live preflight.
-3. Run the logged Codex canary and verify its session on the BTC AI Log server.
-4. Lock `templates/IMPLEMENTATION_CONTRACT.md` before parallel writers start.
-5. Build the smallest complete vertical slice.
-6. Give one task to the Captain. It may use two isolated writer lanes and one read-only reviewer; see `CODEX-PROMPT-FLOW.md`.
-7. Integrate early, run task-relevant tests, deploy, and capture evidence.
-8. Stop nonessential model calls at policy gates.
-9. Freeze, submit, and capture a visible receipt.
+1. Ask the leader whether the session is `OFFICIAL` or `DRILL`; never infer it.
+2. Read the live challenge and current BTC documentation.
+3. Run `budget.ps1` and live preflight, then verify the logged Codex canary on the BTC AI Log server.
+4. Use Spec Broker and parallel read-only investigation to prepare the Human Brief.
+5. Create exactly two Lavish review artifacts: Architecture and interactive UX Flow. Incorporate feedback until both are explicitly locked by the leader.
+6. Compile `PROJECT.md`, `ARCHITECTURE.md`, `UX_FLOW.md`, `DECISIONS.md`, and `TASKS.md`; create `PROJECT_LOCK.json` and pass `implementation-gate.ps1`.
+7. Dispatch independent backend and frontend writer worktrees. Do not integrate while either lane is still building.
+8. After both lane commits pass their own checks, integrate, remove critical-path mocks, run real FE/BE E2E, and capture evidence.
+9. Run fixed-point review, stop nonessential calls at policy gates, freeze, submit, and capture a visible receipt.
 
 ## Directory map
 
@@ -98,9 +98,9 @@ Do not run this against the official repository until the team has reviewed the 
 - `CODEX-PROMPT-FLOW.md` - one-prompt Captain routing, model selection, spawn limits, and evidence contract.
 - `docs/` - team operating guides, the adapted engineering loop, official-repository boundary, Codex/Pi scope policy, copied Codex guides under `docs/codex/`, Pi skill migration matrix, and Codex settings optimization notes.
 - `runbook/` - timed and failure runbooks.
-- `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, budget, Orca, sync, and verification.
-- `skills/` - captain, worker, and reviewer skills. Runtime and orchestration are Captain procedures, not separate skill sprawl.
-- `templates/` - idea brief, product spec, glossary, ADR, vertical slice, worker brief, implementation contract, acceptance matrix, fixed-point review, and short retro.
+- `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, project lock/gate, budget, Orca, sync, and verification.
+- `skills/` - Captain, Worker, Reviewer, mandatory Lavish review surface, and task-triggered helpers. Runtime and orchestration remain Captain procedures.
+- `templates/` - Spec Broker, the five compiled project contracts, project lock, idea brief, product spec, glossary, ADR, vertical slice, worker brief, implementation contract, acceptance matrix, fixed-point review, and short retro.
 - `references/` - preparation-only screenshots and source material. Not included in the official variant.
 - `licenses/` and `THIRD_PARTY_NOTES.md` - attribution.
 

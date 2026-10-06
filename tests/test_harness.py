@@ -105,7 +105,7 @@ class HarnessTests(unittest.TestCase):
             "accessibility", "best-practices", "commit", "create-cli",
             "frontend-design", "performance", "playwright-cli", "summarize",
             "github", "update-changelog", "taste-skill", "frontend-design-v2",
-            "minimalist-skill",
+            "minimalist-skill", "lavish",
         }
         self.assertEqual({path.name for path in skill_root.iterdir() if path.is_dir()}, expected)
         combined = "\n".join((path / "SKILL.md").read_text(encoding="utf-8") for path in skill_root.iterdir())
@@ -126,10 +126,20 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("three to five falsifiable hypotheses", worker)
         self.assertIn("git diff <fixed-point>...HEAD", reviewer)
         self.assertIn("Do not merge or rerank", reviewer)
+        self.assertIn("Architecture Lavish + UX Flow Lavish", loop)
+        self.assertIn("implementation-gate.ps1", captain)
+        self.assertIn("Locked decisions cannot be changed by workers", captain)
+        rules = (ROOT / "kit/RULES.md").read_text(encoding="utf-8")
+        self.assertIn("Anh đang thi chính thức hay drill/chuẩn bị?", rules)
+        self.assertIn("Exactly two user-reviewable Lavish artifacts", rules)
+        self.assertIn("integrates incrementally", rules)
         for relative in (
             "kit/templates/PRODUCT_SPEC.md", "kit/templates/GLOSSARY.md",
             "kit/templates/ADR.md", "kit/templates/VERTICAL_SLICE.md",
-            "kit/templates/SHORT_RETRO.md",
+            "kit/templates/SHORT_RETRO.md", "kit/templates/SPEC_BROKER.md",
+            "kit/templates/PROJECT.md", "kit/templates/ARCHITECTURE.md",
+            "kit/templates/UX_FLOW.md", "kit/templates/DECISIONS.md",
+            "kit/templates/TASKS.md", "kit/templates/PROJECT_LOCK.template.json",
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
 

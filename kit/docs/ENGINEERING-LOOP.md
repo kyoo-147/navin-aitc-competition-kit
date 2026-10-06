@@ -15,17 +15,24 @@ This is the small, competition-safe adaptation of ideas from Matt Pocock's MIT-l
 ## Main flow
 
 ```text
-idea
-→ clarification gate
-→ prototype only if a runnable answer is needed
-→ spec with explicit out of scope
-→ one or a few vertical slices
-→ implementation with red/green feedback
+challenge / idea
+→ ask OFFICIAL or DRILL
+→ Spec Broker structures the input
+→ requirements + technical + UX scouts investigate in parallel
+→ Human Brief
+→ Architecture Lavish + UX Flow Lavish
+→ user feedback and Human Lock
+→ compile PROJECT / ARCHITECTURE / UX_FLOW / DECISIONS / TASKS
+→ deterministic implementation gate
+→ Backend writer || Frontend writer in isolated worktrees
+→ integrate only after both lanes pass independently
+→ real FE/BE E2E
 → fixed-point review
-→ integration and real E2E
 → commit/push/submit when authorized
 → short retro
 ```
+
+The Spec Broker is a compiler from unstructured challenge text to structured requirements. It exposes unknowns and human decisions; it cannot make architecture or UX decisions. The two Lavish artifacts are mandatory decision surfaces, not optional decoration. Their user-approved state becomes repository source of truth and is hash-locked by `scripts/lock-project.ps1`.
 
 ## Clarification gate
 
@@ -33,9 +40,9 @@ Captain asks at most one to three questions before dispatch. Ask only when the a
 
 Persist durable language in `GLOSSARY.md` and hard-to-reverse decisions in short ADRs. Do not create either for trivial or temporary choices.
 
-## Prototype gate
+## Pre-implementation and prototype gate
 
-Prototype only when conversation cannot settle a question. A prototype answers one question about state, flow, interaction, or architecture. It is evidence, not production code, unless it later passes production acceptance independently.
+Implementation is blocked until the brief, Architecture Lavish, UX Flow Lavish, and project contract are explicitly locked by the user. UX Flow must be a real interactive HTML wireframe; Markdown is insufficient. A prototype remains decision evidence, not production code, unless it later passes production acceptance independently.
 
 ## Spec gate
 
@@ -43,9 +50,9 @@ A spec contains the problem, solution, user stories, implementation decisions, t
 
 ## Vertical slices
 
-Each slice must deliver a narrow end-to-end behavior across the necessary layers and be demoable alone. Avoid horizontal tickets such as "build database" or "build frontend" unless a mechanical refactor cannot remain green as a vertical slice.
+The locked project contract defines the final vertical slice. Implementation then uses two deliberately horizontal, independent lanes: backend and frontend. They work against one frozen API/state contract and do not integrate while building. Each lane must pass its own acceptance before the Captain combines their commits. The integrated result must then deliver the narrow end-to-end behavior and remove critical-path mocks.
 
-For a two-hour round, use one slice whenever possible. Never exceed two concurrent writers. Dependency graphs remain small and explicit; no workflow engine is required.
+Never exceed two concurrent writers. Dependency graphs remain small and explicit; no workflow engine is required.
 
 ## Feedback-loop gate
 

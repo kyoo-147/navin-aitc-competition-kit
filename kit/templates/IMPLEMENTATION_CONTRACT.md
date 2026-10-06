@@ -47,19 +47,30 @@ error states:
 - Recoverable error:
 - Blocking error:
 
+## Pre-implementation lock
+
+- Brief: CONFIRMED / BLOCKED
+- Architecture Lavish: LOCKED_BY_USER / BLOCKED
+- UX Flow Lavish: LOCKED_BY_USER / BLOCKED
+- Project contract: LOCKED / BLOCKED
+- `implementation-gate.ps1`: IMPLEMENTATION ALLOWED / BLOCKED
+
 ## Ownership
 
 | Lane | Paths owned | Must not edit | Acceptance command |
 |---|---|---|---|
-| Integration | | | |
-| Backend/AI | | | |
-| Product/evaluation/deploy | | | |
+| Backend writer | | Frontend-owned paths | |
+| Frontend writer | | Backend-owned paths | |
+| Captain integration | Integration-only paths | Locked decisions without user approval | |
+| Read-only reviewer | None | All source | |
 
 ## Merge order
 
-1.
-2.
-3.
+1. Backend writer completes, verifies, and returns a commit.
+2. Frontend writer completes, verifies, and returns a commit.
+3. Captain confirms both independent lane gates passed.
+4. Captain integrates both commits, removes critical-path mocks, and resolves only contract-conformant conflicts.
+5. Captain runs real FE/BE E2E and fixed-point review.
 
 ## Acceptance evidence
 

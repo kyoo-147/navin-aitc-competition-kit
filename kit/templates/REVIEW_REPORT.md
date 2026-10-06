@@ -1,5 +1,15 @@
 # Fixed-Point Review
 
+## Pre-implementation provenance
+
+- Session mode was explicitly answered: YES / NO
+- Correct repository boundary: PASS / FAIL
+- Human Brief confirmed: PASS / FAIL
+- Architecture Lavish reviewed and locked before implementation: PASS / FAIL
+- UX Flow Lavish reviewed and locked before implementation: PASS / FAIL
+- Locked file hashes unchanged: PASS / FAIL
+- Backend and frontend lane commits/checks completed before integration: PASS / FAIL
+
 ## Fixed Point
 
 - Ref: `<sha | branch | tag | merge-base>`

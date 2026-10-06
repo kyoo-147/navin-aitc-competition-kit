@@ -26,6 +26,16 @@ The competition-specific prose and templates are modified adaptations, not verba
 
 The original MIT license text is included at `licenses/Matt-Pocock-MIT.txt`.
 
+## Kun Chen - `kunchenguid/lavish-axi`
+
+Upstream: https://github.com/kunchenguid/lavish-axi
+
+Reviewed revision: `cd202ac`
+
+MIT License. The unmodified Lavish skill entrypoint is included at `skills/lavish/SKILL.md`; it deliberately defers current workflow and design guidance to the live `lavish-axi` CLI so copied instructions do not become stale. This kit requires Lavish as the human decision surface for exactly two pre-implementation artifacts: Architecture and interactive UX/Product Flow.
+
+The Lavish runtime is not vendored. Invoke it with `npx -y lavish-axi`, load current help/design/playbooks before authoring, and keep artifacts local unless the user explicitly authorizes sharing. The original license is included at `licenses/Kun-Chen-Lavish-MIT.txt`.
+
 ## NAVIN Research SS-WD - `kyoo-147/SS-WD`
 
 MIT License. Concepts adapted include:

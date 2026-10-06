@@ -10,6 +10,33 @@
 
 Stop and ask the leader when sources conflict.
 
+## Session mode gate
+
+- Before analyzing, editing, dispatching, or implementing a new challenge, ask: `Anh đang thi chính thức hay drill/chuẩn bị?`
+- Do not infer official mode from the directory, date, key, or user urgency.
+- In `OFFICIAL` mode, work only in `https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research` and its verified local clone. All source, planning files, Lavish artifacts, evidence, and deliverables belong under `chung-khao/`; organizer hooks/config remain at repository root.
+- In `DRILL` mode, label provider and evidence truthfully and never present the result as official competition work.
+
+## Pre-implementation lock
+
+Implementation is forbidden until all gates are true:
+
+```text
+BRIEF = CONFIRMED
+ARCHITECTURE_LAVISH = LOCKED_BY_USER
+UX_FLOW_LAVISH = LOCKED_BY_USER
+PROJECT_CONTRACT = LOCKED
+```
+
+- The Spec Broker compiles the challenge into structured requirements but must not choose architecture or UX for the user.
+- Exactly two user-reviewable Lavish artifacts are mandatory before implementation: Architecture and UX/Product Flow.
+- Architecture Lavish covers stack, components, backend, database, schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, alternatives, recommendation, and open decisions.
+- UX Lavish is an interactive HTML wireframe covering screen map, journeys, actions, navigation, empty/loading/error/success states, responsive behavior, necessary features, and removable scope.
+- The Captain must poll and incorporate user feedback. A generated HTML file without user review is not locked.
+- After approval, compile decisions into `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md`, plus `docs/PROJECT_LOCK.json`.
+- Run `scripts/implementation-gate.ps1`. Only `IMPLEMENTATION ALLOWED` opens execution.
+- Locked decisions are immutable to workers. Changes require explicit user approval, updated artifacts/docs, a new lock timestamp, and notification to every affected lane.
+
 ## Official repository
 
 - Run AI tools from the official team repository root.
@@ -48,6 +75,8 @@ Stop and ask the leader when sources conflict.
 - Start with the smallest working vertical slice.
 - Use deterministic software for deterministic work.
 - Lock the implementation contract before parallel frontend/backend work.
+- After lock, Writer A owns backend and Writer B owns frontend in separate Orca worktrees. They implement independently against the frozen API/state contract; neither edits the other lane or integrates incrementally.
+- The Captain integrates only after both lanes return commits and pass their lane-specific verification. Final mocks are removed and real FE/BE E2E is then proven on the integration branch.
 - Use one writer per checkout or isolated worktree.
 - Use one to three workers by default and only for independent scopes.
 - Keep humans responsible for consequential actions, review, merge, deployment, and submission.

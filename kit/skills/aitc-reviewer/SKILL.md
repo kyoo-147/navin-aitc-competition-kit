@@ -11,6 +11,8 @@ This is a short-contest gate, not a style critique. Remain read-only unless expl
 
 Read the live challenge/acceptance matrix, integrated diff, repository rules, test/build/runtime evidence, rollout metadata, AI Log evidence, Git/worktree state, and deployment/submission evidence.
 
+First require `docs/PROJECT_LOCK.json` plus the five compiled source-of-truth documents. Verify that the Architecture and UX Lavish artifacts exist, record explicit human approval, and predate implementation. Fail Spec when implementation started before lock or a worker silently changed a locked decision. Verify frontend/backend lane commits and checks completed independently before integration began.
+
 Pin a fixed point before reviewing: commit SHA, branch, tag, or verified merge base. Require it to resolve and require a non-empty `git diff <fixed-point>...HEAD`. Record the commit list. Review only that bounded change; do not report unrelated baseline issues unless they invalidate the changed flow.
 
 ## Axis 1 - Spec and scoring

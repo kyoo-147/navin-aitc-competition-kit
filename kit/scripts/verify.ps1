@@ -14,9 +14,9 @@ $required = @(
     'knowledge\README.md', 'knowledge\model-registry.json', 'knowledge\routing-policy.json', 'knowledge\tracking-schema.json',
     'docs\OFFICIAL-REPO-BOUNDARY.md', 'docs\ENGINEERING.md', 'docs\ENGINEERING-LOOP.md', 'docs\ORCA-CODEX-FINDINGS.md', 'docs\CODEX-SCOPES-AND-PI-MIGRATION.md', 'docs\MATT-POCOCK-REFERENCE.md', 'docs\PI-SKILL-MIGRATION-MATRIX.md', 'docs\CODEX-SETTINGS-OPTIMIZATION.md', 'docs\codex\AGENTS.md', 'docs\codex\TASTE_UI.md', 'docs\codex\BUILD_PLAYBOOK.md',
     'scripts\bootstrap.ps1', 'scripts\preflight.ps1', 'scripts\session-preflight.ps1', 'scripts\codex-runtime-refresh.ps1', 'scripts\codex-canary.ps1', 'scripts\budget.ps1',
-    'scripts\model-query.ps1', 'scripts\spend-ledger.ps1',
+    'scripts\model-query.ps1', 'scripts\spend-ledger.ps1', 'scripts\lock-project.ps1', 'scripts\implementation-gate.ps1',
     'scripts\start-codex.ps1', 'scripts\sync-variant.ps1',
-    'templates\IMPLEMENTATION_CONTRACT.md', 'templates\IDEA-BRIEF.md', 'templates\PRODUCT_SPEC.md', 'templates\GLOSSARY.md', 'templates\ADR.md', 'templates\VERTICAL_SLICE.md', 'templates\REVIEW_REPORT.md', 'templates\SHORT_RETRO.md', 'templates\codex-orca.cmd', 'MANIFEST.json'
+    'templates\IMPLEMENTATION_CONTRACT.md', 'templates\IDEA-BRIEF.md', 'templates\SPEC_BROKER.md', 'templates\PROJECT.md', 'templates\ARCHITECTURE.md', 'templates\UX_FLOW.md', 'templates\DECISIONS.md', 'templates\TASKS.md', 'templates\PROJECT_LOCK.template.json', 'templates\PRODUCT_SPEC.md', 'templates\GLOSSARY.md', 'templates\ADR.md', 'templates\VERTICAL_SLICE.md', 'templates\REVIEW_REPORT.md', 'templates\SHORT_RETRO.md', 'templates\codex-orca.cmd', 'skills\lavish\SKILL.md', 'licenses\Kun-Chen-Lavish-MIT.txt', 'MANIFEST.json'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { Fail "Missing $relative" }
@@ -60,6 +60,27 @@ try {
     }
     if (-not ($failures | Where-Object { $_ -like 'Manifest*' })) { Pass 'Manifest count and hashes match' }
 } catch { Fail "Manifest verification failed: $($_.Exception.Message)" }
+
+$gateFixture = Join-Path ([IO.Path]::GetTempPath()) ('aitc-gate-' + [guid]::NewGuid().ToString('N'))
+try {
+    New-Item -ItemType Directory -Force -Path (Join-Path $gateFixture 'docs'), (Join-Path $gateFixture 'artifacts') | Out-Null
+    foreach ($relative in @('PROJECT.md', 'ARCHITECTURE.md', 'UX_FLOW.md', 'DECISIONS.md', 'TASKS.md')) {
+        Set-Content -LiteralPath (Join-Path $gateFixture "docs\$relative") -Value "# $relative`nLOCKED fixture" -Encoding utf8
+    }
+    Set-Content -LiteralPath (Join-Path $gateFixture 'artifacts\architecture.html') -Value '<!doctype html><title>Architecture</title>' -Encoding utf8
+    Set-Content -LiteralPath (Join-Path $gateFixture 'artifacts\ux-flow.html') -Value '<!doctype html><title>UX Flow</title><button>Next</button>' -Encoding utf8
+    & (Join-Path $root 'scripts\lock-project.ps1') -ProjectRoot $gateFixture -SessionMode DRILL -ApprovedBy 'verification-fixture' | Out-Null
+    & (Join-Path $root 'scripts\implementation-gate.ps1') -ProjectRoot $gateFixture -RepositoryRoot $gateFixture | Out-Null
+    Pass 'Implementation gate allows an intact human-locked fixture'
+
+    Add-Content -LiteralPath (Join-Path $gateFixture 'docs\ARCHITECTURE.md') -Value 'unauthorized mutation'
+    $blocked = $false
+    try { & (Join-Path $root 'scripts\implementation-gate.ps1') -ProjectRoot $gateFixture -RepositoryRoot $gateFixture | Out-Null }
+    catch { $blocked = $_.Exception.Message -like '*locked file changed*' }
+    if ($blocked) { Pass 'Implementation gate blocks mutation after lock' }
+    else { Fail 'Implementation gate did not block mutation after lock' }
+} catch { Fail "Implementation gate fixture failed: $($_.Exception.Message)" }
+finally { Remove-Item -LiteralPath $gateFixture -Recurse -Force -ErrorAction SilentlyContinue }
 
 if ($failures.Count -gt 0) {
     Write-Host "KIT VERIFICATION FAILED: $($failures.Count) issue(s)." -ForegroundColor Red

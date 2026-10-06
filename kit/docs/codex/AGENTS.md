@@ -2,6 +2,13 @@
 
 These are Michael's general instructions for agents.
 
+## NAVIN AITC competition workflow
+
+When the task concerns the NAVIN AITC kit or `ai-thuc-chien/aitc2026-team-918-navin-research`, load `aitc-captain` and `lavish` before acting. Ask whether the user is in `OFFICIAL` or `DRILL` mode before analysis, editing, or dispatch. In official mode, use only the verified official repository and keep team-created work under `chung-khao/`.
+
+Do not choose architecture or UX autonomously. Structure the challenge with Spec Broker, brief the user, produce exactly two reviewable Lavish artifacts - Architecture and interactive UX Flow - and obtain explicit Human Lock. Compile the approved decisions into the five project source-of-truth documents and pass `implementation-gate.ps1` before implementation. Locked decisions are immutable to workers. Backend and frontend writers work independently in separate worktrees against the frozen contract; the Captain integrates only after both lanes finish and pass their own checks.
+
+
 ## General
 
 - Do not use em dashes. Use `-` instead.
