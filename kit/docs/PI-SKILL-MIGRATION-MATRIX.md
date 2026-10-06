@@ -2,7 +2,7 @@
 
 Source inventory: `C:\Users\hoang\.pi\agent\skills`.
 
-Default rule: do not bulk-install Pi skills into Codex. The competition default remains three AITC skills: Captain, Worker, Reviewer. Add a compatible skill only when the task needs it, the live rules permit it, and its dependencies are verified.
+Default rule: do not bulk-install Pi skills into Codex. The kit has three core skills - Captain, Worker, Reviewer - plus the thirteen explicitly approved task skills below. Task skills are discovered by description and loaded only when the task matches; live rules and verified dependencies still apply.
 
 ## Safe candidates for task-local Codex use
 

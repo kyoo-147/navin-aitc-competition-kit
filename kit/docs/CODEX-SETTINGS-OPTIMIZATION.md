@@ -6,7 +6,7 @@ This is a read-only audit baseline for the local Codex home. It contains no cred
 
 - Keep one active provider/model/catalog preset.
 - Use the canonical `codex-orca.cmd` wrapper so `CODEX_HOME` and the runtime fingerprint are stable.
-- Keep only the three AITC skills installed by default: Captain, Worker, Reviewer.
+- Keep three AITC core skills plus the thirteen user-approved task skills. Load task skills only when their descriptions match the current task.
 - Load UI/build rules only when the task is UI/product work.
 - Keep hooks enabled for competition sessions.
 - Use the smallest reasoning level that passes the task.
@@ -17,7 +17,7 @@ This is a read-only audit baseline for the local Codex home. It contains no cred
 
 - Codex CLI: 0.160.0.
 - Orca: 1.4.215.
-- User Codex skills after cleanup: three AITC skills plus task-specific `lavish`, `stow`, and `tldraw-offline`.
+- User Codex skills after the approved expansion: three AITC core skills, thirteen approved task skills, plus existing `lavish`, `stow`, and `tldraw-offline`.
 - Re-creatable Codex cache observed: about 19 files and 122 MB.
 - Active configuration contains browser, visualization, document, PDF, spreadsheet, presentation, template, calendar, and Slack plugins.
 - `node_repl` is the only configured MCP server.

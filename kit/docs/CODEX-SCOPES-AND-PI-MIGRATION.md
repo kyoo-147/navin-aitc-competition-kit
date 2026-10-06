@@ -45,13 +45,13 @@ Pi settings are not Codex configuration. Do not copy `~/.pi/agent/settings.json`
 
 ### Install for competition
 
-Install only the three reviewed AITC skills:
+Install the three reviewed AITC core skills:
 
 - `aitc-captain`
 - `aitc-worker`
 - `aitc-reviewer`
 
-These are provider-safe operational skills and are maintained in this kit.
+These are provider-safe operational skills and are maintained in this kit. The user also approved thirteen task-triggered skills: accessibility, best-practices, commit, create-cli, frontend-design, performance, playwright-cli, summarize, github, update-changelog, design-taste-frontend, frontend-design-v2, and minimalist-ui. They are available on demand and are not mandatory context for every task.
 
 ### Reuse only when the live challenge requires it and BTC permits it
 

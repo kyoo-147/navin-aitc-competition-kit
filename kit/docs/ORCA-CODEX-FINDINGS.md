@@ -135,6 +135,6 @@ Preflight validates project hooks; a real canary proves execution by matching lo
 the rollout session ID.
 
 Codex user skills live under `<CODEX_HOME>/skills`; project skills live under `.agents/skills` (or
-`.codex/skills`). The kit installs only the three AITC operational skills globally by default. Do not bulk
+`.codex/skills`). The kit installs three AITC core skills and thirteen explicitly approved task-triggered skills globally. Do not bulk
 copy Pi skills into competition Codex because Pi-specific tools and external services may be unavailable
 or prohibited.

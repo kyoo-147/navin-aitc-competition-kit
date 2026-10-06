@@ -100,7 +100,13 @@ class HarnessTests(unittest.TestCase):
 
     def test_competition_skills_include_runtime_evidence(self):
         skill_root = ROOT / "kit/skills"
-        expected = {"aitc-captain", "aitc-worker", "aitc-reviewer"}
+        expected = {
+            "aitc-captain", "aitc-worker", "aitc-reviewer",
+            "accessibility", "best-practices", "commit", "create-cli",
+            "frontend-design", "performance", "playwright-cli", "summarize",
+            "github", "update-changelog", "taste-skill", "frontend-design-v2",
+            "minimalist-skill",
+        }
         self.assertEqual({path.name for path in skill_root.iterdir() if path.is_dir()}, expected)
         combined = "\n".join((path / "SKILL.md").read_text(encoding="utf-8") for path in skill_root.iterdir())
         self.assertIn("session_meta.model_provider", combined)

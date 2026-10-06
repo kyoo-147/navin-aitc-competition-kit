@@ -65,7 +65,7 @@ cd D:\path\to\navin-aitc-competition-kit\kit
   -RequireServerLog
 ```
 
-`bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs the three reviewed AITC skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
+`bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs three core AITC skills plus thirteen approved task-triggered skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
 
 ## Reusable variant clone
 

@@ -112,7 +112,7 @@ The Captain always applies these small, composable practices inspired by Matt Po
 - `code-review`: review both standards and spec, preferably read-only and after integration;
 - `retro`: convert repeated mistakes into a repository rule or deterministic check.
 
-These are procedures, not extra competition skills. The installed skill set remains Captain, Worker, and Reviewer.
+These are embedded procedures, not another orchestration framework. Captain, Worker, and Reviewer remain the three core roles; approved task skills are loaded only when their trigger matches.
 
 ## Autonomous execution mode
 

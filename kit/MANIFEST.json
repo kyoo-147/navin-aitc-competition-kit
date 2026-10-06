@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-06T00:43:21.8038388Z",
-    "file_count":  92,
+    "generated_at_utc":  "2026-10-06T02:00:11.9850052Z",
+    "file_count":  122,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -60,13 +60,13 @@
                   },
                   {
                       "path":  "docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
-                      "bytes":  4541,
-                      "sha256":  "3db76824eca573e3cc56fd8694f648c1681b2279877695d836a970885175c521"
+                      "bytes":  4867,
+                      "sha256":  "cc027a0bb5894d12f6e3ac856b97ab54b978a0262160d59e89eccc506bb80e48"
                   },
                   {
                       "path":  "docs/CODEX-SETTINGS-OPTIMIZATION.md",
-                      "bytes":  2720,
-                      "sha256":  "34402f3c94bfe9d220d48254a678642147a4211df614697991bf6703ae00e4b1"
+                      "bytes":  2829,
+                      "sha256":  "bccb3aba7ae78a9f893b2d07a53cd1a9095fe828e4114376eb410e3bf83e3caa"
                   },
                   {
                       "path":  "docs/ENGINEERING.md",
@@ -85,13 +85,13 @@
                   },
                   {
                       "path":  "docs/ORCA-CODEX-FINDINGS.md",
-                      "bytes":  6927,
-                      "sha256":  "dd1eee4c8f3d5c0e9b82eb2beeb6744d31278f61cb5338dd29048a95689ed48a"
+                      "bytes":  6955,
+                      "sha256":  "01b7e6a91034d0d5e2dab94d8c1bfc05fcce9bb1fc81fc1f144a3183fd83612d"
                   },
                   {
                       "path":  "docs/PI-SKILL-MIGRATION-MATRIX.md",
-                      "bytes":  4335,
-                      "sha256":  "35e57f99077e1020098d1e12f7b3e7bb63ab6c8f39e3b2262e973ba45b380e95"
+                      "bytes":  4392,
+                      "sha256":  "c579687eefbcd0ede728c855e9cca32d55d46cb8d34d3cacfa5f5ac255571452"
                   },
                   {
                       "path":  "docs/REVIEW-2026-10-05.md",
@@ -145,8 +145,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  5239,
-                      "sha256":  "fe6725858c66a6ff7b191f336c5ab7f2d724d8965436e39066beea41fd19f7f8"
+                      "bytes":  5276,
+                      "sha256":  "bd63104080ddba38dbc1bd52833f3995f8d6a92d8479d49bfe7ddf201b1fec68"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -399,14 +399,29 @@
                       "sha256":  "fb674112c89abb9da85501a9be6e9bea7eb9c237a8a0249760f6f48b2ed80b60"
                   },
                   {
+                      "path":  "skills/accessibility/references/A11Y-PATTERNS.md",
+                      "bytes":  6269,
+                      "sha256":  "712add5458f05515784d0dcaba98bb663556e7a89f60dc019cc7215a4f1c54aa"
+                  },
+                  {
+                      "path":  "skills/accessibility/references/WCAG.md",
+                      "bytes":  9270,
+                      "sha256":  "db49f1ba1d49444e8d265b82f9f6a540aaa39238ffc44ffa94386c4868350cfa"
+                  },
+                  {
+                      "path":  "skills/accessibility/SKILL.md",
+                      "bytes":  14822,
+                      "sha256":  "5f96552e41db945f7672deee9b9aa307eb5b72d950f29a52b87b07114ad95b11"
+                  },
+                  {
                       "path":  "skills/aitc-captain/agents/openai.yaml",
                       "bytes":  260,
                       "sha256":  "551435d5f2e029488b72cdab355137a3b2e2bd8e41b817a9840214ad99db0d7b"
                   },
                   {
                       "path":  "skills/aitc-captain/SKILL.md",
-                      "bytes":  6366,
-                      "sha256":  "824ee1e5aff4a0790da5729d313990b34576a822f0ab8ac5b159442295ffda0f"
+                      "bytes":  6443,
+                      "sha256":  "4923730a8122c99193076c955a1d06566cba8a185c9114660233e80aa11b66c8"
                   },
                   {
                       "path":  "skills/aitc-reviewer/agents/openai.yaml",
@@ -427,6 +442,141 @@
                       "path":  "skills/aitc-worker/SKILL.md",
                       "bytes":  2419,
                       "sha256":  "c7b3cb4cca9025fd57d8e1836f25a20181b0ce62594d970258a538c887990d64"
+                  },
+                  {
+                      "path":  "skills/best-practices/references/SECURITY.md",
+                      "bytes":  6900,
+                      "sha256":  "fde62d4b50e6dd3c0c6919f713f457f2397f5958db21003ff8c608ad185b0e85"
+                  },
+                  {
+                      "path":  "skills/best-practices/SKILL.md",
+                      "bytes":  13199,
+                      "sha256":  "32e323b87b8b7866a63d3e03466099676516e1ebf3b8ed5c88adc4acf0e91e09"
+                  },
+                  {
+                      "path":  "skills/commit/SKILL.md",
+                      "bytes":  1790,
+                      "sha256":  "d3bd1d4b4f5ca17034fa5c5cd9f85d600b1bd88bf0c59cadda97d01174de25d5"
+                  },
+                  {
+                      "path":  "skills/create-cli/references/cli-guidelines.md",
+                      "bytes":  9355,
+                      "sha256":  "589cce4923ff18d70e34f9681fdd3a11608ed3315146518fe675ba45e3b88949"
+                  },
+                  {
+                      "path":  "skills/create-cli/SKILL.md",
+                      "bytes":  3742,
+                      "sha256":  "ba40d5d6be5a620f54ab4be8209d3b55dea78d0cd0311ffbcbe521afac101ffb"
+                  },
+                  {
+                      "path":  "skills/frontend-design/LICENSE.txt",
+                      "bytes":  10351,
+                      "sha256":  "eb3d7b5485466acbd81f2b496f595ab637d2792e268206b27d99e793bdb67549"
+                  },
+                  {
+                      "path":  "skills/frontend-design/SKILL.md",
+                      "bytes":  8315,
+                      "sha256":  "35c43b9d10c2388dbb228047ad028c989a14033750812125f351c85aa42c7a4a"
+                  },
+                  {
+                      "path":  "skills/frontend-design-v2/SKILL.md",
+                      "bytes":  4692,
+                      "sha256":  "eaa1d1170ff6f9d4d42a43a567bde20791bbb30b25bb9a1dbedb49e56df6095e"
+                  },
+                  {
+                      "path":  "skills/github/SKILL.md",
+                      "bytes":  1160,
+                      "sha256":  "69187f2b1822e6d4830b24637b6a5daec8b2ad40813536a12834048c68ed5e09"
+                  },
+                  {
+                      "path":  "skills/minimalist-skill/SKILL.md",
+                      "bytes":  7986,
+                      "sha256":  "1a292d1459292649dc5b422e029093259b6127e7df2f37ad8c22033174333a57"
+                  },
+                  {
+                      "path":  "skills/performance/references/MEASUREMENT.md",
+                      "bytes":  7478,
+                      "sha256":  "8fe0611dbe5d58b9e4635857bab321ebd4678a506dc06e7b4071262217a4252b"
+                  },
+                  {
+                      "path":  "skills/performance/references/RUM.md",
+                      "bytes":  3200,
+                      "sha256":  "d47819820a97d2c7fc2d16ad87bdac9293f6c0c67776e446adf4bf7c1170c621"
+                  },
+                  {
+                      "path":  "skills/performance/SKILL.md",
+                      "bytes":  14210,
+                      "sha256":  "3abf4a1dbcb60143dcc351f85093bcf01420d274583ceeceaad8dcf6c6024de1"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/element-attributes.md",
+                      "bytes":  665,
+                      "sha256":  "bf19aa4671e0a50a0fefa9c790f39124e803060eefe395042b723c29fcb7faa2"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/playwright-tests.md",
+                      "bytes":  1690,
+                      "sha256":  "c5b0719fef2cfdff50bd744051b2f9afc119775db4b48e9b2882c1cf3886797c"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/request-mocking.md",
+                      "bytes":  2182,
+                      "sha256":  "54e801c9663fc2b6d68ceb058cb1c360724c2499f42acc7852a68e83e5b5f37c"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/running-code.md",
+                      "bytes":  5642,
+                      "sha256":  "d95c539a5990b71d02d8bdf1d9414df16191eb6cff95b0063820518b7a13dcb2"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/session-management.md",
+                      "bytes":  5671,
+                      "sha256":  "cd3e261b8763bf952f1e371b876cb78d054379afec85482f9250633e1b7e6c44"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/storage-state.md",
+                      "bytes":  5198,
+                      "sha256":  "9ac47f9ae4a1aedcd2077f8ac9ab1ba6bee1962cb83ff51adcd36fb6d83b5ec6"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/test-generation.md",
+                      "bytes":  16114,
+                      "sha256":  "12f54cfa718d9e559bad918120a4ca4f11c933167713d1b9c5f99872eddaf749"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/tracing.md",
+                      "bytes":  3456,
+                      "sha256":  "ef73e71bee792e341df9cd4f60529c929ade48b538ac76e033f4f20843e8dbda"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/references/video-recording.md",
+                      "bytes":  5387,
+                      "sha256":  "8555ab5400df0d90e66318aacc0a8a4418fbf872e7463824d55d5c41615abd83"
+                  },
+                  {
+                      "path":  "skills/playwright-cli/SKILL.md",
+                      "bytes":  12726,
+                      "sha256":  "1a609c93bff3eea9ab99fed93c0334c851fdc39fb6ac5335551bfb87c171d57c"
+                  },
+                  {
+                      "path":  "skills/summarize/SKILL.md",
+                      "bytes":  2157,
+                      "sha256":  "fe0d01c1e77e07b864ad9c1d3723e330056fc88810bd9b77f1b7aa4e440d0666"
+                  },
+                  {
+                      "path":  "skills/summarize/to-markdown.mjs",
+                      "bytes":  7430,
+                      "sha256":  "9380c3e2f95955b691c1250638b774485a9bc915a3004937e5fd5483a1ce2f22"
+                  },
+                  {
+                      "path":  "skills/taste-skill/SKILL.md",
+                      "bytes":  89234,
+                      "sha256":  "edce0fc55547ab8f93cf14db64603f1286b59378799befbca5b790233baa3145"
+                  },
+                  {
+                      "path":  "skills/update-changelog/SKILL.md",
+                      "bytes":  3339,
+                      "sha256":  "2fa42319ecee35ff3f40346e230ccde08a6528cc6bfa438e00027093c319a10e"
                   },
                   {
                       "path":  "templates/ACCEPTANCE_MATRIX.md",
