@@ -1,35 +1,21 @@
-# Portable Setup Flow
+# Luồng vận hành cuộc thi
 
-Status: LOCKED
-UX Flow Lavish: `../artifacts/ux-flow.html`
-Approval: user approved guided-safe mode and the light-theme setup board in Lavish.
+Status: LOCKED DERIVED VIEW
+Canonical authority: [`PROJECT_CONTRACT.json`](PROJECT_CONTRACT.json)
+Interactive Lavish: [`../artifacts/ux-flow.html`](../artifacts/ux-flow.html)
 
-## Primary journey
+## Trước khi gọi mô hình
 
-```text
-clone private kit
-→ bootstrap plan
-→ explicit apply with backup
-→ human enters secrets
-→ read-only doctor
-→ clone official repository
-→ BTC preflight and provider/log proof
-```
+Captain xác nhận OFFICIAL hay DRILL, mở process tại gốc repo, kiểm tra origin, hooks, Gateway, budget, giới hạn song song live và route canary. Bất kỳ gate nào fail đều chặn model work.
 
-## Command states
+## Chốt sản phẩm
 
-- PLAN: show CREATE, UPDATE, PRESERVE and BLOCK without mutation.
-- APPLY: backup allowlisted files, stage, validate and atomically replace.
-- USER ACTION REQUIRED: authentication, secret entry or consequential approval.
-- READY: local doctor passed; this does not replace live BTC preflight.
+Spec Broker cấu trúc đề bài. Ba scout chỉ đọc điều tra yêu cầu, kỹ thuật và trải nghiệm. Captain trình bày Human Brief cùng đúng hai artifact Lavish local-only. Sau khi anh duyệt, Captain sinh hai JSON authority, năm Markdown views và `PROJECT_LOCK.json`, rồi tạo lock commit.
 
-## Browser interaction
+## Xây và tích hợp sớm
 
-- Static work uses fetch/curl.
-- Interactive evidence uses an isolated browser and stops afterward.
-- Personal Chrome requires explicit per-session permission.
-- One attach failure ends the attempt.
+FE và BE bắt đầu trong hai worktree riêng từ cùng lock/base commit. Mỗi lane test độc lập theo `app-contract.json`. Khoảng phút 40-50, Captain tích hợp một lát cắt thật. Nếu DTO, state, error shape, async flow, auth hoặc endpoint lệch, dừng mở rộng và sửa lát cắt trước. Khi canary pass, hai lane tiếp tục phần còn lại rồi Captain chạy full integration và E2E.
 
-## Responsive/readability decision
+## Rà soát và giao bài
 
-Lavish artifacts use a light theme, high-contrast text and architecture/flow boards composed of clearly labeled blocks.
+Reviewer khóa một fixed point rồi rà riêng Spec, Standards/Engineering và BTC Provenance. Sau deploy và runtime smoke, Captain push và xác minh remote SHA. Tiếp theo gửi AI Log, yêu cầu HTTP 202 và GET readback có `UserPromptSubmit` cùng `Stop` cho đúng session hiện tại. Chỉ sau đó mới được nộp bài và lưu biên nhận.

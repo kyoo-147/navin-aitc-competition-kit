@@ -7,6 +7,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $project = (Resolve-Path -LiteralPath $ProjectRoot -ErrorAction Stop).Path
+. (Join-Path (Split-Path $PSScriptRoot -Parent) 'scripts\lib\Aitc.Common.ps1')
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = (& git -C $project rev-parse --show-toplevel 2>$null)
 }
@@ -16,18 +17,21 @@ if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) { throw 'IMPLEMENTAT
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 
 $checks = @(
+    @{ Ok = [int]$lock.schema_version -ge 2; Message = 'lock schema is v2 or newer' },
     @{ Ok = $lock.status -eq 'LOCKED'; Message = 'project status is LOCKED' },
     @{ Ok = $lock.brief.confirmed -eq $true; Message = 'brief is CONFIRMED' },
     @{ Ok = $lock.architecture_lavish.status -eq 'LOCKED_BY_USER'; Message = 'Architecture Lavish is LOCKED_BY_USER' },
     @{ Ok = $lock.ux_flow_lavish.status -eq 'LOCKED_BY_USER'; Message = 'UX Flow Lavish is LOCKED_BY_USER' },
-    @{ Ok = $lock.contract.status -eq 'LOCKED'; Message = 'project contract is LOCKED' }
+    @{ Ok = $lock.contract.status -eq 'LOCKED'; Message = 'project contract is LOCKED' },
+    @{ Ok = $lock.canonical_contract.status -eq 'LOCKED'; Message = 'canonical JSON contract is LOCKED' },
+    @{ Ok = $lock.boundary_contract.status -eq 'LOCKED'; Message = 'application boundary contract is LOCKED' }
 )
 foreach ($check in $checks) {
     if (-not $check.Ok) { throw "IMPLEMENTATION BLOCKED: $($check.Message) failed." }
     Write-Host "[PASS] $($check.Message)"
 }
 
-foreach ($approval in @($lock.brief, $lock.architecture_lavish, $lock.ux_flow_lavish, $lock.contract)) {
+foreach ($approval in @($lock.brief, $lock.architecture_lavish, $lock.ux_flow_lavish, $lock.contract, $lock.canonical_contract, $lock.boundary_contract)) {
     if ([string]::IsNullOrWhiteSpace([string]$approval.approved_by) -or [string]::IsNullOrWhiteSpace([string]$approval.approved_at_utc)) {
         throw 'IMPLEMENTATION BLOCKED: approval identity or timestamp is missing.'
     }
@@ -36,7 +40,7 @@ Write-Host '[PASS] Human approval evidence is present'
 
 if ($lock.session_mode -eq 'OFFICIAL') {
     $remote = (& git -C $repo remote get-url origin 2>$null)
-    if ($LASTEXITCODE -ne 0 -or $remote -notmatch [regex]::Escape($ExpectedOfficialRepository)) {
+    if ($LASTEXITCODE -ne 0 -or -not (Test-AitcOfficialOrigin -Origin $remote)) {
         throw "IMPLEMENTATION BLOCKED: OFFICIAL mode requires origin $ExpectedOfficialRepository; found '$remote'."
     }
     $officialBoundary = [IO.Path]::GetFullPath((Join-Path $repo 'chung-khao')).TrimEnd('\')
@@ -50,6 +54,7 @@ if ($lock.session_mode -eq 'OFFICIAL') {
 }
 
 $requiredPaths = @(
+    'docs/PROJECT_CONTRACT.json', 'contracts/app-contract.json',
     'docs/PROJECT.md', 'docs/ARCHITECTURE.md', 'docs/UX_FLOW.md', 'docs/DECISIONS.md', 'docs/TASKS.md',
     [string]$lock.architecture_lavish.path, [string]$lock.ux_flow_lavish.path
 )
@@ -64,4 +69,10 @@ foreach ($relative in $requiredPaths | Select-Object -Unique) {
     Write-Host "[PASS] Locked hash verified: $relative"
 }
 
+& (Join-Path $PSScriptRoot 'contract-validate.ps1') -ProjectRoot $project -RequireLocked
+& (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $project
+if ([string]::IsNullOrWhiteSpace([string]$lock.base_commit)) { throw 'IMPLEMENTATION BLOCKED: lock base_commit is missing.' }
+& git -C $repo merge-base --is-ancestor ([string]$lock.base_commit) HEAD
+if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: lock base_commit is not an ancestor of current HEAD.' }
+Write-Host '[PASS] Lock base commit is in current history'
 Write-Host 'IMPLEMENTATION ALLOWED' -ForegroundColor Green

@@ -20,7 +20,9 @@ Run in order:
 ```text
 preflight.ps1
 budget.ps1
+concurrency-policy.ps1
 codex-canary.ps1
+route-compatibility.ps1
 session-preflight.ps1
 orca-preflight.ps1
 ```
@@ -43,8 +45,9 @@ preflight
 → poll terminal with nextCursor
 → verify rollout provider
 → inspect diff/tests/runtime independently
-→ wait until both writer lanes complete
-→ integrate the two verified commits
+→ integrate one real vertical slice around minute 40-50
+→ continue the two bounded lanes after the canary passes
+→ perform full integration of verified commits
 → rerun session/log gates
 → freeze and submit
 ```
@@ -82,11 +85,11 @@ Never accept worker prose alone. Check exact rollout `session_meta.model_provide
 
 ## Time gates
 
-Aim for a real vertical slice by minute 55. Around minute 90 freeze features, run independent review, fix only P0/P1 or scoring-critical P2, deploy/smoke, and preserve a known-good state.
+Aim for a real vertical slice by minute 40-50. If it fails, freeze new scope until the same slice passes. Around minute 90 freeze features, run independent review, fix only P0/P1 or scoring-critical P2, deploy/smoke, and preserve a known-good state.
 
 ## Final report
 
-Return only working behavior, missing/blocking items, spend band, provider/log/test/runtime evidence, Git SHA/status, submission receipt status, and the next required action.
+Run `final-gate.ps1` after push. Return only working behavior, missing/blocking items, spend band, provider/log/test/runtime evidence, Git SHA/status, same-session AI Log submit/readback status, submission receipt status, and the next required action. Never report `AI LOG VERIFIED` from Git push success.
 
 ## Always-on intake and brief
 
@@ -119,10 +122,12 @@ challenge / idea
 → Human Brief
 → Architecture Lavish + UX Flow Lavish
 → user feedback and HUMAN LOCK
-→ compile project source-of-truth files
+→ compile canonical PROJECT_CONTRACT.json + app-contract.json
+→ generate human-readable Markdown views
 → implementation gate
 → independent Backend and Frontend writers
-→ integration
+→ early real integration canary around minute 40-50
+→ parallel finish and full integration
 → real E2E
 → fixed-point review
 → delivery and short retro
@@ -134,7 +139,7 @@ Research, technical investigation, and UX investigation may run concurrently as 
 
 ### Mandatory Lavish decision loop
 
-Before creating each artifact, load the current `lavish-axi` CLI help, design guidance, and every matching playbook. Exactly two artifacts are required:
+Before creating each artifact, use the pinned preinstalled `lavish-axi` CLI. Never use `npx`, network installation, cloud sharing/publishing, remote assets, Tailwind CDN, Google Fonts, or remote JavaScript during AITC work. Exactly two local-only artifacts are required:
 
 1. `Architecture Lavish`: system overview, alternatives, recommendation, decision cards, stack, components, backend, database/schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, cost, and open decisions.
 2. `UX Flow Lavish`: interactive HTML wireframe with the complete screen map, primary journeys, navigation, button behavior, empty/loading/error/success states, responsive behavior, feature scope, and removable scope.
@@ -150,7 +155,7 @@ UX_FLOW_LAVISH = LOCKED_BY_USER
 PROJECT_CONTRACT = LOCKED
 ```
 
-After approval, compile the decisions into `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, `docs/TASKS.md`, and `docs/PROJECT_LOCK.json`. Run `scripts/implementation-gate.ps1`; only `IMPLEMENTATION ALLOWED` permits writer dispatch. Locked decisions cannot be changed by workers.
+After approval, compile the decisions into authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json`. Generate `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md` as human-readable views, then hash all contracts, views, and artifacts in `docs/PROJECT_LOCK.json`. Run `scripts/implementation-gate.ps1`; only `IMPLEMENTATION ALLOWED` permits writer dispatch. Locked decisions cannot be changed by workers.
 
 For non-trivial work, also use `templates/PRODUCT_SPEC.md` and make `Out of Scope` explicit. Keep the task graph small and contract-first; no workflow engine.
 
@@ -161,7 +166,7 @@ After Human Lock, create exactly two writer lanes when both surfaces exist:
 - Writer A: backend, database, API, AI/runtime, backend tests.
 - Writer B: frontend, screen states, interactions, responsive behavior, frontend tests.
 
-Each writer uses an isolated Orca worktree and implements independently against the frozen API/state contract. Frontend may use a contract adapter during its lane verification, but it must not claim real integration. Backend and frontend workers do not edit each other's paths and do not integrate incrementally. Only after both lanes return commits and pass lane checks does the Captain integrate, remove critical-path mocks, run real FE/BE E2E, and request fixed-point review.
+Each writer uses an isolated Orca worktree and implements independently against the frozen API/state contract. Frontend may use a contract adapter during lane verification, but it must not claim real integration. Backend and frontend workers do not edit each other's paths. Around minute 40-50, the Captain integrates the smallest real slice and records `evidence/integration-canary.json`; real UI, real endpoint, real response, and real AI/API when required must pass before either lane expands scope. Writers then finish their remaining bounded work, after which the Captain performs full integration, removes critical-path adapters/mocks, runs real FE/BE E2E, and requests fixed-point review.
 
 ## Embedded engineering loop
 

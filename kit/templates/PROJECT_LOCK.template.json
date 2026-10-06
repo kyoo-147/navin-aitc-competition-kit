@@ -1,29 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "session_mode": "OFFICIAL_OR_DRILL",
   "status": "DRAFT",
   "official_repository": "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research",
-  "brief": {
-    "confirmed": false,
-    "approved_by": "",
-    "approved_at_utc": ""
-  },
-  "architecture_lavish": {
-    "status": "DRAFT",
-    "path": "artifacts/architecture.html",
-    "approved_by": "",
-    "approved_at_utc": ""
-  },
-  "ux_flow_lavish": {
-    "status": "DRAFT",
-    "path": "artifacts/ux-flow.html",
-    "approved_by": "",
-    "approved_at_utc": ""
-  },
-  "contract": {
-    "status": "DRAFT",
-    "approved_by": "",
-    "approved_at_utc": ""
-  },
+  "brief": {"confirmed": false, "approved_by": "", "approved_at_utc": ""},
+  "architecture_lavish": {"status": "DRAFT", "path": "artifacts/architecture.html", "approved_by": "", "approved_at_utc": ""},
+  "ux_flow_lavish": {"status": "DRAFT", "path": "artifacts/ux-flow.html", "approved_by": "", "approved_at_utc": ""},
+  "contract": {"status": "DRAFT", "approved_by": "", "approved_at_utc": ""},
+  "canonical_contract": {"status": "DRAFT", "path": "docs/PROJECT_CONTRACT.json", "approved_by": "", "approved_at_utc": ""},
+  "boundary_contract": {"status": "DRAFT", "path": "contracts/app-contract.json", "approved_by": "", "approved_at_utc": ""},
+  "base_commit": "",
   "locked_files": []
 }

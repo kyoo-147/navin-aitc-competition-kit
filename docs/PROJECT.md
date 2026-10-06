@@ -1,31 +1,23 @@
 # Portable Competition Kit
 
-Status: LOCKED
+Status: LOCKED DERIVED VIEW
+Canonical authority: [`PROJECT_CONTRACT.json`](PROJECT_CONTRACT.json)
+Boundary authority: [`../contracts/app-contract.json`](../contracts/app-contract.json)
 
-## Goal and users
+## Goal
 
-- Goal: reproduce the reviewed NAVIN AITC Codex/Orca environment safely on another Windows machine from one private repository.
-- Primary users: NAVIN AITC leader and authorized teammates.
-- Smallest complete outcome: clone, plan, apply, enter secrets manually, run doctor, then preflight the official repository.
+Cho phép leader và đồng đội clone một repo private, tái tạo an toàn cấu hình Codex/Orca trên Windows, rồi vận hành bài thi theo hợp đồng rõ ràng và bằng chứng fail-closed.
 
-## Must have
+## Phạm vi bắt buộc
 
-- Secret-free portable profiles, skills, wrappers, settings templates and version manifests.
-- Guided safe bootstrap with plan, allowlisted backup, validation and atomic writes.
-- Read-only doctor and explicit rollback.
-- Official repository boundary and browser isolation policy.
-- Machine-verifiable tests and checksums.
+Kit đóng gói profile, skills, wrappers, templates, manifests, bootstrap, doctor, rollback và competition gates nhưng không chứa secret hay private runtime state. Trong chế độ chính thức, process AI chạy tại gốc repo organizer, còn mọi file do đội tạo nằm dưới `chung-khao/**`.
 
-## Out of scope
+Sau khi anh duyệt đúng hai artifact Lavish, Captain khóa `docs/PROJECT_CONTRACT.json` và `contracts/app-contract.json`. Frontend và backend làm trong hai worktree riêng, gặp nhau bằng một lát cắt chạy thật khoảng phút 40-50, sau đó mới tiếp tục phần còn lại.
 
-- Copying raw user homes, auth, sessions, history, browser data, logs, SQLite state or caches.
-- Automatic secret entry, GitHub login, deployment or competition submission.
-- Overwriting organizer-owned root hooks.
+## Không thuộc phạm vi
 
-## Acceptance
+Không copy raw user homes, auth, sessions, lịch sử, browser data, logs, SQLite state hoặc caches. Không tự nhập secret, đổi provider, dùng remote Lavish asset, hoặc coi push thành công là AI Log đã xác minh.
 
-- Clean-home simulation installs expected files without secrets.
-- Existing user files are preserved or backed up before replacement.
-- Doctor reports PASS/BLOCKED/USER ACTION REQUIRED truthfully.
-- Browser auto-connect and browser SessionStart hooks remain disabled.
-- Full kit verification and tests pass.
+## Chấp nhận
+
+Doctor và preflight phải chặn sai repo root, thiếu origin hoặc thiếu hook. Route chỉ hợp lệ khi đúng model, endpoint, harness và tool-call smoke. Final gate chỉ pass sau deploy, push, AI Log HTTP 202 và BTC readback đúng phiên Codex hiện tại.

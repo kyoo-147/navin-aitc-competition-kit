@@ -11,7 +11,7 @@ This is a short-contest gate, not a style critique. Remain read-only unless expl
 
 Read the live challenge/acceptance matrix, integrated diff, repository rules, test/build/runtime evidence, rollout metadata, AI Log evidence, Git/worktree state, and deployment/submission evidence.
 
-First require `docs/PROJECT_LOCK.json` plus the five compiled source-of-truth documents. Verify that the Architecture and UX Lavish artifacts exist, record explicit human approval, and predate implementation. Fail Spec when implementation started before lock or a worker silently changed a locked decision. Verify frontend/backend lane commits and checks completed independently before integration began.
+First require authoritative `docs/PROJECT_CONTRACT.json`, `contracts/app-contract.json`, `docs/PROJECT_LOCK.json`, and the five derived Markdown views. Verify their locked hashes, that the two local-only Lavish artifacts record explicit human approval and predate implementation, and that the lock base commit is in current history. Fail Spec when implementation started before lock, contracts and views drift, or a worker silently changed a locked decision. Verify frontend/backend lanes started from the same lock/base point, produced the minute 40-50 real integration canary evidence, then completed their remaining lane checks before full integration.
 
 Pin a fixed point before reviewing: commit SHA, branch, tag, or verified merge base. Require it to resolve and require a non-empty `git diff <fixed-point>...HEAD`. Record the commit list. Review only that bounded change; do not report unrelated baseline issues unless they invalidate the changed flow.
 
@@ -29,12 +29,15 @@ Fail the gate when any required item is absent:
 
 - exact session rollout exists;
 - `session_meta.model_provider = thucchien`;
+- selected model + endpoint + harness has a current-session tool-call smoke;
 - local AI Log has `UserPromptSubmit` and `Stop` for that same session;
 - submit script returned `202`;
 - BTC readback contains the same session events;
 - no visible `Hook failed` remains unexplained;
 - Git branch/HEAD/status and worktree ownership are known;
 - final submission has a visible receipt when submission is claimed.
+
+Git push success proves only remote Git state. It never satisfies AI Log submit or readback evidence.
 
 A picker label, HTTP 200, worker message, or local log alone is insufficient.
 

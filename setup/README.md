@@ -21,7 +21,10 @@ For competition profile generation:
 ```powershell
 .\setup\bootstrap.ps1 -Profile Aitc -Model gpt-6-luna
 .\setup\bootstrap.ps1 -Profile Aitc -Model gpt-6-luna -Apply -ReplaceConfig
-.\setup\doctor.ps1 -Profile Aitc -OfficialRepo D:\path\to\aitc2026-team-918-navin-research
+$kit = (Get-Location).Path
+$official = 'D:\path\to\aitc2026-team-918-navin-research'
+Set-Location $official
+& "$kit\setup\doctor.ps1" -Profile Aitc -OfficialRepo $official
 ```
 
 `-ReplaceConfig` is intentionally explicit. Without it, an existing `config.toml` is preserved.
@@ -33,7 +36,7 @@ Optional CLI installation:
 .\setup\bootstrap.ps1 -Profile Normal -InstallTools -Apply
 ```
 
-This installs pinned/on-demand Lavish and Chrome DevTools AXI packages. It does not enable browser attachment or browser SessionStart hooks.
+This installs pinned/on-demand tools. AITC Lavish is exactly `lavish-axi@0.1.63` and must be installed before the round; competition runtime never uses `npx` or remote assets. Browser attachment and browser SessionStart hooks remain disabled.
 
 Rollback is plan-first:
 

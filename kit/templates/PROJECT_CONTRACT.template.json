@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "status": "DRAFT",
+  "session_mode": "OFFICIAL_OR_DRILL",
+  "challenge": {"name": "", "goal": "", "users": []},
+  "requirements": {"must_have": [], "should_have": [], "out_of_scope": [], "deliverables": [], "scoring": []},
+  "scope": {"official_repository": "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research", "official_write_boundary": "chung-khao/**", "process_cwd": "official repository root"},
+  "architecture": {"stack": [], "components": [], "data_model": {}, "external_services": [], "deployment": {}, "failure_paths": []},
+  "interfaces": {"boundary_contract": "contracts/app-contract.json"},
+  "screens": {"routes": [], "states": ["empty", "loading", "error", "success"]},
+  "decisions": [],
+  "acceptance": [],
+  "tasks": []
+}

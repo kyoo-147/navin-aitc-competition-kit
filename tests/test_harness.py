@@ -1,3 +1,4 @@
+import hashlib
 import json
 import subprocess
 import sys
@@ -132,7 +133,9 @@ class HarnessTests(unittest.TestCase):
         rules = (ROOT / "kit/RULES.md").read_text(encoding="utf-8")
         self.assertIn("Anh đang thi chính thức hay drill/chuẩn bị?", rules)
         self.assertIn("Exactly two user-reviewable Lavish artifacts", rules)
-        self.assertIn("integrates incrementally", rules)
+        self.assertIn("minute 40-50", rules)
+        self.assertIn("PROJECT_CONTRACT.json", rules)
+        self.assertIn("app-contract.json", rules)
         self.assertIn("Browser automation safety", rules)
         self.assertIn("A failed attach is a hard stop", rules)
         for relative in (
@@ -142,6 +145,7 @@ class HarnessTests(unittest.TestCase):
             "kit/templates/PROJECT.md", "kit/templates/ARCHITECTURE.md",
             "kit/templates/UX_FLOW.md", "kit/templates/DECISIONS.md",
             "kit/templates/TASKS.md", "kit/templates/PROJECT_LOCK.template.json",
+            "kit/templates/PROJECT_CONTRACT.template.json", "kit/templates/APP_CONTRACT.template.json",
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
 
@@ -172,6 +176,85 @@ class HarnessTests(unittest.TestCase):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
             self.assertTrue((ROOT / relative).is_dir(), relative)
 
+
+    def test_canonical_contract_graph_and_lock_have_no_drift(self):
+        contract = json.loads((ROOT / "docs/PROJECT_CONTRACT.json").read_text(encoding="utf-8"))
+        boundary = json.loads((ROOT / "contracts/app-contract.json").read_text(encoding="utf-8"))
+        lock = json.loads((ROOT / "docs/PROJECT_LOCK.json").read_text(encoding="utf-8"))
+        self.assertEqual(contract["status"], "LOCKED")
+        self.assertEqual(boundary["status"], "LOCKED")
+        self.assertGreaterEqual(lock["schema_version"], 2)
+        self.assertEqual(lock["canonical_contract"]["path"], "docs/PROJECT_CONTRACT.json")
+        self.assertEqual(lock["boundary_contract"]["path"], "contracts/app-contract.json")
+        entries = {entry["path"]: entry["sha256"] for entry in lock["locked_files"]}
+        required = {
+            "docs/PROJECT_CONTRACT.json", "contracts/app-contract.json",
+            "docs/PROJECT.md", "docs/ARCHITECTURE.md", "docs/UX_FLOW.md",
+            "docs/DECISIONS.md", "docs/TASKS.md",
+            "artifacts/architecture.html", "artifacts/ux-flow.html",
+        }
+        self.assertEqual(set(entries), required)
+        for relative, expected in entries.items():
+            actual = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+            self.assertEqual(actual, expected, f"stale lock or contract drift: {relative}")
+
+    def test_lavish_is_pinned_and_artifacts_are_local_only(self):
+        tools = json.loads((ROOT / "manifests/tools.json").read_text(encoding="utf-8"))
+        lavish = next(tool for tool in tools["recommended"] if tool["command"] == "lavish-axi")
+        self.assertEqual(lavish["exact"], "0.1.63")
+        self.assertIn("lavish-axi@0.1.63", tools["npm_global_packages"])
+        self.assertNotIn("lavish-axi@latest", tools["npm_global_packages"])
+        for relative in ("artifacts/architecture.html", "artifacts/ux-flow.html"):
+            text = (ROOT / relative).read_text(encoding="utf-8").lower()
+            for forbidden in ("http://", "https://", "cdn.tailwindcss", "fonts.googleapis", "ht-ml.app"):
+                self.assertNotIn(forbidden, text, relative)
+            self.assertNotRegex(text, r"<script[^>]+src\s*=")
+            self.assertNotRegex(text, r"<link[^>]+href\s*=")
+
+    def test_route_requires_model_endpoint_harness_tool_smoke(self):
+        registry = json.loads((ROOT / "kit/knowledge/verified-routes.json").read_text(encoding="utf-8"))
+        tuples = {(r["model"], r["endpoint"], r["harness"]) for r in registry["routes"]}
+        self.assertIn(("gpt-6-luna", "responses", "codex"), tuples)
+        self.assertIn(("gpt-5.6-luna", "responses", "codex"), tuples)
+        self.assertNotIn(("deepseek-flash", "responses", "codex"), tuples)
+        rejection = {(r["model"], r["endpoint"], r["harness"]) for r in registry["explicit_rejections"]}
+        self.assertIn(("deepseek-flash", "responses", "codex"), rejection)
+        script = (ROOT / "kit/scripts/route-compatibility.ps1").read_text(encoding="utf-8")
+        self.assertIn("tool_call_smoke", script)
+        self.assertIn("provider", script)
+
+    def test_early_canary_and_final_provenance_are_separate_gates(self):
+        canary = (ROOT / "kit/scripts/integration-canary.ps1").read_text(encoding="utf-8")
+        final_gate = (ROOT / "kit/scripts/final-gate.ps1").read_text(encoding="utf-8")
+        self.assertIn("INTEGRATION CANARY VERIFIED", canary)
+        self.assertIn("frontend_proof", canary)
+        self.assertIn("backend_endpoint", canary)
+        self.assertIn("merge-base --is-ancestor", final_gate)
+        self.assertIn("submit_log.py", final_gate)
+        self.assertIn("RequireServerLog", final_gate)
+        self.assertLess(final_gate.index("merge-base --is-ancestor"), final_gate.index("submit_log.py"))
+
+    def test_repo_root_origin_and_ai_hooks_are_fail_closed(self):
+        doctor = (ROOT / "setup/doctor.ps1").read_text(encoding="utf-8")
+        preflight = (ROOT / "kit/scripts/preflight.ps1").read_text(encoding="utf-8")
+        common = (ROOT / "kit/scripts/lib/Aitc.Common.ps1").read_text(encoding="utf-8")
+        for marker in ("rev-parse --show-toplevel", "remote get-url origin", "UserPromptSubmit", "PostToolUse", "Stop"):
+            self.assertIn(marker, doctor)
+        self.assertIn("must equal Git top-level", preflight)
+        self.assertIn("github\\.com", doctor)
+        self.assertIn("Test-AitcOfficialOrigin", common)
+        self.assertIn("github\\.com", common)
+
+    def test_model_turn_concurrency_uses_live_key_info(self):
+        policy = json.loads((ROOT / "config/competition/router-policy.json").read_text(encoding="utf-8"))
+        turns = policy["model_turn_concurrency"]
+        self.assertEqual(turns["source"], "live /key/info")
+        self.assertEqual(turns["drill_default"], 2)
+        self.assertEqual(turns["official_default"], 6)
+        self.assertTrue(turns["reserve_headroom"])
+        script = (ROOT / "kit/scripts/concurrency-policy.ps1").read_text(encoding="utf-8")
+        self.assertIn("Get-AitcKeyInfo", script)
+        self.assertIn("reserved_headroom", script)
 
 if __name__ == "__main__":
     unittest.main()

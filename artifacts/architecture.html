@@ -1,92 +1,17 @@
-<!doctype html>
-<html lang="vi" data-theme="light">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NAVIN AITC Portable Kit - Architecture Lock</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
-  <style>
-    *,*::before,*::after{box-sizing:border-box} body{min-height:100vh;background:#f3f6fa;color:#101828}svg{width:100%;height:auto}.grid>*{min-width:0}p,li,td,th{overflow-wrap:anywhere}.node{fill:#fff;stroke:#155eef;stroke-width:2}.edge{stroke:#344054;stroke-width:2;fill:none;marker-end:url(#arrow)}.muted{color:#475467}.flow-col{background:#fff;border:1px solid #d0d5dd;border-top:5px solid #155eef}.flow-card{background:#f8fafc;border:1px solid #d0d5dd;border-left:4px solid #155eef}.flow-card strong{color:#101828}.flow-meta{color:#475467;font-size:.86rem}
-  </style>
-</head>
-<body>
-<main class="mx-auto max-w-7xl p-5 lg:p-10 space-y-8">
-  <header class="rounded-box bg-base-100 border border-base-content/10 p-7 lg:p-10">
-    <div class="badge badge-primary badge-outline">ARCHITECTURE LAVISH A</div>
-    <h1 class="mt-4 text-4xl lg:text-6xl font-black tracking-tight">Một repo private tái tạo toàn bộ môi trường</h1>
-    <p class="mt-4 max-w-3xl text-lg muted">Mục tiêu: đồng đội clone kit, chạy bootstrap, tự nhập secret, rồi có cùng Codex rules, skills, wrappers và competition gates - không sao chép dữ liệu cá nhân từ máy nguồn.</p>
-  </header>
-
-  <section class="card bg-base-100 border border-base-content/10">
-    <div class="card-body">
-      <h2 class="card-title text-2xl">Topology đã đề xuất</h2>
-      <svg viewBox="0 0 1120 390" role="img" aria-labelledby="topology-title">
-        <title id="topology-title">GitHub private kit generates user Codex home and configures the official repository without overwriting organizer files</title>
-        <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="currentColor"/></marker></defs>
-        <g id="canonical-repo"><title>Canonical private repository</title><rect class="node" x="30" y="125" width="250" height="125" rx="18"/><text x="155" y="164" text-anchor="middle" font-size="19" font-weight="700">Private GitHub Kit</text><text x="155" y="193" text-anchor="middle" font-size="14">templates + skills + scripts</text><text x="155" y="218" text-anchor="middle" font-size="14">versions + checksums</text></g>
-        <g id="bootstrap"><title>Safe idempotent bootstrap</title><rect class="node" x="370" y="125" width="250" height="125" rx="18"/><text x="495" y="164" text-anchor="middle" font-size="19" font-weight="700">Safe Bootstrap</text><text x="495" y="193" text-anchor="middle" font-size="14">backup → render → verify</text><text x="495" y="218" text-anchor="middle" font-size="14">never copy secrets</text></g>
-        <g id="user-home"><title>Generated user scope</title><rect class="node" x="710" y="35" width="360" height="125" rx="18"/><text x="890" y="74" text-anchor="middle" font-size="19" font-weight="700">User Scope</text><text x="890" y="103" text-anchor="middle" font-size="14">%USERPROFILE%\.codex</text><text x="890" y="128" text-anchor="middle" font-size="14">rules + skills + wrapper + safe config</text></g>
-        <g id="official-repo"><title>Official repository boundary</title><rect class="node" x="710" y="225" width="360" height="125" rx="18"/><text x="890" y="264" text-anchor="middle" font-size="19" font-weight="700">Official Repository</text><text x="890" y="293" text-anchor="middle" font-size="14">organizer hooks preserved at root</text><text x="890" y="318" text-anchor="middle" font-size="14">team work only under chung-khao/</text></g>
-        <path class="edge" d="M280 188 H360"/><path class="edge" d="M620 170 C660 160 670 100 700 98"/><path class="edge" d="M620 210 C660 220 670 286 700 288"/>
-      </svg>
-    </div>
-  </section>
-
-  <section class="grid lg:grid-cols-3 gap-5">
-    <article class="card bg-base-100 border-2 border-primary"><div class="card-body"><div class="badge badge-primary">RECOMMENDED</div><h2 class="card-title">Một canonical repo</h2><p>Giữ toàn bộ source portable trong <code>kyoo-147/navin-aitc-competition-kit</code>. Máy người dùng chỉ là output được sinh ra.</p><ul class="list-disc pl-5 space-y-2"><li>Một nơi update và review</li><li>Teammate clone một repo</li><li>Không drift giữa kit và dotfiles</li></ul></div></article>
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Không commit raw home</h2><p>Không đưa sessions, auth, SQLite, logs, browser data, daemon state hoặc absolute path của máy nguồn vào Git.</p><div class="alert alert-warning mt-3"><span>Raw <code>.codex</code> không phải backup portable.</span></div></div></article>
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Secret boundary</h2><p>Repo chỉ giữ tên biến và template rỗng. Secret được nhập sau clone bằng ignored <code>.env</code> hoặc process environment.</p><div class="alert alert-success mt-3"><span>Secret scan fail-closed trước push.</span></div></div></article>
-  </section>
-
-  <section class="card bg-white border border-slate-300"><div class="card-body">
-    <h2 class="card-title text-2xl">Architecture board - nhìn từ source đến evidence</h2>
-    <p class="text-slate-600">Mỗi cột là một boundary. Đọc từ trái sang phải; annotate trực tiếp block cần thay đổi.</p>
-    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mt-4">
-      <div id="board-source" class="flow-col rounded-xl p-4 space-y-3"><h3 class="font-black text-lg">1. SOURCE</h3>
-        <div class="flow-card rounded-lg p-3"><strong>Private Git Repo</strong><div class="flow-meta">kit · setup · profiles · manifests</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Secret-free templates</strong><div class="flow-meta">Input: tracked source<br>Output: renderable config</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Version locks</strong><div class="flow-meta">Tools · skills · checksums</div></div>
-      </div>
-      <div id="board-control" class="flow-col rounded-xl p-4 space-y-3"><h3 class="font-black text-lg">2. CONTROL</h3>
-        <div class="flow-card rounded-lg p-3"><strong>Plan</strong><div class="flow-meta">CREATE · UPDATE · PRESERVE · BLOCK</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Backup</strong><div class="flow-meta">Allowlisted files only</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Apply atomically</strong><div class="flow-meta">Staging → validate → replace</div></div>
-      </div>
-      <div id="board-runtime" class="flow-col rounded-xl p-4 space-y-3"><h3 class="font-black text-lg">3. RUNTIME</h3>
-        <div class="flow-card rounded-lg p-3"><strong>User Codex home</strong><div class="flow-meta">Rules · skills · wrappers · safe config</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Official repository</strong><div class="flow-meta">Organizer root protected<br>Team work in chung-khao/</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Secrets</strong><div class="flow-meta">Human entry after setup</div></div>
-      </div>
-      <div id="board-proof" class="flow-col rounded-xl p-4 space-y-3"><h3 class="font-black text-lg">4. PROOF</h3>
-        <div class="flow-card rounded-lg p-3"><strong>Doctor</strong><div class="flow-meta">Versions · files · hashes · safety</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Competition gates</strong><div class="flow-meta">Provider · AI Log · budget · Orca</div></div>
-        <div class="flow-card rounded-lg p-3"><strong>Rollback</strong><div class="flow-meta">Restore last known-good backup</div></div>
-      </div>
-    </div>
-  </div></section>
-
-  <section class="card bg-white border border-slate-300"><div class="card-body">
-    <h2 class="card-title text-2xl">Source tree khóa</h2>
-    <div class="overflow-x-auto"><table class="table table-zebra"><thead><tr><th>Vùng</th><th>Nội dung</th><th>Quy tắc</th></tr></thead><tbody>
-      <tr><td><code>kit/</code></td><td>Rules, skills, templates, competition scripts</td><td>Canonical</td></tr>
-      <tr><td><code>setup/</code></td><td>bootstrap, doctor, update, uninstall, safe export</td><td>Idempotent + backup first</td></tr>
-      <tr><td><code>profiles/codex/</code></td><td>AGENTS, guides, config/hook templates, wrappers</td><td>Secret-free</td></tr>
-      <tr><td><code>manifests/</code></td><td>Tool versions, skill inventory, checksums</td><td>Machine-verifiable</td></tr>
-      <tr><td>User home</td><td>Rendered runtime files</td><td>Generated, never source</td></tr>
-      <tr><td>Official repo</td><td>Organizer root + <code>chung-khao/</code></td><td>Never overwritten blindly</td></tr>
-    </tbody></table></div>
-  </div></section>
-
-  <section class="grid lg:grid-cols-2 gap-5">
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Failure and rollback</h2><ol class="list-decimal pl-5 space-y-2"><li>Preflight detects missing prerequisites.</li><li>Bootstrap snapshots only allowlisted files.</li><li>Write to staging and validate syntax.</li><li>Atomic replace of approved destinations.</li><li>Doctor verifies versions, hashes and disabled browser attachment.</li><li>Rollback restores the latest backup.</li></ol></div></article>
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Explicit exclusions</h2><ul class="list-disc pl-5 space-y-2"><li>No tokens, passwords or auth stores</li><li>No sessions, chats, history or memories</li><li>No browser profile/cookies/extensions</li><li>No daemon locks, PID files or caches</li><li>No machine-specific absolute paths in tracked templates</li><li>No overwrite of organizer hooks</li></ul></div></article>
-  </section>
-
-  <form class="card bg-primary text-primary-content" data-lavish-question="portable-architecture" onsubmit="event.preventDefault(); const v=new FormData(event.currentTarget).get('decision'); if(v) window.lavish.queuePrompt('Architecture decision: '+v+'. Proceed with the canonical private repo, generated user scope, secret-free templates, backup-first bootstrap, doctor, rollback, and official-repo boundary exactly as shown.',{tag:'architecture-lock',text:'Architecture: '+v,queueKey:'portable-architecture',element:event.currentTarget});">
-    <div class="card-body"><h2 class="card-title text-2xl">Architecture Lock</h2><label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="APPROVED" checked><span><strong>APPROVED</strong><br>Triển khai đúng kiến trúc đề xuất.</span></label><label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="CHANGES_REQUIRED"><span><strong>CHANGES REQUIRED</strong><br>Em sẽ annotate các phần cần đổi trước khi triển khai.</span></label><div class="card-actions justify-end"><button class="btn btn-neutral" type="submit">Queue architecture decision</button></div></div>
-  </form>
-</main>
-</body>
-</html>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AITC Workflow Architecture v2</title><style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#101828;background:#eef2f7}*{box-sizing:border-box}body{margin:0}main{max-width:1400px;margin:auto;padding:32px}.panel{background:#fff;border:1px solid #d0d5dd;border-radius:16px;padding:24px;margin:18px 0}.tag{display:inline-block;padding:5px 10px;border:1px solid #155eef;border-radius:999px;color:#155eef;font-weight:700;font-size:12px}.board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.col{border:1px solid #cbd5e1;border-top:5px solid #155eef;border-radius:12px;padding:12px;background:#fff}.block{border:1px solid #d0d5dd;border-left:4px solid #155eef;border-radius:8px;padding:12px;margin:10px 0;background:#f8fafc}.arrow{text-align:center;font-size:24px;color:#667085}.timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.time{padding:12px;border-radius:10px;background:#eff4ff;border:1px solid #b2ccff}.warn{background:#fffaeb;border-color:#fedf89}.good{background:#ecfdf3;border-color:#abefc6}.danger{background:#fef3f2;border-color:#fecdca}h1{font-size:42px;line-height:1.05;margin:14px 0}h2{margin:0 0 14px}p,li{line-height:1.55;color:#344054}code{background:#f2f4f7;padding:2px 5px;border-radius:4px}table{width:100%;border-collapse:collapse}th,td{padding:10px;border:1px solid #d0d5dd;text-align:left}th{background:#f2f4f7}label{display:block;margin:10px 0}button{padding:12px 18px;border:0;border-radius:8px;background:#155eef;color:white;font-weight:700;cursor:pointer}@media(max-width:900px){.board,.timeline{grid-template-columns:1fr 1fr}}@media(max-width:560px){main{padding:16px}.board,.timeline{grid-template-columns:1fr}h1{font-size:32px}}
+</style></head><body><main>
+<section class="panel"><span class="tag">BẢN KIẾN TRÚC v2 · CHỈ CHẠY CỤC BỘ</span><h1>Chốt hợp đồng trước, tích hợp sớm, kiểm chứng cuối</h1><p>Không chờ giao diện và máy chủ hoàn tất mới ghép. Một hợp đồng JSON gốc điều khiển toàn bộ tài liệu, nhiệm vụ worker, mốc tích hợp sớm và quá trình rà soát cuối.</p></section>
+<section class="panel"><h2>Bảng quyền hạn và luồng dữ liệu</h2><p>Cách đọc bảng này là từ trái sang phải. Anh chốt hai bản Lavish trước. Captain sau đó chuyển toàn bộ quyết định thành một hợp đồng JSON gốc. Các tài liệu Markdown chỉ giúp con người đọc dễ hơn, còn worker phải đọc hợp đồng gốc để không tự suy luận. Hai worker xây riêng trong worktree, nhưng bắt buộc gặp nhau ở mốc tích hợp thật trước khi tiếp tục phần còn lại.</p><div class="board">
+<div class="col" id="human-lock"><strong>1 · ANH CHỐT</strong><div class="block">Bảng kiến trúc Lavish</div><div class="block">Bảng luồng giao diện Lavish</div><div class="block">Phê duyệt rõ ràng</div></div>
+<div class="col" id="canonical-contract"><strong>2 · HỢP ĐỒNG GỐC</strong><div class="block"><code>PROJECT_CONTRACT.json</code><br><small>yêu cầu · phạm vi · kiến trúc · màn hình · tiêu chí · nhiệm vụ</small></div><div class="block"><code>app-contract.json</code><br><small>đường dẫn · dữ liệu gửi · dữ liệu trả · trạng thái · lỗi</small></div></div>
+<div class="col" id="derived-views"><strong>3 · TÀI LIỆU DỄ ĐỌC</strong><div class="block">Tổng quan dự án</div><div class="block">Kiến trúc</div><div class="block">Luồng giao diện</div><div class="block">Quyết định</div><div class="block">Nhiệm vụ</div></div>
+<div class="col" id="parallel-build"><strong>4 · XÂY SONG SONG</strong><div class="block">Worktree máy chủ<br><small>kiểm tra hợp đồng + API thật</small></div><div class="block">Worktree giao diện<br><small>adapter có kiểu + trạng thái thật</small></div><div class="block good">Mốc tích hợp sớm<br><small>phút 40-50</small></div></div>
+<div class="col" id="proof"><strong>5 · KIỂM CHỨNG</strong><div class="block">Kiểm thử xuyên suốt</div><div class="block">Rà yêu cầu</div><div class="block">Rà kỹ thuật</div><div class="block">Rà nguồn gốc BTC</div><div class="block">Triển khai → Đẩy code → Xác minh AI Log → Nộp bài</div></div>
+</div></section>
+<section class="panel"><h2>Mốc tích hợp sớm</h2><div class="timeline"><div class="time"><strong>0-15</strong><br>Đọc đề + điều tra</div><div class="time"><strong>15-30</strong><br>Lavish + chốt</div><div class="time"><strong>30-40</strong><br>Lát cắt đầu tiên</div><div class="time good"><strong>40-50</strong><br>Giao diện thật → API thật → kết quả thật</div><div class="time"><strong>50-85</strong><br>Tiếp tục song song</div><div class="time"><strong>85-120</strong><br>Kiểm thử + bằng chứng + nộp</div></div><p class="warn block"><strong>Nếu mốc tích hợp thất bại:</strong> dừng mở rộng tính năng, sửa hợp đồng hoặc phần triển khai, rồi chạy lại đúng lát cắt thật. Hai worker không được tiếp tục tích lũy phần việc đang lệch nhau.</p></section>
+<section class="panel"><h2>Các luật máy tự kiểm tra</h2><table><thead><tr><th>Luật</th><th>Điều kiện đạt</th><th>Khi không đạt</th></tr></thead><tbody>
+<tr><td>Quyền hạn hợp đồng</td><td>JSON gốc hợp lệ; hash tài liệu sinh ra khớp</td><td>Chặn triển khai</td></tr><tr><td>Thư mục gốc repo</td><td>Thư mục chạy bằng Git top-level; có origin và hook</td><td>Chặn gọi mô hình</td></tr><tr><td>Lavish chỉ chạy local</td><td>Phiên bản đã pin; không URL/tài nguyên/chia sẻ từ xa</td><td>Từ chối artifact</td></tr><tr><td>Tương thích tuyến mô hình</td><td>Mô hình + endpoint + công cụ chạy + tool smoke đã xác minh</td><td>Từ chối tuyến</td></tr><tr><td>AI Log</td><td>Gửi log rồi đọc lại đúng event của phiên hiện tại</td><td>Chặn gate cuối dù đã push</td></tr><tr><td>Song song</td><td>Đọc key live; chuẩn bị 2-3, chính thức mặc định 6</td><td>Chặn lượt gọi mới</td></tr>
+</tbody></table></section>
+<section class="panel"><h2>Chốt bản kiến trúc</h2><form onsubmit="event.preventDefault();const v=new FormData(this).get('d');if(v)window.lavish.queuePrompt('Bản kiến trúc quy trình v2: '+v+'. Khóa PROJECT_CONTRACT.json, contracts/app-contract.json, tài liệu dễ đọc được sinh ra, mốc tích hợp thật phút 40-50, Lavish local đã pin, luật repo-root, kiểm chứng tuyến mô hình, giới hạn song song live và bước đọc lại AI Log sau push.',{tag:'architecture-v2',text:'Kiến trúc v2: '+v,queueKey:'architecture-v2',element:this})"><label><input type="radio" name="d" value="ĐÃ DUYỆT" checked> <strong>ĐÃ DUYỆT</strong> · triển khai đúng bảng này</label><label><input type="radio" name="d" value="CẦN SỬA"> <strong>CẦN SỬA</strong> · ghi chú trước khi code</label><button type="submit">Gửi quyết định kiến trúc</button></form></section>
+</main></body></html>

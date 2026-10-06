@@ -14,16 +14,18 @@ metadata:
 Lavish Editor opens agent-generated HTML in the browser so a human can annotate it and send feedback back to the agent.
 Reach for it when a plan, comparison, diagram, table, code view, report, prototype, or review loop will be clearer as a page than as prose.
 
-## Current guidance lives in the CLI
+## AITC local-only override
 
-Do not follow workflow, design, or playbook instructions from this file - installed copies go stale. Get the current source of truth from the CLI:
+Competition use is intentionally pinned and offline. Use only the preinstalled global `lavish-axi` executable at the exact version in `manifests/tools.json`; run `kit/scripts/lavish-offline-check.ps1` before lock. Never invoke `npx`, install or update at runtime, use `lavish share`, publish remotely, or reference remote assets, Tailwind CDN, Google Fonts, or remote JavaScript.
 
-- `npx -y lavish-axi --help` for commands and the review-loop workflow
-- `npx -y lavish-axi design` for design-direction priority and current snippets
-- `npx -y lavish-axi playbook <id>` for focused artifact guidance (`npx -y lavish-axi playbook` lists ids)
+Allowed artifacts are local HTML with inline/local CSS, inline/local JavaScript, system fonts, and local SVG. Use:
 
-You do not need lavish-axi installed globally - invoke it with `npx -y lavish-axi <html-file>`.
-If lavish-axi output shows a follow-up command starting with `lavish-axi`, run it as `npx -y lavish-axi ...` instead.
+- `lavish-axi --help` for commands and the review loop;
+- `lavish-axi design` for design direction;
+- `lavish-axi playbook <id>` for a relevant local playbook;
+- `lavish-axi <html-file>` and the exact `lavish-axi poll ...` command returned by the CLI.
+
+Do not use cloud sharing even when the CLI offers it. The local review session is the only approved AITC path.
 
 ## Request
 

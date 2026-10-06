@@ -29,6 +29,13 @@ foreach ($recommended in @('orca','lavish-axi','chrome-devtools-axi','chrome-dev
     if ($null -eq $version) { Write-PortableStatus INFO "Optional command not found: $recommended" }
     else { Write-PortableStatus PASS "${recommended}: $version" }
 }
+$toolManifest = Get-Content -LiteralPath (Join-Path $repo 'manifests\tools.json') -Raw | ConvertFrom-Json
+$lavishSpec = @($toolManifest.recommended | Where-Object { $_.command -eq 'lavish-axi' }) | Select-Object -First 1
+$lavishVersion = Get-PortableCommandVersion 'lavish-axi'
+if ($Profile -eq 'Aitc' -and ($null -eq $lavishVersion -or [string]$lavishVersion -ne [string]$lavishSpec.exact)) {
+    Write-PortableStatus BLOCKED "AITC requires preinstalled lavish-axi $($lavishSpec.exact); found $lavishVersion"
+    $blocking++
+} elseif ($null -ne $lavishVersion) { Write-PortableStatus PASS "AITC Lavish pin: $lavishVersion" }
 
 $statePath = Get-PortableInstallStatePath $codex
 if (-not (Test-Path -LiteralPath $statePath -PathType Leaf)) {
@@ -100,10 +107,20 @@ if ($Profile -eq 'Aitc') {
 if (-not [string]::IsNullOrWhiteSpace($OfficialRepo)) {
     try {
         $official = (Resolve-Path -LiteralPath $OfficialRepo -ErrorAction Stop).Path
+        $gitTop = (& git -C $official rev-parse --show-toplevel 2>$null | Out-String).Trim()
+        if (-not $gitTop -or [IO.Path]::GetFullPath($gitTop).TrimEnd('\') -ne $official.TrimEnd('\')) { throw "Git top-level does not equal official workspace root: $gitTop" }
+        $current = [IO.Path]::GetFullPath((Get-Location).Path).TrimEnd('\')
+        if ($current -ne $official.TrimEnd('\')) { throw "Run AITC doctor from official repository root '$official'; current '$current'" }
         $remote = (& git -C $official remote get-url origin 2>$null)
-        if ($LASTEXITCODE -ne 0 -or $remote -notmatch 'ai-thuc-chien/aitc2026-team-918-navin-research') { throw "Wrong origin: $remote" }
+        $originOk = $remote -match '^(?:https://github\.com/|git@github\.com:|ssh://git@github\.com/)ai-thuc-chien/aitc2026-team-918-navin-research(?:\.git)?$'
+        if ($LASTEXITCODE -ne 0 -or -not $originOk) { throw "Wrong origin: $remote" }
         if (-not (Test-Path -LiteralPath (Join-Path $official 'chung-khao') -PathType Container)) { throw 'Missing chung-khao directory' }
-        if (-not (Test-Path -LiteralPath (Join-Path $official '.codex\hooks.json') -PathType Leaf)) { throw 'Missing organizer .codex/hooks.json' }
+        $hooksPath = Join-Path $official '.codex\hooks.json'
+        if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) { throw 'Missing organizer .codex/hooks.json' }
+        $hooks = Get-Content -LiteralPath $hooksPath -Raw | ConvertFrom-Json
+        foreach ($event in @('UserPromptSubmit','PostToolUse','Stop')) {
+            if ($null -eq $hooks.hooks.PSObject.Properties[$event]) { throw "Organizer AI hook missing $event" }
+        }
         Write-PortableStatus PASS "Official repository boundary verified: $official"
     } catch { Write-PortableStatus BLOCKED "Official repository check failed: $($_.Exception.Message)"; $blocking++ }
 }

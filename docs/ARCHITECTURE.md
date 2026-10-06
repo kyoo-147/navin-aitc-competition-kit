@@ -1,38 +1,25 @@
-# Portable Kit Architecture
+# Kiến trúc Competition Kit
 
-Status: LOCKED
-Architecture Lavish: `../artifacts/architecture.html`
-Approval: user approved the light-theme architecture board in Lavish.
+Status: LOCKED DERIVED VIEW
+Canonical authority: [`PROJECT_CONTRACT.json`](PROJECT_CONTRACT.json)
+Architecture Lavish: [`../artifacts/architecture.html`](../artifacts/architecture.html)
 
-## Boundaries
+## Quyền hạn
 
-1. Source: private Git repository owns kit, setup, profiles and manifests.
-2. Control: bootstrap plans, backs up allowlisted files, validates staging, then applies.
-3. Runtime: generated user Codex home plus a separately cloned official repository.
-4. Proof: doctor, competition gates, checksums and rollback.
+`docs/PROJECT_CONTRACT.json` là nguồn sự thật máy đọc cho yêu cầu, phạm vi, kiến trúc, quyết định, acceptance và tasks. `contracts/app-contract.json` là ranh giới FE/BE cho routes, requests, responses, states và errors. Năm Markdown là bản trình bày để con người đọc, không có quyền ghi đè hai JSON này.
 
-## Stack
+## Luồng xây dựng
 
-- PowerShell 5.1-compatible setup scripts for Windows.
-- JSON manifests and state files.
-- Git for source/version identity.
-- npm only when explicit tool installation is requested.
+Human Lock tạo một lock commit chứa hash của hai contract, năm Markdown và hai Lavish artifacts. Backend và frontend làm độc lập trong worktree, nhưng khoảng phút 40-50 phải chứng minh một lát cắt thật: giao diện thật gọi endpoint thật, dịch vụ hoặc AI thật xử lý khi cần, response thật quay về và giao diện render kết quả. Canary thất bại sẽ đóng băng phạm vi mới cho đến khi sửa xong.
 
-## State ownership
+## Runtime chính thức
 
-- Git owns templates, scripts, skill sources and version expectations.
-- User home owns generated runtime configuration and private state.
-- Official repo owns organizer hooks and all final-round work under `chung-khao/`.
-- Humans own all credentials and consequential actions.
+Codex process chạy tại gốc official repository để organizer AI Log hooks hoạt động. Quyền sửa của Captain và workers vẫn giới hạn trong `chung-khao/**`. `doctor.ps1` và `preflight.ps1` kiểm tra Git top-level, origin và đủ `UserPromptSubmit`, `PostToolUse`, `Stop` hooks.
 
-## Failure paths
+## Lavish
 
-- Missing prerequisite: BLOCKED without mutation.
-- Existing destination: PRESERVE in plan mode; backup before approved replacement.
-- Invalid staged output: BLOCKED before destination replacement.
-- Missing secret: USER ACTION REQUIRED, never fabricated.
-- Failed browser attach: hard stop, no retry or Chrome restart.
+AITC dùng `lavish-axi` 0.1.63 đã cài sẵn. Artifact chỉ có HTML, CSS/JS inline hoặc local, system font và local SVG. Cấm `npx`, share/publish cloud, remote asset, Tailwind CDN, Google Fonts và remote JavaScript.
 
-## Security
+## Routing và giao bài
 
-No auth stores, tokens, sessions, chats, logs, browser profiles, cookies, databases, PID files or caches enter the portable source.
+Route hợp lệ là một tuple đã kiểm chứng: model + endpoint + harness + tool-call smoke + rollout provider proof. Giới hạn lượt gọi đọc live từ `/key/info`; DRILL mặc định 2, OFFICIAL mặc định 6 và luôn chừa headroom. Deploy, push, AI Log submit, same-session readback và final submission là các gate độc lập.

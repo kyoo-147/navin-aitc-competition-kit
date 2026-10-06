@@ -1,6 +1,6 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-06T10:26:04.2210811Z",
+    "generated_at_utc":  "2026-10-06T12:49:49.7813476Z",
     "file_count":  21,
     "files":  [
                   {
@@ -10,8 +10,8 @@
                   },
                   {
                       "path":  "manifests/tools.json",
-                      "bytes":  1161,
-                      "sha256":  "3bf64aadc97a7af69cfb166ff66eac2549dc596d576c853e06b30fe88104daa0"
+                      "bytes":  1238,
+                      "sha256":  "a26871d29475765a849c6db5140b62d61ab95afce71d7bcc52c1d77732a1b978"
                   },
                   {
                       "path":  "profiles/codex/AGENTS.md",
@@ -65,8 +65,8 @@
                   },
                   {
                       "path":  "setup/doctor.ps1",
-                      "bytes":  6301,
-                      "sha256":  "c80d9988afbf58087ec397d0fb29f403509ed715291f771b165cb27c349a5f0d"
+                      "bytes":  7714,
+                      "sha256":  "839dac572c3416ce5e1366f85f330b96b66baf0bc6d6ffaa5323eee1a4afa2c8"
                   },
                   {
                       "path":  "setup/export-safe-profile.ps1",
@@ -80,8 +80,8 @@
                   },
                   {
                       "path":  "setup/README.md",
-                      "bytes":  1498,
-                      "sha256":  "13d0c224aefe5bf1840fb7acca11503dc48764d33fa4dfc60bc08a75e270fd65"
+                      "bytes":  1681,
+                      "sha256":  "d368c37d20be9126e909dd8c21ad7f0e0d06d9e98ec6ca989d52c4315a613a97"
                   },
                   {
                       "path":  "setup/rollback.ps1",

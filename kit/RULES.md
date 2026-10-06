@@ -33,7 +33,9 @@ PROJECT_CONTRACT = LOCKED
 - Architecture Lavish covers stack, components, backend, database, schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, alternatives, recommendation, and open decisions.
 - UX Lavish is an interactive HTML wireframe covering screen map, journeys, actions, navigation, empty/loading/error/success states, responsive behavior, necessary features, and removable scope.
 - The Captain must poll and incorporate user feedback. A generated HTML file without user review is not locked.
-- After approval, compile decisions into `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md`, plus `docs/PROJECT_LOCK.json`.
+- During AITC work, Lavish uses the preinstalled pinned `lavish-axi` executable only. Do not invoke `npx`, cloud share/publish, remote assets, Tailwind CDN, Google Fonts, or remote JavaScript. Artifacts use local HTML, inline/local CSS and JavaScript, system fonts, and local SVG only.
+- After approval, compile the authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json`. Generate `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md` as human-readable views. `docs/PROJECT_LOCK.json` hashes both contracts, all views, and both Lavish artifacts.
+- Workers resolve ambiguity from the canonical JSON contracts. Markdown never overrides the canonical or boundary contract.
 - Run `scripts/implementation-gate.ps1`. Only `IMPLEMENTATION ALLOWED` opens execution.
 - Locked decisions are immutable to workers. Changes require explicit user approval, updated artifacts/docs, a new lock timestamp, and notification to every affected lane.
 
@@ -59,7 +61,7 @@ PROJECT_CONTRACT = LOCKED
 - AI Log is fail-closed for model work.
 - Preserve required Codex events: `UserPromptSubmit`, `PostToolUse`, and `Stop`.
 - Do not hand-edit `.ai-log/`, synthesize events, remove required events, alter timestamps, or submit another team's logs.
-- A local file is not server proof. Require successful submission status `202` and confirm entries through the BTC readback API.
+- A local file or successful Git push is not server proof. The final sequence is push, submit AI Log, require status `202`, then confirm same-session entries through the BTC readback API.
 - Open the AI tool at official repository root because hooks can be skipped from a subdirectory.
 
 ## Routing and spend
@@ -74,9 +76,10 @@ PROJECT_CONTRACT = LOCKED
 
 - Start with the smallest working vertical slice.
 - Use deterministic software for deterministic work.
-- Lock the implementation contract before parallel frontend/backend work.
-- After lock, Writer A owns backend and Writer B owns frontend in separate Orca worktrees. They implement independently against the frozen API/state contract; neither edits the other lane or integrates incrementally.
-- The Captain integrates only after both lanes return commits and pass their lane-specific verification. Final mocks are removed and real FE/BE E2E is then proven on the integration branch.
+- Lock the canonical project contract and FE/BE boundary contract before parallel work.
+- After lock, Writer A owns backend and Writer B owns frontend in separate Orca worktrees. They implement independently against the frozen API/state contract and do not edit each other's paths.
+- Around minute 40-50, the Captain integrates one smallest real vertical slice: real UI to real backend endpoint to real AI/API when required to real response rendered by the UI. Failure freezes new scope until the same slice passes.
+- After the early canary, writers continue their remaining independent scopes. The Captain later performs full integration, removes critical-path adapters/mocks, and proves real FE/BE E2E.
 - Use one writer per checkout or isolated worktree.
 - Use one to three workers by default and only for independent scopes.
 - Keep humans responsible for consequential actions, review, merge, deployment, and submission.

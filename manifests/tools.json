@@ -10,12 +10,12 @@
   ],
   "recommended": [
     { "name": "Orca", "command": "orca", "minimum": "1.4.215", "installer": "manual" },
-    { "name": "Lavish", "command": "lavish-axi", "minimum": "0.1.0", "installer": "npm:lavish-axi" },
+    { "name": "Lavish", "command": "lavish-axi", "minimum": "0.1.63", "exact": "0.1.63", "installer": "npm:lavish-axi@0.1.63", "competition_runtime": "preinstalled-local-only" },
     { "name": "Chrome DevTools AXI", "command": "chrome-devtools-axi", "minimum": "0.1.39", "installer": "npm:chrome-devtools-axi" },
     { "name": "Chrome DevTools MCP", "command": "chrome-devtools-mcp", "minimum": "1.10.1", "installer": "npm:chrome-devtools-mcp" }
   ],
   "npm_global_packages": [
-    "lavish-axi@latest",
+    "lavish-axi@0.1.63",
     "chrome-devtools-axi@0.1.39",
     "chrome-devtools-mcp@1.10.1"
   ]

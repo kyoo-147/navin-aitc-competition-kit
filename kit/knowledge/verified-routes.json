@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "authority": "A current-session live smoke and rollout provider proof override this compatibility registry.",
+  "routes": [
+    {"model":"gpt-6-luna","endpoint":"responses","harness":"codex","documented_compatible":true,"tool_call_smoke_required":true},
+    {"model":"gpt-5.6-luna","endpoint":"responses","harness":"codex","documented_compatible":true,"tool_call_smoke_required":true},
+    {"model":"gpt-5.6-sol","endpoint":"responses","harness":"codex","documented_compatible":true,"tool_call_smoke_required":true},
+    {"model":"deepseek-flash","endpoint":"chat/completions","harness":"chat-worker","documented_compatible":true,"tool_call_smoke_required":true},
+    {"model":"deepseek-v4-pro","endpoint":"chat/completions","harness":"chat-worker","documented_compatible":true,"tool_call_smoke_required":true},
+    {"model":"gemini-3.1-flash-lite","endpoint":"chat/completions","harness":"chat-worker","documented_compatible":true,"tool_call_smoke_required":true}
+  ],
+  "explicit_rejections": [
+    {"model":"deepseek-flash","endpoint":"responses","harness":"codex","reason":"Catalog presence does not prove Codex Responses compatibility."},
+    {"model":"deepseek-v4-pro","endpoint":"responses","harness":"codex","reason":"This route requires a separately validated chat-completions harness."},
+    {"model":"gemini-3.1-flash-lite","endpoint":"responses","harness":"codex","reason":"This route requires a separately validated chat-completions harness."}
+  ]
+}

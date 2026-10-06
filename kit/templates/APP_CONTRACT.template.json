@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT",
+  "routes": [],
+  "requests": {},
+  "responses": {},
+  "states": {"empty": {}, "loading": {}, "error": {}, "success": {}},
+  "errors": {
+    "shape": {"code": "string", "message": "string", "details": "object|null", "retryable": "boolean"},
+    "required_codes": ["VALIDATION_ERROR", "UNAUTHORIZED", "NOT_FOUND", "UPSTREAM_ERROR", "INTERNAL_ERROR"]
+  }
+}

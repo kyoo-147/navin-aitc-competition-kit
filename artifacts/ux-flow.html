@@ -1,82 +1,20 @@
-<!doctype html>
-<html lang="vi" data-theme="light">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NAVIN AITC Portable Kit - Setup UX Flow Lock</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
-  <style>*,*::before,*::after{box-sizing:border-box}body{background:#f3f6fa;color:#101828}.grid>*{min-width:0}p,li,td,th{overflow-wrap:anywhere}.stepbox{border:1px solid #d0d5dd;background:#fff;border-top:5px solid #7f56d9}.arrow{font-size:1.6rem;color:#667085}.card{box-shadow:none}.opacity-70{color:#475467;opacity:1}</style>
-</head>
-<body>
-<main class="mx-auto max-w-7xl p-5 lg:p-10 space-y-8">
-  <header class="rounded-box bg-base-100 border border-base-content/10 p-7 lg:p-10">
-    <div class="badge badge-secondary badge-outline">UX FLOW LAVISH B</div>
-    <h1 class="mt-4 text-4xl lg:text-6xl font-black tracking-tight">Clone một lần. Cấu hình rõ ràng. Không chạm secret.</h1>
-    <p class="mt-4 max-w-3xl text-lg opacity-70">Đây là trải nghiệm setup dành cho teammate trên máy Windows mới. Mỗi bước phải cho biết điều gì đã làm, điều gì chưa làm và hành động nào chỉ con người được phép thực hiện.</p>
-  </header>
-
-  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
-    <h2 class="card-title text-2xl">Happy path - khoảng 5 bước</h2>
-    <ul class="steps steps-vertical lg:steps-horizontal w-full mt-5">
-      <li class="step step-primary">Clone private kit</li>
-      <li class="step step-primary">Bootstrap</li>
-      <li class="step step-primary">Nhập secrets</li>
-      <li class="step step-primary">Doctor</li>
-      <li class="step step-primary">Clone official repo</li>
-      <li class="step step-primary">BTC preflight</li>
-    </ul>
-  </div></section>
-
-  <section class="grid lg:grid-cols-3 gap-5">
-    <article class="card stepbox"><div class="card-body"><div class="badge">01</div><h2 class="card-title">Clone</h2><div class="mockup-code"><pre data-prefix="$"><code>git clone &lt;private-kit&gt;</code></pre></div><p class="opacity-70">Nếu GitHub auth thiếu, dừng và hướng dẫn login. Không bypass quyền repo.</p></div></article>
-    <article class="card stepbox"><div class="card-body"><div class="badge">02</div><h2 class="card-title">Bootstrap</h2><div class="mockup-code"><pre data-prefix=">"><code>.\setup\bootstrap.ps1</code></pre></div><p class="opacity-70">Hiện plan, backup destinations, cài tools/skills, render config và không hỏi secret.</p></div></article>
-    <article class="card stepbox"><div class="card-body"><div class="badge">03</div><h2 class="card-title">User action</h2><p>Chỉ người dùng nhập key vào ignored <code>.env</code> hoặc process environment.</p><div class="alert alert-warning"><span>Không paste key vào prompt, Git hay screenshot.</span></div></div></article>
-    <article class="card stepbox"><div class="card-body"><div class="badge">04</div><h2 class="card-title">Doctor</h2><div class="mockup-code"><pre data-prefix=">"><code>.\setup\doctor.ps1</code></pre></div><p class="opacity-70">PASS/BLOCKED cho versions, files, hashes, hooks, browser safety và secret placeholders.</p></div></article>
-    <article class="card stepbox"><div class="card-body"><div class="badge">05</div><h2 class="card-title">Official clone</h2><p>Clone repo BTC riêng. Organizer files ở root; toàn bộ team output ở <code>chung-khao/</code>.</p></div></article>
-    <article class="card stepbox"><div class="card-body"><div class="badge">06</div><h2 class="card-title">Competition-ready gate</h2><p>Gateway → provider proof → AI Log local → submit 202 → readback → Orca preflight.</p><div class="badge badge-error badge-outline">Fail closed</div></div></article>
-  </section>
-
-  <section class="grid lg:grid-cols-2 gap-5">
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Bootstrap screen/output contract</h2><div class="overflow-x-auto"><table class="table table-zebra"><thead><tr><th>Phase</th><th>Output bắt buộc</th></tr></thead><tbody>
-      <tr><td>Inspect</td><td>OS, paths, existing config, versions</td></tr><tr><td>Plan</td><td>CREATE / UPDATE / PRESERVE / BLOCK</td></tr><tr><td>Backup</td><td>Timestamp + exact allowlisted files</td></tr><tr><td>Apply</td><td>Mỗi change có PASS/FAIL</td></tr><tr><td>Verify</td><td>Doctor summary + next user action</td></tr>
-    </tbody></table></div></div></article>
-    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Modes</h2><div class="join join-vertical w-full">
-      <div class="join-item border border-base-content/10 p-4"><strong>Install</strong><p class="opacity-70">Máy mới, tạo cấu hình portable từ template.</p></div>
-      <div class="join-item border border-base-content/10 p-4"><strong>Update</strong><p class="opacity-70">Nâng kit, diff trước khi thay, giữ secrets và local state.</p></div>
-      <div class="join-item border border-base-content/10 p-4"><strong>Doctor</strong><p class="opacity-70">Read-only, không sửa máy.</p></div>
-      <div class="join-item border border-base-content/10 p-4"><strong>Rollback</strong><p class="opacity-70">Khôi phục allowlisted config từ backup.</p></div>
-    </div></div></article>
-  </section>
-
-  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
-    <h2 class="card-title text-2xl">Failure states phải rõ</h2>
-    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mt-3">
-      <div class="alert alert-error"><span><strong>BLOCKED</strong><br>Prerequisite hoặc repo identity sai.</span></div>
-      <div class="alert alert-warning"><span><strong>USER ACTION REQUIRED</strong><br>Login, key hoặc approval.</span></div>
-      <div class="alert alert-info"><span><strong>PRESERVED</strong><br>Existing config không bị ghi đè.</span></div>
-      <div class="alert alert-success"><span><strong>READY</strong><br>Doctor và competition gates pass.</span></div>
-    </div>
-  </div></section>
-
-  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
-    <h2 class="card-title text-2xl">Browser behavior</h2>
-    <div class="grid lg:grid-cols-3 gap-4">
-      <div class="p-4 rounded-box bg-base-200"><strong>Mặc định</strong><p>Isolated browser, bounded flow, stop after evidence.</p></div>
-      <div class="p-4 rounded-box bg-base-200"><strong>Personal Chrome</strong><p>Không attach. Chỉ khi user cho phép đúng session.</p></div>
-      <div class="p-4 rounded-box bg-base-200"><strong>Attach failure</strong><p>Dừng ngay. Không retry hoặc restart Chrome.</p></div>
-    </div>
-  </div></section>
-
-  <form class="card bg-secondary text-secondary-content" data-lavish-question="portable-setup-flow" onsubmit="event.preventDefault(); const d=new FormData(event.currentTarget); const decision=d.get('decision'); const mode=d.get('defaultMode'); if(decision) window.lavish.queuePrompt('Setup UX decision: '+decision+'. Default bootstrap mode: '+mode+'. Implement the clone → bootstrap → user secret entry → doctor → official clone → BTC preflight flow and the shown failure states.',{tag:'ux-flow-lock',text:'Setup flow: '+decision+' / '+mode,queueKey:'portable-setup-flow',element:event.currentTarget});">
-    <div class="card-body"><h2 class="card-title text-2xl">UX Flow Lock</h2>
-      <fieldset class="fieldset"><legend class="fieldset-legend text-secondary-content">Default bootstrap experience</legend><label class="label justify-start gap-3"><input class="radio" type="radio" name="defaultMode" value="guided-safe" checked> Guided safe mode: show plan, backup, then apply</label><label class="label justify-start gap-3"><input class="radio" type="radio" name="defaultMode" value="noninteractive"> Non-interactive mode by default</label></fieldset>
-      <div class="divider"></div>
-      <label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="APPROVED" checked><span><strong>APPROVED</strong><br>Triển khai flow này.</span></label><label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="CHANGES_REQUIRED"><span><strong>CHANGES REQUIRED</strong><br>Em sẽ annotate phần cần đổi.</span></label>
-      <div class="card-actions justify-end"><button class="btn btn-neutral" type="submit">Queue UX flow decision</button></div>
-    </div>
-  </form>
-</main>
-</body>
-</html>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Luồng vận hành AITC v2</title><style>
+:root{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#101828;background:#eef2f7}*{box-sizing:border-box}body{margin:0}main{max-width:1320px;margin:auto;padding:32px}.panel{background:#fff;border:1px solid #d0d5dd;border-radius:16px;padding:24px;margin:18px 0}.tag{display:inline-block;padding:5px 10px;border:1px solid #7f56d9;border-radius:999px;color:#6941c6;font-weight:700;font-size:12px}h1{font-size:42px;line-height:1.05;margin:14px 0}h2{margin:0 0 14px}p,li{line-height:1.55;color:#344054}.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stage{border:1px solid #d0d5dd;border-top:5px solid #7f56d9;border-radius:12px;padding:14px;background:#fff}.stage p{font-size:14px}.item{padding:10px;margin:8px 0;border-radius:8px;background:#f9fafb;border:1px solid #e4e7ec}.gate{border-left:5px solid #12b76a;background:#ecfdf3}.fail{border-left:5px solid #f04438;background:#fef3f2}.human{border-left:5px solid #f79009;background:#fffaeb}.sequence{display:flex;align-items:stretch;gap:8px;overflow:auto}.step{min-width:145px;padding:12px;border:1px solid #d0d5dd;border-radius:10px;background:#f8fafc}.sep{align-self:center;color:#667085;font-size:22px}code{background:#f2f4f7;padding:2px 5px;border-radius:4px}label{display:block;margin:10px 0}button{padding:12px 18px;border:0;border-radius:8px;background:#6941c6;color:#fff;font-weight:700;cursor:pointer}@media(max-width:850px){.flow{grid-template-columns:1fr 1fr}}@media(max-width:560px){main{padding:16px}.flow{grid-template-columns:1fr}h1{font-size:32px}}
+</style></head><body><main>
+<section class="panel"><span class="tag">LUỒNG VẬN HÀNH v2 · HTML CỤC BỘ</span><h1>Từ lúc nhận đề đến lúc nộp bài, mỗi cổng kiểm tra đều rõ ràng</h1><p>Mỗi bước cho biết ai chịu trách nhiệm, bằng chứng cần có và khi nào phải dừng. Đẩy code, gửi AI Log, đọc lại AI Log và nộp bài là các việc riêng biệt; hoàn thành một việc không tự động chứng minh các việc còn lại.</p></section>
+<section class="panel"><h2>Bảng vận hành cuộc thi</h2><p>Bảng chia cuộc thi thành bốn giai đoạn. Giai đoạn sau chỉ được bắt đầu khi cổng xanh của giai đoạn trước đã có bằng chứng. Những ô vàng là quyết định hoặc hành động chỉ con người được quyền chốt.</p><div class="flow">
+<div class="stage"><strong>A · KIỂM TRA TRƯỚC</strong><p>Xác minh đúng repo, đúng provider và đúng giới hạn live trước khi tiêu tốn lượt gọi mô hình.</p><div class="item">Cấu hình thi chính thức</div><div class="item">Thư mục chạy = gốc repo chính thức</div><div class="item">Có origin và AI hooks</div><div class="item">Đọc live <code>/key/info</code></div><div class="item gate">Thử tuyến provider + công cụ chạy</div></div>
+<div class="stage"><strong>B · CHỐT CÁCH LÀM</strong><p>Captain biến đề bài thành cấu trúc rõ ràng, điều tra song song và đưa quyết định lớn ra để anh duyệt.</p><div class="item">Bộ biên dịch yêu cầu</div><div class="item">Yêu cầu || Kỹ thuật || Trải nghiệm</div><div class="item human">Captain brief với anh</div><div class="item human">Hai bảng Lavish local</div><div class="item gate">Anh chốt + tạo commit khóa</div></div>
+<div class="stage"><strong>C · XÂY SẢN PHẨM</strong><p>Giao diện và máy chủ làm độc lập theo cùng hợp đồng, gặp nhau sớm bằng một lát cắt chạy thật rồi mới tiếp tục.</p><div class="item">Hai worktree giao diện || máy chủ</div><div class="item">Dùng chung app-contract JSON</div><div class="item gate">Mốc tích hợp phút 40-50</div><div class="item">Tiếp tục phần còn lại song song</div><div class="item gate">Kiểm thử xuyên suốt thật</div></div>
+<div class="stage"><strong>D · GIAO BÀI</strong><p>Rà riêng yêu cầu, kỹ thuật và nguồn gốc BTC. Sau triển khai, từng bằng chứng push, log và nộp bài phải được kiểm tra độc lập.</p><div class="item">Rà soát ba trục</div><div class="item">Triển khai + kiểm tra nhanh</div><div class="item gate">Biên nhận đẩy Git</div><div class="item gate">Gửi AI Log + đọc lại</div><div class="item human">Biên nhận nộp bài cuối</div></div>
+</div></section>
+<section class="panel"><h2>Chuỗi giao bài cuối - tuyệt đối không gộp</h2><p>Đẩy Git thành công chỉ chứng minh code đã lên remote. Nó không chứng minh BTC đã nhận AI Log. Vì vậy Captain phải gửi log, nhận HTTP 202, rồi gọi API đọc lại và tìm đúng event của phiên Codex hiện tại trước khi báo sẵn sàng nộp.</p><div class="sequence"><div class="step">Triển khai<br><small>ứng dụng chạy thật</small></div><div class="sep">→</div><div class="step">Đẩy Git<br><small>SHA trên remote</small></div><div class="sep">→</div><div class="step">Gửi AI Log<br><small>HTTP 202</small></div><div class="sep">→</div><div class="step">Đọc lại log<br><small>đúng phiên hiện tại</small></div><div class="sep">→</div><div class="step">Nộp bài cuối<br><small>biên nhận nhìn thấy được</small></div></div><div class="item fail"><strong>Đẩy Git thành công nhưng AI Log thất bại = không đạt nguồn gốc.</strong> Không được báo sẵn sàng.</div></section>
+<section class="panel"><h2>Cách xử lý các lỗi khó</h2><p>Những lỗi này không được chữa bằng cách cho worker đoán hoặc thử lại vô hạn. Mỗi lỗi có một điều kiện dừng và một đường phục hồi xác định.</p><div class="flow">
+<div class="stage"><strong>Hợp đồng bị lệch</strong><div class="item fail">Hash hoặc schema khác nhau</div><div class="item">Dừng các lane bị ảnh hưởng</div><div class="item human">Anh duyệt thay đổi hợp đồng</div></div>
+<div class="stage"><strong>Mốc tích hợp thất bại</strong><div class="item fail">DTO, trạng thái hoặc lỗi không khớp</div><div class="item">Dừng thêm phạm vi mới</div><div class="item">Sửa đúng lát cắt thật</div></div>
+<div class="stage"><strong>Chạy sai thư mục</strong><div class="item fail">Git top-level khác thư mục process</div><div class="item">Dừng gọi mô hình</div><div class="item">Mở lại tại gốc repo</div></div>
+<div class="stage"><strong>Tuyến mô hình không khớp</strong><div class="item fail">Có model nhưng endpoint hoặc harness chưa xác minh</div><div class="item">Từ chối tuyến</div><div class="item">Chạy thử tool-call có giới hạn</div></div>
+</div></section>
+<section class="panel"><h2>Giới hạn làm việc song song</h2><p>Số lượt gọi mô hình và số worker viết code là hai giới hạn khác nhau. Dù key cho nhiều request, đội vẫn chỉ dùng tối đa hai writer để tránh xung đột source. Giới hạn lượt gọi phải lấy từ key live và luôn chừa khoảng an toàn.</p><div class="flow"><div class="stage"><strong>CHUẨN BỊ / KEY TEST</strong><div class="item">Mặc định 2 lượt gọi đang chạy</div><div class="item">Chỉ tăng 3 khi key live còn dư</div></div><div class="stage"><strong>THI CHÍNH THỨC</strong><div class="item">Mặc định 6 lượt gọi đang chạy</div><div class="item">Không dùng kín mức tối đa của key</div></div><div class="stage"><strong>NGUỒN SỰ THẬT LIVE</strong><div class="item"><code>/key/info</code></div><div class="item">RPM · song song · khoảng dự phòng</div></div><div class="stage"><strong>GIỚI HẠN SỬA CODE</strong><div class="item">2 writer</div><div class="item">1 reviewer chỉ đọc</div></div></div></section>
+<section class="panel"><h2>Chốt luồng vận hành</h2><form onsubmit="event.preventDefault();const v=new FormData(this).get('d');if(v)window.lavish.queuePrompt('Luồng vận hành cuộc thi v2: '+v+'. Triển khai kiểm tra repo-root, tách riêng push/gửi log/đọc lại/nộp bài, giới hạn song song live, thử tuyến mô hình, test lệch hợp đồng và mốc tích hợp phút 40-50 đúng như bảng.',{tag:'operations-v2',text:'Luồng vận hành v2: '+v,queueKey:'operations-v2',element:this})"><label><input type="radio" name="d" value="ĐÃ DUYỆT" checked> <strong>ĐÃ DUYỆT</strong> · khóa luồng này</label><label><input type="radio" name="d" value="CẦN SỬA"> <strong>CẦN SỬA</strong> · ghi chú trước</label><button type="submit">Gửi quyết định vận hành</button></form></section>
+</main></body></html>
