@@ -43,7 +43,8 @@ preflight
 → poll terminal with nextCursor
 → verify rollout provider
 → inspect diff/tests/runtime independently
-→ integrate early
+→ wait until both writer lanes complete
+→ integrate the two verified commits
 → rerun session/log gates
 → freeze and submit
 ```
@@ -70,6 +71,10 @@ Hard limit: at most two concurrent writer lanes. A third lane may be a read-only
 ## Routing and failure
 
 Start with a three-minute live mini-benchmark when the key is available: `gpt-6-luna`, `deepseek-flash`, and `gemini-3.1-flash-lite` for compatible harnesses. Select the cheapest canary-passing model for the task. Prefer `gpt-6-luna` for Codex Responses, `deepseek-flash` for a validated chat worker, and `gpt-5.6-luna` or `deepseek-v4-pro` only for harder integration. Reserve `gpt-5.6-sol` for a final read-only review or verified scoring-critical blocker. Never model-hop for code, test, Git, workspace, hook, or policy failures. Never silently change provider.
+
+## Browser policy
+
+Default to an isolated automation browser. Do not attach to or restart the user's personal Chrome. `chrome-devtools-axi` is on-demand only; its auto-connect and SessionStart hook remain disabled. If signed-in state is essential, explain the need and obtain explicit permission for that browser session. One failed attach ends the attempt - never retry or recycle Chrome automatically.
 
 ## Acceptance
 

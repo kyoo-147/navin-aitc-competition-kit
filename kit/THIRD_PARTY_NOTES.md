@@ -36,6 +36,16 @@ MIT License. The unmodified Lavish skill entrypoint is included at `skills/lavis
 
 The Lavish runtime is not vendored. Invoke it with `npx -y lavish-axi`, load current help/design/playbooks before authoring, and keep artifacts local unless the user explicitly authorizes sharing. The original license is included at `licenses/Kun-Chen-Lavish-MIT.txt`.
 
+## Kun Chen - `kunchenguid/chrome-devtools-axi`
+
+Upstream: https://github.com/kunchenguid/chrome-devtools-axi
+
+Reviewed revision: `06688b18adf5c0855fca6ed4efe2dbd0ad0e2ec6`
+
+MIT License. The generated discovery skill is included unchanged at `skills/chrome-devtools-axi/SKILL.md`; current usage guidance remains owned by the installed CLI. The competition kit permits this skill only on demand and defaults browser work to an isolated automation profile. Auto-connect and SessionStart hooks are intentionally disabled because installation does not authorize control of the user's personal Chrome.
+
+The runtime is installed separately and is not vendored into the kit. The original license is included at `licenses/Kun-Chen-Chrome-DevTools-AXI-MIT.txt`.
+
 ## NAVIN Research SS-WD - `kyoo-147/SS-WD`
 
 MIT License. Concepts adapted include:

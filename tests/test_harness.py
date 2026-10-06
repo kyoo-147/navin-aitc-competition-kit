@@ -105,7 +105,7 @@ class HarnessTests(unittest.TestCase):
             "accessibility", "best-practices", "commit", "create-cli",
             "frontend-design", "performance", "playwright-cli", "summarize",
             "github", "update-changelog", "taste-skill", "frontend-design-v2",
-            "minimalist-skill", "lavish",
+            "minimalist-skill", "lavish", "chrome-devtools-axi",
         }
         self.assertEqual({path.name for path in skill_root.iterdir() if path.is_dir()}, expected)
         combined = "\n".join((path / "SKILL.md").read_text(encoding="utf-8") for path in skill_root.iterdir())
@@ -133,6 +133,8 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("Anh đang thi chính thức hay drill/chuẩn bị?", rules)
         self.assertIn("Exactly two user-reviewable Lavish artifacts", rules)
         self.assertIn("integrates incrementally", rules)
+        self.assertIn("Browser automation safety", rules)
+        self.assertIn("A failed attach is a hard stop", rules)
         for relative in (
             "kit/templates/PRODUCT_SPEC.md", "kit/templates/GLOSSARY.md",
             "kit/templates/ADR.md", "kit/templates/VERTICAL_SLICE.md",

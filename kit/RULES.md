@@ -82,6 +82,15 @@ PROJECT_CONTRACT = LOCKED
 - Keep humans responsible for consequential actions, review, merge, deployment, and submission.
 - Do not add fake data, fake health, fake metrics, placeholder production paths, or silent fallback.
 
+## Browser automation safety
+
+- Browser work defaults to an isolated automation profile. The user's personal Chrome, signed-in profile, tabs, cookies, extensions, history, and saved data are out of scope.
+- `chrome-devtools-axi` may be installed as an on-demand skill, but auto-connect, browser URL attachment, and SessionStart hooks remain disabled.
+- Never attach to, restart, close, or relaunch the user's Chrome unless the leader explicitly authorizes that exact session after the Captain explains why isolated browsing is insufficient.
+- A failed attach is a hard stop. Do not retry, recreate the bridge, or restart Chrome automatically.
+- Official browser evidence must be produced from the official repository workflow, saved under `chung-khao/`, scrubbed of secrets/personal data, and labeled with the tested commit and command.
+- Stop isolated browser processes after verification. Do not leave background bridges or automation listeners running.
+
 ## Evidence
 
 - Inspect diffs, tests, runtime behavior, logs, deployment, and artifacts.

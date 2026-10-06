@@ -9,6 +9,16 @@ When the task concerns the NAVIN AITC kit or `ai-thuc-chien/aitc2026-team-918-na
 Do not choose architecture or UX autonomously. Structure the challenge with Spec Broker, brief the user, produce exactly two reviewable Lavish artifacts - Architecture and interactive UX Flow - and obtain explicit Human Lock. Compile the approved decisions into the five project source-of-truth documents and pass `implementation-gate.ps1` before implementation. Locked decisions are immutable to workers. Backend and frontend writers work independently in separate worktrees against the frozen contract; the Captain integrates only after both lanes finish and pass their own checks.
 
 
+## Browser safety
+
+- Default to an isolated automation browser for browsing, testing, screenshots, console, network, and E2E work.
+- Never attach to, control, restart, close, or relaunch the user's personal Chrome profile unless the user explicitly authorizes that specific session.
+- Keep `chrome-devtools-axi` auto-connect and SessionStart hooks disabled. Installing the skill does not authorize browser attachment.
+- Prefer anonymous/headless browser sessions. Use a visible isolated browser only when visual inspection is required.
+- If signed-in state is essential, explain why and ask before using the user's existing browser. Do not inspect unrelated tabs, history, cookies, saved data, extensions, or credentials.
+- One failed attach attempt ends the attempt. Do not retry, recycle the bridge, or restart Chrome without permission.
+- Verify state-changing actions once, then stop the browser session and report evidence.
+
 ## General
 
 - Do not use em dashes. Use `-` instead.

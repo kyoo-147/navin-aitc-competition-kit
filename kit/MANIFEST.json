@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-06T03:35:31.5251027Z",
-    "file_count":  139,
+    "generated_at_utc":  "2026-10-06T03:55:09.7521246Z",
+    "file_count":  142,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -45,8 +45,8 @@
                   },
                   {
                       "path":  "docs/codex/AGENTS.md",
-                      "bytes":  4844,
-                      "sha256":  "e3931e1fa1cba9b9012ab4ae52c0a85362c5c806b10b1027abee035490773744"
+                      "bytes":  5774,
+                      "sha256":  "9374b2ebf45f50cb87000d443dc0f7e377cb39ebb62f29624d4789952ed03096"
                   },
                   {
                       "path":  "docs/codex/BUILD_PLAYBOOK.md",
@@ -109,6 +109,11 @@
                       "sha256":  "bd4ab2f4c589a261965e247bb1f09a03ab8f3142f3f13bbe879376a63befef7d"
                   },
                   {
+                      "path":  "docs/WORKFLOW-MAP.md",
+                      "bytes":  3527,
+                      "sha256":  "9a7261eef8378d2c80390cfef41ddf4f457dd8c5f9025e6571a919347d06c71b"
+                  },
+                  {
                       "path":  "knowledge/model-registry.json",
                       "bytes":  8652,
                       "sha256":  "56109fda414c952b8eed203bbbd54cc1d4b33dd5b80861fd27d8087ced4e3d98"
@@ -127,6 +132,11 @@
                       "path":  "knowledge/tracking-schema.json",
                       "bytes":  1499,
                       "sha256":  "e294c96a5e430637e57d3f60938cbd1b22c00f3978e5da1bddedd79c1e76cd27"
+                  },
+                  {
+                      "path":  "licenses/Kun-Chen-Chrome-DevTools-AXI-MIT.txt",
+                      "bytes":  1086,
+                      "sha256":  "198147376fdc353ef89061bcdd34e38a2c901eb1830da7ed45bcd1d0fb399091"
                   },
                   {
                       "path":  "licenses/Kun-Chen-Lavish-MIT.txt",
@@ -155,8 +165,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  5868,
-                      "sha256":  "118fc3a67d811d0685e5baa33d03d359ffecc2e73a3ff32fd71fd33ed9f23b6f"
+                      "bytes":  5932,
+                      "sha256":  "35269977b0dddb2d351d339ed043c8662eb5652e457ddfa89f07506285bf979d"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -305,8 +315,8 @@
                   },
                   {
                       "path":  "RULES.md",
-                      "bytes":  5470,
-                      "sha256":  "ef4b1b00ed6a43d299dd699d012abad701d27f40fb0d434a0c8365e84b151ef0"
+                      "bytes":  6427,
+                      "sha256":  "e1bd4101c29506369bbbad45533273cc84d4ef3d94cd824f002e2da81219b0da"
                   },
                   {
                       "path":  "runbook/FAILURE_MATRIX.md",
@@ -415,8 +425,8 @@
                   },
                   {
                       "path":  "scripts/verify.ps1",
-                      "bytes":  6814,
-                      "sha256":  "9cf50ee084c4dcf571b9974d973a404f312be1af51f41e2a7fa00eff06490b7e"
+                      "bytes":  6926,
+                      "sha256":  "ac3dca2e663e994e154e30afde05bcac7be771fc9425ba75dc9c58ca3c551614"
                   },
                   {
                       "path":  "skills/accessibility/references/A11Y-PATTERNS.md",
@@ -440,8 +450,8 @@
                   },
                   {
                       "path":  "skills/aitc-captain/SKILL.md",
-                      "bytes":  10694,
-                      "sha256":  "e12d163b7048bb92f7c8f8f1262dee7a555cbc4c1cde9a758e86f717cdfc6319"
+                      "bytes":  11160,
+                      "sha256":  "0091f06aa846ecb23d3ea14366488dc533d80b74cb16dcc532e49b683505b563"
                   },
                   {
                       "path":  "skills/aitc-reviewer/agents/openai.yaml",
@@ -472,6 +482,11 @@
                       "path":  "skills/best-practices/SKILL.md",
                       "bytes":  13199,
                       "sha256":  "32e323b87b8b7866a63d3e03466099676516e1ebf3b8ed5c88adc4acf0e91e09"
+                  },
+                  {
+                      "path":  "skills/chrome-devtools-axi/SKILL.md",
+                      "bytes":  1644,
+                      "sha256":  "27e05b59f0d79c6fe0c46a0f9edf906fab7c882b2d391cc75d4cc08eb9e20411"
                   },
                   {
                       "path":  "skills/commit/SKILL.md",
@@ -695,8 +710,8 @@
                   },
                   {
                       "path":  "THIRD_PARTY_NOTES.md",
-                      "bytes":  2826,
-                      "sha256":  "14f3e0061391ed48caa85d47377c13f696a231c345157bddbaf829080a708b34"
+                      "bytes":  3580,
+                      "sha256":  "05317b41064b1a294b2e15cc3bd953e8b68d20fff62cafe411f7c677cce34e72"
                   }
               ]
 }
