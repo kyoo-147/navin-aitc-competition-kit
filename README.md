@@ -2,6 +2,24 @@
 
 Private preparation and reusable operating kit for team **AITC-918 - NAVIN Research**.
 
+## Clone and configure a teammate machine
+
+This private repository is the canonical portable source. Do not copy a raw user `.codex` directory.
+
+```powershell
+git clone https://github.com/kyoo-147/navin-aitc-competition-kit
+cd navin-aitc-competition-kit
+
+# Safe default: plan only, no target-home changes.
+.\setup\bootstrap.ps1 -Profile Normal
+
+# Apply only after reviewing CREATE / UPDATE / PRESERVE / BLOCK output.
+.\setup\bootstrap.ps1 -Profile Normal -Apply
+.\setup\doctor.ps1 -Profile Normal
+```
+
+For BTC competition mode, use `-Profile Aitc`, enter secrets yourself only after bootstrap, then run doctor with `-OfficialRepo`. Full setup, rollback and update commands are in [`setup/README.md`](setup/README.md). Security boundaries are in [`SECURITY.md`](SECURITY.md).
+
 This repository is separate from the organizer-owned team repository. It must never receive secrets or raw private AI logs.
 
 ## Canonical reusable kit
@@ -50,7 +68,9 @@ Live BTC instructions always override snapshots and internal runbooks.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File kit\scripts\update-manifest.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File setup\update-portable-manifest.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File kit\scripts\verify.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File setup\verify-portable.ps1
 python scripts\verify_harness.py
 python -m unittest discover -s tests -v
 git diff --check

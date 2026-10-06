@@ -1,0 +1,112 @@
+{
+    "schema_version":  1,
+    "generated_at_utc":  "2026-10-06T10:24:21.2008587Z",
+    "file_count":  21,
+    "files":  [
+                  {
+                      "path":  "manifests/skills.json",
+                      "bytes":  622,
+                      "sha256":  "8867ff1851d3337dfbd9553c69ca16764faf03a9ed64dd5b7379595462279e67"
+                  },
+                  {
+                      "path":  "manifests/tools.json",
+                      "bytes":  1161,
+                      "sha256":  "3bf64aadc97a7af69cfb166ff66eac2549dc596d576c853e06b30fe88104daa0"
+                  },
+                  {
+                      "path":  "profiles/codex/AGENTS.md",
+                      "bytes":  5774,
+                      "sha256":  "9374b2ebf45f50cb87000d443dc0f7e377cb39ebb62f29624d4789952ed03096"
+                  },
+                  {
+                      "path":  "profiles/codex/BUILD_PLAYBOOK.md",
+                      "bytes":  6935,
+                      "sha256":  "e09195f2d1a35a902d8e727289fab2ddb7bdaed59efd0d96e7e6faf821d7d28b"
+                  },
+                  {
+                      "path":  "profiles/codex/codex-orca.cmd",
+                      "bytes":  625,
+                      "sha256":  "fb54e78f0876f9018b40b8c83c310ffd3dae05f41676d72b11c075fcba8932ad"
+                  },
+                  {
+                      "path":  "profiles/codex/codex-runtime-refresh.ps1",
+                      "bytes":  4144,
+                      "sha256":  "5a0a03137d57b8978681e167160a50337e622d6dbc9308d8098d63b4797ba9a3"
+                  },
+                  {
+                      "path":  "profiles/codex/config.aitc.template.toml",
+                      "bytes":  365,
+                      "sha256":  "bc0113567fef6796069c802a4af5a7d24f7d56732dfb76d85f8003a479cedbce"
+                  },
+                  {
+                      "path":  "profiles/codex/config.normal.template.toml",
+                      "bytes":  87,
+                      "sha256":  "5747cd274bd40e2d87e61c5f043f8d918d35bcc3fd4fccf6cb7eb8b7f1c8045a"
+                  },
+                  {
+                      "path":  "profiles/codex/hooks.safe.template.json",
+                      "bytes":  18,
+                      "sha256":  "78922a784ee78e9e50587e93628cd3b9d4dfbe49087adc4514e6781cea38cbb9"
+                  },
+                  {
+                      "path":  "profiles/codex/README.md",
+                      "bytes":  686,
+                      "sha256":  "1b5e5dab2db194cbba443356974f574fb8276011f102ecfed3e03a58900cdd8d"
+                  },
+                  {
+                      "path":  "profiles/codex/TASTE_UI.md",
+                      "bytes":  3075,
+                      "sha256":  "0385909b3ad22bbec07cb99b75385abb1bed251653aa5d8af50ed097ef37055a"
+                  },
+                  {
+                      "path":  "setup/bootstrap.ps1",
+                      "bytes":  8804,
+                      "sha256":  "3aeefbdcb04b1a85b330242a4f0b58c6035e6815d340e7aa44d52d844513b4fd"
+                  },
+                  {
+                      "path":  "setup/doctor.ps1",
+                      "bytes":  6288,
+                      "sha256":  "fdf4b2b1c593c7e4584c8290e071211df349c3d9b5d883310ee5ac5ef0a6a95b"
+                  },
+                  {
+                      "path":  "setup/export-safe-profile.ps1",
+                      "bytes":  1050,
+                      "sha256":  "bb8bd409af13f58a068a7e5ba301175a9a201b4f1d1a3e9d8c3328e846527ab3"
+                  },
+                  {
+                      "path":  "setup/lib/Portable.Common.ps1",
+                      "bytes":  4203,
+                      "sha256":  "ef1fde0f7173bdc2763b4ef8f720a5ef212ea3cfb4a806ff90681489c7824182"
+                  },
+                  {
+                      "path":  "setup/README.md",
+                      "bytes":  1498,
+                      "sha256":  "13d0c224aefe5bf1840fb7acca11503dc48764d33fa4dfc60bc08a75e270fd65"
+                  },
+                  {
+                      "path":  "setup/rollback.ps1",
+                      "bytes":  2076,
+                      "sha256":  "ca7dd3a913cace506f2ddfd09a25798773115e9cdcfcf350bb2dc0ed32f9a3d9"
+                  },
+                  {
+                      "path":  "setup/uninstall.ps1",
+                      "bytes":  454,
+                      "sha256":  "8f1c13374f69f21cdc1940b40a044c48227a2c27018a4cfb8c16224bf5946320"
+                  },
+                  {
+                      "path":  "setup/update.ps1",
+                      "bytes":  1120,
+                      "sha256":  "1fdafbcf7f396e30c929f971c3feedd9952f0882fe1b65cd3caf0725161a5059"
+                  },
+                  {
+                      "path":  "setup/update-portable-manifest.ps1",
+                      "bytes":  1345,
+                      "sha256":  "f865572ec7b0539267f75d112b91f60b14c8f4790344bf2bbe74e7c01caef124"
+                  },
+                  {
+                      "path":  "setup/verify-portable.ps1",
+                      "bytes":  2768,
+                      "sha256":  "7d65c520e0085c65997bac0a3f8fa9cdeafeea0ffc62496ca217cab756d96fcf"
+                  }
+              ]
+}

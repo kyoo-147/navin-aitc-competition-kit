@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NAVIN AITC Portable Kit - Setup UX Flow Lock</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
+  <style>*,*::before,*::after{box-sizing:border-box}body{background:#f3f6fa;color:#101828}.grid>*{min-width:0}p,li,td,th{overflow-wrap:anywhere}.stepbox{border:1px solid #d0d5dd;background:#fff;border-top:5px solid #7f56d9}.arrow{font-size:1.6rem;color:#667085}.card{box-shadow:none}.opacity-70{color:#475467;opacity:1}</style>
+</head>
+<body>
+<main class="mx-auto max-w-7xl p-5 lg:p-10 space-y-8">
+  <header class="rounded-box bg-base-100 border border-base-content/10 p-7 lg:p-10">
+    <div class="badge badge-secondary badge-outline">UX FLOW LAVISH B</div>
+    <h1 class="mt-4 text-4xl lg:text-6xl font-black tracking-tight">Clone một lần. Cấu hình rõ ràng. Không chạm secret.</h1>
+    <p class="mt-4 max-w-3xl text-lg opacity-70">Đây là trải nghiệm setup dành cho teammate trên máy Windows mới. Mỗi bước phải cho biết điều gì đã làm, điều gì chưa làm và hành động nào chỉ con người được phép thực hiện.</p>
+  </header>
+
+  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
+    <h2 class="card-title text-2xl">Happy path - khoảng 5 bước</h2>
+    <ul class="steps steps-vertical lg:steps-horizontal w-full mt-5">
+      <li class="step step-primary">Clone private kit</li>
+      <li class="step step-primary">Bootstrap</li>
+      <li class="step step-primary">Nhập secrets</li>
+      <li class="step step-primary">Doctor</li>
+      <li class="step step-primary">Clone official repo</li>
+      <li class="step step-primary">BTC preflight</li>
+    </ul>
+  </div></section>
+
+  <section class="grid lg:grid-cols-3 gap-5">
+    <article class="card stepbox"><div class="card-body"><div class="badge">01</div><h2 class="card-title">Clone</h2><div class="mockup-code"><pre data-prefix="$"><code>git clone &lt;private-kit&gt;</code></pre></div><p class="opacity-70">Nếu GitHub auth thiếu, dừng và hướng dẫn login. Không bypass quyền repo.</p></div></article>
+    <article class="card stepbox"><div class="card-body"><div class="badge">02</div><h2 class="card-title">Bootstrap</h2><div class="mockup-code"><pre data-prefix=">"><code>.\setup\bootstrap.ps1</code></pre></div><p class="opacity-70">Hiện plan, backup destinations, cài tools/skills, render config và không hỏi secret.</p></div></article>
+    <article class="card stepbox"><div class="card-body"><div class="badge">03</div><h2 class="card-title">User action</h2><p>Chỉ người dùng nhập key vào ignored <code>.env</code> hoặc process environment.</p><div class="alert alert-warning"><span>Không paste key vào prompt, Git hay screenshot.</span></div></div></article>
+    <article class="card stepbox"><div class="card-body"><div class="badge">04</div><h2 class="card-title">Doctor</h2><div class="mockup-code"><pre data-prefix=">"><code>.\setup\doctor.ps1</code></pre></div><p class="opacity-70">PASS/BLOCKED cho versions, files, hashes, hooks, browser safety và secret placeholders.</p></div></article>
+    <article class="card stepbox"><div class="card-body"><div class="badge">05</div><h2 class="card-title">Official clone</h2><p>Clone repo BTC riêng. Organizer files ở root; toàn bộ team output ở <code>chung-khao/</code>.</p></div></article>
+    <article class="card stepbox"><div class="card-body"><div class="badge">06</div><h2 class="card-title">Competition-ready gate</h2><p>Gateway → provider proof → AI Log local → submit 202 → readback → Orca preflight.</p><div class="badge badge-error badge-outline">Fail closed</div></div></article>
+  </section>
+
+  <section class="grid lg:grid-cols-2 gap-5">
+    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Bootstrap screen/output contract</h2><div class="overflow-x-auto"><table class="table table-zebra"><thead><tr><th>Phase</th><th>Output bắt buộc</th></tr></thead><tbody>
+      <tr><td>Inspect</td><td>OS, paths, existing config, versions</td></tr><tr><td>Plan</td><td>CREATE / UPDATE / PRESERVE / BLOCK</td></tr><tr><td>Backup</td><td>Timestamp + exact allowlisted files</td></tr><tr><td>Apply</td><td>Mỗi change có PASS/FAIL</td></tr><tr><td>Verify</td><td>Doctor summary + next user action</td></tr>
+    </tbody></table></div></div></article>
+    <article class="card bg-base-100 border border-base-content/10"><div class="card-body"><h2 class="card-title">Modes</h2><div class="join join-vertical w-full">
+      <div class="join-item border border-base-content/10 p-4"><strong>Install</strong><p class="opacity-70">Máy mới, tạo cấu hình portable từ template.</p></div>
+      <div class="join-item border border-base-content/10 p-4"><strong>Update</strong><p class="opacity-70">Nâng kit, diff trước khi thay, giữ secrets và local state.</p></div>
+      <div class="join-item border border-base-content/10 p-4"><strong>Doctor</strong><p class="opacity-70">Read-only, không sửa máy.</p></div>
+      <div class="join-item border border-base-content/10 p-4"><strong>Rollback</strong><p class="opacity-70">Khôi phục allowlisted config từ backup.</p></div>
+    </div></div></article>
+  </section>
+
+  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
+    <h2 class="card-title text-2xl">Failure states phải rõ</h2>
+    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mt-3">
+      <div class="alert alert-error"><span><strong>BLOCKED</strong><br>Prerequisite hoặc repo identity sai.</span></div>
+      <div class="alert alert-warning"><span><strong>USER ACTION REQUIRED</strong><br>Login, key hoặc approval.</span></div>
+      <div class="alert alert-info"><span><strong>PRESERVED</strong><br>Existing config không bị ghi đè.</span></div>
+      <div class="alert alert-success"><span><strong>READY</strong><br>Doctor và competition gates pass.</span></div>
+    </div>
+  </div></section>
+
+  <section class="card bg-base-100 border border-base-content/10"><div class="card-body">
+    <h2 class="card-title text-2xl">Browser behavior</h2>
+    <div class="grid lg:grid-cols-3 gap-4">
+      <div class="p-4 rounded-box bg-base-200"><strong>Mặc định</strong><p>Isolated browser, bounded flow, stop after evidence.</p></div>
+      <div class="p-4 rounded-box bg-base-200"><strong>Personal Chrome</strong><p>Không attach. Chỉ khi user cho phép đúng session.</p></div>
+      <div class="p-4 rounded-box bg-base-200"><strong>Attach failure</strong><p>Dừng ngay. Không retry hoặc restart Chrome.</p></div>
+    </div>
+  </div></section>
+
+  <form class="card bg-secondary text-secondary-content" data-lavish-question="portable-setup-flow" onsubmit="event.preventDefault(); const d=new FormData(event.currentTarget); const decision=d.get('decision'); const mode=d.get('defaultMode'); if(decision) window.lavish.queuePrompt('Setup UX decision: '+decision+'. Default bootstrap mode: '+mode+'. Implement the clone → bootstrap → user secret entry → doctor → official clone → BTC preflight flow and the shown failure states.',{tag:'ux-flow-lock',text:'Setup flow: '+decision+' / '+mode,queueKey:'portable-setup-flow',element:event.currentTarget});">
+    <div class="card-body"><h2 class="card-title text-2xl">UX Flow Lock</h2>
+      <fieldset class="fieldset"><legend class="fieldset-legend text-secondary-content">Default bootstrap experience</legend><label class="label justify-start gap-3"><input class="radio" type="radio" name="defaultMode" value="guided-safe" checked> Guided safe mode: show plan, backup, then apply</label><label class="label justify-start gap-3"><input class="radio" type="radio" name="defaultMode" value="noninteractive"> Non-interactive mode by default</label></fieldset>
+      <div class="divider"></div>
+      <label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="APPROVED" checked><span><strong>APPROVED</strong><br>Triển khai flow này.</span></label><label class="flex gap-3 items-start"><input class="radio mt-1" type="radio" name="decision" value="CHANGES_REQUIRED"><span><strong>CHANGES REQUIRED</strong><br>Em sẽ annotate phần cần đổi.</span></label>
+      <div class="card-actions justify-end"><button class="btn btn-neutral" type="submit">Queue UX flow decision</button></div>
+    </div>
+  </form>
+</main>
+</body>
+</html>

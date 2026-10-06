@@ -145,6 +145,29 @@ class HarnessTests(unittest.TestCase):
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
 
+    def test_portable_setup_is_source_controlled_and_safe_by_default(self):
+        required = (
+            "setup/bootstrap.ps1", "setup/doctor.ps1", "setup/rollback.ps1",
+            "setup/update.ps1", "setup/uninstall.ps1",
+            "setup/export-safe-profile.ps1", "setup/verify-portable.ps1",
+            "setup/update-portable-manifest.ps1", "setup/README.md",
+            "profiles/codex/AGENTS.md", "profiles/codex/config.normal.template.toml",
+            "profiles/codex/config.aitc.template.toml", "manifests/tools.json",
+            "manifests/skills.json", "manifests/portable-files.json", "SECURITY.md",
+        )
+        for relative in required:
+            self.assertTrue((ROOT / relative).is_file(), relative)
+        bootstrap = (ROOT / "setup/bootstrap.ps1").read_text(encoding="utf-8")
+        self.assertIn("[switch]$Apply", bootstrap)
+        self.assertIn("PLAN ONLY", bootstrap)
+        self.assertIn("ReplaceConfig", bootstrap)
+        doctor = (ROOT / "setup/doctor.ps1").read_text(encoding="utf-8")
+        self.assertIn("Browser auto-attach environment is disabled", doctor)
+        self.assertIn("value not displayed", doctor)
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        self.assertIn("Never commit or export", security)
+        self.assertIn("One failed attachment attempt is a hard stop", security)
+
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
             self.assertTrue((ROOT / relative).is_dir(), relative)

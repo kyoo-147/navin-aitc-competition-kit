@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source": "kit/skills",
+  "destination": "%CODEX_HOME%/skills",
+  "install_mode": "copy",
+  "core": ["aitc-captain", "aitc-worker", "aitc-reviewer"],
+  "mandatory_review": ["lavish"],
+  "browser_on_demand": ["chrome-devtools-axi"],
+  "task_triggered": [
+    "accessibility", "best-practices", "commit", "create-cli", "frontend-design",
+    "frontend-design-v2", "github", "minimalist-skill", "performance",
+    "playwright-cli", "summarize", "taste-skill", "update-changelog"
+  ],
+  "browser_policy": {
+    "auto_connect": false,
+    "session_start_hook": false,
+    "default": "isolated"
+  }
+}

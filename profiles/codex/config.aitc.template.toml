@@ -1,0 +1,16 @@
+model = "__MODEL__"
+model_provider = "thucchien"
+__REASONING_LINE__
+model_catalog_json = "__MODEL_CATALOG_JSON__"
+forced_login_method = "api"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[model_providers.thucchien]
+name = "BTC"
+base_url = "https://api.thucchien.ai/v1"
+env_key = "THUCCHIEN_API_KEY"
+wire_api = "responses"
+
+[features]
+hooks = true
