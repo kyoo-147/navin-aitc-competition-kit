@@ -1,7 +1,7 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-05T14:36:34.8659771Z",
-    "file_count":  87,
+    "generated_at_utc":  "2026-10-06T00:43:21.8038388Z",
+    "file_count":  92,
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -10,8 +10,8 @@
                   },
                   {
                       "path":  "AGENTS.md",
-                      "bytes":  1770,
-                      "sha256":  "7324309b3dd14529fbfdfdef3fa72e88aa884f930cfa695e6970f3f33d7904ba"
+                      "bytes":  2059,
+                      "sha256":  "4952d132270f0698e343463c7c7ebed00f421bb5d226bc64a73a3d8bb9334922"
                   },
                   {
                       "path":  "CODEX-PROMPT-FLOW.md",
@@ -44,9 +44,29 @@
                       "sha256":  "477c1632f73eab45021b98353d5beaf5029294c6d75d6c65e7e001d2fd2a1b0e"
                   },
                   {
+                      "path":  "docs/codex/AGENTS.md",
+                      "bytes":  3877,
+                      "sha256":  "8463540bfbb36fb1767cd6b6dbf4950f1fccf63283d0677cd187296514a3b817"
+                  },
+                  {
+                      "path":  "docs/codex/BUILD_PLAYBOOK.md",
+                      "bytes":  6935,
+                      "sha256":  "e09195f2d1a35a902d8e727289fab2ddb7bdaed59efd0d96e7e6faf821d7d28b"
+                  },
+                  {
+                      "path":  "docs/codex/TASTE_UI.md",
+                      "bytes":  3075,
+                      "sha256":  "0385909b3ad22bbec07cb99b75385abb1bed251653aa5d8af50ed097ef37055a"
+                  },
+                  {
                       "path":  "docs/CODEX-SCOPES-AND-PI-MIGRATION.md",
                       "bytes":  4541,
                       "sha256":  "3db76824eca573e3cc56fd8694f648c1681b2279877695d836a970885175c521"
+                  },
+                  {
+                      "path":  "docs/CODEX-SETTINGS-OPTIMIZATION.md",
+                      "bytes":  2720,
+                      "sha256":  "34402f3c94bfe9d220d48254a678642147a4211df614697991bf6703ae00e4b1"
                   },
                   {
                       "path":  "docs/ENGINEERING.md",
@@ -67,6 +87,11 @@
                       "path":  "docs/ORCA-CODEX-FINDINGS.md",
                       "bytes":  6927,
                       "sha256":  "dd1eee4c8f3d5c0e9b82eb2beeb6744d31278f61cb5338dd29048a95689ed48a"
+                  },
+                  {
+                      "path":  "docs/PI-SKILL-MIGRATION-MATRIX.md",
+                      "bytes":  4335,
+                      "sha256":  "35e57f99077e1020098d1e12f7b3e7bb63ab6c8f39e3b2262e973ba45b380e95"
                   },
                   {
                       "path":  "docs/REVIEW-2026-10-05.md",
@@ -120,8 +145,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "bytes":  5136,
-                      "sha256":  "3d334bfacda5019557cab9e9fab138091d606e910582e0b4401dc74ed83ab1fd"
+                      "bytes":  5239,
+                      "sha256":  "fe6725858c66a6ff7b191f336c5ab7f2d724d8965436e39066beea41fd19f7f8"
                   },
                   {
                       "path":  "references/official-training/README.md",
@@ -370,8 +395,8 @@
                   },
                   {
                       "path":  "scripts/verify.ps1",
-                      "bytes":  4361,
-                      "sha256":  "37f0c79bdefe8f234ba1fc775815c5ad0926bced305f23155a3a0aa24d53ab45"
+                      "bytes":  4519,
+                      "sha256":  "fb674112c89abb9da85501a9be6e9bea7eb9c237a8a0249760f6f48b2ed80b60"
                   },
                   {
                       "path":  "skills/aitc-captain/agents/openai.yaml",

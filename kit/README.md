@@ -96,7 +96,7 @@ Do not run this against the official repository until the team has reviewed the 
 
 - `config/` - dated routing guidance and spend policy.
 - `CODEX-PROMPT-FLOW.md` - one-prompt Captain routing, model selection, spawn limits, and evidence contract.
-- `docs/` - team operating guides, official-repository boundary, and Codex/Pi scope policy.
+- `docs/` - team operating guides, official-repository boundary, Codex/Pi scope policy, copied Codex guides under `docs/codex/`, Pi skill migration matrix, and Codex settings optimization notes.
 - `runbook/` - timed and failure runbooks.
 - `scripts/` - bootstrap, conditional Codex runtime refresh, preflight/session proof, budget, Orca, sync, and verification.
 - `skills/` - captain, worker, and reviewer skills. Runtime and orchestration are Captain procedures, not separate skill sprawl.
