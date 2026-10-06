@@ -50,7 +50,6 @@ $lock = [ordered]@{
     contract = [ordered]@{ status = 'LOCKED'; approved_by = $ApprovedBy; approved_at_utc = $now }
     canonical_contract = [ordered]@{ status = 'LOCKED'; path = 'docs/PROJECT_CONTRACT.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
     boundary_contract = [ordered]@{ status = 'LOCKED'; path = 'contracts/app-contract.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
-    boundary_contract = [ordered]@{ status = 'LOCKED'; path = 'contracts/app-contract.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
     design = [ordered]@{ status = if ($projectContract.screens.design_lock_required -eq $true) { 'LOCKED' } else { 'SKIPPED' }; required = ($projectContract.screens.design_lock_required -eq $true); path = 'design/DESIGN_LOCK.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
     base_commit = $gitHead
     locked_files = @($lockedFiles)
