@@ -1,21 +1,17 @@
 :root {
-  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --border: 1px solid #d0d5dd;
-  --surface: #ffffff;
-  --canvas: #eef2f7;
-  --text: #101828;
-  --muted: #344054;
-  --action: #155eef;
-  --verified: #12b76a;
-  --human: #f79009;
-  --blocked: #f04438;
-  --motion-duration: 160ms;
+  --font-body: <human-selected-system-font-stack>;
+  --space-1: <value>;
+  --space-2: <value>;
+  --radius-sm: <value>;
+  --radius-md: <value>;
+  --border: <value>;
+  --surface: <value>;
+  --canvas: <value>;
+  --text: <value>;
+  --muted: <value>;
+  --action: <value>;
+  --success: <value>;
+  --warning: <value>;
+  --error: <value>;
+  --motion-duration: <value>;
 }

@@ -59,18 +59,18 @@ error states:
 
 | Lane | Paths owned | Must not edit | Acceptance command |
 |---|---|---|---|
-| Backend writer | | Frontend-owned paths | |
-| Frontend writer | | Backend-owned paths | |
+| Lane A: highest-value independent subsystem | | Lane B paths | |
+| Lane B: second independent subsystem | | Lane A paths | |
 | Captain integration | Integration-only paths | Locked decisions without user approval | |
 | Read-only reviewer | None | All source | |
 
 ## Merge order
 
-1. Backend writer completes, verifies, and returns a commit.
-2. Frontend writer completes, verifies, and returns a commit.
-3. Captain confirms both independent lane gates passed.
-4. Captain integrates both commits, removes critical-path mocks, and resolves only contract-conformant conflicts.
-5. Captain runs real FE/BE E2E and fixed-point review.
+1. Both lanes start from exact `LOCK_BASE_SHA` and deliver their canary contribution.
+2. Captain runs the minute 40-50 real integration canary.
+3. If it fails, freeze scope and repair the same slice; if it passes, lanes continue.
+4. Captain integrates verified commits and resolves only contract-conformant conflicts.
+5. Captain runs real end-to-end behavior and fixed-point review.
 
 ## Acceptance evidence
 

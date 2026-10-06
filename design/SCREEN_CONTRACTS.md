@@ -6,7 +6,7 @@ Status: LOCKED DERIVED VIEW
 
 Purpose: show authority order, contract graph, early integration canary and machine gates.
 
-Must contain: canonical contract, FE/BE boundary contract, minute 40-50 canary, repo-root/origin/AI Log rules, route tuple verification, final gates.
+Must contain: canonical contract, application boundary contract, minute 40-50 canary, repo-root/origin/AI Log rules, route tuple verification, final gates.
 
 Must not contain: secrets, remote assets, third-party design service, a third Lavish review surface.
 

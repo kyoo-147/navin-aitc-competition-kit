@@ -46,7 +46,7 @@ official repository root/
    │  ├─ TASKS.md
    │  └─ PROJECT_LOCK.json
    ├─ contracts/
-   │  └─ app-contract.json           # FE/BE routes, shapes, states, errors
+   │  └─ app-contract.json           # application routes, shapes, states, errors
    ├─ artifacts/
    │  ├─ architecture.html
    │  └─ ux-flow.html
@@ -61,10 +61,10 @@ The exact application folders are chosen by the user through Architecture Lavish
 
 ```text
 LOCK_BASE_SHA from the Human Lock commit
-├─ Orca worktree A / backend branch
-│  └─ backend + DB + API + AI/runtime + backend checks → commit A
-├─ Orca worktree B / frontend branch
-│  └─ screens + interactions + states + frontend checks → commit B
+├─ Orca worktree A / highest-value independent subsystem
+│  └─ architecture-selected ownership + checks → commit A
+├─ Orca worktree B / second independent subsystem
+│  └─ architecture-selected ownership + checks → commit B
 └─ optional read-only reviewer
 
 Captain verifies both worktrees are based exactly on LOCK_BASE_SHA
@@ -75,7 +75,7 @@ Captain verifies both worktrees are based exactly on LOCK_BASE_SHA
 → Captain performs full integration
 → resolve only contract-conformant conflicts
 → remove critical-path mocks/adapters
-→ real FE/BE E2E
+→ real full-product E2E
 → fixed-point Spec review
 → fixed-point Standards/Engineering review
 → fixed-point Competition Provenance review
@@ -83,7 +83,7 @@ Captain verifies both worktrees are based exactly on LOCK_BASE_SHA
 → commit/push/submit only when authorized
 ```
 
-Frontend and backend keep exclusive path ownership, but they must meet at the early integration canary. A frontend contract adapter is permitted only for lane testing and is not proof of that real canary.
+Lane A and Lane B keep exclusive path ownership, but they must meet at the early integration canary. A lane-local adapter is permitted only for isolated testing and is not proof of that real canary.
 
 ## 5. Browser workflow
 
@@ -112,7 +112,7 @@ The Captain reports:
 - Human Lock and unchanged project hashes;
 - writer branches, commits, ownership, and verification;
 - integrated SHA and clean status;
-- targeted tests, build, real runtime, and FE/BE E2E;
+- targeted tests, build, real runtime, and full-product E2E;
 - exact model + endpoint + harness + tool-call smoke and BTC provider evidence in official mode;
 - separate Git push, AI Log HTTP 202, and same-session BTC readback evidence;
 - spend state, deployment proof, and submission receipt where required;

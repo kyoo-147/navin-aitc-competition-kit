@@ -1,13 +1,16 @@
 # Components
 
-Status: LOCKED DERIVED VIEW
+Status: DRAFT | LOCKED
 
-- `DecisionPanel`: one decision, rationale, evidence, approve/change action.
-- `ContractBoard`: canonical authority flowing to derived views and lanes.
-- `EvidenceState`: explicit VERIFIED, UNVERIFIED, BLOCKED, USER ACTION REQUIRED.
-- `Timeline`: contest minute gates including early canary.
-- `StatusTable`: rule, pass condition, failure action.
-- `ApprovalForm`: human choice with a visible queued feedback receipt.
-- `ResultState`: clear success, error, retry and next action.
+Repeat only for components required by the locked screens.
 
-Frontend workers implement these names only when the challenge contract requires them; they do not add a parallel design language.
+## Component: <name>
+
+- Purpose: <purpose>
+- Used by: <screens>
+- Inputs/props: <contract>
+- Outputs/events: <contract>
+- States: <states>
+- Accessibility: <semantics and keyboard behavior>
+- Responsive behavior: <rules>
+- Must not: <scope boundary>

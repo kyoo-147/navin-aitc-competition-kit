@@ -1,6 +1,8 @@
 import hashlib
 import json
 import subprocess
+import tempfile
+import shutil
 import sys
 import unittest
 from pathlib import Path
@@ -9,6 +11,44 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class HarnessTests(unittest.TestCase):
+    def run_powershell(self, script, *args, cwd=None):
+        return subprocess.run(
+            ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(script), *map(str, args)],
+            cwd=cwd or ROOT, text=True, capture_output=True, check=False,
+        )
+
+    def make_gate_fixture(self, base, mode="DRILL", ui=True):
+        repo = Path(base) / "repo"
+        project = repo / ("chung-khao" if mode == "OFFICIAL" else ".")
+        project.mkdir(parents=True)
+        for relative in (
+            "docs/PROJECT.md", "docs/ARCHITECTURE.md", "docs/UX_FLOW.md", "docs/DECISIONS.md", "docs/TASKS.md",
+            "contracts/app-contract.json", "artifacts/architecture.html", "artifacts/ux-flow.html",
+        ):
+            target = project / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / relative, target)
+        contract = json.loads((ROOT / "docs/PROJECT_CONTRACT.json").read_text(encoding="utf-8"))
+        contract["scope"]["project_relative_root"] = "chung-khao" if mode == "OFFICIAL" else "."
+        contract["screens"]["kind"] = "UI" if ui else "CLI_ONLY"
+        contract["screens"]["design_lock_required"] = ui
+        if not ui:
+            contract["screens"].pop("design_contract", None)
+        contract_path = project / "docs/PROJECT_CONTRACT.json"
+        contract_path.write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8")
+        if ui:
+            for relative in ("DESIGN_BRIEF.md", "DESIGN_SYSTEM.md", "SCREEN_CONTRACTS.md", "COMPONENTS.md", "TOKENS.css", "DESIGN_LOCK.json"):
+                target = project / "design" / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(ROOT / "design" / relative, target)
+        subprocess.run(["git", "init", "-q", str(repo)], check=True)
+        subprocess.run(["git", "-C", str(repo), "config", "user.name", "Fixture"], check=True)
+        subprocess.run(["git", "-C", str(repo), "config", "user.email", "fixture@example.invalid"], check=True)
+        subprocess.run(["git", "-C", str(repo), "remote", "add", "origin", "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research.git"], check=True)
+        subprocess.run(["git", "-C", str(repo), "add", "."], check=True)
+        subprocess.run(["git", "-C", str(repo), "commit", "-qm", "fixture"], check=True)
+        return repo, project
+
     def test_verifier_passes(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "verify_harness.py")],
@@ -133,7 +173,7 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("three to five falsifiable hypotheses", worker)
         self.assertIn("git diff <fixed-point>...HEAD", reviewer)
         self.assertIn("Do not merge or rerank", reviewer)
-        self.assertIn("Architecture Lavish + UX / Design / Experience Lavish", loop)
+        self.assertIn("Architecture Lavish LOCK + UX / Design Lavish LOCK", loop)
         self.assertIn("implementation-gate.ps1", captain)
         self.assertIn("Locked decisions cannot be changed by workers", captain)
         rules = (ROOT / "kit/RULES.md").read_text(encoding="utf-8")
@@ -239,6 +279,110 @@ class HarnessTests(unittest.TestCase):
             "kit/templates/design/DESIGN_BRIEF.md", "kit/templates/design/DESIGN_LOCK.json",
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
+
+    def test_design_templates_are_product_neutral(self):
+        templates = "\n".join((ROOT / "kit/templates/design" / name).read_text(encoding="utf-8") for name in ("DESIGN_BRIEF.md","DESIGN_SYSTEM.md","SCREEN_CONTRACTS.md","COMPONENTS.md","DESIGN_LOCK.json"))
+        for forbidden in ("NAVIN AITC leader", "local-first competition kit", "Utility", "DecisionPanel", "ContractBoard", "Architecture Lavish"):
+            self.assertNotIn(forbidden, templates)
+
+    def test_multimodal_resource_contract_and_research_rules(self):
+        template = json.loads((ROOT / "kit/templates/PROJECT_CONTRACT.template.json").read_text(encoding="utf-8"))
+        self.assertIsNone(template["resources"]["api"]["request_cap"])
+        self.assertEqual(template["resources"]["generation_policy"], {"cache_by_prompt_hash": True, "duplicate_requests": False, "retry_limit": 1})
+        self.assertEqual(template["screens"], {"kind": None, "design_lock_required": None, "routes": [], "states": ["empty", "loading", "error", "success"]})
+        captain = (ROOT / "kit/skills/aitc-captain/SKILL.md").read_text(encoding="utf-8")
+        for marker in ("official, government, or reputable sources", "one full-stack web app", "structured text request", "normalizes and hashes the prompt", "mandatory video", "MUST HAVE, SHOULD HAVE, and OPTIONAL"):
+            self.assertIn(marker, captain)
+        self.assertTrue((ROOT / "kit/templates/IMAGE_GENERATION_CONTRACT.template.json").is_file())
+        self.assertTrue((ROOT / "kit/templates/STRUCTURED_GENERATION.schema.json").is_file())
+
+    def test_contract_requires_explicit_screen_kind_and_design_decision(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "contracts").mkdir()
+            shutil.copy2(ROOT / "contracts/app-contract.json", root / "contracts/app-contract.json")
+            base = json.loads((ROOT / "kit/templates/PROJECT_CONTRACT.template.json").read_text(encoding="utf-8"))
+            base["screens"]["kind"] = "CLI_ONLY"
+            base["screens"]["design_lock_required"] = False
+            contract_path = root / "docs/PROJECT_CONTRACT.json"
+            contract_path.write_text(json.dumps(base), encoding="utf-8")
+            ok = self.run_powershell(ROOT / "kit/scripts/contract-validate.ps1", "-ProjectRoot", root)
+            self.assertEqual(ok.returncode, 0, ok.stdout + ok.stderr)
+            for mutation in ("missing", "null"):
+                invalid = json.loads(json.dumps(base))
+                if mutation == "missing":
+                    invalid["screens"].pop("design_lock_required")
+                else:
+                    invalid["screens"]["design_lock_required"] = None
+                contract_path.write_text(json.dumps(invalid), encoding="utf-8")
+                failed = self.run_powershell(ROOT / "kit/scripts/contract-validate.ps1", "-ProjectRoot", root)
+                self.assertNotEqual(failed.returncode, 0, mutation)
+
+    def test_official_chung_khao_gate_and_conditional_design_lock(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, project = self.make_gate_fixture(tmp, mode="OFFICIAL", ui=True)
+            lock = self.run_powershell(ROOT / "kit/scripts/lock-project.ps1", "-ProjectRoot", project, "-RepositoryRoot", repo, "-SessionMode", "OFFICIAL", "-ApprovedBy", "fixture")
+            self.assertEqual(lock.returncode, 0, lock.stdout + lock.stderr)
+            self.assertIn("PROJECT_RELATIVE_ROOT=chung-khao", lock.stdout)
+            subprocess.run(["git", "-C", str(repo), "add", "chung-khao/docs/PROJECT_LOCK.json"], check=True)
+            subprocess.run(["git", "-C", str(repo), "commit", "-qm", "lock"], check=True)
+            gate = self.run_powershell(ROOT / "kit/scripts/implementation-gate.ps1", "-ProjectRoot", project, "-RepositoryRoot", repo)
+            self.assertEqual(gate.returncode, 0, gate.stdout + gate.stderr)
+            lock_path = project / "docs/PROJECT_LOCK.json"
+            payload = json.loads(lock_path.read_text(encoding="utf-8"))
+            payload["design"]["status"] = "SKIPPED"
+            lock_path.write_text(json.dumps(payload), encoding="utf-8")
+            blocked = self.run_powershell(ROOT / "kit/scripts/implementation-gate.ps1", "-ProjectRoot", project, "-RepositoryRoot", repo)
+            self.assertNotEqual(blocked.returncode, 0)
+            subprocess.run(["git", "-C", str(repo), "checkout", "--", "chung-khao/docs/PROJECT_LOCK.json"], check=True)
+            subprocess.run(["git", "-C", str(repo), "checkout", "-q", "--detach", payload["base_commit"]], check=True)
+            writer = self.run_powershell(ROOT / "kit/scripts/writer-preflight.ps1", "-RepositoryRoot", repo, "-WorktreePath", repo, "-LockBaseSha", payload["base_commit"], "-SessionMode", "OFFICIAL", "-ProjectRelativeRoot", "chung-khao")
+            self.assertEqual(writer.returncode, 0, writer.stdout + writer.stderr)
+
+    def test_cli_project_explicitly_skips_design_lock(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, project = self.make_gate_fixture(tmp, mode="DRILL", ui=False)
+            lock = self.run_powershell(ROOT / "kit/scripts/lock-project.ps1", "-ProjectRoot", project, "-RepositoryRoot", repo, "-SessionMode", "DRILL", "-ApprovedBy", "fixture")
+            self.assertEqual(lock.returncode, 0, lock.stdout + lock.stderr)
+            payload = json.loads((project / "docs/PROJECT_LOCK.json").read_text(encoding="utf-8"))
+            self.assertFalse(payload["design"]["required"])
+            self.assertEqual(payload["design"]["status"], "SKIPPED")
+            self.assertFalse(any(item["path"].startswith("design/") for item in payload["locked_files"]))
+
+    def test_aitc_shell_policy_filters_secret_environment_defaults(self):
+        for relative in ("profiles/codex/config.aitc.template.toml", "kit/config/codex-config.template.toml"):
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertIn("[shell_environment_policy]", text)
+            self.assertIn("ignore_default_excludes = false", text)
+
+    def test_sync_variant_blocks_official_mode(self):
+        result = self.run_powershell(ROOT / "kit/scripts/sync-variant.ps1", "-OfficialRepo", ROOT, "-SessionMode", "OFFICIAL")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("SYNC VARIANT BLOCKED", result.stdout + result.stderr)
+
+    def test_generation_cache_reuses_success_and_blocks_duplicate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "data").mkdir()
+            shutil.copy2(ROOT / "kit/templates/data/generation-manifest.json", root / "data/generation-manifest.json")
+            shutil.copy2(ROOT / "kit/templates/data/request-ledger.json", root / "data/request-ledger.json")
+            script = ROOT / "kit/scripts/generation-cache.ps1"
+            start = self.run_powershell(script, "-ProjectRoot", root, "-Operation", "RECORD", "-Prompt", "A calm hero", "-AssetId", "hero", "-Type", "image", "-Purpose", "hero", "-OutputPath", "public/generated/images/hero.webp", "-Status", "STARTED")
+            self.assertEqual(start.returncode, 0, start.stdout + start.stderr)
+            duplicate = self.run_powershell(script, "-ProjectRoot", root, "-Operation", "RECORD", "-Prompt", "A  calm hero", "-AssetId", "hero-duplicate", "-Type", "image", "-Purpose", "hero", "-Status", "STARTED")
+            self.assertNotEqual(duplicate.returncode, 0)
+            output = root / "public/generated/images/hero.webp"
+            output.parent.mkdir(parents=True)
+            output.write_bytes(b"fixture")
+            success = self.run_powershell(script, "-ProjectRoot", root, "-Operation", "RECORD", "-Prompt", "A calm hero", "-AssetId", "hero", "-Type", "image", "-Purpose", "hero", "-OutputPath", "public/generated/images/hero.webp", "-Status", "SUCCESS", "-ResultStatus", "200")
+            self.assertEqual(success.returncode, 0, success.stdout + success.stderr)
+            reuse = self.run_powershell(script, "-ProjectRoot", root, "-Operation", "CHECK", "-Prompt", "A calm hero")
+            self.assertEqual(reuse.returncode, 0, reuse.stdout + reuse.stderr)
+            self.assertIn("GENERATION REUSE", reuse.stdout)
+            ledger_text = (root / "data/request-ledger.json").read_text(encoding="utf-8").lower()
+            self.assertNotIn("authorization", ledger_text)
+            self.assertNotIn("api_key", ledger_text)
 
     def test_route_requires_model_endpoint_harness_tool_smoke(self):
         registry = json.loads((ROOT / "kit/knowledge/verified-routes.json").read_text(encoding="utf-8"))

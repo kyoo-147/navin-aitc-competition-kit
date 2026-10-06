@@ -3,11 +3,20 @@ param(
     [Parameter(Mandatory = $true)][string]$ProjectRoot,
     [Parameter(Mandatory = $true)][ValidateSet('OFFICIAL', 'DRILL')][string]$SessionMode,
     [Parameter(Mandatory = $true)][string]$ApprovedBy,
+    [string]$RepositoryRoot,
     [string]$OfficialRepository = 'https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research'
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'lib\Aitc.Common.ps1')
 $root = (Resolve-Path -LiteralPath $ProjectRoot -ErrorAction Stop).Path
+if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) { $RepositoryRoot = (& git -C $root rev-parse --show-toplevel 2>$null | Out-String).Trim() }
+$repo = (Resolve-Path -LiteralPath $RepositoryRoot -ErrorAction Stop).Path
+$projectRelativeRoot = Get-AitcProjectRelativeRoot -RepositoryRoot $repo -ProjectRoot $root -SessionMode $SessionMode
+if ($SessionMode -eq 'OFFICIAL') {
+    $origin = (& git -C $repo remote get-url origin 2>$null | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0 -or -not (Test-AitcOfficialOrigin -Origin $origin)) { throw "Cannot lock; official origin mismatch: '$origin'." }
+}
 $required = @(
     'docs/PROJECT_CONTRACT.json', 'contracts/app-contract.json',
     'docs/PROJECT.md', 'docs/ARCHITECTURE.md', 'docs/UX_FLOW.md',
@@ -18,18 +27,20 @@ $required = @(
 & (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $root
 $projectContract = Get-Content -LiteralPath (Join-Path $root 'docs\PROJECT_CONTRACT.json') -Raw | ConvertFrom-Json
 $appContract = Get-Content -LiteralPath (Join-Path $root 'contracts\app-contract.json') -Raw | ConvertFrom-Json
+if ([string]$projectContract.scope.project_relative_root -ne $projectRelativeRoot) { throw "Cannot lock; contract scope.project_relative_root must be '$projectRelativeRoot'." }
 if ($projectContract.screens.design_lock_required -eq $true) {
     $required += @('design/DESIGN_BRIEF.md','design/DESIGN_SYSTEM.md','design/SCREEN_CONTRACTS.md','design/COMPONENTS.md','design/TOKENS.css','design/DESIGN_LOCK.json')
 }
 if ([string]$projectContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid PROJECT_CONTRACT status.' }
 if ([string]$appContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid app-contract status.' }
-$gitHead = (& git -C $root rev-parse HEAD 2>$null | Out-String).Trim()
-if ([string]::IsNullOrWhiteSpace($gitHead)) { throw 'Cannot lock; project is not at a valid Git commit.' }
+$gitHead = (& git -C $repo rev-parse HEAD 2>$null | Out-String).Trim()
+if ([string]::IsNullOrWhiteSpace($gitHead)) { throw 'Cannot lock; repository is not at a valid Git commit.' }
 foreach ($relative in $required) {
-    & git -C $root ls-files --error-unmatch -- $relative 2>$null | Out-Null
-    if ($LASTEXITCODE -ne 0) { throw "Cannot lock; locked file is not tracked: $relative. Commit Human Lock files first." }
-    $status = (& git -C $root status --porcelain=v1 -- $relative | Out-String).Trim()
-    if ($status) { throw "Cannot lock; locked file is uncommitted or modified: $relative. Commit Human Lock before creating LOCK_BASE_SHA." }
+    $repositoryPath = ConvertTo-AitcRepositoryPath -ProjectRelativeRoot $projectRelativeRoot -ProjectPath $relative
+    & git -C $repo ls-files --error-unmatch -- $repositoryPath 2>$null | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Cannot lock; locked file is not tracked: $repositoryPath. Commit the Human Lock files first." }
+    $status = (& git -C $repo status --porcelain=v1 -- $repositoryPath | Out-String).Trim()
+    if ($status) { throw "Cannot lock; locked file is uncommitted or modified: $repositoryPath. Commit Human Lock before creating LOCK_BASE_SHA." }
 }
 Write-Host "[PASS] Human Lock files are tracked and clean at $gitHead"
 $lockedFiles = foreach ($relative in $required) {
@@ -44,6 +55,7 @@ $lock = [ordered]@{
     session_mode = $SessionMode
     status = 'LOCKED'
     official_repository = $OfficialRepository
+    project_relative_root = $projectRelativeRoot
     brief = [ordered]@{ confirmed = $true; approved_by = $ApprovedBy; approved_at_utc = $now }
     architecture_lavish = [ordered]@{ status = 'LOCKED_BY_USER'; path = 'artifacts/architecture.html'; approved_by = $ApprovedBy; approved_at_utc = $now }
     ux_flow_lavish = [ordered]@{ status = 'LOCKED_BY_USER'; path = 'artifacts/ux-flow.html'; approved_by = $ApprovedBy; approved_at_utc = $now }
@@ -58,4 +70,5 @@ $lockPath = Join-Path $root 'docs/PROJECT_LOCK.json'
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 [IO.File]::WriteAllText($lockPath, (($lock | ConvertTo-Json -Depth 8) + [Environment]::NewLine), $utf8)
 Write-Host "[PASS] Project contract locked at $lockPath"
+Write-Host "PROJECT_RELATIVE_ROOT=$projectRelativeRoot"
 Write-Host "LOCK_BASE_SHA=$gitHead"

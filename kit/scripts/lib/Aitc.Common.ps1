@@ -27,6 +27,33 @@ function Get-AitcProperty {
     return $property.Value
 }
 
+function Get-AitcProjectRelativeRoot {
+    param(
+        [Parameter(Mandatory = $true)][string]$RepositoryRoot,
+        [Parameter(Mandatory = $true)][string]$ProjectRoot,
+        [Parameter(Mandatory = $true)][ValidateSet('OFFICIAL','DRILL')][string]$SessionMode
+    )
+    $repo = [IO.Path]::GetFullPath((Resolve-Path -LiteralPath $RepositoryRoot -ErrorAction Stop).Path).TrimEnd('\')
+    $project = [IO.Path]::GetFullPath((Resolve-Path -LiteralPath $ProjectRoot -ErrorAction Stop).Path).TrimEnd('\')
+    if ($SessionMode -eq 'DRILL') {
+        if ($project -ne $repo) { throw "DRILL project root must equal repository root; found '$project'." }
+        return '.'
+    }
+    $expected = [IO.Path]::GetFullPath((Join-Path $repo 'chung-khao')).TrimEnd('\')
+    if ($project -ne $expected) { throw "OFFICIAL ProjectRoot must equal '$expected'; found '$project'." }
+    return 'chung-khao'
+}
+
+function ConvertTo-AitcRepositoryPath {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProjectRelativeRoot,
+        [Parameter(Mandatory = $true)][string]$ProjectPath
+    )
+    $clean = $ProjectPath.Replace('\','/').TrimStart('/')
+    if ($ProjectRelativeRoot -eq '.') { return $clean }
+    return ($ProjectRelativeRoot.Trim('/').Replace('\','/') + '/' + $clean)
+}
+
 function Test-AitcOfficialOrigin {
     param([Parameter(Mandatory = $true)][string]$Origin)
     $normalized = $Origin.Trim().TrimEnd('/')

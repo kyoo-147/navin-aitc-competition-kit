@@ -1,13 +1,64 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "status": "DRAFT",
   "session_mode": "OFFICIAL_OR_DRILL",
   "challenge": {"name": "", "goal": "", "users": []},
-  "requirements": {"must_have": [], "should_have": [], "out_of_scope": [], "deliverables": [], "scoring": []},
-  "scope": {"official_repository": "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research", "official_write_boundary": "chung-khao/**", "process_cwd": "official repository root"},
-  "architecture": {"stack": [], "components": [], "data_model": {}, "external_services": [], "deployment": {}, "failure_paths": []},
+  "requirements": {
+    "must_have": [],
+    "should_have": [],
+    "optional": [],
+    "out_of_scope": [],
+    "deliverables": [],
+    "scoring": []
+  },
+  "scope": {
+    "official_repository": "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research",
+    "official_write_boundary": "chung-khao/**",
+    "project_relative_root": null,
+    "process_cwd": "official repository root"
+  },
+  "architecture": {
+    "pattern": null,
+    "stack": [],
+    "components": [],
+    "data_model": {},
+    "external_services": [],
+    "deployment": {},
+    "failure_paths": []
+  },
   "interfaces": {"boundary_contract": "contracts/app-contract.json"},
-  "screens": {"routes": [], "states": ["empty", "loading", "error", "success"]},
+  "screens": {
+    "kind": null,
+    "design_lock_required": null,
+    "routes": [],
+    "states": ["empty", "loading", "error", "success"]
+  },
+  "resources": {
+    "api": {
+      "request_cap": null,
+      "budget_usd": null,
+      "rpm": null,
+      "tpm": null,
+      "max_parallel": null
+    },
+    "modalities": {
+      "text": false,
+      "image": false,
+      "video": false,
+      "audio": false
+    },
+    "generation_policy": {
+      "cache_by_prompt_hash": true,
+      "duplicate_requests": false,
+      "retry_limit": 1
+    },
+    "media_budget": {
+      "structured_text_requests": null,
+      "images": null,
+      "videos": null,
+      "dynamic_features": null
+    }
+  },
   "decisions": [],
   "acceptance": [],
   "tasks": []

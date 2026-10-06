@@ -1,11 +1,13 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$OfficialRepo,
+    [Parameter(Mandatory = $true)][ValidateSet('OFFICIAL','DRILL')][string]$SessionMode,
     [string]$DestinationName = 'navin-competition-kit',
     [switch]$Force
 )
 
 $ErrorActionPreference = 'Stop'
+if ($SessionMode -eq 'OFFICIAL') { throw 'SYNC VARIANT BLOCKED: vendored competition kit, third-party skills, and templates are forbidden in the official submission repository.' }
 . (Join-Path $PSScriptRoot 'lib\Aitc.Common.ps1')
 $repo = Assert-AitcOfficialRepo -RepoPath $OfficialRepo
 $source = Split-Path $PSScriptRoot -Parent

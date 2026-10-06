@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT",
+  "assets": [
+    {
+      "asset_id": "<stable-id>",
+      "purpose": "<scoring or product purpose>",
+      "aspect_ratio": "<ratio>",
+      "dimensions": {"width": null, "height": null},
+      "subject": "<subject>",
+      "composition": "<composition>",
+      "visual_style": "<from human-selected design direction>",
+      "palette": "<from design/TOKENS.css>",
+      "consistency_group": "<group or null>",
+      "transparent_background": false,
+      "embedded_text_allowed": false,
+      "output_filename": "public/generated/images/<file>",
+      "retry_policy": {"transient_retry_limit": 1, "cosmetic_regeneration": false},
+      "provider": "BTC Gateway only",
+      "prompt_hash": null
+    }
+  ]
+}

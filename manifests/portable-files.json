@@ -1,6 +1,6 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-06T13:10:15.6073270Z",
+    "generated_at_utc":  "2026-10-06T13:55:22.9299327Z",
     "file_count":  21,
     "files":  [
                   {
@@ -35,8 +35,8 @@
                   },
                   {
                       "path":  "profiles/codex/config.aitc.template.toml",
-                      "bytes":  381,
-                      "sha256":  "bc0113567fef6796069c802a4af5a7d24f7d56732dfb76d85f8003a479cedbce"
+                      "bytes":  444,
+                      "sha256":  "1fdd8644a4551537876318f850d16e9546ffd6c6a90e8363eafbb827a79691b1"
                   },
                   {
                       "path":  "profiles/codex/config.normal.template.toml",

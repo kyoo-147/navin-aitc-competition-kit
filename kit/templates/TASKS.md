@@ -4,38 +4,43 @@ Status: BLOCKED_UNTIL_PROJECT_LOCK | READY
 
 ## Frozen integration contract
 
-- API contract location: `docs/ARCHITECTURE.md`
-- UI/state contract location: `docs/UX_FLOW.md`
+- Boundary contract: `contracts/app-contract.json`
+- Product/design contracts: `docs/PROJECT_CONTRACT.json` and conditional `design/`
 - Integration owner: Captain
+- ProjectRelativeRoot: `chung-khao` in OFFICIAL, `.` in DRILL
 
-## Lane A — Backend writer
+## Lane A — highest-value independent subsystem
 
+- Outcome:
+- Why highest-value:
 - Own:
-- Do not touch: frontend-owned paths
+- Do not touch: Lane B paths
 - Inputs/contracts:
-- Outputs:
+- Canary contribution:
 - Acceptance commands:
 - Commit required: yes
 
-## Lane B — Frontend writer
+## Lane B — second independent subsystem
 
+- Outcome:
+- Why independent:
 - Own:
-- Do not touch: backend-owned paths
+- Do not touch: Lane A paths
 - Inputs/contracts:
-- Contract adapter allowed for lane verification: yes
-- Real integration claim allowed: no
+- Canary contribution:
 - Acceptance commands:
 - Commit required: yes
 
-## Lane C — Read-only reviewer
+## Lane C — read-only reviewer
 
 - Fixed point:
 - Review axes: Spec, Standards/Engineering, Competition Provenance
+- Design review when applicable: P0/P1/P2 only; no redesign
 
-## Merge order
+## Integration order
 
-1. Backend lane completes and passes its own checks.
-2. Frontend lane completes and passes its own checks.
-3. Captain integrates both commits only after steps 1 and 2.
-4. Captain removes critical-path mocks/adapters.
-5. Captain runs real FE/BE E2E and fixed-point review.
+1. Start Lane A and Lane B from exact `LOCK_BASE_SHA`.
+2. Around minute 40-50, integrate the smallest real UI -> route/service -> BTC API when required -> real result -> render slice.
+3. On failure, freeze new scope and repair that slice.
+4. On pass, lanes continue remaining independent work.
+5. Captain integrates verified commits, removes critical-path adapters, and runs real E2E.

@@ -118,14 +118,16 @@ Use this locked sequence:
 ```text
 challenge / idea
 → Spec Broker
-→ parallel requirements + technical + UX investigation
+→ factual web research when current/domain facts are needed
 → Human Brief
-→ Architecture Lavish + UX Flow Lavish
-→ user feedback and HUMAN LOCK
-→ compile canonical PROJECT_CONTRACT.json + app-contract.json
+→ Architecture direction
+→ Design Studio directions + UX / Design / Experience Lavish + prototype
+→ independent design review + human feedback
+→ Architecture Lavish LOCK + UX / Design Lavish LOCK
+→ compile canonical PROJECT_CONTRACT.json + app-contract.json + conditional DESIGN LOCK
 → generate human-readable Markdown views
 → implementation gate
-→ independent Backend and Frontend writers
+→ independent Lane A and Lane B chosen from the locked architecture
 → early real integration canary around minute 40-50
 → parallel finish and full integration
 → real E2E
@@ -135,7 +137,7 @@ challenge / idea
 
 The Spec Broker converts unstructured input into `goal`, `users`, `inputs`, `outputs`, `must_have`, `should_have`, `out_of_scope`, `deliverables`, `scoring`, `entities`, `external_apis`, `constraints`, `unknowns`, `assumptions`, `human_decisions`, and `acceptance`. It must not choose architecture, stack, database, auth, deployment, or UX for the user.
 
-Research, technical investigation, and UX investigation may run concurrently as read-only scouts. Their output feeds one short Human Brief. Ask one to three decision-critical questions and continue non-blocked investigation.
+Research, technical investigation, and UX investigation may run concurrently as read-only scouts. Their output feeds one short Human Brief. For open-ended travel, culture, education, society, or other fact-sensitive challenges, use normal search/browser access and prefer official, government, or reputable sources; cross-check material facts. Research collects FACTS with URLs and retrieval dates. Never use ChatGPT, Gemini, Claude web, an external AI generator/API, or Internet source/template/code. Only the BTC model may process or generate product content. Live BTC rules override this preparation rule.
 
 ### Mandatory Lavish decision loop
 
@@ -161,12 +163,23 @@ For non-trivial work, also use `templates/PRODUCT_SPEC.md` and make `Out of Scop
 
 ### Contract-first writer sequence
 
-After Human Lock, create exactly two writer lanes when both surfaces exist:
+After Human Lock, create at most two writer lanes only when the locked architecture exposes independent ownership. Lane A is the highest-value independent subsystem; Lane B is the second independent subsystem. The Captain names both from the architecture and must not hardcode backend/frontend roles. For example, a multimodal travel product may use `Generation/API/Media pipeline` and `Product/UI/Experience`.
 
-- Writer A: backend, database, API, AI/runtime, backend tests.
-- Writer B: frontend, screen states, interactions, responsive behavior, frontend tests.
+Each writer uses an isolated Orca worktree at the exact `LOCK_BASE_SHA` and implements against frozen contracts without editing the other lane's paths. Around minute 40-50, the Captain integrates the smallest real slice and records `evidence/integration-canary.json`; real UI, real route/service, real BTC API when required, real response, and rendered result must pass. Failure freezes new scope until that same slice is repaired. After pass, workers finish independent scope, then Captain performs full integration and E2E.
 
-Each writer uses an isolated Orca worktree and implements independently against the frozen API/state contract. Frontend may use a contract adapter during lane verification, but it must not claim real integration. Backend and frontend workers do not edit each other's paths. Around minute 40-50, the Captain integrates the smallest real slice and records `evidence/integration-canary.json`; real UI, real endpoint, real response, and real AI/API when required must pass before either lane expands scope. Writers then finish their remaining bounded work, after which the Captain performs full integration, removes critical-path adapters/mocks, runs real FE/BE E2E, and requests fixed-point review.
+## Small multimodal web default
+
+For a small web multimodal challenge, prefer one full-stack web app: `Browser -> UI -> server routes -> BTC Gateway (text/image/video)`. Unless the challenge or locked architecture requires them, do not add a database, auth/account, CMS, microservice, Redis/queue, vector DB, or product agent runtime. Persist generated material in `data/site-content.json`, `data/generation-manifest.json`, `data/request-ledger.json`, and `public/generated/{images,video}/` when file persistence is sufficient.
+
+Before lock, fill `resources.api` from the live challenge, `/key/info`, and `/team/info`; never assume a global cap. Lock required modalities and a scoring-based media budget. A typical 120-minute starting proposal is one structured text generation, four or five images, one short hero video, and optionally one dynamic text feature, but the human-approved contract controls. Separate MUST HAVE, SHOULD HAVE, and OPTIONAL; drop OPTIONAL first.
+
+Prefer one schema-validated structured text request that returns the complete content structure plus image and video prompts. Do not make one LLM request per section when one bounded request suffices. Validate output against the challenge-specific schema before use.
+
+Before image calls, lock an image-generation contract covering purpose, dimensions/aspect ratio, subject, composition, chosen design style/palette, cross-asset consistency, transparency, output filename, and retry policy. Use transparency for logos/icons/cutouts when appropriate; keep scene/hero backgrounds; embed no text unless required. GPT Image is permitted only through BTC Gateway. Cosmetic differences do not justify regeneration.
+
+Every generation normalizes and hashes the prompt, checks `data/generation-manifest.json`, and reuses an existing successful output. `data/request-ledger.json` records type, purpose, attempt, result status, latency and available cost metadata, never keys, secrets, or auth headers. Block duplicate active requests. Retry a transient/5xx failure at most once; inspect and fix 4xx without blind retry; stop on quota or budget exhaustion.
+
+When video is mandatory, generate structured content first, start the final video prompt asynchronously as early as possible, continue independent coding/image work, and poll at a live-limit-compliant interval (normally 8-10 seconds, adjusted to current RPM/concurrency). Do not defer mandatory video to the end.
 
 ## Embedded engineering loop
 

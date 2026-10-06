@@ -17,6 +17,12 @@ Stop and ask the leader when sources conflict.
 - In `OFFICIAL` mode, work only in `https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research` and its verified local clone. All source, planning files, Lavish artifacts, evidence, and deliverables belong under `chung-khao/`; organizer hooks/config remain at repository root.
 - In `DRILL` mode, label provider and evidence truthfully and never present the result as official competition work.
 
+## Research and content provenance
+
+- For open-ended or fact-sensitive challenges, Captain researches current facts before content lock using normal search/browser access and official, government, or reputable sources; cross-check material claims and preserve URLs/retrieval dates.
+- Research gathers FACTS only. BTC models may transform/generate product content afterward.
+- Do not use ChatGPT/Gemini/Claude web, external AI generators/APIs, or copied Internet code/templates. Live BTC rules always have highest priority.
+
 ## Pre-implementation lock
 
 Implementation is forbidden until all gates are true:
@@ -77,11 +83,13 @@ PROJECT_CONTRACT = LOCKED
 
 - Start with the smallest working vertical slice.
 - Use deterministic software for deterministic work.
-- Lock the canonical project contract and FE/BE boundary contract before parallel work.
-- After lock, create every Writer A/B Orca worktree from the exact `LOCK_BASE_SHA`; run `writer-preflight.ps1` before model work. Writer A owns backend and Writer B owns frontend in separate worktrees. They implement independently against the frozen API/state contract and do not edit each other's paths.
+- Lock the canonical project contract and application boundary contract before parallel work.
+- After lock, create every Lane A/B Orca worktree from the exact `LOCK_BASE_SHA`; run `writer-preflight.ps1` before model work. Lane A owns the highest-value independent subsystem and Lane B the second independent subsystem, selected from the locked architecture; roles are never hardcoded to backend/frontend.
 - Around minute 40-50, the Captain integrates one smallest real vertical slice: real UI to real backend endpoint to real AI/API when required to real response rendered by the UI. Failure freezes new scope until the same slice passes.
-- After the early canary, writers continue their remaining independent scopes. The Captain later performs full integration, removes critical-path adapters/mocks, and proves real FE/BE E2E.
+- After the early canary, writers continue their remaining independent scopes. The Captain later performs full integration, removes critical-path adapters/mocks, and proves real full-product E2E.
 - In AITC profile, bootstrap exposes only `aitc-captain`, `aitc-worker`, `aitc-reviewer`, `aitc-design-studio`, `lavish`, and on-demand browser skills. Other task skills remain repository references and are not runtime policy.
+- Lock live API resources, required modalities, generation policy, and media counts before implementation. Use structured generation, prompt-hash reuse, one transient retry maximum, no blind 4xx retry, and stop on quota/budget exhaustion.
+- If mandatory, start video after validated structured content as early as practical and poll within live API limits while independent work continues.
 - Use one writer per checkout or isolated worktree.
 - Use one to three workers by default and only for independent scopes.
 - Keep humans responsible for consequential actions, review, merge, deployment, and submission.

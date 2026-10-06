@@ -6,7 +6,7 @@ Architecture Lavish: [`../artifacts/architecture.html`](../artifacts/architectur
 
 ## Quyền hạn
 
-`docs/PROJECT_CONTRACT.json` là nguồn sự thật máy đọc cho yêu cầu, phạm vi, kiến trúc, quyết định, acceptance và tasks. `contracts/app-contract.json` là ranh giới FE/BE cho routes, requests, responses, states và errors. Năm Markdown là bản trình bày để con người đọc, không có quyền ghi đè hai JSON này.
+`docs/PROJECT_CONTRACT.json` là nguồn sự thật máy đọc cho yêu cầu, phạm vi, kiến trúc, quyết định, acceptance và tasks. `contracts/app-contract.json` là ranh giới ứng dụng cho routes, requests, responses, states và errors. Năm Markdown là bản trình bày để con người đọc, không có quyền ghi đè hai JSON này.
 
 ## Luồng xây dựng
 

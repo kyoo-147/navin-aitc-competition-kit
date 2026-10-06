@@ -21,7 +21,17 @@ foreach ($name in @('challenge','requirements','scope','architecture','interface
     if ($null -eq $project.PSObject.Properties[$name] -or $null -eq $project.$name) { throw "CONTRACT INVALID: PROJECT_CONTRACT missing $name." }
 }
 if ([string]$project.interfaces.boundary_contract -ne 'contracts/app-contract.json') { throw 'CONTRACT INVALID: interfaces.boundary_contract must be contracts/app-contract.json.' }
-if ([string]$project.interfaces.boundary_contract -ne 'contracts/app-contract.json') { throw 'CONTRACT INVALID: interfaces.boundary_contract must be contracts/app-contract.json.' }
+$kindProperty = $project.screens.PSObject.Properties['kind']
+if ($null -eq $kindProperty -or [string]::IsNullOrWhiteSpace([string]$kindProperty.Value)) { throw 'CONTRACT INVALID: screens.kind must be explicitly set.' }
+$designProperty = $project.screens.PSObject.Properties['design_lock_required']
+if ($null -eq $designProperty -or $null -eq $designProperty.Value -or $designProperty.Value -isnot [bool]) { throw 'CONTRACT INVALID: screens.design_lock_required must be explicit true or false.' }
+if ([string]$project.screens.kind -eq 'UI' -and $project.screens.design_lock_required -ne $true) { throw 'CONTRACT INVALID: UI requires design_lock_required=true.' }
+if ([string]$project.screens.kind -eq 'CLI_ONLY' -and $project.screens.design_lock_required -ne $false) { throw 'CONTRACT INVALID: CLI_ONLY requires design_lock_required=false.' }
+$resourcesProperty = $project.PSObject.Properties['resources']
+if ($null -eq $resourcesProperty) { throw 'CONTRACT INVALID: resources contract is required.' }
+foreach ($name in @('api','modalities','generation_policy')) {
+    if ($null -eq $project.resources.PSObject.Properties[$name]) { throw "CONTRACT INVALID: resources.$name is required." }
+}
 if ($project.screens.design_lock_required -eq $true) {
     foreach ($name in @('brief','system','screens','components','tokens','lock')) {
         if ([string]::IsNullOrWhiteSpace([string]$project.screens.design_contract.$name)) { throw "CONTRACT INVALID: design_contract.$name is required when design_lock_required is true." }

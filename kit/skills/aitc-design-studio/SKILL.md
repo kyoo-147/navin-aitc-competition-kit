@@ -9,18 +9,22 @@ This is a workflow, not a model or external design API. Use only the BTC-approve
 
 ## Gate
 
-Run this pipeline only after `PROJECT.md`, `ARCHITECTURE.md`, the requirement/spec contract and the two approved Lavish surfaces exist. If the project is CLI-only, set `screens.design_lock_required=false` and report `DESIGN LOCK SKIPPED: CLI-only`; do not invent UI ceremony.
+Run after Spec/Research, Human Brief, and an Architecture direction exist. The Design Studio creates the directions and prototype that feed the UX / Design / Experience Lavish artifact; it must not require that artifact to be approved before starting. If `screens.kind=CLI_ONLY`, explicitly set `screens.design_lock_required=false` and report `DESIGN LOCK SKIPPED: CLI-only`; missing/null is invalid.
 
 For a UI project, the sequence is mandatory:
 
 ```text
-PROJECT BRIEF LOCKED
+SPEC / RESEARCH
+  -> HUMAN BRIEF
+  -> ARCHITECTURE DIRECTION
   -> DESIGN BRIEF
   -> 2-3 DESIGN DIRECTIONS
   -> HUMAN CHOICE IN UX / DESIGN / EXPERIENCE LAVISH
-  -> UX FLOW
+  -> UX / DESIGN / EXPERIENCE LAVISH
   -> INTERACTIVE WIREFRAME / PROTOTYPE
   -> DESIGN CRITIQUE BY A DIFFERENT READ-ONLY REVIEWER
+  -> HUMAN FEEDBACK
+  -> ARCHITECTURE LAVISH LOCK + UX / DESIGN LAVISH LOCK
   -> DESIGN CONTRACT
   -> DESIGN LOCK
   -> IMPLEMENTATION

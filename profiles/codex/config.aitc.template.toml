@@ -6,6 +6,9 @@ forced_login_method = "api"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
+[shell_environment_policy]
+ignore_default_excludes = false
+
 [model_providers.thucchien]
 name = "BTC"
 base_url = "https://api.thucchien.ai/v1"

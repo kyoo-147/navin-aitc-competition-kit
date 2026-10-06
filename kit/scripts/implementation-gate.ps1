@@ -15,6 +15,8 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot -ErrorAction Stop).Path
 $lockPath = Join-Path $project 'docs/PROJECT_LOCK.json'
 if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) { throw 'IMPLEMENTATION BLOCKED: docs/PROJECT_LOCK.json is missing.' }
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
+$projectRelativeRoot = Get-AitcProjectRelativeRoot -RepositoryRoot $repo -ProjectRoot $project -SessionMode ([string]$lock.session_mode)
+if ([string]$lock.project_relative_root -ne $projectRelativeRoot) { throw "IMPLEMENTATION BLOCKED: project_relative_root must be '$projectRelativeRoot'." }
 
 $checks = @(
     @{ Ok = [int]$lock.schema_version -ge 2; Message = 'lock schema is v2 or newer' },
@@ -44,12 +46,7 @@ if ($lock.session_mode -eq 'OFFICIAL') {
     if ($LASTEXITCODE -ne 0 -or -not (Test-AitcOfficialOrigin -Origin $remote)) {
         throw "IMPLEMENTATION BLOCKED: OFFICIAL mode requires origin $ExpectedOfficialRepository; found '$remote'."
     }
-    $officialBoundary = [IO.Path]::GetFullPath((Join-Path $repo 'chung-khao')).TrimEnd('\')
-    $candidate = [IO.Path]::GetFullPath($project).TrimEnd('\')
-    if ($candidate -ne $officialBoundary -and -not $candidate.StartsWith($officialBoundary + '\', [StringComparison]::OrdinalIgnoreCase)) {
-        throw "IMPLEMENTATION BLOCKED: OFFICIAL project must be under '$officialBoundary'; found '$candidate'."
-    }
-    Write-Host '[PASS] Official repository and chung-khao boundary verified'
+    Write-Host '[PASS] Official repository and exact chung-khao project root verified'
 } elseif ($lock.session_mode -ne 'DRILL') {
     throw "IMPLEMENTATION BLOCKED: session_mode must be OFFICIAL or DRILL, found '$($lock.session_mode)'."
 }
@@ -74,8 +71,10 @@ foreach ($relative in $requiredPaths | Select-Object -Unique) {
 }
 
 & (Join-Path $PSScriptRoot 'contract-validate.ps1') -ProjectRoot $project -RequireLocked
+$canonical = Get-Content -LiteralPath (Join-Path $project 'docs\PROJECT_CONTRACT.json') -Raw | ConvertFrom-Json
+if ([string]$canonical.scope.project_relative_root -ne $projectRelativeRoot) { throw "IMPLEMENTATION BLOCKED: contract scope.project_relative_root must be '$projectRelativeRoot'." }
 foreach ($relative in $requiredPaths | Select-Object -Unique) {
-    $trackedPath = $relative.Replace('\','/')
+    $trackedPath = ConvertTo-AitcRepositoryPath -ProjectRelativeRoot $projectRelativeRoot -ProjectPath $relative
     & git -C $repo ls-files --error-unmatch -- $trackedPath 2>$null | Out-Null
     if ($LASTEXITCODE -ne 0) { throw "IMPLEMENTATION BLOCKED: locked file is not tracked: $relative." }
     $status = (& git -C $repo status --porcelain=v1 -- $trackedPath | Out-String).Trim()
@@ -83,7 +82,8 @@ foreach ($relative in $requiredPaths | Select-Object -Unique) {
 }
 & (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $project
 if ([string]::IsNullOrWhiteSpace([string]$lock.base_commit)) { throw 'IMPLEMENTATION BLOCKED: lock base_commit is missing.' }
-& git -C $repo diff --quiet ([string]$lock.base_commit) -- $requiredPaths
+$repositoryPaths = @($requiredPaths | Select-Object -Unique | ForEach-Object { ConvertTo-AitcRepositoryPath -ProjectRelativeRoot $projectRelativeRoot -ProjectPath $_ })
+& git -C $repo diff --quiet ([string]$lock.base_commit) -- $repositoryPaths
 if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: locked files differ from LOCK_BASE_SHA.' }
 & git -C $repo merge-base --is-ancestor ([string]$lock.base_commit) HEAD
 if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: LOCK_BASE_SHA is not an ancestor of current HEAD.' }

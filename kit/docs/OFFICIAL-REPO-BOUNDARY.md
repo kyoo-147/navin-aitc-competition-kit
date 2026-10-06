@@ -31,11 +31,9 @@ Launch Codex and other supported AI tools from the official repository root. Ope
 
 The standalone `navin-aitc-competition-kit` repository is preparation tooling and may stay separate.
 
-If the team wants a self-contained version in the official repository, run `scripts/sync-variant.ps1`. It writes only to:
+`scripts/sync-variant.ps1` is preparation/DRILL-only. It hard-blocks `OFFICIAL` mode. Do not copy this vendored kit, third-party skills, or reusable templates into the official submission. During the official session, create only challenge work under `chung-khao/`.
 
-`chung-khao/navin-competition-kit/`
-
-Review the resulting diff before committing. The sync excludes raw preparation screenshots and source material.
+Official project paths use `ProjectRelativeRoot = "chung-khao"`; DRILL uses `ProjectRelativeRoot = "."`. Git pathspecs must be converted from project-relative to repository-relative form before `ls-files`, `status`, `diff`, lock, or writer-preflight checks.
 
 ## Git flow
 

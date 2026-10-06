@@ -18,15 +18,18 @@ This is the small, competition-safe adaptation of ideas from Matt Pocock's MIT-l
 challenge / idea
 → ask OFFICIAL or DRILL
 → Spec Broker structures the input
-→ requirements + technical + UX scouts investigate in parallel
+→ factual research + technical + UX scouts investigate as needed
 → Human Brief
-→ Architecture Lavish + UX / Design / Experience Lavish
-→ user feedback and Human Lock
+→ Architecture direction
+→ Design Studio directions + UX / Design / Experience prototype
+→ independent design review + human feedback
+→ Architecture Lavish LOCK + UX / Design Lavish LOCK
 → compile PROJECT / ARCHITECTURE / UX_FLOW / DECISIONS / TASKS
 → deterministic implementation gate
-→ Backend writer || Frontend writer in isolated worktrees
-→ integrate only after both lanes pass independently
-→ real FE/BE E2E
+→ highest-value Lane A || second independent Lane B
+→ real minute 40-50 integration canary
+→ lanes finish independently
+→ real full E2E
 → fixed-point review
 → commit/push/submit when authorized
 → short retro
@@ -50,9 +53,15 @@ A spec contains the problem, solution, user stories, implementation decisions, t
 
 ## Vertical slices
 
-The locked project contract defines the final vertical slice and `LOCK_BASE_SHA`. Implementation then uses two deliberately independent lanes: backend and frontend. They work against one frozen API/state contract, meet at a real minute 40-50 canary, continue their remaining scopes after it passes, and only then undergo final integration. Each lane must pass its own acceptance; the integrated result must deliver the narrow end-to-end behavior and remove critical-path mocks.
+The locked project contract defines the final vertical slice and `LOCK_BASE_SHA`. Implementation uses at most two deliberately independent, architecture-selected lanes: Lane A is the highest-value subsystem and Lane B is the second independent subsystem. They meet at a real minute 40-50 canary, continue remaining scope after it passes, and only then undergo final integration. Each lane must pass its own acceptance; the integrated result must deliver the narrow end-to-end behavior and remove critical-path mocks.
 
 Never exceed two concurrent writers. Dependency graphs remain small and explicit; no workflow engine is required.
+
+## Open-ended research and multimodal generation
+
+When content depends on current/domain facts, research the normal web first and retain sources; external AI and copied code/templates are forbidden. For a small multimodal web product, prefer one full-stack app with server routes to BTC Gateway and file-backed generated assets unless requirements justify heavier infrastructure.
+
+Lock live API limits, modalities, media counts, and MUST/SHOULD/OPTIONAL scope in the canonical contract. Prefer one validated structured generation request. Every media request uses a locked image/video prompt contract, prompt hash, manifest lookup, duplicate prevention, bounded retry, and secret-free request ledger. Start mandatory video early after structured content and poll within live limits.
 
 ## Feedback-loop gate
 

@@ -67,18 +67,17 @@ cd D:\path\to\navin-aitc-competition-kit\kit
 
 `bootstrap.ps1` never asks for or prints a key, preserves an existing user config unless `-ForceConfig` is explicit, preserves user hooks, installs the conditional runtime wrapper, and optionally installs three core AITC skills plus thirteen approved task-triggered skills. Populate the official clone's ignored `.env` or the process environment yourself before live preflight.
 
-## Reusable variant clone
+## Reusable variant clone (DRILL only)
 
-To place a reviewable copy of the operational kit inside the official final-round boundary:
+To place a reviewable copy in a preparation clone:
 
 ```powershell
 .\scripts\sync-variant.ps1 `
-  -OfficialRepo D:\path\to\aitc2026-team-918-navin-research
+  -OfficialRepo D:\path\to\preparation-clone `
+  -SessionMode DRILL
 ```
 
-The destination is `chung-khao/navin-competition-kit/`. The script refuses to overwrite an existing destination unless `-Force` is explicit. It excludes preparation screenshots and raw source material.
-
-Do not run this against the official repository until the team has reviewed the kit and intentionally decided to commit that variant.
+The script hard-blocks `OFFICIAL`; vendored kit, third-party skills, and templates do not belong in the official submission.
 
 ## Competition flow
 
@@ -88,8 +87,8 @@ Do not run this against the official repository until the team has reviewed the 
 4. Use Spec Broker and parallel read-only investigation to prepare the Human Brief.
 5. Create exactly two Lavish review artifacts: Architecture and interactive UX Flow. Incorporate feedback until both are explicitly locked by the leader.
 6. Compile `PROJECT.md`, `ARCHITECTURE.md`, `UX_FLOW.md`, `DECISIONS.md`, and `TASKS.md`; create `PROJECT_LOCK.json` and pass `implementation-gate.ps1`.
-7. Dispatch independent backend and frontend writer worktrees. Do not integrate while either lane is still building.
-8. After both lane commits pass their own checks, integrate, remove critical-path mocks, run real FE/BE E2E, and capture evidence.
+7. Dispatch the two highest-value independent architecture-selected lanes from the exact lock SHA.
+8. Run the minute 40-50 real canary, continue independent work after pass, then integrate and run real E2E.
 9. Run fixed-point review, stop nonessential calls at policy gates, freeze, submit, and capture a visible receipt.
 
 ## Directory map

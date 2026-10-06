@@ -6,7 +6,9 @@ Human approval evidence:
 
 ## System overview
 
-<user -> frontend -> backend -> database/AI/external systems>
+<user -> browser UI -> full-stack server routes -> BTC Gateway modalities>
+
+For a small multimodal web challenge, start from one full-stack web app. Add database, auth/account, CMS, microservice, Redis/queue, vector DB, or a product agent runtime only when the challenge or evidence requires it.
 
 ## Decision cards
 
@@ -16,8 +18,8 @@ Human approval evidence:
 
 ## Stack and deployment
 
-- Frontend:
-- Backend:
+- Full-stack app:
+- Server routes:
 - Database:
 - AI/runtime:
 - Deployment:
@@ -41,6 +43,16 @@ response:
 validation:
 error states:
 ```
+
+## Resource and media contract
+
+- Live request cap / budget / RPM / TPM / max parallel:
+- Required modalities:
+- Structured generation schema:
+- Media budget:
+- Image generation contract:
+- Cache/retry policy:
+- Mandatory video start and poll plan:
 
 ## Authentication and security
 

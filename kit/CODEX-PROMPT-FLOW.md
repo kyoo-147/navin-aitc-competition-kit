@@ -49,4 +49,4 @@ Workers must never read `.env`, credential stores, SSH keys, browser profiles, o
 
 ## Acceptance
 
-Do not accept agent prose. Require both lane commits and lane checks before Captain integration; then require requirement satisfaction, code, targeted tests, build/typecheck, real FE/BE flow without critical-path mocks, integrated branch, and deployment proof when required. Label missing proof `UNVERIFIED` or `BLOCKED`.
+Do not accept agent prose. Require both architecture-selected lane commits and checks; run the early real integration canary before remaining scope, then require requirement satisfaction, code, targeted tests, build/typecheck, real full-product flow without critical-path mocks, integrated branch, and deployment proof when required. Label missing proof `UNVERIFIED` or `BLOCKED`.

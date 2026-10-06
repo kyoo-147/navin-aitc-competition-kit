@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Challenge content generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hero", "sections", "seo"],
+  "properties": {
+    "hero": {
+      "type": "object",
+      "required": ["title", "subtitle", "video_prompt"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "subtitle": {"type": "string", "minLength": 1},
+        "video_prompt": {"type": "string"}
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "content", "image_prompt"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "content": {"type": "string", "minLength": 1},
+          "image_prompt": {"type": "string"}
+        }
+      }
+    },
+    "seo": {"type": "object"}
+  }
+}
