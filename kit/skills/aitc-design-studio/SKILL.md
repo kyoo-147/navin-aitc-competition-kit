@@ -1,39 +1,93 @@
 ---
 name: aitc-design-studio
-description: One bounded design authority for AITC product surfaces. Reconcile visual direction, UX flow, accessibility, responsive behavior, and tokens without activating competing design philosophies.
+description: Deterministic, local-only design pipeline using the BTC model and Lavish; compiles approved product taste into auditable design contracts.
 ---
 
 # AITC Design Studio
 
-You are the single design authority for an AITC product lane. Do not activate or combine other design-policy skills by intuition. Read the locked `PROJECT_CONTRACT.json`, `contracts/app-contract.json`, and `TASTE_UI.md` first. The two approved Lavish surfaces are the only human decision surfaces: Architecture and UX / Design / Experience Flow.
+This is a workflow, not a model or external design API. Use only the BTC-approved model route and local Lavish. Never use Claude Design, Figma AI, v0, Lovable, remote design APIs, cloud publishing, or a third design artifact.
 
-## Deliverable
+## Gate
 
-Produce one concise design decision set that contains:
+Run this pipeline only after `PROJECT.md`, `ARCHITECTURE.md`, the requirement/spec contract and the two approved Lavish surfaces exist. If the project is CLI-only, set `screens.design_lock_required=false` and report `DESIGN LOCK SKIPPED: CLI-only`; do not invent UI ceremony.
 
-- the user and task for each screen;
-- one chosen visual direction plus two rejected alternatives and why;
-- screen map and primary journey;
-- core components and interaction states;
-- loading, empty, error, success, offline, and permission states;
-- responsive behavior for the contest target viewport;
-- accessible names, keyboard path, focus behavior, contrast and reduced motion;
-- design tokens for typography, spacing, color, borders, motion and density;
-- explicit removable scope.
+For a UI project, the sequence is mandatory:
 
-## Authority order
+```text
+PROJECT BRIEF LOCKED
+  -> DESIGN BRIEF
+  -> 2-3 DESIGN DIRECTIONS
+  -> HUMAN CHOICE IN UX / DESIGN / EXPERIENCE LAVISH
+  -> UX FLOW
+  -> INTERACTIVE WIREFRAME / PROTOTYPE
+  -> DESIGN CRITIQUE BY A DIFFERENT READ-ONLY REVIEWER
+  -> DESIGN CONTRACT
+  -> DESIGN LOCK
+  -> IMPLEMENTATION
+```
 
-1. Human-locked `PROJECT_CONTRACT.json` and `app-contract.json`.
-2. Approved UX / Design / Experience Flow artifact.
-3. `TASTE_UI.md` and repository standards.
-4. This skill.
+## Design Brief
 
-If sources conflict, stop and return one concrete decision to Captain. Do not silently invent a new convention.
+Read the locked contracts and produce `design/DESIGN_BRIEF.md` with structured values for:
 
-## Product rules
+```yaml
+product_type:
+target_user:
+primary_job:
+platform:
+screen_count_estimate:
+design_goal:
+tone:
+density:
+interaction_style:
+must_feel:
+must_not_feel:
+primary_action:
+secondary_actions:
+constraints:
+accessibility:
+responsive_targets:
+```
 
-Prefer clarity, hierarchy, and fast comprehension under contest time. Use real product states rather than decorative screenshots or fake dashboards. Keep motion purposeful and inexpensive. Avoid gradients, glassmorphism, arbitrary purple-blue AI styling, card nesting, and typography that harms scanning. Do not turn a design preference into a global engineering rule.
+This is the anti-taste-drift input. Facts come from the brief and contract; design choices are explicitly labeled choices.
+
+## Directions and human choice
+
+Generate two or three materially different directions. At minimum show typography, spacing, layout, navigation, component language, hierarchy, interaction pattern and one sample screen. The human may choose one direction or mix named attributes, for example `Layout=A; Typography=B; Navigation=A`. Record chosen and rejected directions in the existing UX / Design / Experience Lavish artifact, then wait for approval. Do not silently choose for the human.
+
+## UX and prototype
+
+Define screen map, user journey, inputs, outputs, actions and navigation. Every screen contract defines purpose, primary action, empty, loading, error, success, offline and permission states. Generate an interactive local HTML/CSS/JS prototype using inline CSS, system fonts, local SVG and inline JS only. No Tailwind CDN, Google Fonts, remote icon library, remote JS, remote assets, `lavish-axi share`, `ht-ml.app`, or publish command.
+
+## Independent design critique
+
+Use `aitc-reviewer` as a read-only reviewer with a design-review task. The generator must not approve its own prototype. Review only:
+
+- hierarchy and flow clarity;
+- consistency with the chosen direction;
+- accessibility and keyboard path;
+- responsive layout;
+- requirement compliance;
+- unnecessary complexity.
+
+Return findings as `P0`, `P1`, or `P2`. P0/P1 must be fixed before lock. P2 may be recorded as removable scope. The reviewer must not redesign the whole application or change the chosen direction without human approval.
+
+## Compiled handoff
+
+After approval, compile exactly:
+
+```text
+design/
+  DESIGN_BRIEF.md
+  DESIGN_SYSTEM.md
+  SCREEN_CONTRACTS.md
+  COMPONENTS.md
+  TOKENS.css
+  DESIGN_LOCK.json
+```
+
+The FE worker implements these contracts; it may not invent a second component language. `DESIGN_LOCK.json` records the chosen direction, artifact, contract paths, reviewer result and approval identity. `DESIGN_LOCK` is required only when `screens.design_lock_required=true`.
 
 ## Handoff
 
-Return `DESIGN_DIRECTION`, `SCREEN_MAP`, `TOKENS`, `STATES`, `ACCESSIBILITY`, `RESPONSIVE_RULES`, `REMOVABLE_SCOPE`, exact files, and the checks run. The Captain owns approval and integration. You may not change the locked contract or create a third Lavish artifact.
+Return `DESIGN_BRIEF`, `DIRECTIONS`, `HUMAN_CHOICE`, `UX_FLOW`, `PROTOTYPE`, `CRITIQUE`, `DESIGN_CONTRACT`, `DESIGN_LOCK`, exact files, and checks run. Preserve `VERIFIED`, `UNVERIFIED`, `BLOCKED`, `USER ACTION REQUIRED`, `DESIGNED/PROPOSED`, and `TARGET/UNMEASURED` labels. The Captain owns approval and integration.

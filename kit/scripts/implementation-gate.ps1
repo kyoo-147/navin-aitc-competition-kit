@@ -24,14 +24,15 @@ $checks = @(
     @{ Ok = $lock.ux_flow_lavish.status -eq 'LOCKED_BY_USER'; Message = 'UX Flow Lavish is LOCKED_BY_USER' },
     @{ Ok = $lock.contract.status -eq 'LOCKED'; Message = 'project contract is LOCKED' },
     @{ Ok = $lock.canonical_contract.status -eq 'LOCKED'; Message = 'canonical JSON contract is LOCKED' },
-    @{ Ok = $lock.boundary_contract.status -eq 'LOCKED'; Message = 'application boundary contract is LOCKED' }
+    @{ Ok = $lock.boundary_contract.status -eq 'LOCKED'; Message = 'application boundary contract is LOCKED' },
+    @{ Ok = ($lock.design.required -ne $true -or $lock.design.status -eq 'LOCKED'); Message = 'design contract is LOCKED when UI is required' }
 )
 foreach ($check in $checks) {
     if (-not $check.Ok) { throw "IMPLEMENTATION BLOCKED: $($check.Message) failed." }
     Write-Host "[PASS] $($check.Message)"
 }
 
-foreach ($approval in @($lock.brief, $lock.architecture_lavish, $lock.ux_flow_lavish, $lock.contract, $lock.canonical_contract, $lock.boundary_contract)) {
+foreach ($approval in @($lock.brief, $lock.architecture_lavish, $lock.ux_flow_lavish, $lock.contract, $lock.canonical_contract, $lock.boundary_contract, $lock.design)) {
     if ([string]::IsNullOrWhiteSpace([string]$approval.approved_by) -or [string]::IsNullOrWhiteSpace([string]$approval.approved_at_utc)) {
         throw 'IMPLEMENTATION BLOCKED: approval identity or timestamp is missing.'
     }
@@ -58,6 +59,9 @@ $requiredPaths = @(
     'docs/PROJECT.md', 'docs/ARCHITECTURE.md', 'docs/UX_FLOW.md', 'docs/DECISIONS.md', 'docs/TASKS.md',
     [string]$lock.architecture_lavish.path, [string]$lock.ux_flow_lavish.path
 )
+if ($lock.design.required -eq $true) {
+    $requiredPaths += @('design/DESIGN_BRIEF.md','design/DESIGN_SYSTEM.md','design/SCREEN_CONTRACTS.md','design/COMPONENTS.md','design/TOKENS.css','design/DESIGN_LOCK.json')
+}
 $entries = @($lock.locked_files)
 foreach ($relative in $requiredPaths | Select-Object -Unique) {
     $entry = $entries | Where-Object { $_.path -eq $relative } | Select-Object -First 1

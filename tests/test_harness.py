@@ -199,7 +199,15 @@ class HarnessTests(unittest.TestCase):
             "docs/DECISIONS.md", "docs/TASKS.md",
             "artifacts/architecture.html", "artifacts/ux-flow.html",
         }
+        if contract["screens"].get("design_lock_required"):
+            required.update({
+                "design/DESIGN_BRIEF.md", "design/DESIGN_SYSTEM.md",
+                "design/SCREEN_CONTRACTS.md", "design/COMPONENTS.md",
+                "design/TOKENS.css", "design/DESIGN_LOCK.json",
+            })
         self.assertEqual(set(entries), required)
+        if contract["screens"].get("design_lock_required"):
+            self.assertEqual(lock["design"]["status"], "LOCKED")
         for relative, expected in entries.items():
             actual = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
             self.assertEqual(actual, expected, f"stale lock or contract drift: {relative}")
@@ -216,6 +224,21 @@ class HarnessTests(unittest.TestCase):
                 self.assertNotIn(forbidden, text, relative)
             self.assertNotRegex(text, r"<script[^>]+src\s*=")
             self.assertNotRegex(text, r"<link[^>]+href\s*=")
+
+    def test_design_studio_is_contract_first_and_local_only(self):
+        skill = (ROOT / "kit/skills/aitc-design-studio/SKILL.md").read_text(encoding="utf-8")
+        for marker in ("DESIGN BRIEF", "2-3 DESIGN DIRECTIONS", "HUMAN CHOICE", "DESIGN CRITIQUE", "P0", "P1", "P2", "DESIGN LOCK"):
+            self.assertIn(marker, skill)
+        self.assertIn("Claude Design", skill)
+        self.assertIn("lavish-axi share", skill)
+        self.assertIn("design_lock_required=false", skill)
+        for relative in (
+            "design/DESIGN_BRIEF.md", "design/DESIGN_SYSTEM.md",
+            "design/SCREEN_CONTRACTS.md", "design/COMPONENTS.md",
+            "design/TOKENS.css", "design/DESIGN_LOCK.json",
+            "kit/templates/design/DESIGN_BRIEF.md", "kit/templates/design/DESIGN_LOCK.json",
+        ):
+            self.assertTrue((ROOT / relative).is_file(), relative)
 
     def test_route_requires_model_endpoint_harness_tool_smoke(self):
         registry = json.loads((ROOT / "kit/knowledge/verified-routes.json").read_text(encoding="utf-8"))

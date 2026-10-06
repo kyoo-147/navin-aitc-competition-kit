@@ -21,6 +21,12 @@ foreach ($name in @('challenge','requirements','scope','architecture','interface
     if ($null -eq $project.PSObject.Properties[$name] -or $null -eq $project.$name) { throw "CONTRACT INVALID: PROJECT_CONTRACT missing $name." }
 }
 if ([string]$project.interfaces.boundary_contract -ne 'contracts/app-contract.json') { throw 'CONTRACT INVALID: interfaces.boundary_contract must be contracts/app-contract.json.' }
+if ([string]$project.interfaces.boundary_contract -ne 'contracts/app-contract.json') { throw 'CONTRACT INVALID: interfaces.boundary_contract must be contracts/app-contract.json.' }
+if ($project.screens.design_lock_required -eq $true) {
+    foreach ($name in @('brief','system','screens','components','tokens','lock')) {
+        if ([string]::IsNullOrWhiteSpace([string]$project.screens.design_contract.$name)) { throw "CONTRACT INVALID: design_contract.$name is required when design_lock_required is true." }
+    }
+}
 if ([int]$app.schema_version -lt 1) { throw 'CONTRACT INVALID: app-contract schema_version must be 1 or newer.' }
 foreach ($name in @('routes','requests','responses','states','errors')) {
     if ($null -eq $app.PSObject.Properties[$name] -or $null -eq $app.$name) { throw "CONTRACT INVALID: app-contract missing $name." }

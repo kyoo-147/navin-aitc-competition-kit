@@ -18,6 +18,9 @@ $required = @(
 & (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $root
 $projectContract = Get-Content -LiteralPath (Join-Path $root 'docs\PROJECT_CONTRACT.json') -Raw | ConvertFrom-Json
 $appContract = Get-Content -LiteralPath (Join-Path $root 'contracts\app-contract.json') -Raw | ConvertFrom-Json
+if ($projectContract.screens.design_lock_required -eq $true) {
+    $required += @('design/DESIGN_BRIEF.md','design/DESIGN_SYSTEM.md','design/SCREEN_CONTRACTS.md','design/COMPONENTS.md','design/TOKENS.css','design/DESIGN_LOCK.json')
+}
 if ([string]$projectContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid PROJECT_CONTRACT status.' }
 if ([string]$appContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid app-contract status.' }
 $gitHead = (& git -C $root rev-parse HEAD 2>$null | Out-String).Trim()
@@ -47,6 +50,8 @@ $lock = [ordered]@{
     contract = [ordered]@{ status = 'LOCKED'; approved_by = $ApprovedBy; approved_at_utc = $now }
     canonical_contract = [ordered]@{ status = 'LOCKED'; path = 'docs/PROJECT_CONTRACT.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
     boundary_contract = [ordered]@{ status = 'LOCKED'; path = 'contracts/app-contract.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
+    boundary_contract = [ordered]@{ status = 'LOCKED'; path = 'contracts/app-contract.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
+    design = [ordered]@{ status = if ($projectContract.screens.design_lock_required -eq $true) { 'LOCKED' } else { 'SKIPPED' }; required = ($projectContract.screens.design_lock_required -eq $true); path = 'design/DESIGN_LOCK.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
     base_commit = $gitHead
     locked_files = @($lockedFiles)
 }

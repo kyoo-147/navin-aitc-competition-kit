@@ -30,11 +30,12 @@ PROJECT_CONTRACT = LOCKED
 
 - The Spec Broker compiles the challenge into structured requirements but must not choose architecture or UX for the user.
 - Exactly two user-reviewable Lavish artifacts are mandatory before implementation: Architecture and UX / Design / Experience Flow.
+- UI projects additionally require the internal `aitc-design-studio` pipeline: Design Brief, 2-3 directions, human choice, interactive prototype, independent P0/P1/P2 critique, and `DESIGN_LOCK`. CLI-only projects set `screens.design_lock_required=false` and skip it.
 - Architecture Lavish covers stack, components, backend, database, schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, alternatives, recommendation, and open decisions.
 - UX Lavish is an interactive HTML wireframe covering screen map, journeys, actions, navigation, empty/loading/error/success states, responsive behavior, necessary features, and removable scope.
 - The Captain must poll and incorporate user feedback. A generated HTML file without user review is not locked.
 - During AITC work, Lavish uses the preinstalled pinned `lavish-axi` executable only. Do not invoke `npx`, cloud share/publish, remote assets, Tailwind CDN, Google Fonts, or remote JavaScript. Artifacts use local HTML, inline/local CSS and JavaScript, system fonts, and local SVG only.
-- After approval, compile the authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json`. Generate `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md` as human-readable views. Commit every Human Lock file, then run `lock-project.ps1`; `docs/PROJECT_LOCK.json` records the exact `LOCK_BASE_SHA` and hashes both contracts, all views, and both Lavish artifacts.
+- After approval, compile the authoritative `docs/PROJECT_CONTRACT.json`, `contracts/app-contract.json`, and, for UI, the `design/` contracts. Generate the human-readable views. Commit every Human Lock file, then run `lock-project.ps1`; `docs/PROJECT_LOCK.json` records the exact `LOCK_BASE_SHA` and hashes all required contracts, design files, views, and both Lavish artifacts.
 - Workers resolve ambiguity from the canonical JSON contracts. Markdown never overrides the canonical or boundary contract.
 - Run `scripts/implementation-gate.ps1`. It must verify locked files are tracked, clean relative to `LOCK_BASE_SHA`, and output `IMPLEMENTATION ALLOWED` plus `LOCK_BASE_SHA=<sha>` before execution.
 - Locked decisions are immutable to workers. Changes require explicit user approval, updated artifacts/docs, a new lock timestamp, and notification to every affected lane.

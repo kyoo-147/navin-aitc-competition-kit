@@ -78,6 +78,16 @@
                                                "artifacts/ux-flow.html"
                                            ],
                     "ux_design_scope":  [
+                    "design_lock_required":  true,
+                    "design_contract":  {
+                        "brief": "design/DESIGN_BRIEF.md",
+                        "system": "design/DESIGN_SYSTEM.md",
+                        "screens": "design/SCREEN_CONTRACTS.md",
+                        "components": "design/COMPONENTS.md",
+                        "tokens": "design/TOKENS.css",
+                        "lock": "design/DESIGN_LOCK.json"
+                    },
+                    "ux_design_scope":  [
                                             "screen_map",
                                             "user_journey",
                                             "visual_directions",

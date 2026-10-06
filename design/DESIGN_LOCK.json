@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "LOCKED",
+  "required_when": "PROJECT_CONTRACT.screens.design_lock_required == true",
+  "direction": "Utility",
+  "artifact": "artifacts/ux-flow.html",
+  "brief": "design/DESIGN_BRIEF.md",
+  "system": "design/DESIGN_SYSTEM.md",
+  "screens": "design/SCREEN_CONTRACTS.md",
+  "components": "design/COMPONENTS.md",
+  "tokens": "design/TOKENS.css",
+  "review": {"status":"PASS","p0":0,"p1":0,"p2":0,"reviewer":"aitc-reviewer"},
+  "approved_by": "user"
+}
