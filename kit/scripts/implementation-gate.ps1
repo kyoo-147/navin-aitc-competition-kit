@@ -70,9 +70,19 @@ foreach ($relative in $requiredPaths | Select-Object -Unique) {
 }
 
 & (Join-Path $PSScriptRoot 'contract-validate.ps1') -ProjectRoot $project -RequireLocked
+foreach ($relative in $requiredPaths | Select-Object -Unique) {
+    $trackedPath = $relative.Replace('\','/')
+    & git -C $repo ls-files --error-unmatch -- $trackedPath 2>$null | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "IMPLEMENTATION BLOCKED: locked file is not tracked: $relative." }
+    $status = (& git -C $repo status --porcelain=v1 -- $trackedPath | Out-String).Trim()
+    if ($status) { throw "IMPLEMENTATION BLOCKED: locked file is uncommitted or modified: $relative." }
+}
 & (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $project
 if ([string]::IsNullOrWhiteSpace([string]$lock.base_commit)) { throw 'IMPLEMENTATION BLOCKED: lock base_commit is missing.' }
+& git -C $repo diff --quiet ([string]$lock.base_commit) -- $requiredPaths
+if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: locked files differ from LOCK_BASE_SHA.' }
 & git -C $repo merge-base --is-ancestor ([string]$lock.base_commit) HEAD
-if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: lock base_commit is not an ancestor of current HEAD.' }
-Write-Host '[PASS] Lock base commit is in current history'
+if ($LASTEXITCODE -ne 0) { throw 'IMPLEMENTATION BLOCKED: LOCK_BASE_SHA is not an ancestor of current HEAD.' }
+Write-Host "[PASS] LOCK_BASE_SHA=$($lock.base_commit)"
 Write-Host 'IMPLEMENTATION ALLOWED' -ForegroundColor Green
+Write-Host "LOCK_BASE_SHA=$($lock.base_commit)"

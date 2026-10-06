@@ -105,7 +105,16 @@ try {
     if (-not $SkipSkills) {
         $skillSource = Join-Path $kit 'skills'
         $skillDestination = Join-Path $codex 'skills'
-        foreach ($skill in Get-ChildItem -LiteralPath $skillSource -Directory | Sort-Object Name) {
+        $skillManifest = Get-Content -LiteralPath (Join-Path $repo 'manifests\skills.json') -Raw | ConvertFrom-Json
+        $allowlist = $skillManifest.profile_allowlists.$Profile
+        $skills = Get-ChildItem -LiteralPath $skillSource -Directory | Sort-Object Name
+        if ($allowlist -is [array]) {
+            $skills = @($skills | Where-Object { $_.Name -in @($allowlist) })
+            Write-PortableStatus INFO "Profile allowlist: $($Profile) -> $((@($allowlist) -join ', '))"
+        } else {
+            Write-PortableStatus INFO "Profile allowlist: $Profile -> all source skills"
+        }
+        foreach ($skill in $skills) {
             $destination = Join-Path $skillDestination $skill.Name
             $exists = Test-Path -LiteralPath $destination -PathType Container
             Write-PortableStatus PLAN "$(if($exists){'UPDATE'}else{'CREATE'}) skill $($skill.Name): $destination"

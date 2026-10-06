@@ -29,14 +29,14 @@ PROJECT_CONTRACT = LOCKED
 ```
 
 - The Spec Broker compiles the challenge into structured requirements but must not choose architecture or UX for the user.
-- Exactly two user-reviewable Lavish artifacts are mandatory before implementation: Architecture and UX/Product Flow.
+- Exactly two user-reviewable Lavish artifacts are mandatory before implementation: Architecture and UX / Design / Experience Flow.
 - Architecture Lavish covers stack, components, backend, database, schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, alternatives, recommendation, and open decisions.
 - UX Lavish is an interactive HTML wireframe covering screen map, journeys, actions, navigation, empty/loading/error/success states, responsive behavior, necessary features, and removable scope.
 - The Captain must poll and incorporate user feedback. A generated HTML file without user review is not locked.
 - During AITC work, Lavish uses the preinstalled pinned `lavish-axi` executable only. Do not invoke `npx`, cloud share/publish, remote assets, Tailwind CDN, Google Fonts, or remote JavaScript. Artifacts use local HTML, inline/local CSS and JavaScript, system fonts, and local SVG only.
-- After approval, compile the authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json`. Generate `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md` as human-readable views. `docs/PROJECT_LOCK.json` hashes both contracts, all views, and both Lavish artifacts.
+- After approval, compile the authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json`. Generate `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, and `docs/TASKS.md` as human-readable views. Commit every Human Lock file, then run `lock-project.ps1`; `docs/PROJECT_LOCK.json` records the exact `LOCK_BASE_SHA` and hashes both contracts, all views, and both Lavish artifacts.
 - Workers resolve ambiguity from the canonical JSON contracts. Markdown never overrides the canonical or boundary contract.
-- Run `scripts/implementation-gate.ps1`. Only `IMPLEMENTATION ALLOWED` opens execution.
+- Run `scripts/implementation-gate.ps1`. It must verify locked files are tracked, clean relative to `LOCK_BASE_SHA`, and output `IMPLEMENTATION ALLOWED` plus `LOCK_BASE_SHA=<sha>` before execution.
 - Locked decisions are immutable to workers. Changes require explicit user approval, updated artifacts/docs, a new lock timestamp, and notification to every affected lane.
 
 ## Official repository
@@ -77,9 +77,10 @@ PROJECT_CONTRACT = LOCKED
 - Start with the smallest working vertical slice.
 - Use deterministic software for deterministic work.
 - Lock the canonical project contract and FE/BE boundary contract before parallel work.
-- After lock, Writer A owns backend and Writer B owns frontend in separate Orca worktrees. They implement independently against the frozen API/state contract and do not edit each other's paths.
+- After lock, create every Writer A/B Orca worktree from the exact `LOCK_BASE_SHA`; run `writer-preflight.ps1` before model work. Writer A owns backend and Writer B owns frontend in separate worktrees. They implement independently against the frozen API/state contract and do not edit each other's paths.
 - Around minute 40-50, the Captain integrates one smallest real vertical slice: real UI to real backend endpoint to real AI/API when required to real response rendered by the UI. Failure freezes new scope until the same slice passes.
 - After the early canary, writers continue their remaining independent scopes. The Captain later performs full integration, removes critical-path adapters/mocks, and proves real FE/BE E2E.
+- In AITC profile, bootstrap exposes only `aitc-captain`, `aitc-worker`, `aitc-reviewer`, `aitc-design-studio`, `lavish`, and on-demand browser skills. Other task skills remain repository references and are not runtime policy.
 - Use one writer per checkout or isolated worktree.
 - Use one to three workers by default and only for independent scopes.
 - Keep humans responsible for consequential actions, review, merge, deployment, and submission.

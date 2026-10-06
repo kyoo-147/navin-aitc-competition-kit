@@ -102,7 +102,7 @@ class HarnessTests(unittest.TestCase):
     def test_competition_skills_include_runtime_evidence(self):
         skill_root = ROOT / "kit/skills"
         expected = {
-            "aitc-captain", "aitc-worker", "aitc-reviewer",
+            "aitc-captain", "aitc-worker", "aitc-reviewer", "aitc-design-studio",
             "accessibility", "best-practices", "commit", "create-cli",
             "frontend-design", "performance", "playwright-cli", "summarize",
             "github", "update-changelog", "taste-skill", "frontend-design-v2",
@@ -114,6 +114,12 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("turn_started", combined)
         self.assertIn("UserPromptSubmit", combined)
         self.assertIn("deepseek-flash", combined)
+        skills_manifest = json.loads((ROOT / "manifests/skills.json").read_text(encoding="utf-8"))
+        self.assertEqual(set(skills_manifest["profile_allowlists"]["Aitc"]), {
+            "aitc-captain", "aitc-worker", "aitc-reviewer", "aitc-design-studio",
+            "lavish", "chrome-devtools-axi", "playwright-cli",
+        })
+        self.assertIn("profile_allowlists", (ROOT / "setup/bootstrap.ps1").read_text(encoding="utf-8"))
 
     def test_competition_engineering_loop_is_bounded_and_evidence_driven(self):
         loop = (ROOT / "kit/docs/ENGINEERING-LOOP.md").read_text(encoding="utf-8")
@@ -127,7 +133,7 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("three to five falsifiable hypotheses", worker)
         self.assertIn("git diff <fixed-point>...HEAD", reviewer)
         self.assertIn("Do not merge or rerank", reviewer)
-        self.assertIn("Architecture Lavish + UX Flow Lavish", loop)
+        self.assertIn("Architecture Lavish + UX / Design / Experience Lavish", loop)
         self.assertIn("implementation-gate.ps1", captain)
         self.assertIn("Locked decisions cannot be changed by workers", captain)
         rules = (ROOT / "kit/RULES.md").read_text(encoding="utf-8")

@@ -1,8 +1,12 @@
-# Luồng vận hành cuộc thi
+# UX / Design / Experience Flow
 
 Status: LOCKED DERIVED VIEW
 Canonical authority: [`PROJECT_CONTRACT.json`](PROJECT_CONTRACT.json)
 Interactive Lavish: [`../artifacts/ux-flow.html`](../artifacts/ux-flow.html)
+
+## Vai trò của artifact thứ hai
+
+Đây là bề mặt UX, design và experience duy nhất của kit. Nó không tạo Lavish thứ ba. Artifact bao gồm screen map, user journey, hai hoặc ba visual directions, lựa chọn thiết kế, core components, interactive wireframe, loading/error/empty/success states, responsive behavior, accessibility và design tokens.
 
 ## Trước khi gọi mô hình
 

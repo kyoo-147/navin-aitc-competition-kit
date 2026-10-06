@@ -28,7 +28,7 @@ The dated snapshot is not a live allowlist. `/key/info`, current catalog, canary
 ## Spawn rule
 
 - Small task, overlapping ownership, or expensive merge: Captain works directly.
-- For a product with both surfaces, spawn one backend writer and one frontend writer in separate worktrees. They work independently against the frozen contract and do not integrate incrementally.
+- For a product with both surfaces, spawn one backend writer and one frontend writer in separate worktrees from exact `LOCK_BASE_SHA`. They work independently against the frozen contract, meet at the early real integration canary around minute 40-50, then continue their remaining scopes.
 - Optional third lane: one read-only scout/reviewer; it must not write to a writer worktree.
 - Every writer gets an Orca-managed worktree and terminal. Capture worktree ID, terminal handle, `turn_started`, cursor-poll output, rollout session ID, provider metadata, tests, and Git status.
 

@@ -20,7 +20,7 @@ challenge / idea
 → Spec Broker structures the input
 → requirements + technical + UX scouts investigate in parallel
 → Human Brief
-→ Architecture Lavish + UX Flow Lavish
+→ Architecture Lavish + UX / Design / Experience Lavish
 → user feedback and Human Lock
 → compile PROJECT / ARCHITECTURE / UX_FLOW / DECISIONS / TASKS
 → deterministic implementation gate
@@ -42,7 +42,7 @@ Persist durable language in `GLOSSARY.md` and hard-to-reverse decisions in short
 
 ## Pre-implementation and prototype gate
 
-Implementation is blocked until the brief, Architecture Lavish, UX Flow Lavish, and project contract are explicitly locked by the user. UX Flow must be a real interactive HTML wireframe; Markdown is insufficient. A prototype remains decision evidence, not production code, unless it later passes production acceptance independently.
+Implementation is blocked until the brief, Architecture Lavish, UX / Design / Experience Lavish, and project contract are explicitly locked by the user. The second artifact must be a real interactive HTML wireframe plus visual directions, components, states, responsive behavior, accessibility and tokens; Markdown is insufficient. A prototype remains decision evidence, not production code, unless it later passes production acceptance independently.
 
 ## Spec gate
 
@@ -50,7 +50,7 @@ A spec contains the problem, solution, user stories, implementation decisions, t
 
 ## Vertical slices
 
-The locked project contract defines the final vertical slice. Implementation then uses two deliberately horizontal, independent lanes: backend and frontend. They work against one frozen API/state contract and do not integrate while building. Each lane must pass its own acceptance before the Captain combines their commits. The integrated result must then deliver the narrow end-to-end behavior and remove critical-path mocks.
+The locked project contract defines the final vertical slice and `LOCK_BASE_SHA`. Implementation then uses two deliberately independent lanes: backend and frontend. They work against one frozen API/state contract, meet at a real minute 40-50 canary, continue their remaining scopes after it passes, and only then undergo final integration. Each lane must pass its own acceptance; the integrated result must deliver the narrow end-to-end behavior and remove critical-path mocks.
 
 Never exceed two concurrent writers. Dependency graphs remain small and explicit; no workflow engine is required.
 

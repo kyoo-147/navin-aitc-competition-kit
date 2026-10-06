@@ -24,7 +24,9 @@ Challenge / idea
 → compile canonical PROJECT_CONTRACT.json + contracts/app-contract.json
 → generate five human-readable Markdown views
 → hash-lock contracts, views, and artifacts
-→ implementation-gate.ps1
+→ commit Human Lock files
+→ record LOCK_BASE_SHA
+→ implementation-gate.ps1 outputs LOCK_BASE_SHA
 ```
 
 Implementation is allowed only when the gate prints `IMPLEMENTATION ALLOWED`.
@@ -58,14 +60,15 @@ The exact application folders are chosen by the user through Architecture Lavish
 ## 4. Git and worker flow
 
 ```text
-verified official base SHA
+LOCK_BASE_SHA from the Human Lock commit
 ├─ Orca worktree A / backend branch
 │  └─ backend + DB + API + AI/runtime + backend checks → commit A
 ├─ Orca worktree B / frontend branch
 │  └─ screens + interactions + states + frontend checks → commit B
 └─ optional read-only reviewer
 
-Captain verifies the first bounded slice from A and B
+Captain verifies both worktrees are based exactly on LOCK_BASE_SHA
+→ Captain verifies the first bounded slice from A and B
 → minute 40-50: integrate real UI → real endpoint → real service/AI → rendered response
 → if canary fails: freeze new scope and repair the same slice
 → if canary passes: A and B continue remaining bounded scope

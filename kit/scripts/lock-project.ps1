@@ -26,7 +26,18 @@ $required = @(
 $projectContract = Get-Content -LiteralPath (Join-Path $root 'docs\PROJECT_CONTRACT.json') -Raw | ConvertFrom-Json
 $appContract = Get-Content -LiteralPath (Join-Path $root 'contracts\app-contract.json') -Raw | ConvertFrom-Json
 if ([string]$projectContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid PROJECT_CONTRACT status.' }
+if ([string]$projectContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid PROJECT_CONTRACT status.' }
 if ([string]$appContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid app-contract status.' }
+
+$gitHead = (& git -C $root rev-parse HEAD 2>$null | Out-String).Trim()
+if ([string]::IsNullOrWhiteSpace($gitHead)) { throw 'Cannot lock; project is not at a valid Git commit.' }
+foreach ($relative in $required) {
+    & git -C $root ls-files --error-unmatch -- $relative 2>$null | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Cannot lock; locked file is not tracked: $relative. Commit the Human Lock files first." }
+    $status = (& git -C $root status --porcelain=v1 -- $relative | Out-String).Trim()
+    if ($status) { throw "Cannot lock; locked file is uncommitted or modified: $relative. Commit Human Lock before creating LOCK_BASE_SHA." }
+}
+Write-Host "[PASS] Human Lock files are tracked and clean at $gitHead"
 $projectContract.status = 'LOCKED'
 $appContract.status = 'LOCKED'
 $utf8 = New-Object System.Text.UTF8Encoding($false)

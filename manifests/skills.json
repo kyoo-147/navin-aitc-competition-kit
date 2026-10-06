@@ -5,7 +5,11 @@
   "install_mode": "copy",
   "core": ["aitc-captain", "aitc-worker", "aitc-reviewer"],
   "mandatory_review": ["lavish"],
-  "browser_on_demand": ["chrome-devtools-axi"],
+  "browser_on_demand": ["chrome-devtools-axi", "playwright-cli"],
+  "profile_allowlists": {
+    "Aitc": ["aitc-captain", "aitc-worker", "aitc-reviewer", "aitc-design-studio", "lavish", "chrome-devtools-axi", "playwright-cli"],
+    "Normal": "all"
+  },
   "task_triggered": [
     "accessibility", "best-practices", "commit", "create-cli", "frontend-design",
     "frontend-design-v2", "github", "minimalist-skill", "performance",

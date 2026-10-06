@@ -142,7 +142,7 @@ Research, technical investigation, and UX investigation may run concurrently as 
 Before creating each artifact, use the pinned preinstalled `lavish-axi` CLI. Never use `npx`, network installation, cloud sharing/publishing, remote assets, Tailwind CDN, Google Fonts, or remote JavaScript during AITC work. Exactly two local-only artifacts are required:
 
 1. `Architecture Lavish`: system overview, alternatives, recommendation, decision cards, stack, components, backend, database/schema, API contract, AI calls, state ownership, auth, deployment, dependencies, failure paths, cost, and open decisions.
-2. `UX Flow Lavish`: interactive HTML wireframe with the complete screen map, primary journeys, navigation, button behavior, empty/loading/error/success states, responsive behavior, feature scope, and removable scope.
+2. `UX / Design / Experience Lavish`: the single interactive HTML wireframe with screen map, primary journeys, two or three visual directions, chosen design direction, core components, navigation, button behavior, loading/empty/error/success states, responsive behavior, accessibility, design tokens, feature scope, and removable scope.
 
 The UX artifact must be clickable enough to exercise Next, Back, primary actions, tab/navigation changes, success, and error states without a backend. Markdown is not a prototype. Open each artifact with Lavish, poll for feedback, apply queued feedback, and obtain explicit user approval. A file that was generated but not reviewed is not locked.
 
