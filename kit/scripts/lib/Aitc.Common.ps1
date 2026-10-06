@@ -27,6 +27,12 @@ function Get-AitcProperty {
     return $property.Value
 }
 
+function Test-AitcOfficialOrigin {
+    param([Parameter(Mandatory = $true)][string]$Origin)
+    $normalized = $Origin.Trim().TrimEnd('/')
+    return $normalized -match '^(?:https://github\.com/|git@github\.com:|ssh://git@github\.com/)ai-thuc-chien/aitc2026-team-918-navin-research(?:\.git)?$'
+}
+
 function Mask-AitcValue {
     param([AllowNull()][string]$Value)
     if ([string]::IsNullOrWhiteSpace($Value)) { return '<missing>' }
@@ -40,6 +46,8 @@ function Assert-AitcOfficialRepo {
     if (-not (Test-Path -LiteralPath (Join-Path $resolved '.git'))) { throw "Not a Git clone: $resolved" }
     if (-not (Test-Path -LiteralPath (Join-Path $resolved 'chung-khao') -PathType Container)) { throw "Missing required chung-khao directory: $resolved" }
     if (-not (Test-Path -LiteralPath (Join-Path $resolved 'scripts\submit_log.py') -PathType Leaf)) { throw 'Missing organizer AI Log script scripts/submit_log.py.' }
+    $origin = (& git -C $resolved remote get-url origin 2>$null | Out-String).Trim()
+    if ($LASTEXITCODE -ne 0 -or -not (Test-AitcOfficialOrigin -Origin $origin)) { throw "Official origin mismatch: $origin" }
     return $resolved
 }
 

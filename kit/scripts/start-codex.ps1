@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepoPath,
     [Parameter(Mandatory = $true)][string]$Model,
     [string]$CodexHome = (Join-Path $HOME '.codex'),
+    [string]$RouteEvidencePath,
     [Parameter(ValueFromRemainingArguments = $true)][string[]]$CodexArgs
 )
 
@@ -14,6 +15,11 @@ $configPath = Join-Path $CodexHome 'config.toml'
 if (-not (Test-Path -LiteralPath $configPath)) { throw "Missing Codex config. Run bootstrap.ps1 first: $configPath" }
 $codex = Get-AitcCodexCommand
 $runtimeScript = Join-Path $PSScriptRoot 'codex-runtime-refresh.ps1'
+if ([string]::IsNullOrWhiteSpace($RouteEvidencePath)) {
+    $safeModel = $Model -replace '[^A-Za-z0-9._-]', '_'
+    $RouteEvidencePath = Join-Path $repo "chung-khao\evidence\routes\$safeModel-responses-codex.json"
+}
+& (Join-Path $PSScriptRoot 'route-compatibility.ps1') -Model $Model -Endpoint responses -Harness codex -SmokeEvidencePath $RouteEvidencePath
 
 $oldHome = $env:CODEX_HOME
 $oldKey = $env:THUCCHIEN_API_KEY

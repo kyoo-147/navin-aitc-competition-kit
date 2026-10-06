@@ -7,7 +7,7 @@ description: Implement one bounded BTC competition outcome end-to-end in an assi
 
 Own one coherent outcome. Do not redesign the project or change provider/runtime policy. The Captain selects the model: prefer the cheapest live canary-passing candidate; `gpt-6-luna` for Codex Responses, `deepseek-flash` for a validated chat harness, and never a premium model without explicit tier assignment.
 
-Do not edit until `scripts/implementation-gate.ps1` reports `IMPLEMENTATION ALLOWED`. Read `docs/PROJECT.md`, `docs/ARCHITECTURE.md`, `docs/UX_FLOW.md`, `docs/DECISIONS.md`, `docs/TASKS.md`, and `docs/PROJECT_LOCK.json` as immutable source of truth. Never replace a locked architecture, stack, data model, API, screen, flow, or scope with personal judgement. Return a blocker or change proposal to the Captain; only explicit user approval can unlock it.
+Do not edit until `scripts/implementation-gate.ps1` reports `IMPLEMENTATION ALLOWED`. Read authoritative `docs/PROJECT_CONTRACT.json` and `contracts/app-contract.json` first, then the derived Markdown views and `docs/PROJECT_LOCK.json`. When wording differs, JSON contracts win and contract drift is a blocker. Never replace a locked architecture, stack, data model, API, screen, flow, or scope with personal judgement. Return a blocker or change proposal to the Captain; only explicit user approval can unlock it.
 
 ## Before editing
 
@@ -44,7 +44,7 @@ For a bug, do not theorize before one command can reproduce the user's exact sym
 6. run the original user path, relevant broader gates, and the full suite once at the end;
 7. inspect the final diff for scope creep before commit.
 
-Reuse existing modules. Fix root causes. Stay inside `OWN`. Do not touch `DO_NOT_TOUCH` without Captain approval. Backend and frontend lanes work independently against the frozen contract and must not integrate incrementally or edit each other's paths. A frontend contract adapter is lane-only evidence, not real integration. No placeholders, fake production paths, fake health/metrics, silent fallback, weakened tests, unrequested dependencies, or external source copying.
+Reuse existing modules. Fix root causes. Stay inside `OWN`. Do not touch `DO_NOT_TOUCH` without Captain approval. Backend and frontend lanes work independently against the frozen contract and do not edit each other's paths. Each lane must deliver the smallest contract-compliant slice needed for the Captain's minute 40-50 integration canary before expanding remaining scope. A frontend contract adapter is lane-only evidence, not real integration. No placeholders, fake production paths, fake health/metrics, silent fallback, weakened tests, unrequested dependencies, or external source copying.
 
 ## Verification
 

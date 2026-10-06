@@ -20,6 +20,14 @@ function Check-Step {
 $repo = $null
 $logSettings = $null
 Check-Step 'Official repository structure' { $script:repo = Assert-AitcOfficialRepo -RepoPath $RepoPath }
+Check-Step 'Process is running at official repository root' {
+    if ($null -eq $repo) { throw 'Official repository was not resolved.' }
+    $gitTop = (& git -C $repo rev-parse --show-toplevel 2>$null | Out-String).Trim()
+    if (-not $gitTop) { throw 'git rev-parse --show-toplevel failed.' }
+    $current = [IO.Path]::GetFullPath((Get-Location).Path).TrimEnd('\')
+    $top = [IO.Path]::GetFullPath($gitTop).TrimEnd('\')
+    if ($current -ne $top) { throw "Current workspace '$current' must equal Git top-level '$top'." }
+}
 if ($null -eq $repo) { throw 'Cannot continue without a valid official repository.' }
 
 Check-Step 'Required local commands' {
@@ -69,6 +77,9 @@ Check-Step 'Repository identity and final-round directory' {
     try {
         $origin = (& git remote get-url origin 2>$null).Trim()
         if (-not $origin) { throw 'origin remote is missing.' }
+        if (-not (Test-AitcOfficialOrigin -Origin $origin)) {
+            throw "Official origin mismatch: $origin"
+        }
         if (-not (Test-Path -LiteralPath 'chung-khao\README.md')) { throw 'chung-khao/README.md is missing.' }
     } finally { Pop-Location }
 }

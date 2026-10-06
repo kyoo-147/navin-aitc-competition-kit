@@ -1,0 +1,129 @@
+{
+    "schema_version":  1,
+    "status":  "LOCKED",
+    "purpose":  "Machine-readable boundary shared by frontend and backend lanes. Replace examples with challenge-specific values before Human Lock.",
+    "routes":  [
+                   {
+                       "id":  "portable-doctor",
+                       "method":  "CLI",
+                       "path":  "setup/doctor.ps1",
+                       "request":  "DoctorRequest",
+                       "responses":  [
+                                         "DoctorReady",
+                                         "DoctorBlocked"
+                                     ],
+                       "states":  [
+                                      "checking",
+                                      "ready",
+                                      "blocked",
+                                      "user_action_required"
+                                  ],
+                       "errors":  [
+                                      "WRONG_REPO_ROOT",
+                                      "ORIGIN_MISSING",
+                                      "AI_HOOK_MISSING",
+                                      "MANAGED_FILE_DRIFT"
+                                  ]
+                   },
+                   {
+                       "id":  "integration-canary",
+                       "method":  "CLI",
+                       "path":  "kit/scripts/integration-canary.ps1",
+                       "request":  "IntegrationCanaryRequest",
+                       "responses":  [
+                                         "IntegrationCanaryVerified"
+                                     ],
+                       "states":  [
+                                      "not_started",
+                                      "running",
+                                      "passed",
+                                      "failed"
+                                  ],
+                       "errors":  [
+                                      "CONTRACT_DRIFT",
+                                      "CANARY_COMMAND_FAILED",
+                                      "EVIDENCE_INCOMPLETE"
+                                  ]
+                   }
+               ],
+    "requests":  {
+                     "DoctorRequest":  {
+                                           "required":  [
+                                                            "profile",
+                                                            "official_repo"
+                                                        ],
+                                           "properties":  {
+                                                              "profile":  {
+                                                                              "enum":  [
+                                                                                           "Normal",
+                                                                                           "Aitc"
+                                                                                       ]
+                                                                          },
+                                                              "official_repo":  {
+                                                                                    "type":  "absolute_path"
+                                                                                }
+                                                          }
+                                       },
+                     "IntegrationCanaryRequest":  {
+                                                      "required":  [
+                                                                       "project_root",
+                                                                       "frontend_path",
+                                                                       "backend_endpoint",
+                                                                       "command"
+                                                                   ],
+                                                      "properties":  {
+                                                                         "project_root":  {
+                                                                                              "type":  "absolute_path"
+                                                                                          },
+                                                                         "frontend_path":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                         "backend_endpoint":  {
+                                                                                                  "type":  "string"
+                                                                                              },
+                                                                         "command":  {
+                                                                                         "type":  "string"
+                                                                                     }
+                                                                     }
+                                                  }
+                 },
+    "responses":  {
+                      "DoctorReady":  {
+                                          "exit_code":  0,
+                                          "marker":  "DOCTOR READY"
+                                      },
+                      "DoctorBlocked":  {
+                                            "exit_code":  1,
+                                            "marker":  "DOCTOR BLOCKED"
+                                        },
+                      "IntegrationCanaryVerified":  {
+                                                        "exit_code":  0,
+                                                        "marker":  "INTEGRATION CANARY VERIFIED"
+                                                    }
+                  },
+    "states":  {
+                   "checking":  "Deterministic checks are running.",
+                   "ready":  "All mandatory checks passed.",
+                   "blocked":  "One or more mandatory checks failed.",
+                   "user_action_required":  "A secret or consequential human action is required.",
+                   "not_started":  "No real vertical slice has been executed.",
+                   "running":  "The real vertical-slice command is running.",
+                   "passed":  "The real UI-to-backend slice passed and evidence was recorded.",
+                   "failed":  "The slice failed; new scope must remain frozen."
+               },
+    "errors":  {
+                   "shape":  {
+                                 "code":  "string",
+                                 "message":  "string",
+                                 "details":  "object|null",
+                                 "retryable":  "boolean"
+                             },
+                   "required_codes":  [
+                                          "VALIDATION_ERROR",
+                                          "UNAUTHORIZED",
+                                          "NOT_FOUND",
+                                          "UPSTREAM_ERROR",
+                                          "INTERNAL_ERROR"
+                                      ]
+               }
+}

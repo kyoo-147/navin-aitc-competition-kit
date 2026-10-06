@@ -2,12 +2,25 @@
   "schema_version": 2,
   "policy": "evidence-gated-value-routing",
   "runtime_source_of_truth": "/key/info",
+  "model_turn_concurrency": {
+    "source": "live /key/info",
+    "drill_default": 2,
+    "drill_max_after_live_headroom_check": 3,
+    "official_default": 6,
+    "reserve_headroom": true,
+    "forbid_hardcoded_gateway_maximum": true
+  },
   "concurrency": {
     "max_concurrent_writers": 2,
     "max_read_only_reviewers": 1,
     "writer_worktree_required": true,
     "reviewer_must_be_read_only": true,
     "spawn_rule": "Spawn only when ownership is independent, acceptance is observable, and coordination cost is lower than time saved."
+  },
+  "route_verification": {
+    "required_tuple": ["model", "endpoint", "harness", "tool_call_smoke", "provider_proof"],
+    "catalog_presence_is_sufficient": false,
+    "current_session_smoke_required": true
   },
   "tiers": {
     "T0": {

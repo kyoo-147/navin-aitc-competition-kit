@@ -21,8 +21,9 @@ Challenge / idea
 → Architecture Lavish || interactive UX Flow Lavish
 → user annotates and approves
 → HUMAN LOCK
-→ compile five source-of-truth documents
-→ hash-lock documents and artifacts
+→ compile canonical PROJECT_CONTRACT.json + contracts/app-contract.json
+→ generate five human-readable Markdown views
+→ hash-lock contracts, views, and artifacts
 → implementation-gate.ps1
 ```
 
@@ -35,12 +36,15 @@ official repository root/
 ├─ organizer hooks and config        # preserve at root
 └─ chung-khao/
    ├─ docs/
-   │  ├─ PROJECT.md
+   │  ├─ PROJECT_CONTRACT.json       # canonical authority
+   │  ├─ PROJECT.md                  # derived human view
    │  ├─ ARCHITECTURE.md
    │  ├─ UX_FLOW.md
    │  ├─ DECISIONS.md
    │  ├─ TASKS.md
    │  └─ PROJECT_LOCK.json
+   ├─ contracts/
+   │  └─ app-contract.json           # FE/BE routes, shapes, states, errors
    ├─ artifacts/
    │  ├─ architecture.html
    │  └─ ux-flow.html
@@ -61,8 +65,11 @@ verified official base SHA
 │  └─ screens + interactions + states + frontend checks → commit B
 └─ optional read-only reviewer
 
-Captain verifies A and B independently
-→ Captain integrates commit A and commit B
+Captain verifies the first bounded slice from A and B
+→ minute 40-50: integrate real UI → real endpoint → real service/AI → rendered response
+→ if canary fails: freeze new scope and repair the same slice
+→ if canary passes: A and B continue remaining bounded scope
+→ Captain performs full integration
 → resolve only contract-conformant conflicts
 → remove critical-path mocks/adapters
 → real FE/BE E2E
@@ -73,7 +80,7 @@ Captain verifies A and B independently
 → commit/push/submit only when authorized
 ```
 
-Frontend and backend do not integrate while either lane is still building. A frontend contract adapter is permitted only for lane testing and is not proof of real integration.
+Frontend and backend keep exclusive path ownership, but they must meet at the early integration canary. A frontend contract adapter is permitted only for lane testing and is not proof of that real canary.
 
 ## 5. Browser workflow
 
@@ -103,6 +110,7 @@ The Captain reports:
 - writer branches, commits, ownership, and verification;
 - integrated SHA and clean status;
 - targeted tests, build, real runtime, and FE/BE E2E;
-- exact BTC provider and AI Log evidence in official mode;
+- exact model + endpoint + harness + tool-call smoke and BTC provider evidence in official mode;
+- separate Git push, AI Log HTTP 202, and same-session BTC readback evidence;
 - spend state, deployment proof, and submission receipt where required;
 - every missing item as `UNVERIFIED` or `BLOCKED`.

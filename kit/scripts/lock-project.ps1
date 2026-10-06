@@ -9,6 +9,8 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $ProjectRoot -ErrorAction Stop).Path
 $required = @(
+    'docs/PROJECT_CONTRACT.json',
+    'contracts/app-contract.json',
     'docs/PROJECT.md',
     'docs/ARCHITECTURE.md',
     'docs/UX_FLOW.md',
@@ -17,6 +19,19 @@ $required = @(
     'artifacts/architecture.html',
     'artifacts/ux-flow.html'
 )
+
+& (Join-Path $PSScriptRoot 'contract-validate.ps1') -ProjectRoot $root
+& (Join-Path $PSScriptRoot 'lavish-offline-check.ps1') -ProjectRoot $root
+
+$projectContract = Get-Content -LiteralPath (Join-Path $root 'docs\PROJECT_CONTRACT.json') -Raw | ConvertFrom-Json
+$appContract = Get-Content -LiteralPath (Join-Path $root 'contracts\app-contract.json') -Raw | ConvertFrom-Json
+if ([string]$projectContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid PROJECT_CONTRACT status.' }
+if ([string]$appContract.status -notin @('DRAFT','LOCKED')) { throw 'Cannot lock; invalid app-contract status.' }
+$projectContract.status = 'LOCKED'
+$appContract.status = 'LOCKED'
+$utf8 = New-Object System.Text.UTF8Encoding($false)
+[IO.File]::WriteAllText((Join-Path $root 'docs\PROJECT_CONTRACT.json'), (($projectContract | ConvertTo-Json -Depth 30) + [Environment]::NewLine), $utf8)
+[IO.File]::WriteAllText((Join-Path $root 'contracts\app-contract.json'), (($appContract | ConvertTo-Json -Depth 30) + [Environment]::NewLine), $utf8)
 
 $lockedFiles = foreach ($relative in $required) {
     $path = Join-Path $root ($relative.Replace('/', [IO.Path]::DirectorySeparatorChar))
@@ -30,7 +45,7 @@ $lockedFiles = foreach ($relative in $required) {
 
 $now = [DateTime]::UtcNow.ToString('o')
 $lock = [ordered]@{
-    schema_version = 1
+    schema_version = 2
     session_mode = $SessionMode
     status = 'LOCKED'
     official_repository = $OfficialRepository
@@ -38,11 +53,13 @@ $lock = [ordered]@{
     architecture_lavish = [ordered]@{ status = 'LOCKED_BY_USER'; path = 'artifacts/architecture.html'; approved_by = $ApprovedBy; approved_at_utc = $now }
     ux_flow_lavish = [ordered]@{ status = 'LOCKED_BY_USER'; path = 'artifacts/ux-flow.html'; approved_by = $ApprovedBy; approved_at_utc = $now }
     contract = [ordered]@{ status = 'LOCKED'; approved_by = $ApprovedBy; approved_at_utc = $now }
+    canonical_contract = [ordered]@{ status = 'LOCKED'; path = 'docs/PROJECT_CONTRACT.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
+    boundary_contract = [ordered]@{ status = 'LOCKED'; path = 'contracts/app-contract.json'; approved_by = $ApprovedBy; approved_at_utc = $now }
+    base_commit = (& git -C $root rev-parse HEAD 2>$null)
     locked_files = @($lockedFiles)
 }
 
 $lockPath = Join-Path $root 'docs/PROJECT_LOCK.json'
-$utf8 = New-Object System.Text.UTF8Encoding($false)
 [IO.File]::WriteAllText($lockPath, (($lock | ConvertTo-Json -Depth 6) + [Environment]::NewLine), $utf8)
 Write-Host "[PASS] Project contract locked at $lockPath"
 Write-Host '[INFO] Run implementation-gate.ps1 before dispatching writers.'

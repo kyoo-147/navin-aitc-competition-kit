@@ -2,7 +2,10 @@
 param(
     [Parameter(Mandatory = $true)][string]$RepoPath,
     [Parameter(Mandatory = $true)][string]$Model,
-    [string]$CodexHome = (Join-Path $HOME '.codex')
+    [string]$CodexHome = (Join-Path $HOME '.codex'),
+    [ValidateSet('responses')][string]$Endpoint = 'responses',
+    [ValidateSet('codex')][string]$Harness = 'codex',
+    [string]$EvidencePath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,7 +22,9 @@ if ($configText -notmatch '(?m)^\s*model_catalog_json\s*=\s*"([^"]+)"') { throw 
 
 $nonce = [Guid]::NewGuid().ToString('N').Substring(0, 12)
 $marker = "AITC_CANARY_OK_$nonce"
-$prompt = "Reply with exactly $marker. Do not read files and do not call tools."
+$toolRelative = "chung-khao/.aitc-tool-canary-$nonce.txt"
+$toolPath = Join-Path $repo ($toolRelative.Replace('/', '\'))
+$prompt = "Use the shell tool exactly once to write the exact text $marker into $toolRelative. Then read no other files and reply with exactly $marker."
 $oldHome = $env:CODEX_HOME
 $oldGateway = $env:THUCCHIEN_API_KEY
 $env:CODEX_HOME = $CodexHome
@@ -32,6 +37,9 @@ try {
     $codexOutput = (& $codex --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust exec -m $Model $prompt 2>&1 | Out-String)
     if ($LASTEXITCODE -ne 0) { throw "Codex canary failed with exit code $LASTEXITCODE." }
     if ($codexOutput -notmatch [regex]::Escape($marker)) { throw 'Codex canary response lacks the expected marker.' }
+    if (-not (Test-Path -LiteralPath $toolPath -PathType Leaf)) { throw 'Codex canary did not create the required tool-call marker.' }
+    $toolText = (Get-Content -LiteralPath $toolPath -Raw).Trim()
+    if ($toolText -ne $marker) { throw 'Codex tool-call marker content is incorrect.' }
 
     $meta = Get-AitcLatestCodexSessionMeta -CodexHome $CodexHome -RepoPath $repo -NotBeforeUtc $startedUtc
     if ($meta.Provider -ne 'thucchien') { throw "Canary used provider '$($meta.Provider)', not thucchien." }
@@ -45,6 +53,7 @@ try {
         throw 'AI Log submission was not confirmed with status 202. Pending logs were preserved.'
     }
 } finally {
+    Remove-Item -LiteralPath $toolPath -Force -ErrorAction SilentlyContinue
     Pop-Location
     $env:CODEX_HOME = $oldHome
     $env:THUCCHIEN_API_KEY = $oldGateway
@@ -62,9 +71,30 @@ foreach ($required in @('UserPromptSubmit', 'Stop')) {
     if (-not ($sessionEvents -contains $required)) { throw "Canary server session lacks $required." }
 }
 
+if ([string]::IsNullOrWhiteSpace($EvidencePath)) {
+    $safeModel = $Model -replace '[^A-Za-z0-9._-]', '_'
+    $EvidencePath = Join-Path $repo "chung-khao\evidence\routes\$safeModel-responses-codex.json"
+}
+$evidence = [ordered]@{
+    schema_version = 1
+    status = 'VERIFIED'
+    verified_at_utc = [DateTime]::UtcNow.ToString('o')
+    model = $Model
+    endpoint = $Endpoint
+    harness = $Harness
+    provider = $meta.Provider
+    session_id = $meta.SessionId
+    tool_call_smoke = $true
+    ai_log_submit_202 = $true
+    ai_log_readback = $true
+}
+$evidenceParent = Split-Path $EvidencePath -Parent
+if ($evidenceParent) { New-Item -ItemType Directory -Force -Path $evidenceParent | Out-Null }
+[IO.File]::WriteAllText($EvidencePath, (($evidence | ConvertTo-Json -Depth 4) + [Environment]::NewLine), (New-Object Text.UTF8Encoding($false)))
 Write-Host "[PASS] Codex Gateway canary returned the expected marker using model '$Model'."
 Write-Host "[PASS] Rollout provider is thucchien for session $(Mask-AitcValue $meta.SessionId)."
 Write-Host '[PASS] Local AI Log contains UserPromptSubmit and Stop.'
 Write-Host '[PASS] AI Log submission returned 202.'
 Write-Host '[PASS] BTC server readback contains the same session events.'
+Write-Host "[PASS] Tool-call route evidence: $EvidencePath"
 Write-Host 'CODEX CANARY VERIFIED' -ForegroundColor Green

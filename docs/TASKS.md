@@ -1,24 +1,15 @@
-# Portable Kit Task Graph
+# Nhiệm vụ vận hành đã khóa
 
-Status: READY_AFTER_GATE
+Status: LOCKED DERIVED VIEW
+Canonical authority: [`PROJECT_CONTRACT.json`](PROJECT_CONTRACT.json)
 
-## Lane A - portable configuration engine
-
-- `setup/lib/Portable.Common.ps1`
-- bootstrap, doctor, update, rollback, uninstall and safe export
-- backup, staging, validation, manifest and secret scanning
-
-## Lane B - portable sources and documentation
-
-- `profiles/codex/`
-- `manifests/`
-- root README and security guidance
-- clean-home fixtures and tests
-
-## Integration
-
-1. Complete source templates and scripts.
-2. Run clean-home plan and apply simulation.
-3. Verify existing-file preservation and rollback.
-4. Run secret scan, kit verification and unit tests.
-5. Commit only after all gates pass.
+1. Chạy doctor/preflight từ gốc official repo và xác minh origin cùng AI hooks.
+2. Đọc `/key/info`, budget và chọn giới hạn lượt gọi còn headroom.
+3. Chạy tool-call canary cho đúng model + endpoint + harness; lưu provider/session evidence.
+4. Hoàn thành Spec Broker, Human Brief và đúng hai Lavish artifacts local-only.
+5. Khóa canonical contract, boundary contract, Markdown views và Lavish hashes.
+6. Tạo hai worktree FE/BE từ cùng lock/base commit.
+7. Chạy real integration canary khoảng phút 40-50 và commit evidence.
+8. Hoàn tất hai lane, full integration, E2E và ba review độc lập.
+9. Deploy và smoke, push và xác minh remote SHA.
+10. Submit AI Log, yêu cầu HTTP 202, GET readback đúng session, rồi mới final submit.
