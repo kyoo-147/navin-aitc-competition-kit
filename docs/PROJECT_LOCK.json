@@ -6,42 +6,49 @@
     "brief":  {
                   "confirmed":  true,
                   "approved_by":  "user",
-                  "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                  "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
               },
     "architecture_lavish":  {
                                 "status":  "LOCKED_BY_USER",
                                 "path":  "artifacts/architecture.html",
                                 "approved_by":  "user",
-                                "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                                "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
                             },
     "ux_flow_lavish":  {
                            "status":  "LOCKED_BY_USER",
                            "path":  "artifacts/ux-flow.html",
                            "approved_by":  "user",
-                           "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                           "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
                        },
     "contract":  {
                      "status":  "LOCKED",
                      "approved_by":  "user",
-                     "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                     "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
                  },
     "canonical_contract":  {
                                "status":  "LOCKED",
                                "path":  "docs/PROJECT_CONTRACT.json",
                                "approved_by":  "user",
-                               "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                               "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
                            },
     "boundary_contract":  {
                               "status":  "LOCKED",
                               "path":  "contracts/app-contract.json",
                               "approved_by":  "user",
-                              "approved_at_utc":  "2026-10-06T13:11:48.4773616Z"
+                              "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
                           },
-    "base_commit":  "cc1abf1d5ae0f5efc51fbca136be4c5165b9e190",
+    "design":  {
+                   "status":  "LOCKED",
+                   "required":  true,
+                   "path":  "design/DESIGN_LOCK.json",
+                   "approved_by":  "user",
+                   "approved_at_utc":  "2026-10-06T13:22:51.5240717Z"
+               },
+    "base_commit":  "30bd3c4e77a051ad0ca0dd51876da93409448451",
     "locked_files":  [
                          {
                              "path":  "docs/PROJECT_CONTRACT.json",
-                             "sha256":  "f332ff1ae81adc210980220a6c02b2e8189229ef63ee8a9d98e6b0764c92ab6f"
+                             "sha256":  "6fefba16a3a549f011fe9ecd24c6ab3181ca3809302e4afdd159cb36e688cb2b"
                          },
                          {
                              "path":  "contracts/app-contract.json",
@@ -74,6 +81,30 @@
                          {
                              "path":  "artifacts/ux-flow.html",
                              "sha256":  "06469f65e84a5bd21e7d3e5626901309fa664de2e8c1e24ce23cb3ac72cf39f9"
+                         },
+                         {
+                             "path":  "design/DESIGN_BRIEF.md",
+                             "sha256":  "6756800ea26ca2ff080fabd77ebc13b67b15d4f0a65d73df2af54050bdbb69ad"
+                         },
+                         {
+                             "path":  "design/DESIGN_SYSTEM.md",
+                             "sha256":  "ed10c1ea76143ac525a97010561c109984c6e71feabb1a34eb27dfc171995618"
+                         },
+                         {
+                             "path":  "design/SCREEN_CONTRACTS.md",
+                             "sha256":  "8583582d37b37cfee106c2e16f6f6f74a8081b6b367a5c9727a2611e924d20c0"
+                         },
+                         {
+                             "path":  "design/COMPONENTS.md",
+                             "sha256":  "f36610b8050c7c881959d186978db70d74d01a2c7f7615bca6f28974972f48b9"
+                         },
+                         {
+                             "path":  "design/TOKENS.css",
+                             "sha256":  "a1e8a353292d6747b9aacef43a97a639c4b36a61f78f570d81091717bdfd43fa"
+                         },
+                         {
+                             "path":  "design/DESIGN_LOCK.json",
+                             "sha256":  "c41181145c55aefc59fbf3e187e1d760598359444b96b2f9177563b47744cb75"
                          }
                      ]
 }
