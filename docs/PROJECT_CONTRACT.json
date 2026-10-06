@@ -1,137 +1,136 @@
 {
-    "schema_version":  2,
-    "status":  "LOCKED",
-    "session_mode":  "DRILL",
-    "challenge":  {
-                      "name":  "NAVIN AITC portable competition kit",
-                      "goal":  "Reproduce a safe, contract-first Codex and Orca competition environment on another Windows machine.",
-                      "users":  [
-                                    "NAVIN AITC leader",
-                                    "authorized teammates"
-                                ]
-                  },
-    "requirements":  {
-                         "must_have":  [
-                                           "Secret-free portable profiles, skills, wrappers, settings templates and version manifests",
-                                           "Exactly two local-only Lavish decision artifacts before implementation",
-                                           "A canonical machine-readable project contract and a machine-readable FE/BE boundary contract",
-                                           "Two isolated writer worktrees with a real early integration canary around minute 40-50",
-                                           "Repo-root, origin and AI Log hook invariants for official work",
-                                           "Route verification by model, endpoint, harness and tool-call smoke",
-                                           "Separate deploy, push, AI Log submit, AI Log readback and final submission gates"
-                                       ],
-                         "out_of_scope":  [
-                                              "Raw user homes, credentials, sessions, browser profiles, logs, databases or caches",
-                                              "Automatic secret entry or provider fallback",
-                                              "Treating Git push success as AI Log verification"
-                                          ]
-                     },
-    "scope":  {
-                  "official_repository":  "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research",
-                  "official_write_boundary":  "chung-khao/**",
-                  "process_cwd":  "official repository root",
-                  "maximum_writer_worktrees":  2,
-                  "maximum_read_only_reviewers":  1
-              },
-    "architecture":  {
-                         "authority_order":  [
-                                                 "docs/PROJECT_CONTRACT.json",
-                                                 "contracts/app-contract.json",
-                                                 "derived Markdown views",
-                                                 "worker briefs"
-                                             ],
-                         "integration_strategy":  "Independent FE and BE worktrees meet at a real vertical-slice canary around minute 40-50, then continue in parallel before full integration.",
-                         "lavish_runtime":  {
-                                                "command":  "lavish-axi",
-                                                "version":  "0.1.63",
-                                                "network_allowed":  false,
-                                                "allowed_assets":  [
-                                                                       "inline CSS",
-                                                                       "inline JavaScript",
-                                                                       "local SVG",
-                                                                       "system fonts"
-                                                                   ],
-                                                "forbidden":  [
-                                                                  "npx",
-                                                                  "lavish share",
-                                                                  "remote publish",
-                                                                  "remote assets",
-                                                                  "Tailwind CDN",
-                                                                  "Google Fonts",
-                                                                  "remote JavaScript"
-                                                              ]
-                                            }
-                     },
-    "interfaces":  {
-                       "boundary_contract":  "contracts/app-contract.json",
-                       "route_verification_fields":  [
-                                                         "model",
-                                                         "endpoint",
-                                                         "harness",
-                                                         "tool_call_smoke",
-                                                         "provider_proof"
-                                                     ]
-                   },
-    "screens":  {
-                    "decision_artifacts":  [
-                                               "artifacts/architecture.html",
-                                               "artifacts/ux-flow.html"
-                                           ],
-                    "ux_design_scope":  [
-                    "design_lock_required":  true,
-                    "design_contract":  {
-                        "brief": "design/DESIGN_BRIEF.md",
-                        "system": "design/DESIGN_SYSTEM.md",
-                        "screens": "design/SCREEN_CONTRACTS.md",
-                        "components": "design/COMPONENTS.md",
-                        "tokens": "design/TOKENS.css",
-                        "lock": "design/DESIGN_LOCK.json"
-                    },
-                    "ux_design_scope":  [
-                                            "screen_map",
-                                            "user_journey",
-                                            "visual_directions",
-                                            "design_choice",
-                                            "core_components",
-                                            "interactive_wireframe",
-                                            "loading",
-                                            "error",
-                                            "empty",
-                                            "success",
-                                            "responsive_behavior",
-                                            "accessibility",
-                                            "design_tokens"
-                                        ],
-                    "required_states":  [
-                                            "empty",
-                                            "loading",
-                                            "error",
-                                            "success"
-                                        ]
-                },
-    "decisions":  [
-                      "Canonical JSON is authoritative; Markdown files are human-readable views.",
-                      "An early real integration canary is mandatory before either lane finishes all remaining scope.",
-                      "Lavish is pinned and local-only during competition.",
-                      "Live key information controls concurrency; DRILL defaults to 2 active model turns and OFFICIAL defaults to 6 while preserving headroom.",
-                      "Model catalog presence alone never proves a route compatible.",
-                      "AI Log verification requires submit status 202 and readback for the same current Codex session."
-                  ],
-    "acceptance":  [
-                       "Contract and lock drift fail closed.",
-                       "Wrong cwd, missing origin or missing AI Log hooks fail official readiness.",
-                       "Remote Lavish dependencies and unpinned Lavish versions fail validation.",
-                       "Unverified model, endpoint or harness combinations are rejected.",
-                       "A failed early integration canary blocks scope expansion.",
-                       "Push success without same-session AI Log readback blocks final readiness."
-                   ],
-    "tasks":  [
-                  "Validate and lock canonical and boundary contracts",
-                  "Run official repo-root and provider preflight",
-                  "Build FE and BE independently from the locked boundary contract",
-                  "Run and record the minute 40-50 integration canary",
-                  "Finish lanes and run full integration and E2E",
-                  "Review spec, engineering and BTC provenance independently",
-                  "Deploy, push, submit logs, read back same-session events, then submit"
-              ]
+  "schema_version": 2,
+  "status": "LOCKED",
+  "session_mode": "DRILL",
+  "challenge": {
+    "name": "NAVIN AITC portable competition kit",
+    "goal": "Reproduce a safe, contract-first Codex and Orca competition environment on another Windows machine.",
+    "users": [
+      "NAVIN AITC leader",
+      "authorized teammates"
+    ]
+  },
+  "requirements": {
+    "must_have": [
+      "Secret-free portable profiles, skills, wrappers, settings templates and version manifests",
+      "Exactly two local-only Lavish decision artifacts before implementation",
+      "A canonical machine-readable project contract and a machine-readable FE/BE boundary contract",
+      "Two isolated writer worktrees with a real early integration canary around minute 40-50",
+      "Repo-root, origin and AI Log hook invariants for official work",
+      "Route verification by model, endpoint, harness and tool-call smoke",
+      "Separate deploy, push, AI Log submit, AI Log readback and final submission gates"
+    ],
+    "out_of_scope": [
+      "Raw user homes, credentials, sessions, browser profiles, logs, databases or caches",
+      "Automatic secret entry or provider fallback",
+      "Treating Git push success as AI Log verification"
+    ]
+  },
+  "scope": {
+    "official_repository": "https://github.com/ai-thuc-chien/aitc2026-team-918-navin-research",
+    "official_write_boundary": "chung-khao/**",
+    "process_cwd": "official repository root",
+    "maximum_writer_worktrees": 2,
+    "maximum_read_only_reviewers": 1
+  },
+  "architecture": {
+    "authority_order": [
+      "docs/PROJECT_CONTRACT.json",
+      "contracts/app-contract.json",
+      "derived Markdown views",
+      "worker briefs"
+    ],
+    "integration_strategy": "Independent FE and BE worktrees meet at a real vertical-slice canary around minute 40-50, then continue in parallel before full integration.",
+    "lavish_runtime": {
+      "command": "lavish-axi",
+      "version": "0.1.63",
+      "network_allowed": false,
+      "allowed_assets": [
+        "inline CSS",
+        "inline JavaScript",
+        "local SVG",
+        "system fonts"
+      ],
+      "forbidden": [
+        "npx",
+        "lavish share",
+        "remote publish",
+        "remote assets",
+        "Tailwind CDN",
+        "Google Fonts",
+        "remote JavaScript"
+      ]
+    }
+  },
+  "interfaces": {
+    "boundary_contract": "contracts/app-contract.json",
+    "route_verification_fields": [
+      "model",
+      "endpoint",
+      "harness",
+      "tool_call_smoke",
+      "provider_proof"
+    ]
+  },
+  "screens": {
+    "decision_artifacts": [
+      "artifacts/architecture.html",
+      "artifacts/ux-flow.html"
+    ],
+    "ux_design_scope": [
+      "screen_map",
+      "user_journey",
+      "visual_directions",
+      "design_choice",
+      "core_components",
+      "interactive_wireframe",
+      "loading",
+      "error",
+      "empty",
+      "success",
+      "responsive_behavior",
+      "accessibility",
+      "design_tokens"
+    ],
+    "required_states": [
+      "empty",
+      "loading",
+      "error",
+      "success"
+    ],
+    "design_lock_required": true,
+    "design_contract": {
+      "brief": "design/DESIGN_BRIEF.md",
+      "system": "design/DESIGN_SYSTEM.md",
+      "screens": "design/SCREEN_CONTRACTS.md",
+      "components": "design/COMPONENTS.md",
+      "tokens": "design/TOKENS.css",
+      "lock": "design/DESIGN_LOCK.json"
+    }
+  },
+  "decisions": [
+    "Canonical JSON is authoritative; Markdown files are human-readable views.",
+    "An early real integration canary is mandatory before either lane finishes all remaining scope.",
+    "Lavish is pinned and local-only during competition.",
+    "Live key information controls concurrency; DRILL defaults to 2 active model turns and OFFICIAL defaults to 6 while preserving headroom.",
+    "Model catalog presence alone never proves a route compatible.",
+    "AI Log verification requires submit status 202 and readback for the same current Codex session."
+  ],
+  "acceptance": [
+    "Contract and lock drift fail closed.",
+    "Wrong cwd, missing origin or missing AI Log hooks fail official readiness.",
+    "Remote Lavish dependencies and unpinned Lavish versions fail validation.",
+    "Unverified model, endpoint or harness combinations are rejected.",
+    "A failed early integration canary blocks scope expansion.",
+    "Push success without same-session AI Log readback blocks final readiness."
+  ],
+  "tasks": [
+    "Validate and lock canonical and boundary contracts",
+    "Run official repo-root and provider preflight",
+    "Build FE and BE independently from the locked boundary contract",
+    "Run and record the minute 40-50 integration canary",
+    "Finish lanes and run full integration and E2E",
+    "Review spec, engineering and BTC provenance independently",
+    "Deploy, push, submit logs, read back same-session events, then submit"
+  ]
 }
