@@ -32,6 +32,13 @@ try {
     if ([IO.File]::ReadAllText((Join-Path $fixture 'config.toml')).Trim() -ne 'CONFIG_SENTINEL') { throw 'Rollback changed preserved config.toml.' }
     Write-PortableStatus PASS 'Rollback restored prior state and retained preserved config'
 
+    $lineEndingSource = Join-Path $repo 'setup\doctor.ps1'
+    $lineEndingCopy = Join-Path $fixture 'doctor-crlf.ps1'
+    $canonical = [IO.File]::ReadAllText($lineEndingSource).Replace("`r`n", "`n").Replace("`r", "`n")
+    Write-Utf8NoBom -Path $lineEndingCopy -Content ($canonical.Replace("`n", "`r`n"))
+    if ((Get-PortableCanonicalTextHash $lineEndingSource) -ne (Get-PortableCanonicalTextHash $lineEndingCopy)) { throw 'Canonical hash changed across LF/CRLF.' }
+    Write-PortableStatus PASS 'Portable checksums are stable across LF and CRLF'
+
     foreach ($root in @('profiles','setup','manifests')) {
         Get-ChildItem -LiteralPath (Join-Path $repo $root) -File -Recurse | ForEach-Object {
             if ($_.Name -eq 'portable-files.json') { return }

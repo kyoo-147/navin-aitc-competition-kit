@@ -2,6 +2,7 @@
 param([string]$RepoRoot)
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'lib\Portable.Common.ps1')
 if ([string]::IsNullOrWhiteSpace($RepoRoot)) { $RepoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path }
 $root = (Resolve-Path -LiteralPath $RepoRoot).Path
 $output = Join-Path $root 'manifests\portable-files.json'
@@ -14,7 +15,7 @@ $files = foreach ($item in $items | Sort-Object FullName -Unique) {
     [ordered]@{
         path = $item.FullName.Substring($root.Length + 1).Replace('\','/')
         bytes = $item.Length
-        sha256 = (Get-FileHash -LiteralPath $item.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+        sha256 = Get-PortableCanonicalTextHash $item.FullName
     }
 }
 $manifest = [ordered]@{ schema_version=1; generated_at_utc=[DateTime]::UtcNow.ToString('o'); file_count=@($files).Count; files=@($files) }
