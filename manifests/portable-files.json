@@ -1,6 +1,6 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-06T10:24:21.2008587Z",
+    "generated_at_utc":  "2026-10-06T10:26:04.2210811Z",
     "file_count":  21,
     "files":  [
                   {
@@ -26,7 +26,7 @@
                   {
                       "path":  "profiles/codex/codex-orca.cmd",
                       "bytes":  625,
-                      "sha256":  "fb54e78f0876f9018b40b8c83c310ffd3dae05f41676d72b11c075fcba8932ad"
+                      "sha256":  "09b6488dee67d2eefdda353fe9d3fe9dad2d4fbab113e48dde48ca2a58299b0c"
                   },
                   {
                       "path":  "profiles/codex/codex-runtime-refresh.ps1",
@@ -65,8 +65,8 @@
                   },
                   {
                       "path":  "setup/doctor.ps1",
-                      "bytes":  6288,
-                      "sha256":  "fdf4b2b1c593c7e4584c8290e071211df349c3d9b5d883310ee5ac5ef0a6a95b"
+                      "bytes":  6301,
+                      "sha256":  "c80d9988afbf58087ec397d0fb29f403509ed715291f771b165cb27c349a5f0d"
                   },
                   {
                       "path":  "setup/export-safe-profile.ps1",
@@ -75,8 +75,8 @@
                   },
                   {
                       "path":  "setup/lib/Portable.Common.ps1",
-                      "bytes":  4203,
-                      "sha256":  "ef1fde0f7173bdc2763b4ef8f720a5ef212ea3cfb4a806ff90681489c7824182"
+                      "bytes":  4640,
+                      "sha256":  "eac74505f3371fa5b4020c498de2a118a15ba2c800667abd93171db129194740"
                   },
                   {
                       "path":  "setup/README.md",
@@ -100,13 +100,13 @@
                   },
                   {
                       "path":  "setup/update-portable-manifest.ps1",
-                      "bytes":  1345,
-                      "sha256":  "f865572ec7b0539267f75d112b91f60b14c8f4790344bf2bbe74e7c01caef124"
+                      "bytes":  1359,
+                      "sha256":  "01488f12f1ea061f9a29552cd67de31b2a22d016581d026070b5ac7f54438c57"
                   },
                   {
                       "path":  "setup/verify-portable.ps1",
-                      "bytes":  2768,
-                      "sha256":  "7d65c520e0085c65997bac0a3f8fa9cdeafeea0ffc62496ca217cab756d96fcf"
+                      "bytes":  3317,
+                      "sha256":  "b0b9742ddaebf43cd9d55d241c7e8f153df46ff3b59cde38b76b7e3cc2ffea8f"
                   }
               ]
 }

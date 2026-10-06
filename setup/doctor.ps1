@@ -80,7 +80,7 @@ if (-not (Test-Path -LiteralPath $portableManifestPath -PathType Leaf)) {
         $portableManifest = Get-Content -LiteralPath $portableManifestPath -Raw | ConvertFrom-Json
         foreach ($entry in @($portableManifest.files)) {
             $path = Join-Path $repo ([string]$entry.path).Replace('/', '\')
-            if (-not (Test-Path -LiteralPath $path -PathType Leaf) -or (Get-PortableHash $path) -ne [string]$entry.sha256) {
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf) -or (Get-PortableCanonicalTextHash $path) -ne [string]$entry.sha256) {
                 Write-PortableStatus BLOCKED "Portable checksum mismatch: $($entry.path)"
                 $blocking++
             }

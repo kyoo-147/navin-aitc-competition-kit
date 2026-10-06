@@ -24,6 +24,15 @@ function Get-PortableHash {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
 }
 
+function Get-PortableCanonicalTextHash {
+    param([Parameter(Mandatory = $true)][string]$Path)
+    $text = [IO.File]::ReadAllText($Path).Replace("`r`n", "`n").Replace("`r", "`n")
+    $bytes = (New-Object System.Text.UTF8Encoding($false)).GetBytes($text)
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try { return (($sha.ComputeHash($bytes) | ForEach-Object { $_.ToString('x2') }) -join '') }
+    finally { $sha.Dispose() }
+}
+
 function Write-Utf8NoBom {
     param([Parameter(Mandatory = $true)][string]$Path, [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content)
     $parent = Split-Path $Path -Parent
