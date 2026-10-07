@@ -161,6 +161,16 @@ class HarnessTests(unittest.TestCase):
         })
         self.assertIn("profile_allowlists", (ROOT / "setup/bootstrap.ps1").read_text(encoding="utf-8"))
 
+    def test_bootstrap_prefers_windows_cmd_launcher(self):
+        bootstrap = (ROOT / "setup/bootstrap.ps1").read_text(encoding="utf-8")
+        self.assertIn("Get-Command codex.cmd", bootstrap)
+        with tempfile.TemporaryDirectory() as tmp:
+            result = self.run_powershell(ROOT / "setup/bootstrap.ps1", "-Profile", "Aitc", "-CodexHome", tmp, "-Apply")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            wrapper = (Path(tmp) / "codex-orca.cmd").read_text(encoding="utf-8")
+            self.assertIn("codex.cmd", wrapper)
+            self.assertNotIn("codex.ps1", wrapper)
+
     def test_aitc_profile_installs_only_allowlisted_skills(self):
         with tempfile.TemporaryDirectory() as tmp:
             result = self.run_powershell(ROOT / "setup/bootstrap.ps1", "-Profile", "Aitc", "-CodexHome", tmp, "-Apply")

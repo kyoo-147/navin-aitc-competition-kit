@@ -1,6 +1,6 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-07T10:28:50.3219172Z",
+    "generated_at_utc":  "2026-10-07T10:49:54.9276287Z",
     "file_count":  66,
     "files":  [
                   {
@@ -31,7 +31,7 @@
                   {
                       "path":  "profiles/codex/codex-orca.installed.cmd",
                       "bytes":  694,
-                      "sha256":  "7a8c83b8b0580cf15f6e54061eb7d6becc968e07adf3261c99064573272e217e"
+                      "sha256":  "49debcd1d788fbf41ddeec8e643c21e5b855c87f9e2647154cb3d921c7a68ac0"
                   },
                   {
                       "path":  "profiles/codex/codex-runtime-refresh.ps1",
@@ -275,8 +275,8 @@
                   },
                   {
                       "path":  "setup/bootstrap.ps1",
-                      "bytes":  9517,
-                      "sha256":  "3e6c77ddc63dc13dd6d8705f3579d9e728d189ddb6173925c6b513d3dd23a42e"
+                      "bytes":  9672,
+                      "sha256":  "ff93fb08afc52d87ae9e048e6e2bb5db6d6ceab792c9d37c16ed6193b3460a2b"
                   },
                   {
                       "path":  "setup/doctor.ps1",

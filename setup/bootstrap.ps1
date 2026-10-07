@@ -41,7 +41,9 @@ foreach ($requirement in @(
 $renderRoot = Join-Path ([IO.Path]::GetTempPath()) ('navin-portable-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $renderRoot | Out-Null
 try {
-    $codexCommand = (Get-Command codex -ErrorAction Stop).Source
+    $codexCommandInfo = Get-Command codex.cmd -ErrorAction SilentlyContinue
+    if ($null -eq $codexCommandInfo) { $codexCommandInfo = Get-Command codex -ErrorAction Stop }
+    $codexCommand = $codexCommandInfo.Source
     $catalogDestination = Join-Path $codex 'models-btc.json'
     $catalogNormalized = $catalogDestination.Replace('\','/')
 
