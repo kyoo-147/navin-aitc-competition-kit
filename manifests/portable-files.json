@@ -1,7 +1,7 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-07T10:49:54.9276287Z",
-    "file_count":  66,
+    "generated_at_utc":  "2026-10-07T10:55:49.6033892Z",
+    "file_count":  67,
     "files":  [
                   {
                       "path":  "manifests/skills.json",
@@ -40,8 +40,13 @@
                   },
                   {
                       "path":  "profiles/codex/config.aitc.template.toml",
-                      "bytes":  444,
-                      "sha256":  "1fdd8644a4551537876318f850d16e9546ffd6c6a90e8363eafbb827a79691b1"
+                      "bytes":  475,
+                      "sha256":  "432107b85cabb1b2f9c58b9c79cdb2f695e977f75586c837903e31da00c7584d"
+                  },
+                  {
+                      "path":  "profiles/codex/config.direct-keys.example.toml",
+                      "bytes":  902,
+                      "sha256":  "508342566fafeb56ee0520e89bac2e8999a3bafeed855486ee8f7a0cdf583e3d"
                   },
                   {
                       "path":  "profiles/codex/config.normal.template.toml",
@@ -55,8 +60,8 @@
                   },
                   {
                       "path":  "profiles/codex/README.md",
-                      "bytes":  1194,
-                      "sha256":  "29a146a1aa446c25227f963cea00f9fa1af7955a32f26c6b7be875d20d7466f4"
+                      "bytes":  1446,
+                      "sha256":  "1e9d831604741c9b7d96acd9b3eaf39d7a2a65aebfd1530288674df1b6d8af43"
                   },
                   {
                       "path":  "profiles/codex/skills/accessibility/references/A11Y-PATTERNS.md",
@@ -295,8 +300,8 @@
                   },
                   {
                       "path":  "setup/MACHINE-REPLICATION.md",
-                      "bytes":  6573,
-                      "sha256":  "d00ca572609e70351b8e0bebbe37a0c56bf63b5d2cf21faa4a82eff349ce3186"
+                      "bytes":  8866,
+                      "sha256":  "c948635fcd31f39e6fa3d97e988f5db541e7ba501555d053204c11d6416bc01d"
                   },
                   {
                       "path":  "setup/README.md",

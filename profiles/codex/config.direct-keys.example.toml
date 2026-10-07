@@ -1,0 +1,30 @@
+# New-machine example for direct provider keys.
+# Copy only to the local %USERPROFILE%\.codex\config.toml.
+# Replace placeholders locally. Never commit the resulting file.
+
+model = "deepseek/deepseek-v4.1-flash"
+model_provider = "commandcode"
+model_reasoning_effort = "high"
+model_catalog_json = "C:/Users/<username>/.codex/models-commandcode.json"
+forced_login_method = "api"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[shell_environment_policy]
+ignore_default_excludes = false
+inherit = "core"
+
+[model_providers.commandcode]
+name = "CommandCode"
+base_url = "https://api.commandcode.ai/provider/v1"
+wire_api = "responses"
+experimental_bearer_token = "PASTE_COMMANDCODE_KEY_HERE"
+
+[model_providers.thucchien]
+name = "AI Thuc Chien"
+base_url = "https://api.thucchien.ai/v1"
+wire_api = "responses"
+experimental_bearer_token = "PASTE_NEW_BTC_GATEWAY_KEY_HERE"
+
+[features]
+hooks = true

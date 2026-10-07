@@ -235,6 +235,24 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("Never commit or export", security)
         self.assertIn("One failed attachment attempt is a hard stop", security)
 
+    def test_machine_profile_documents_direct_keys_and_cmd_repair(self):
+        direct = (ROOT / "profiles/codex/config.direct-keys.example.toml").read_text(encoding="utf-8")
+        self.assertIn('[model_providers.commandcode]', direct)
+        self.assertIn('PASTE_COMMANDCODE_KEY_HERE', direct)
+        self.assertIn('[model_providers.thucchien]', direct)
+        self.assertIn('PASTE_NEW_BTC_GATEWAY_KEY_HERE', direct)
+        self.assertNotIn('env_key =', direct)
+        aitc = (ROOT / "profiles/codex/config.aitc.template.toml").read_text(encoding="utf-8")
+        self.assertIn('experimental_bearer_token = "PASTE_NEW_BTC_GATEWAY_KEY_HERE"', aitc)
+        self.assertNotIn('env_key =', aitc)
+        runbook = (ROOT / "setup/MACHINE-REPLICATION.md").read_text(encoding="utf-8")
+        self.assertIn('Windows launcher repair and verification', runbook)
+        self.assertIn('codex.ps1', runbook)
+        self.assertIn('codex.cmd', runbook)
+        captured = (ROOT / "profiles/codex/codex-orca.installed.cmd").read_text(encoding="utf-8")
+        self.assertIn('codex.cmd', captured)
+        self.assertNotIn('codex.ps1', captured)
+
     def test_machine_replication_restores_reviewed_user_skills(self):
         with tempfile.TemporaryDirectory() as tmp:
             result = self.run_powershell(

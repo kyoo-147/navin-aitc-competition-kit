@@ -146,19 +146,82 @@ ignore_default_excludes = false
 
 `doctor.ps1` may report `USER ACTION REQUIRED` for missing keys. That is expected before local secret entry.
 
-## 6. Enter credentials locally
+## 6. Configure provider keys locally
 
-Never commit or transfer keys through this repository. Enter the required values in the official clone's ignored `.env` or in the current process environment, following live BTC instructions:
+The repository contains only placeholders. Never commit a filled local config.
 
-```text
-THUCCHIEN_API_KEY
-AI_LOG_API_KEY
-AI_LOG_SERVER
+### Direct-key configuration used on the captured machine
+
+Start from `profiles/codex/config.direct-keys.example.toml`, replace `<username>` in `model_catalog_json`, then copy it to the local Codex home only after backing up any existing config:
+
+```powershell
+$codexHome = Join-Path $HOME '.codex'
+Copy-Item "$codexHome\config.toml" "$codexHome\config.toml.before-provider-keys.bak" -ErrorAction SilentlyContinue
+Copy-Item ".\profiles\codex\config.direct-keys.example.toml" "$codexHome\config.toml"
+notepad "$codexHome\config.toml"
 ```
 
-Run BTC preflight only when Gateway access is available. Catalog presence alone is not provider/tool proof.
+Paste keys only into these local placeholders:
 
-## 7. Official competition repository
+```toml
+[model_providers.commandcode]
+experimental_bearer_token = "PASTE_COMMANDCODE_KEY_HERE"
+
+[model_providers.thucchien]
+experimental_bearer_token = "PASTE_NEW_BTC_GATEWAY_KEY_HERE"
+```
+
+Do not place both `env_key` and `experimental_bearer_token` in the same provider block. The direct-key profile intentionally uses only `experimental_bearer_token`.
+
+AI Log remains project-local in the official clone's ignored `.env`:
+
+```text
+# AI_LOG_API_KEY=<paste locally>
+AI_LOG_SERVER=https://live.thucchien.ai/api/ingest
+```
+
+Run BTC preflight only when Gateway access is available. Catalog presence or a visible provider label alone is not provider/tool proof.
+
+### Switching provider
+
+Keep exactly one top-level preset active. For CommandCode:
+
+```toml
+model = "deepseek/deepseek-v4.1-flash"
+model_provider = "commandcode"
+model_catalog_json = "C:/Users/<username>/.codex/models-commandcode.json"
+```
+
+For competition BTC:
+
+```toml
+model = "gpt-6-luna"
+model_provider = "thucchien"
+model_catalog_json = "C:/Users/<username>/.codex/models-btc.json"
+```
+
+Close existing Codex sessions after switching, then reopen through `codex-orca.cmd`.
+
+## 7. Windows launcher repair and verification
+
+The wrapper must call the npm Windows shim `codex.cmd`. It must never call `codex.ps1` from a batch file. The old failure symptom is Notepad opening a file that begins with `#!/usr/bin/env pwsh` instead of launching Codex.
+
+Verify:
+
+```powershell
+Select-String "$HOME\.codex\codex-orca.cmd" 'codex\.ps1'
+& "$HOME\.codex\codex-orca.cmd" --version
+```
+
+The first command must return no match. The second must end with a Codex version. If `codex.ps1` appears, repair from the current Git checkout:
+
+```powershell
+.\setup\bootstrap.ps1 -Profile Aitc -CodexHome "$HOME\.codex" -Apply
+```
+
+The bootstrap explicitly resolves `codex.cmd` before the generic `codex` command. `profiles/codex/codex-orca.installed.cmd` is the captured machine-specific proof; new machines use the rendered portable wrapper.
+
+## 8. Official competition repository
 
 Clone the organizer repository separately. Do not vendor this kit into it during OFFICIAL mode.
 
@@ -185,7 +248,7 @@ In DRILL mode:
 ProjectRelativeRoot = .
 ```
 
-## 8. Competition workflow
+## 9. Competition workflow
 
 ```text
 ask OFFICIAL or DRILL
@@ -215,7 +278,7 @@ Lane A and Lane B are selected from the locked architecture; they are not fixed 
 
 For open-ended multimodal challenges, follow `kit/RULES.md` and `kit/skills/aitc-captain/SKILL.md`: source-backed research, one structured content request when sufficient, locked media budget, prompt-hash cache, request ledger, early mandatory video, and BTC Gateway only.
 
-## 9. Update and rollback
+## 10. Update and rollback
 
 Update from Git and reapply safely:
 

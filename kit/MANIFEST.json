@@ -1,6 +1,6 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-10-06T13:55:23.0900414Z",
+    "generated_at_utc":  "2026-10-07T10:54:23.0989834Z",
     "file_count":  164,
     "files":  [
                   {
@@ -30,8 +30,8 @@
                   },
                   {
                       "path":  "config/codex-config.template.toml",
-                      "bytes":  444,
-                      "sha256":  "77e204dc71235be48cdbd012a2492612034037f52e456bc3497eb6183470c337"
+                      "bytes":  475,
+                      "sha256":  "29f2f7ef16979273ec046532afe28460ce51555838bb5f876b7dd94e8c935724"
                   },
                   {
                       "path":  "config/models-btc.snapshot.json",

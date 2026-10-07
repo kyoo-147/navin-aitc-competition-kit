@@ -12,7 +12,7 @@ ignore_default_excludes = false
 [model_providers.thucchien]
 name = "BTC"
 base_url = "https://api.thucchien.ai/v1"
-env_key = "THUCCHIEN_API_KEY"
+experimental_bearer_token = "PASTE_NEW_BTC_GATEWAY_KEY_HERE"
 wire_api = "responses"
 
 [features]
