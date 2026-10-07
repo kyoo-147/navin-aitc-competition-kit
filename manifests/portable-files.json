@@ -1,7 +1,7 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-06T13:55:22.9299327Z",
-    "file_count":  21,
+    "generated_at_utc":  "2026-10-07T10:19:57.4060537Z",
+    "file_count":  22,
     "files":  [
                   {
                       "path":  "manifests/skills.json",
@@ -27,6 +27,11 @@
                       "path":  "profiles/codex/codex-orca.cmd",
                       "bytes":  625,
                       "sha256":  "09b6488dee67d2eefdda353fe9d3fe9dad2d4fbab113e48dde48ca2a58299b0c"
+                  },
+                  {
+                      "path":  "profiles/codex/codex-orca.installed.cmd",
+                      "bytes":  694,
+                      "sha256":  "7a8c83b8b0580cf15f6e54061eb7d6becc968e07adf3261c99064573272e217e"
                   },
                   {
                       "path":  "profiles/codex/codex-runtime-refresh.ps1",
