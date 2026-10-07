@@ -1,7 +1,7 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-07T10:24:54.2540668Z",
-    "file_count":  64,
+    "generated_at_utc":  "2026-10-07T10:28:50.3219172Z",
+    "file_count":  66,
     "files":  [
                   {
                       "path":  "manifests/skills.json",
@@ -55,8 +55,8 @@
                   },
                   {
                       "path":  "profiles/codex/README.md",
-                      "bytes":  686,
-                      "sha256":  "1b5e5dab2db194cbba443356974f574fb8276011f102ecfed3e03a58900cdd8d"
+                      "bytes":  1194,
+                      "sha256":  "29a146a1aa446c25227f963cea00f9fa1af7955a32f26c6b7be875d20d7466f4"
                   },
                   {
                       "path":  "profiles/codex/skills/accessibility/references/A11Y-PATTERNS.md",
@@ -294,9 +294,19 @@
                       "sha256":  "eac74505f3371fa5b4020c498de2a118a15ba2c800667abd93171db129194740"
                   },
                   {
+                      "path":  "setup/MACHINE-REPLICATION.md",
+                      "bytes":  6573,
+                      "sha256":  "d00ca572609e70351b8e0bebbe37a0c56bf63b5d2cf21faa4a82eff349ce3186"
+                  },
+                  {
                       "path":  "setup/README.md",
-                      "bytes":  1681,
-                      "sha256":  "d368c37d20be9126e909dd8c21ad7f0e0d06d9e98ec6ca989d52c4315a613a97"
+                      "bytes":  2011,
+                      "sha256":  "b708e0b9c0894acbc770bb090e96ce4a2e11975a9f888ed5a5249b3e37b9db56"
+                  },
+                  {
+                      "path":  "setup/restore-machine-profile.ps1",
+                      "bytes":  3401,
+                      "sha256":  "259b55a952b050401dfa12a7b1f1d10346686c933b304453236ef694976cb786"
                   },
                   {
                       "path":  "setup/rollback.ps1",

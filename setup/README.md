@@ -1,3 +1,7 @@
+# Machine replication
+
+For a complete new-machine runbook and executable restore flow, read [`MACHINE-REPLICATION.md`](MACHINE-REPLICATION.md) and use `restore-machine-profile.ps1`. It can restore the AITC-only runtime profile or the reviewed snapshot of all user-installed Codex skills without copying secrets or runtime state.
+
 # Portable Setup
 
 Windows teammate flow:

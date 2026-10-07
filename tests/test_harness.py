@@ -205,9 +205,9 @@ class HarnessTests(unittest.TestCase):
     def test_portable_setup_is_source_controlled_and_safe_by_default(self):
         required = (
             "setup/bootstrap.ps1", "setup/doctor.ps1", "setup/rollback.ps1",
-            "setup/update.ps1", "setup/uninstall.ps1",
+            "setup/update.ps1", "setup/uninstall.ps1", "setup/restore-machine-profile.ps1",
             "setup/export-safe-profile.ps1", "setup/verify-portable.ps1",
-            "setup/update-portable-manifest.ps1", "setup/README.md",
+            "setup/update-portable-manifest.ps1", "setup/README.md", "setup/MACHINE-REPLICATION.md",
             "profiles/codex/AGENTS.md", "profiles/codex/config.normal.template.toml",
             "profiles/codex/config.aitc.template.toml", "manifests/tools.json",
             "manifests/skills.json", "manifests/portable-files.json", "SECURITY.md",
@@ -224,6 +224,20 @@ class HarnessTests(unittest.TestCase):
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn("Never commit or export", security)
         self.assertIn("One failed attachment attempt is a hard stop", security)
+
+    def test_machine_replication_restores_reviewed_user_skills(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = self.run_powershell(
+                ROOT / "setup/restore-machine-profile.ps1",
+                "-Profile", "Aitc", "-CodexHome", tmp,
+                "-RestoreUserSkills", "-ReplaceConfig", "-Apply",
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            expected = {path.name for path in (ROOT / "profiles/codex/skills").iterdir() if path.is_dir()}
+            installed = {path.name for path in (Path(tmp) / "skills").iterdir() if path.is_dir()}
+            self.assertEqual(installed, expected)
+            self.assertNotIn(".system", installed)
+            self.assertIn("Machine profile restoration completed", result.stdout)
 
     def test_workspace_boundaries_exist(self):
         for relative in ("workspace/product", "workspace/evidence", "workspace/submission"):
