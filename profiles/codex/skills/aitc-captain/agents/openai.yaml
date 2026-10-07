@@ -1,0 +1,4 @@
+interface:
+  display_name: "AITC Captain"
+  short_description: "Run the competition control plane"
+  default_prompt: "Read the current challenge, build the acceptance matrix, choose the smallest complete product, and dispatch only genuinely independent work."

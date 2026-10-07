@@ -1,0 +1,4 @@
+interface:
+  display_name: "AITC Reviewer"
+  short_description: "Find only score/reliability blockers"
+  default_prompt: "Review the integrated work for scoring compliance and engineering/runtime correctness. Report only material P0/P1/P2 findings."

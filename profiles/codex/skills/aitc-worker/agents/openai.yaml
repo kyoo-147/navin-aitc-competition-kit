@@ -1,0 +1,4 @@
+interface:
+  display_name: "AITC Worker"
+  short_description: "Implement one bounded outcome"
+  default_prompt: "Implement the assigned outcome inside the stated ownership boundary, verify it, and return concise evidence."

@@ -1,7 +1,7 @@
 {
     "schema_version":  1,
-    "generated_at_utc":  "2026-10-07T10:19:57.4060537Z",
-    "file_count":  22,
+    "generated_at_utc":  "2026-10-07T10:24:54.2540668Z",
+    "file_count":  64,
     "files":  [
                   {
                       "path":  "manifests/skills.json",
@@ -57,6 +57,216 @@
                       "path":  "profiles/codex/README.md",
                       "bytes":  686,
                       "sha256":  "1b5e5dab2db194cbba443356974f574fb8276011f102ecfed3e03a58900cdd8d"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/accessibility/references/A11Y-PATTERNS.md",
+                      "bytes":  6269,
+                      "sha256":  "f10e238dd4dd3c4f51134c2056bc02d3dd4f8fb6ccc9145c2c1ba7aab4d58140"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/accessibility/references/WCAG.md",
+                      "bytes":  9270,
+                      "sha256":  "16683e025e3833d931c9d880645d98a448827f97e10189b6c8f12c832e7a2361"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/accessibility/SKILL.md",
+                      "bytes":  14822,
+                      "sha256":  "267fb2a0707d6142f2871f22688203a42ba21291a2aa200fb740936e41362b5d"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-captain/agents/openai.yaml",
+                      "bytes":  260,
+                      "sha256":  "551435d5f2e029488b72cdab355137a3b2e2bd8e41b817a9840214ad99db0d7b"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-captain/SKILL.md",
+                      "bytes":  15260,
+                      "sha256":  "761789f0f25d74a4b0c6a4d2ef39f9d11ba9a5d7def9d89b4a603480538bf89f"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-design-studio/SKILL.md",
+                      "bytes":  4110,
+                      "sha256":  "90339a798e4faa69e53907526d6c8d3b20fec350c13a8597d7d1e7d5b5e74adb"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-reviewer/agents/openai.yaml",
+                      "bytes":  250,
+                      "sha256":  "fec86eb56feebf0166e3d1bc73e94fbe87d49ad6482602e107da943ec21d4339"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-reviewer/SKILL.md",
+                      "bytes":  3991,
+                      "sha256":  "eef44a95d26c285b65dd7c1c2b4a4a6ce41e4683928f59bed5b6769ac348040b"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-worker/agents/openai.yaml",
+                      "bytes":  223,
+                      "sha256":  "d0c60c247121a398d848a334558ca3a7c490114b56468eee4d813dc12cfacffa"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/aitc-worker/SKILL.md",
+                      "bytes":  4351,
+                      "sha256":  "6c9cb83d14cdfd9b4405949bb99105dd271f6c5730e32c62815b84ed04ad8298"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/best-practices/references/SECURITY.md",
+                      "bytes":  6900,
+                      "sha256":  "af021e5db37e921c79b8807d63e1cfc02dcf63614d2806cfba04ba44a1366178"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/best-practices/SKILL.md",
+                      "bytes":  13199,
+                      "sha256":  "9d1f10a08cd7a94176ce160ec860dbd3ecfadad75d46546001883f1f907c5c3e"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/chrome-devtools-axi/SKILL.md",
+                      "bytes":  1617,
+                      "sha256":  "e75b29300e0af202210bdd9d9e78bb2f943c4b2fb7c92265ce34c7e93c5ce19d"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/commit/SKILL.md",
+                      "bytes":  1790,
+                      "sha256":  "05eaa872c4e95408d85f34a7443574d8619a26fa8a173db4b49dcdeb5b33e5a0"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/create-cli/references/cli-guidelines.md",
+                      "bytes":  9355,
+                      "sha256":  "93e6d7af840ffb658e0ea7e53801ac7290c60636f7aa6a3dc32dc4129df005c1"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/create-cli/SKILL.md",
+                      "bytes":  3742,
+                      "sha256":  "ec6f1d4211d4f5bd5d1a1fbcff341f42f207220c225c7ae78b0d7c6d02990738"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/frontend-design/LICENSE.txt",
+                      "bytes":  10351,
+                      "sha256":  "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/frontend-design/SKILL.md",
+                      "bytes":  8315,
+                      "sha256":  "1608ea77fbb6fc30d13a97d12cfa8ebf31358d40f0dd97beed24829d6b3f45dd"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/frontend-design-v2/SKILL.md",
+                      "bytes":  4692,
+                      "sha256":  "acec0303def9239e888248380c0a10b177938cbb80cd95de394fd6b79fcc6a42"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/github/SKILL.md",
+                      "bytes":  1160,
+                      "sha256":  "51b28818a6f0359287d5c8244a6fdc59a4ac5504596deb193b28b81832221c86"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/lavish/SKILL.md",
+                      "bytes":  1891,
+                      "sha256":  "366a98684113cbf9d455d37d8d4d1366671391c34cfa16e9bfe211c4b67dde0a"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/minimalist-skill/SKILL.md",
+                      "bytes":  7986,
+                      "sha256":  "36bc7328f085405f43b476938e62460fa573bf7e984e949e072bcf014831a44c"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/performance/references/MEASUREMENT.md",
+                      "bytes":  7478,
+                      "sha256":  "128f6f20c6c8fb55fcccd8b259cf680811022cf262dc55b03e9d623bcb555a99"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/performance/references/RUM.md",
+                      "bytes":  3200,
+                      "sha256":  "a2bdf660ecb23098afbadfb83254d39cef10c0da82938225f61271bad3f81b19"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/performance/SKILL.md",
+                      "bytes":  14210,
+                      "sha256":  "b0c220185d88c61f7770eb127d8facf86c86d2dd1fd82b86e15a4965a0137265"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/element-attributes.md",
+                      "bytes":  665,
+                      "sha256":  "bf19aa4671e0a50a0fefa9c790f39124e803060eefe395042b723c29fcb7faa2"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/playwright-tests.md",
+                      "bytes":  1690,
+                      "sha256":  "c5b0719fef2cfdff50bd744051b2f9afc119775db4b48e9b2882c1cf3886797c"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/request-mocking.md",
+                      "bytes":  2182,
+                      "sha256":  "54e801c9663fc2b6d68ceb058cb1c360724c2499f42acc7852a68e83e5b5f37c"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/running-code.md",
+                      "bytes":  5642,
+                      "sha256":  "d95c539a5990b71d02d8bdf1d9414df16191eb6cff95b0063820518b7a13dcb2"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/session-management.md",
+                      "bytes":  5671,
+                      "sha256":  "cd3e261b8763bf952f1e371b876cb78d054379afec85482f9250633e1b7e6c44"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/storage-state.md",
+                      "bytes":  5198,
+                      "sha256":  "9ac47f9ae4a1aedcd2077f8ac9ab1ba6bee1962cb83ff51adcd36fb6d83b5ec6"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/test-generation.md",
+                      "bytes":  16114,
+                      "sha256":  "12f54cfa718d9e559bad918120a4ca4f11c933167713d1b9c5f99872eddaf749"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/tracing.md",
+                      "bytes":  3456,
+                      "sha256":  "ef73e71bee792e341df9cd4f60529c929ade48b538ac76e033f4f20843e8dbda"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/references/video-recording.md",
+                      "bytes":  5387,
+                      "sha256":  "8555ab5400df0d90e66318aacc0a8a4418fbf872e7463824d55d5c41615abd83"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/playwright-cli/SKILL.md",
+                      "bytes":  12726,
+                      "sha256":  "1a609c93bff3eea9ab99fed93c0334c851fdc39fb6ac5335551bfb87c171d57c"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/README.md",
+                      "bytes":  448,
+                      "sha256":  "0e7bfe8e2f654fa1c8e7f09f75fcf0764e5162920aa6b82b4b63e111ae9cf5f9"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/stow/SKILL.md",
+                      "bytes":  18299,
+                      "sha256":  "2daad9f295600e965562afeb53be016ab9bbce43e0ca68f1e3e866b4e1416556"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/summarize/SKILL.md",
+                      "bytes":  2157,
+                      "sha256":  "3100cd6a8b4569474c027e0904b9bd0947eea5be7f67f334cfc3559a5fc4f9d1"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/summarize/to-markdown.mjs",
+                      "bytes":  7430,
+                      "sha256":  "09d78892d1b6f62112f0b36d0575c8c54794f96f2c5082c587c7e0481eaae28d"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/taste-skill/SKILL.md",
+                      "bytes":  89234,
+                      "sha256":  "176f8a183312e1892c81f5932ef40ef00d294afb5653a3281724d82e858f02b8"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/tldraw-offline/SKILL.md",
+                      "bytes":  20154,
+                      "sha256":  "3481baf5a9a2c8b9277b69b2d72d7dad107c8447b9f6c1c7c8d9aae867608b2c"
+                  },
+                  {
+                      "path":  "profiles/codex/skills/update-changelog/SKILL.md",
+                      "bytes":  3339,
+                      "sha256":  "68f67516baaa881bb304ed29d1e407f6e88e90952f0126f9fa6d9941cad80522"
                   },
                   {
                       "path":  "profiles/codex/TASTE_UI.md",
